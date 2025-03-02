@@ -10,7 +10,6 @@ import {
   ShieldX,
   Aperture,
   Menu,
-  UsersRound,
   Coffee,
   Mail,
 } from "lucide-react";
@@ -35,11 +34,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
       href: "/getting-started",
       icon: <Coffee className="h-5 w-5" />,
     },
-    {
-      name: "About Us",
-      href: "/about-us",
-      icon: <UsersRound className="h-5 w-5" />,
-    },
+
     { name: "Contact", href: "/contact", icon: <Mail className="h-5 w-5" /> },
     {
       name: "Privacy Policy",
