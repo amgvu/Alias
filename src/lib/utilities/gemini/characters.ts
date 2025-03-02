@@ -36,10 +36,10 @@ export const characterGen = async (
     be determined by a combination of factors, including frequency of online mentions, fan
      sentiment (positive or negative), critical acclaim, and relevance to the core themes of
       "${theme}".  Return ONLY a JSON array of character names, with no other text or explanations.
-        The JSON array should be formatted as follows: ["Character 1", "Character 2", "Character 3", ...].
-          Character 1 should be the most popular, Character 2 the second most, and so on.  If fewer than
-           ${numMembers} relevant characters exist, return all that you can find. Please omit any explanations,
-            disclaimers, or unnecessary text.`;
+      The JSON array should be formatted as follows: ["Character 1", "Character 2", "Character 3", ...].
+        Character 1 should be the most popular, Character 2 the second most, and so on.  If fewer than
+        ${numMembers} relevant characters exist, return all that you can find. Please omit any explanations,
+          disclaimers, or unnecessary text.`;
 
   try {
     const result = await model.generateContent(prompt);
