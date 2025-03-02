@@ -9,10 +9,6 @@
 - [Node.js](https://nodejs.org) (LTS version recommended)
 - [Git](https://git-scm.com/)
 
-### **Optional (but Recommended)**
-
-- [pnpm](https://pnpm.io/)
-
 ---
 
 ## **Dashboard Setup**
