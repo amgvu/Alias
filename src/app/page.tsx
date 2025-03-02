@@ -20,7 +20,7 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center">
         <h1 className="font-bold text-9xl">
           <TextEffect per="char" delay={0.5}>
-            Project Arcs
+            Arclify
           </TextEffect>
         </h1>
 
