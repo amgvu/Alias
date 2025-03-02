@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Project Arcs",
-  description: "A tool for managing nicknames",
+  title: "Arclify",
+  description: "Discord nicknames management, but fun.",
 };
 
 export default function RootLayout({
