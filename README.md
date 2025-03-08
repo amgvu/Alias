@@ -1,4 +1,4 @@
-# **Project Arcs**
+# **Arclify**
 
 ---
 
@@ -43,36 +43,6 @@ Start the Next.js development server:
 ```bash
 npm run dev
 ```
-
-- Open `http://localhost:3000/dashboard`
-
-### **4. Supabase Integration**
-
-Set up environment variables for Supabase:
-
-1. Create a `.env.local` file in the root directory.
-2. Add the following:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=##############
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=################
-   ```
-3. Save the file.
-
-### **5. Access the Dashboard**
-
-Once the server is running, you can start interacting with the dashboard.
-
----
-
-## **Recommended VS Code Extensions**
-
-### **For Dashboard Development**
-
-- Tailwind CSS IntelliSense
-- Supabase VS Code Extension
-- ESLint for consistent formatting
-
----
 
 ## **Contributing**
 
