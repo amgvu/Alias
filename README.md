@@ -43,7 +43,3 @@ Start the Next.js development server:
 ```bash
 npm run dev
 ```
-
-## **Contributing**
-
-Feel free to create GitHub issues for features, bug fixes, or documentation updates
