@@ -71,8 +71,9 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
 
         <div className="menu h-full border-r border-neutral-700 w-60 bg-neutral-800 text-neutral-content fixed">
           <div className="flex flex-col h-full overflow-y-auto">
-            <div className="sticky top-0 bg-neutral-800 p-4 border-b border-neutral-700">
-              <h2 className="text-xl font-semibold">Arclify</h2>
+            <div className="sticky inline-flex top-0 bg-neutral-800 p-2 px-4 border-b border-neutral-700">
+              <img src="/Arclify.svg" width="48" height="48" />
+              <h2 className="text-xl py-4 px-2 font-semibold">Arclify</h2>
             </div>
 
             <div className="flex-1 p-4">
