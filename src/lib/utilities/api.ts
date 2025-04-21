@@ -6,7 +6,7 @@ export const fetchServers = async (
   userId: string
 ): Promise<Server[]> => {
   const response = await fetch(
-    "worble-production-a5eb.up.railway.app/api/servers",
+    "https://worble-production-a5eb.up.railway.app/api/servers",
     {
       method: "POST",
       headers: {
@@ -31,7 +31,7 @@ export const fetchServers = async (
 
 export const fetchMembers = async (guildId: string) => {
   const response = await fetch(
-    `worble-production-a5eb.up.railway.app/api/members/${guildId}`
+    `https://worble-production-a5eb.up.railway.app/api/members/${guildId}`
   );
   if (!response.ok) {
     throw new Error("Failed to fetch members");
@@ -47,7 +47,7 @@ export const updateNickname = async (
   nickname: string
 ) => {
   const response = await fetch(
-    "worble-production-a5eb.up.railway.app/api/changeNickname",
+    "https://worble-production-a5eb.up.railway.app/api/changeNickname",
     {
       method: "POST",
       headers: {
