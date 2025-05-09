@@ -46,6 +46,7 @@ export const useServers = () => {
     };
 
     if (!sessionStorage.getItem("pageLoadTimestamp")) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       sessionStorage.getItem("pageLoadTimestamp") ||
         sessionStorage.setItem("pageLoadTimestamp", Date.now().toString());
     }
