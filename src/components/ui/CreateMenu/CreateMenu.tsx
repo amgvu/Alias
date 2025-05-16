@@ -95,7 +95,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
           onFocus={handleOpen}
           displayValue={(arc: Arc | null) => arc?.arc_name || ""}
           onChange={(event) => setQuery(event.target.value)}
-          className="w-full p-2 pr-10 bg-neutral-800 border cursor-pointer focus:cursor-auto border-neutral-700 rounded-lg text-[#D7DADC] focus:outline-hidden focus:ring-2 focus:ring-neutral-500"
+          className="w-full p-2 pr-10 bg-neutral-800 border cursor-pointer focus:cursor-auto border-neutral-700 rounded-lg transition-all text-[#D7DADC] focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
           placeholder="Select or create an arc"
         />
         <Combobox.Button className="absolute cursor-pointer inset-y-0 right-0 flex items-center pr-2">
@@ -157,7 +157,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
                         }}
                         className="hover:text-red-400 ml-2"
                       >
-                        <TrashIcon className="h-4 w-4 text-red-500 hover:text-red-400" />
+                        <TrashIcon className="h-4 w-4 text-red-500 hover:text-red-400 cursor-pointer" />
                       </button>
                     </div>
                   )}
@@ -167,7 +167,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
                 <Combobox.Option
                   value={{ id: -1, arc_name: query, guild_id: selectedServer }}
                   className={({ active }) => `
-                    relative cursor-default select-none py-2 pl-4 pr-4 flex items-center
+                    relative cursor-pointer hover:bg-neutral-600 transition-all rounded-lg select-none py-2 pl-4 pr-4 flex items-center
                     ${
                       active
                         ? "bg-neutral-800 text-[#D7DADC]"
