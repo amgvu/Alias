@@ -127,7 +127,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         className={`relative bg-no-repeat bg-left`}
         style={{ backgroundImage: `url(${member.avatar_url})` }}
       ></div>
-      <div className="absolute inset-0 bg-black/5"></div>
+      <div className="absolute inset-0"></div>
       <div className="flex items-center space-x-4 relative z-10">
         <div className="h-full flex-shrink-0 relative">
           <img
@@ -171,15 +171,15 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           <DSButton
             onClick={handleRevert}
             disabled={isUpdating}
-            className={`${styles.applyButton} active:bg-red-400`}
+            className={`${styles.applyButton}`}
           >
-            Revert
+            Reset
           </DSButton>
         </div>
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="p-2 hover:bg-neutral-600 transition-all cursor-pointer rounded-lg"
+          className="p-2 hover:bg-neutral-700 transition-all cursor-pointer rounded-lg"
         >
           <motion.div animate={{ rotate: isExpanded ? 180 : 0 }}>
             {isExpanded ? (
@@ -200,7 +200,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="mt-4 pt-1 border-t border-neutral-600">
+            <div className="mt-4 pt-1 px-2 border-t border-neutral-600">
               <div className="flex items-center gap-2 mb-2 text-sm text-neutral-400">
                 Saved Nicknames
               </div>
@@ -225,7 +225,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                           setInputValue(nickname.nickname);
                           onNicknameChange(nickname.nickname);
                         }}
-                        className="px-3 py-1 text-sm bg-neutral-700 cursor-pointer transition-all hover:bg-neutral-600 rounded-full"
+                        className="px-3 py-1 text-sm bg-neutral-900 cursor-pointer transition-all hover:bg-neutral-800 rounded-full"
                       >
                         {nickname.nickname}
                       </button>
@@ -235,7 +235,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                           e.stopPropagation();
                           handleDeleteNickname(nickname);
                         }}
-                        className="absolute bottom-4 -right-1 p-1 cursor-pointer text-sm text-neutral-100 bg-neutral-800 rounded-full transition hover:bg-red-400"
+                        className="absolute bottom-4 -right-1 p-1 cursor-pointer text-sm text-neutral-950 bg-neutral-200 rounded-full transition hover:bg-red-400"
                       >
                         <X className="w-3 h-3" />
                       </button>

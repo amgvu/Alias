@@ -152,6 +152,7 @@ export default function Dashboard() {
                   <div className="flex justify-end space-x-4">
                     <DSButton
                       onClick={applyAllNicknames}
+                      className="border border-neutral-500 hover:bg-neutral-700"
                       disabled={
                         isApplyingAll ||
                         members.some((m: Member) => !m.nickname)
@@ -161,6 +162,7 @@ export default function Dashboard() {
                     </DSButton>
                     <DSButton
                       onClick={handleSaveArc}
+                      className="border border-neutral-500 hover:bg-neutral-700"
                       disabled={
                         isSavingArc ||
                         !selectedServer ||
@@ -197,6 +199,7 @@ export default function Dashboard() {
                   <div className="flex justify-end space-x-4 mt-3">
                     <DSButton
                       onClick={handleGenerateCharacters}
+                      className="border border-neutral-500 hover:bg-neutral-700"
                       disabled={loading}
                     >
                       {loading ? (
