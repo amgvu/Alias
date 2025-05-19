@@ -80,12 +80,6 @@ export default function Dashboard() {
             >
               <div className="flex justify-between items-center">
                 <div className="text-center font-bold font-[family-name:var(--font-geist-sans)]"></div>
-                <label
-                  htmlFor="my-drawer-2"
-                  className="btn btn-primary drawer-button lg:hidden"
-                >
-                  Open Menu
-                </label>
               </div>
 
               <div className="flex flex-col">

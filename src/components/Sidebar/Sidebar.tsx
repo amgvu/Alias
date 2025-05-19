@@ -17,6 +17,14 @@ import {
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
 
+  const handleDiscordLogin = () => {
+    signIn("discord", { callbackUrl: "/dashboard" });
+  };
+
+  const handleDiscordLogout = () => {
+    signOut({ callbackUrl: "/", redirect: true });
+  };
+
   const navItems = [
     { name: "Home", href: "/", icon: <Home className="h-5 w-5" /> },
     ...(session
@@ -94,7 +102,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
             <div className="sticky bottom-0 bg-neutral-800 p-4 border-t border-neutral-700">
               {session ? (
                 <button
-                  onClick={() => signOut()}
+                  onClick={handleDiscordLogout}
                   className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all  hover:bg-neutral-700 rounded-lg"
                 >
                   <LogOut className="h-5 w-5" />
@@ -102,7 +110,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                 </button>
               ) : (
                 <button
-                  onClick={() => signIn()}
+                  onClick={handleDiscordLogin}
                   className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all  hover:bg-neutral-700 rounded-lg"
                 >
                   <LogIn className="h-5 w-5" />
