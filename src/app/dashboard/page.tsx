@@ -18,6 +18,7 @@ import {
   useAuth,
 } from "@/lib/hooks";
 import { Member } from "@/types/types";
+import { motion } from "framer-motion";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -117,96 +118,103 @@ export default function Dashboard() {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="menu bg-neutral-800 border-r border-neutral-700 min-h-full w-80 p-4">
-            <div className="space-y-6 mt-3">
-              <div className="rounded-md">
-                <label className="block text-lg font-medium mb-3">
-                  My Servers
-                </label>
-                <DSMenu
-                  items={servers.map((server) => server.name)}
-                  placeholder="Select a server"
-                  selectedItem={selectedServerName}
-                  setSelectedItem={handleServerSelection}
-                />
-              </div>
-              <div className="rounded-md">
-                <label className="block text-lg font-medium mb-3">
-                  My Arcs
-                </label>
-                <DSCreateMenu
-                  selectedServer={selectedServer}
-                  selectedArc={selectedArc}
-                  setSelectedArc={setSelectedArc}
-                  onCreateNewArc={handleCreateNewArc}
-                />
-              </div>
-              <div>
-                <ul>
-                  <div className="flex justify-end space-x-4">
-                    <DSButton
-                      onClick={applyAllNicknames}
-                      className="border border-neutral-500 hover:bg-neutral-700"
-                      disabled={
-                        isApplyingAll ||
-                        members.some((m: Member) => !m.nickname)
-                      }
-                    >
-                      {isApplyingAll ? "Applying..." : "Apply Arc"}
-                    </DSButton>
-                    <DSButton
-                      onClick={handleSaveArc}
-                      className="border border-neutral-500 hover:bg-neutral-700"
-                      disabled={
-                        isSavingArc ||
-                        !selectedServer ||
-                        !selectedArc ||
-                        members.length === 0
-                      }
-                    >
-                      {isSavingArc ? "Saving..." : "Save Arc"}
-                    </DSButton>
-                  </div>
-                </ul>
-              </div>
-
-              <div className="border-t border-neutral-700 pt-4">
-                <label className="inline-block text-lg font-medium">
-                  Arc Studio
-                </label>
-                <h2 className="inline-block mx-2 font-light text-neutral-500">
-                  experimental
-                </h2>
-                <h3 className="font-light mt-1 text-sm text-neutral-400">
-                  Generate characters or objects for arcs and apply them within
-                  seconds
-                </h3>
-
-                <div className="mt-4">
-                  <h3 className="text-sm mb-2">Characters</h3>
-                  <DSInput
-                    className="transition-all bg-neutral-800 border rounded-lg border-neutral-600"
-                    placeholder="Enter a movie, show, game, etc"
-                    value={theme}
-                    onChange={(e) => setTheme(e.target.value)}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.1 }}
+            className="menu bg-neutral-800 border-r border-neutral-700 min-h-full w-80 p-4"
+          >
+            <div>
+              <div className="space-y-6 mt-3">
+                <div className="rounded-md">
+                  <label className="block text-lg font-medium mb-3">
+                    My Servers
+                  </label>
+                  <DSMenu
+                    items={servers.map((server) => server.name)}
+                    placeholder="Select a server"
+                    selectedItem={selectedServerName}
+                    setSelectedItem={handleServerSelection}
                   />
-                  <div className="flex justify-end space-x-4 mt-3">
-                    <DSButton
-                      onClick={handleGenerateCharacters}
-                      className="border border-neutral-500 hover:bg-neutral-700"
-                      disabled={loading}
-                    >
-                      {loading ? (
-                        <LoaderPinwheel className="animate-spin w-5 h-5" />
-                      ) : (
-                        "Generate"
-                      )}
-                    </DSButton>
+                </div>
+                <div className="rounded-md">
+                  <label className="block text-lg font-medium mb-3">
+                    My Arcs
+                  </label>
+                  <DSCreateMenu
+                    selectedServer={selectedServer}
+                    selectedArc={selectedArc}
+                    setSelectedArc={setSelectedArc}
+                    onCreateNewArc={handleCreateNewArc}
+                  />
+                </div>
+                <div>
+                  <ul>
+                    <div className="flex justify-end space-x-4">
+                      <DSButton
+                        onClick={applyAllNicknames}
+                        className="border border-neutral-500 hover:bg-neutral-700"
+                        disabled={
+                          isApplyingAll ||
+                          members.some((m: Member) => !m.nickname)
+                        }
+                      >
+                        {isApplyingAll ? "Applying..." : "Apply Arc"}
+                      </DSButton>
+                      <DSButton
+                        onClick={handleSaveArc}
+                        className="border border-neutral-500 hover:bg-neutral-700"
+                        disabled={
+                          isSavingArc ||
+                          !selectedServer ||
+                          !selectedArc ||
+                          members.length === 0
+                        }
+                      >
+                        {isSavingArc ? "Saving..." : "Save Arc"}
+                      </DSButton>
+                    </div>
+                  </ul>
+                </div>
+
+                <div className="border-t border-neutral-700 pt-4">
+                  <label className="inline-block text-lg font-medium">
+                    Arc Studio
+                  </label>
+                  <h2 className="inline-block mx-2 font-light text-neutral-500">
+                    experimental
+                  </h2>
+                  <h3 className="font-light mt-1 text-sm text-neutral-400">
+                    Generate characters or objects for arcs and apply them
+                    within seconds
+                  </h3>
+
+                  <div className="mt-4">
+                    <h3 className="text-sm mb-2">Characters</h3>
+                    <DSInput
+                      className="transition-all bg-neutral-800 border rounded-lg border-neutral-600"
+                      placeholder="Enter a movie, show, game, etc"
+                      value={theme}
+                      onChange={(e) => setTheme(e.target.value)}
+                    />
+                    <div className="flex justify-end space-x-4 mt-3">
+                      <DSButton
+                        onClick={handleGenerateCharacters}
+                        className="border border-neutral-500 hover:bg-neutral-700"
+                        disabled={loading}
+                      >
+                        {loading ? (
+                          <LoaderPinwheel className="animate-spin w-5 h-5" />
+                        ) : (
+                          "Generate"
+                        )}
+                      </DSButton>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
