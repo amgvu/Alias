@@ -63,17 +63,17 @@ export default function Home() {
                 },
               }}
             >
+              <span>Harry Potter</span>
+              <span>Lord of the Rings</span>
               <span>The Sopranos</span>
               <span>Severance</span>
               <span>Breaking Bad</span>
-              <span>Rappers</span>
-              <span>Anime</span>
+              <span>Succession</span>
               <span>Restaurant Chains</span>
               <span>Star Wars</span>
               <span>Game Of Thrones</span>
               <span>DnD</span>
               <span>Cars</span>
-              <span>Harry Potter</span>
             </TextLoop>
             <h3 className="inline-flex whitespace-pre-wrap text-3xl"> arc?</h3>
           </div>
