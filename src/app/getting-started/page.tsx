@@ -17,7 +17,9 @@ export default function GettingStarted() {
           <li>
             Generative AI tools for creating thematic nicknames in seconds
           </li>
-          <li className="text-neutral-600">and many more to come!</li>
+          <li className="text-neutral-600">
+            and many more to come! (mobile friendliness, roles management, etc.)
+          </li>
         </ul>
       </div>
       <h1 className="text-3xl font-bold mb-2">Getting Started</h1>
