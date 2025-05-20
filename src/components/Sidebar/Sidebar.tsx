@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Home,
   ScrollText,
-  LogIn,
   LogOut,
   ShieldX,
   Aperture,
@@ -13,6 +12,7 @@ import {
   Coffee,
   Mail,
 } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
@@ -107,15 +107,15 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                   className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all  hover:bg-neutral-700 rounded-lg"
                 >
                   <LogOut className="h-5 w-5" />
-                  <span>Sign Out</span>
+                  <span>Log Out</span>
                 </button>
               ) : (
                 <button
                   onClick={handleDiscordLogin}
-                  className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all  hover:bg-neutral-700 rounded-lg"
+                  className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all bg-[#5865F2] hover:bg-[#454FBF] rounded-lg"
                 >
-                  <LogIn className="h-5 w-5" />
-                  <span>Sign In</span>
+                  <FaDiscord className="h-5 w-5" />
+                  <span>Sign In with Discord</span>
                 </button>
               )}
             </div>
