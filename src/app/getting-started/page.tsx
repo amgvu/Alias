@@ -3,10 +3,10 @@ export default function GettingStarted() {
     <main className="p-8 font-sans text-center">
       <h1 className="text-3xl font-bold mb-2">Intro</h1>
       <p className="text-neutral-300 mb-6 mx-auto mt-2 max-w-4xl">
-        Thanks for being interested in using Arclify! This is a Discord platform
-        that gives server owners and moderators a comprehensive suite for
-        managing their members&apos; nicknames efficiently. Some of the unique
-        features of the app include:
+        Thanks for being interested in using Arclify! This is a free Discord
+        platform that gives server owners and moderators a comprehensive suite
+        for managing their members&apos; nicknames efficiently. Some of the
+        unique features of the app include:
       </p>
       <div className="mx-auto w-fit">
         <ul className="text-neutral-300 mb-8 mt-2 text-sm list-disc list-inside text-left">
@@ -18,7 +18,8 @@ export default function GettingStarted() {
             Generative AI tools for creating thematic nicknames in seconds
           </li>
           <li className="text-neutral-500">
-            and many more to come! (mobile friendliness, roles management, etc.)
+            and many more to come! (mobile friendliness (long overdue tbh),
+            roles management, server monitoring, etc.)
           </li>
         </ul>
       </div>
@@ -67,9 +68,18 @@ export default function GettingStarted() {
           </p>
         </div>
         <div>
-          <h2 className="text-3xl font-semibold">Contact</h2>
+          <h2 className="text-3xl font-semibold">
+            Bug Reports or Feature Requests?
+          </h2>
+          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
+            I&apos;d love to hear your feedback! Please feel free to reach out
+            via any of the below methods of contact.
+          </p>
           <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-lg text-center">
-            arclify.dev@gmail.com
+            Email: arclify.dev@gmail.com
+          </p>
+          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-lg text-center">
+            Discord: amg00
           </p>
         </div>
       </div>
