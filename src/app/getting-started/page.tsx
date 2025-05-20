@@ -17,51 +17,50 @@ export default function GettingStarted() {
           <li>
             Generative AI tools for creating thematic nicknames in seconds
           </li>
-          <li className="text-neutral-600">
+          <li className="text-neutral-500">
             and many more to come! (mobile friendliness, roles management, etc.)
           </li>
         </ul>
       </div>
       <h1 className="text-3xl font-bold mb-2">Getting Started</h1>
       <p className="text-neutral-400 mb-8">
-        Setup Arclify for your Discord server(s) in just 4 easy steps:
+        Setup Arclify for your Discord server(s) in just a few simple steps
       </p>
       <div className="space-y-12">
         <div>
           <h2 className="text-3xl font-semibold">
             1. Add Arclify&apos;s Discord bot into your server
           </h2>
-          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-lg">
+          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl">
             Arclify is currently in closed beta. You can request free access by
-            emailing me at arclify.dev@gmail.com!
+            emailing me at arclify.dev@gmail.com
           </p>
         </div>
         <div>
           <h2 className="text-3xl font-semibold">
-            2. Place the bot above the members you want to manage in the role
+            2. Place the bot above all members you want to manage in the role
             heirarchy
           </h2>
-          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-lg text-center">
-            Don&apos;t worry! The Discord bot&apos;s permissions are set to be
+          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
+            Don&apos;t worry, the Discord bot&apos;s permissions are set to be
             as minimal as possible for Arclify to work. Features like renaming
-            members can only be done by the app if it&apos;s above the user in
-            the role hierarchy.
+            members can only be done if the bot is above the user(s) in the role
+            hierarchy.
           </p>
         </div>
         <div>
           <h2 className="text-3xl font-semibold">
             3. Log into Arclify with your Discord account
           </h2>
-          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-lg text-center">
+          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
             Arclify does not store or access your Discord login credentials at
             any time. Your Discord login is solely used to authenticate your
-            access to the app. I respect the security and privacy of your
-            information!
+            access to the app.
           </p>
         </div>
         <div>
           <h2 className="text-3xl font-semibold">4. Enter the the dashboard</h2>
-          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-lg text-center">
+          <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
             Enjoy! Please note that some features are still in development and
             may have some bugs. If you encounter any issues, please report them
             to me by sending an email to arclify.dev@gmail.com
