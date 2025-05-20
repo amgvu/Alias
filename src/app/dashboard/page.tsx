@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { LoaderPinwheel } from "lucide-react";
+import { LoaderPinwheel, ChevronsUpDown } from "lucide-react";
 import {
   DSButton,
   DSMenu,
@@ -18,7 +18,7 @@ import {
   useAuth,
 } from "@/lib/hooks";
 import { Member } from "@/types/types";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -44,8 +44,14 @@ export default function Dashboard() {
     setMembers,
   } = useMemberManagement(selectedServer, fetchedMembers);
 
-  const { theme, setTheme, loading, handleGenerateCharacters } =
-    useThemeGenerator(members, setMembers);
+  const {
+    category,
+    setCategory,
+    theme,
+    setTheme,
+    loading,
+    handleGenerateCharacters,
+  } = useThemeGenerator(members, setMembers);
 
   const {
     selectedArc,
@@ -54,6 +60,14 @@ export default function Dashboard() {
     handleSaveArc,
     handleCreateNewArc,
   } = useArcManagement(selectedServer, members, setMembers);
+
+  const categories = [
+    "Fictional Characters",
+    "Real People",
+    "Objects",
+    "Places",
+    "Abstract Concepts",
+  ];
 
   useEffect(() => {
     setIsLoaded(true);
@@ -185,22 +199,46 @@ export default function Dashboard() {
                     experimental
                   </h2>
                   <h3 className="font-light mt-1 text-sm text-neutral-400">
-                    Generate characters or objects for arcs and apply them
-                    within seconds
+                    Generate names for your members based on a theme and apply
+                    them within seconds.
                   </h3>
 
                   <div className="mt-4">
-                    <h3 className="text-sm mb-2">Characters</h3>
+                    <button
+                      className="flex items-center gap-1 py-1 text-neutral-200 transition-all text-md cursor-pointer relative"
+                      onClick={() =>
+                        setCategory((current) => {
+                          const currentIndex = categories.indexOf(current);
+                          const nextIndex =
+                            (currentIndex + 1) % categories.length;
+                          return categories[nextIndex];
+                        })
+                      }
+                    >
+                      <ChevronsUpDown className="w-3 h-3 opacity-70 flex-shrink-0" />
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={category}
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -5 }}
+                          transition={{ duration: 0.1, ease: "easeInOut" }}
+                          className="hover:text-neutral-400 inline-block"
+                        >
+                          {category}
+                        </motion.span>
+                      </AnimatePresence>
+                    </button>
                     <DSInput
                       className="transition-all bg-neutral-800 border rounded-lg border-neutral-600"
-                      placeholder="Enter a movie, show, game, etc"
+                      placeholder="Enter a movie, game, thing, etc"
                       value={theme}
                       onChange={(e) => setTheme(e.target.value)}
                     />
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="border border-neutral-500 hover:bg-neutral-700"
+                        className="border border-neutral-500 transition-all hover:bg-neutral-700"
                         disabled={loading}
                       >
                         {loading ? (
