@@ -7,6 +7,7 @@ export const useThemeGenerator = (
   setMembers: (members: Member[]) => void
 ) => {
   const [theme, setTheme] = useState<string>("");
+  const [category, setCategory] = useState<string>("Fictional Characters");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [generatedThemes, setGeneratedThemes] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -48,10 +49,23 @@ export const useThemeGenerator = (
       return;
     }
 
+    if (
+      ![
+        "Fictional Characters",
+        "Real People",
+        "Objects",
+        "Places",
+        "Abstract Concepts",
+      ].includes(category)
+    ) {
+      alert("Invalid category selected");
+      return;
+    }
+
     setLoading(true);
     try {
       const numCharacters = members.length;
-      const characters = await characterGen(theme, numCharacters);
+      const characters = await characterGen(theme, category, numCharacters);
       setGeneratedThemes(characters);
 
       const generatedNames = characters.split(",").map((name) => name.trim());
@@ -81,6 +95,8 @@ export const useThemeGenerator = (
   };
 
   return {
+    category,
+    setCategory,
     theme,
     setTheme,
     loading,

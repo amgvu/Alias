@@ -2,6 +2,7 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 
 export const characterGen = async (
   theme: string,
+  category: string,
   numMembers: number
 ): Promise<string> => {
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY as string;
@@ -31,14 +32,14 @@ export const characterGen = async (
     },
   });
 
-  const prompt = `List ${numMembers} popular characters related to the theme "${theme}",
+  const prompt = `List ${numMembers} popular ${category} related to the theme "${theme}",
    ordered from most to least popular.  For the purposes of this list, "popularity" should
     be determined by a combination of factors, including frequency of online mentions, fan
      sentiment (positive or negative), critical acclaim, and relevance to the core themes of
-      "${theme}".  Return ONLY a JSON array of character names, with no other text or explanations.
-      The JSON array should be formatted as follows: ["Character 1", "Character 2", "Character 3", ...].
-        Character 1 should be the most popular, Character 2 the second most, and so on.  If fewer than
-        ${numMembers} relevant characters exist, return all that you can find. Please omit any explanations,
+      "${theme}".  Return ONLY a JSON array of ${category} names, with no other text or explanations.
+      The JSON array should be formatted as follows: ["${category} 1", "${category} 2", "${category} 3", ...].
+        ${category} 1 should be the most popular, ${category} 2 the second most, and so on.  If fewer than
+        ${numMembers} relevant ${category} exist, return all that you can find. Please omit any explanations,
           disclaimers, or unnecessary text.`;
 
   try {
