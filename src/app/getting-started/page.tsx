@@ -12,23 +12,21 @@ export default function GettingStarted() {
       >
         <h1 className="text-3xl text-neutral-200 font-bold mb-2">Intro</h1>
         <p className="text-neutral-300 mb-6 mx-auto mt-2 max-w-4xl">
-          Thanks for being interested in using Arclify! This is a free platform
-          that gives Discord communities a comprehensive suite for managing
-          their members&apos; nicknames efficiently. Some of the unique features
-          of the app include:
+          Thanks for being interested in using Arclify! This is a platform that
+          gives Discord communities a comprehensive suite for managing their
+          members&apos; efficiently. Some of the unique features of the app
+          include:
         </p>
         <div className="mx-auto w-fit">
           <ul className="text-neutral-300 mb-8 mt-2 text-sm list-disc list-inside text-left">
-            <li>
-              Database persistence for nicknames and collections of nicknames
-            </li>
-            <li>Applying multiple names at once</li>
+            <li>Persistent storage for nicknames and nickname collections</li>
+            <li>The ability to apply multiple names at once</li>
             <li>
               Generative AI tools for creating thematic nicknames in seconds
             </li>
             <li className="text-neutral-500">
-              and many more to come! (mobile friendliness (long overdue tbh),
-              roles management, server monitoring, etc.)
+              and many more to come! (mobile friendliness (priority), roles
+              management, server monitoring, etc.)
             </li>
           </ul>
         </div>
@@ -44,8 +42,8 @@ export default function GettingStarted() {
               1. Add Arclify&apos;s Discord bot into your server
             </h2>
             <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl">
-              Arclify is currently in closed beta. You can request free access
-              by emailing me at arclify.dev@gmail.com
+              If you&apos;ve been accepted to the closed beta, more details on
+              adding the bot to your server can be found in your email.
             </p>
           </div>
           <div>
@@ -72,12 +70,11 @@ export default function GettingStarted() {
           </div>
           <div>
             <h2 className="text-3xl text-neutral-200 font-semibold">
-              4. Enter the the dashboard
+              4. Enter the dashboard
             </h2>
             <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
               Enjoy! Please note that some features are still in development and
-              may have some bugs. If you encounter any issues, please report
-              them to me by sending an email to arclify.dev@gmail.com
+              may have some bugs.
             </p>
           </div>
           <div>
@@ -86,7 +83,7 @@ export default function GettingStarted() {
             </h2>
             <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
               I&apos;d love to hear your feedback! Please feel free to reach out
-              via any of the below methods of contact.
+              to me:
             </p>
             <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-lg text-center">
               Email: arclify.dev@gmail.com
