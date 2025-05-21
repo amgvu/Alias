@@ -16,6 +16,14 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleSignUpClick = () => {
+    window.open(
+      "https://form.typeform.com/to/D6pNxiIe",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] bg-black text-neutral-100 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center">
@@ -84,18 +92,13 @@ export default function Home() {
             <TextEffect delay={1.7}>Join the Closed Beta</TextEffect>
           </h3>
           <motion.button
+            onClick={handleSignUpClick}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 2.2 }}
             className="cursor-pointer font-semibold text-black bg-neutral-100 px-6 py-3 rounded-lg shadow-md hover:bg-neutral-400 transition duration-300"
           >
-            <a
-              href="https://form.typeform.com/to/D6pNxiIe"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Sign Up
-            </a>
+            Sign Up
           </motion.button>
         </div>
       </main>
