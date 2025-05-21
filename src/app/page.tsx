@@ -12,7 +12,6 @@ export default function Home() {
     const timer = setTimeout(() => {
       setShowTextLoop(true);
     }, 1000);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -25,17 +24,17 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] bg-black text-neutral-100 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center">
-        <h1 className="font-bold text-9xl">
+    <div className="min-h-screen bg-black text-neutral-100 flex flex-col items-center justify-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="w-full max-w-5xl flex flex-col gap-8 items-center text-center">
+        <h1 className="font-bold text-8xl md:text-9xl">
           <TextEffect per="char" delay={0.1}>
             Arclify
           </TextEffect>
         </h1>
 
-        <div className="text-center text-neutral-200 font-light text-4xl space-y-4">
-          <TextEffect per="char" speedReveal={5} delay={0.5}>
-            Streamline Your Discord Community. Automate for Expression.
+        <div className="text-center text-neutral-200 font-light text-2xl md:text-4xl space-y-4">
+          <TextEffect per="char" speedReveal={4} delay={0.5}>
+            Streamline Discord Ops with Full-Stack Automation
           </TextEffect>
 
           <div
@@ -44,7 +43,7 @@ export default function Home() {
             }`}
           >
             <TextLoop
-              className="overflow-y-clip text-3xl"
+              className="overflow-y-clip md:text-3xl"
               transition={{
                 type: "spring",
                 stiffness: 900,
@@ -102,7 +101,7 @@ export default function Home() {
           </motion.button>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center"></footer>
+      <footer className="flex gap-6 flex-wrap items-center justify-center"></footer>
     </div>
   );
 }
