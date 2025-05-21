@@ -82,7 +82,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] text-[#D7DADC] bg-neutral-900">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] text-white bg-black">
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
@@ -116,7 +116,7 @@ export default function Dashboard() {
                       isApplyingAll={isApplyingAll}
                     />
                   ) : (
-                    <div className="text-center font-semibold text-4xl text-neutral-500 py-5">
+                    <div className="text-center font-semibold text-4xl text-neutral-700 py-5">
                       Select a server to view and manage members
                     </div>
                   )}
@@ -136,12 +136,12 @@ export default function Dashboard() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.1 }}
-            className="menu bg-neutral-800 border-r border-neutral-700 min-h-full w-80 p-4"
+            className="menu bg-black border-r border-neutral-700 min-h-full w-80 p-4"
           >
             <div>
               <div className="space-y-6 mt-3">
                 <div className="rounded-md">
-                  <label className="block text-lg font-medium mb-3">
+                  <label className="block text-lg text-neutral-200 font-medium mb-3">
                     My Servers
                   </label>
                   <DSMenu
@@ -152,7 +152,7 @@ export default function Dashboard() {
                   />
                 </div>
                 <div className="rounded-md">
-                  <label className="block text-lg font-medium mb-3">
+                  <label className="block text-lg text-neutral-200 font-medium mb-3">
                     My Arcs
                   </label>
                   <DSCreateMenu
@@ -167,7 +167,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4">
                       <DSButton
                         onClick={applyAllNicknames}
-                        className="border border-neutral-500 hover:bg-neutral-700"
+                        className="bg-neutral-200 text-black font-semibold hover:bg-neutral-400"
                         disabled={
                           isApplyingAll ||
                           members.some((m: Member) => !m.nickname)
@@ -177,7 +177,7 @@ export default function Dashboard() {
                       </DSButton>
                       <DSButton
                         onClick={handleSaveArc}
-                        className="border border-neutral-500 hover:bg-neutral-700"
+                        className="bg-neutral-200 font-semibold disabled:bg-neutral-500 text-black hover:bg-neutral-400"
                         disabled={
                           isSavingArc ||
                           !selectedServer ||
@@ -192,7 +192,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="border-t border-neutral-700 pt-4">
-                  <label className="inline-block text-lg font-medium">
+                  <label className="inline-block text-neutral-200 text-lg font-medium">
                     Arc Studio
                   </label>
                   <h2 className="inline-block mx-2 font-light text-neutral-500">
@@ -230,7 +230,7 @@ export default function Dashboard() {
                       </AnimatePresence>
                     </button>
                     <DSInput
-                      className="transition-all bg-neutral-800 border rounded-lg border-neutral-600"
+                      className="transition-all bg-neutral-950 border rounded-lg border-neutral-700"
                       placeholder="Enter a movie, game, thing, etc"
                       value={theme}
                       onChange={(e) => setTheme(e.target.value)}
@@ -238,7 +238,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="border border-neutral-500 transition-all hover:bg-neutral-700"
+                        className="transition-all bg-neutral-200 font-semibold text-black hover:bg-neutral-400"
                         disabled={loading}
                       >
                         {loading ? (

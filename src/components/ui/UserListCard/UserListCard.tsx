@@ -121,12 +121,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
       initial={{ y: 0 }}
       animate={controls}
       className={`${styles.card} relative bg-no-repeat bg-left`}
-      style={{ backgroundImage: `url(${member.avatar_url})` }}
     >
-      <div
-        className={`relative bg-no-repeat bg-left`}
-        style={{ backgroundImage: `url(${member.avatar_url})` }}
-      ></div>
       <div className="absolute inset-0"></div>
       <div className="flex items-center space-x-4 relative z-10">
         <div className="h-full flex-shrink-0 relative">
@@ -179,13 +174,13 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="p-2 hover:bg-neutral-700 transition-all cursor-pointer rounded-lg"
+          className="p-2 transition-all cursor-pointer rounded-lg"
         >
-          <motion.div animate={{ rotate: isExpanded ? 180 : 0 }}>
+          <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
             {isExpanded ? (
-              <ChevronUp className="w-5 h-5 text-neutral-500" />
+              <ChevronUp className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
             ) : (
-              <ChevronDown className="w-5 h-5 text-neutral-500" />
+              <ChevronDown className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
             )}
           </motion.div>
         </button>
@@ -200,8 +195,8 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="mt-4 pt-1 px-2 border-t border-neutral-600">
-              <div className="flex items-center gap-2 mb-2 text-sm text-neutral-400">
+            <div className="mt-4 pt-1 px-2 border-t border-neutral-700">
+              <div className="flex items-center gap-2 mb-2 text-sm text-neutral-500">
                 Saved Nicknames
               </div>
               {isLoadingNicknames ? (
@@ -225,7 +220,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                           setInputValue(nickname.nickname);
                           onNicknameChange(nickname.nickname);
                         }}
-                        className="px-3 py-1 text-sm bg-neutral-900 cursor-pointer transition-all hover:bg-neutral-800 rounded-full"
+                        className="px-3 py-1 text-sm bg-black border-neutral-700 border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
                       >
                         {nickname.nickname}
                       </button>
@@ -235,7 +230,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                           e.stopPropagation();
                           handleDeleteNickname(nickname);
                         }}
-                        className="absolute bottom-4 -right-1 p-1 cursor-pointer text-sm text-neutral-950 bg-neutral-200 rounded-full transition hover:bg-red-400"
+                        className="absolute bottom-4 -right-1 p-1 cursor-pointer text-sm text-neutral-950 bg-red-400 rounded-full transition hover:bg-red-500"
                       >
                         <X className="w-3 h-3" />
                       </button>

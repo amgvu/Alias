@@ -89,13 +89,13 @@ export const DSUserList: React.FC<UserListProps> = ({
             animate="visible"
             variants={roleGroupVariants}
           >
-            <div className="text-md font-semibold border-b border-neutral-700 pb-2 mb-4">
+            <div className="text-md text-neutral-200 font font-semibold border-b border-neutral-700 pb-1 mb-3">
               {roleName}
             </div>
             {groupedMembers[roleName].map((member) => (
               <motion.div
                 key={`${member.user_id}-${animationKey}`}
-                className="mb-4"
+                className="mb-2"
                 custom={memberIndices[member.user_id]}
                 initial="initial"
                 animate={isApplyingAll ? "animate" : "initial"}

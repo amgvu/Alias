@@ -2,6 +2,7 @@
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Home,
   ScrollText,
@@ -77,10 +78,10 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
           className="drawer-overlay"
         ></label>
 
-        <div className="menu h-full border-r border-neutral-700 w-60 bg-neutral-800 text-neutral-content fixed">
+        <div className="menu h-full border-r border-neutral-700 w-60 bg-neutral-950 text-neutral-content fixed">
           <div className="flex flex-col h-full overflow-y-auto">
-            <div className="sticky inline-flex top-0 bg-neutral-800 p-2 px-4 border-b border-neutral-700">
-              <img src="/Arclify.svg" width="48" height="48" />
+            <div className="sticky inline-flex top-0 p-2 px-4 border-neutral-700">
+              <Image src="/Arclify.svg" width="48" height="48" alt="logo" />
               <h2 className="text-xl py-4 px-2 font-semibold">Arclify</h2>
             </div>
 
@@ -90,7 +91,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="flex items-center gap-3 px-4 py-2 hover:bg-neutral-700 rounded-lg"
+                      className="flex items-center gap-3 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-lg"
                     >
                       {item.icon}
                       <span>{item.name}</span>
@@ -100,11 +101,11 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
               </ul>
             </div>
 
-            <div className="sticky bottom-0 bg-neutral-800 p-4 border-t border-neutral-700">
+            <div className="sticky text-neutral-400 bottom-0 p-4 border-neutral-700">
               {session ? (
                 <button
                   onClick={handleDiscordLogout}
-                  className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all  hover:bg-neutral-700 rounded-lg"
+                  className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all hover:text-white hover:bg-neutral-900 rounded-lg"
                 >
                   <LogOut className="h-5 w-5" />
                   <span>Log Out</span>

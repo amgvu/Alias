@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   menuButtonStyles,
   menuItemsStyles,
@@ -22,14 +24,28 @@ const DSMenu: React.FC<DSMenuProps> = ({
 }) => {
   const title = selectedItem || placeholder;
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <Menu as="div" className="relative w-full">
-      <Menu.Button className={menuButtonStyles}>
-        <span className={!selectedItem ? "text-zinc-400" : ""}>{title}</span>
-        <ChevronDownIcon
-          className="h-5 w-5 cursor-pointer text-neutral-100"
-          aria-hidden="true"
-        />
+      <Menu.Button
+        className={menuButtonStyles}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <span className={!selectedItem ? "text-neutral-400" : ""}>{title}</span>
+        <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
+          {isExpanded ? (
+            <ChevronDown
+              className="h-5 w-5 cursor-pointer text-neutral-700 hover:text-white transition-all duration-200"
+              aria-hidden="true"
+            />
+          ) : (
+            <ChevronUp
+              className="h-5 w-5 cursor-pointer text-neutral-700 hover:text-white transition-all duration-200"
+              aria-hidden="true"
+            />
+          )}
+        </motion.div>
       </Menu.Button>
       <Transition
         as={Fragment}
