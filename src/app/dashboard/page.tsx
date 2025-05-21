@@ -141,7 +141,7 @@ export default function Dashboard() {
             <div>
               <div className="space-y-6 mt-3">
                 <div className="rounded-md">
-                  <label className="block text-lg font-medium mb-3">
+                  <label className="block text-lg text-neutral-200 font-medium mb-3">
                     My Servers
                   </label>
                   <DSMenu
@@ -152,7 +152,7 @@ export default function Dashboard() {
                   />
                 </div>
                 <div className="rounded-md">
-                  <label className="block text-lg font-medium mb-3">
+                  <label className="block text-lg text-neutral-200 font-medium mb-3">
                     My Arcs
                   </label>
                   <DSCreateMenu
@@ -167,7 +167,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4">
                       <DSButton
                         onClick={applyAllNicknames}
-                        className="bg-neutral-200 text-black hover:bg-neutral-400"
+                        className="bg-neutral-200 text-black font-semibold hover:bg-neutral-400"
                         disabled={
                           isApplyingAll ||
                           members.some((m: Member) => !m.nickname)
@@ -177,7 +177,7 @@ export default function Dashboard() {
                       </DSButton>
                       <DSButton
                         onClick={handleSaveArc}
-                        className="bg-neutral-200 disabled:bg-neutral-500 text-black hover:bg-neutral-400"
+                        className="bg-neutral-200 font-semibold disabled:bg-neutral-500 text-black hover:bg-neutral-400"
                         disabled={
                           isSavingArc ||
                           !selectedServer ||
@@ -192,7 +192,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="border-t border-neutral-700 pt-4">
-                  <label className="inline-block text-lg font-medium">
+                  <label className="inline-block text-neutral-200 text-lg font-medium">
                     Arc Studio
                   </label>
                   <h2 className="inline-block mx-2 font-light text-neutral-500">
@@ -205,7 +205,7 @@ export default function Dashboard() {
 
                   <div className="mt-4">
                     <button
-                      className="flex items-center gap-1 py-1 text-white transition-all text-md cursor-pointer relative"
+                      className="flex items-center gap-1 py-1 text-neutral-200 transition-all text-md cursor-pointer relative"
                       onClick={() =>
                         setCategory((current) => {
                           const currentIndex = categories.indexOf(current);
@@ -238,7 +238,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="transition-all bg-neutral-200 text-black hover:bg-neutral-400"
+                        className="transition-all bg-neutral-200 font-semibold text-black hover:bg-neutral-400"
                         disabled={loading}
                       >
                         {loading ? (

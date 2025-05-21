@@ -220,7 +220,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                           setInputValue(nickname.nickname);
                           onNicknameChange(nickname.nickname);
                         }}
-                        className="px-3 py-1 text-sm bg-black border-neutral-700 border cursor-pointer transition-all hover:bg-neutral-800 rounded-full"
+                        className="px-3 py-1 text-sm bg-black border-neutral-700 border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
                       >
                         {nickname.nickname}
                       </button>
