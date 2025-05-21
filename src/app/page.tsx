@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowTextLoop(true);
-    }, 1600);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -26,8 +26,8 @@ export default function Home() {
         </h1>
 
         <div className="text-center text-neutral-200 font-light text-4xl space-y-4">
-          <TextEffect per="char" speedReveal={1.7} delay={0.5}>
-            Nicknames management in your Discord server, but fun.
+          <TextEffect per="char" speedReveal={5} delay={0.5}>
+            Streamline Your Discord Community. Automate for Expression.
           </TextEffect>
 
           <div
@@ -41,7 +41,7 @@ export default function Home() {
                 type: "spring",
                 stiffness: 900,
                 damping: 80,
-                mass: 10,
+                mass: 5,
               }}
               variants={{
                 initial: {
@@ -64,9 +64,9 @@ export default function Home() {
                 },
               }}
             >
-              <span>Harry Potter</span>
               <span>The Sopranos</span>
               <span>Severance</span>
+              <span>Harry Potter</span>
               <span>Breaking Bad</span>
               <span>Succession</span>
               <span>Restaurant Chains</span>
@@ -81,12 +81,12 @@ export default function Home() {
 
         <div className="mt-2 font-[family-name:var(--font-geist-mono)] inline-flex items-center gap-4">
           <h3 className="font-semibold text-neutral-100 text-md">
-            <TextEffect delay={2}>Join the Closed Beta</TextEffect>
+            <TextEffect delay={1.7}>Join the Closed Beta</TextEffect>
           </h3>
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 2.5 }}
+            transition={{ duration: 0.5, delay: 2.2 }}
             className="cursor-pointer font-semibold text-black bg-neutral-100 px-6 py-3 rounded-lg shadow-md hover:bg-neutral-400 transition duration-300"
           >
             <a
