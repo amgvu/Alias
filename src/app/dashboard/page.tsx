@@ -238,8 +238,10 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="transition-all bg-neutral-200 font-semibold text-black hover:bg-neutral-400"
-                        disabled={loading}
+                        className="transition-all bg-neutral-200 disabled:bg-neutral-500 font-semibold text-black hover:bg-neutral-400"
+                        disabled={
+                          loading || !selectedServer || members.length === 0
+                        }
                       >
                         {loading ? (
                           <LoaderPinwheel className="animate-spin w-5 h-5" />
