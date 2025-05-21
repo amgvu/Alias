@@ -25,9 +25,9 @@ const DSMenu: React.FC<DSMenuProps> = ({
   return (
     <Menu as="div" className="relative w-full">
       <Menu.Button className={menuButtonStyles}>
-        <span className={!selectedItem ? "text-zinc-400" : ""}>{title}</span>
+        <span className={!selectedItem ? "text-white" : ""}>{title}</span>
         <ChevronDownIcon
-          className="h-5 w-5 cursor-pointer text-neutral-100"
+          className="h-5 w-5 cursor-pointer text-white"
           aria-hidden="true"
         />
       </Menu.Button>

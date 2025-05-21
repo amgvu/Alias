@@ -82,7 +82,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] text-[#D7DADC] bg-neutral-900">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] text-white bg-black">
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
@@ -136,7 +136,7 @@ export default function Dashboard() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.1 }}
-            className="menu bg-neutral-800 border-r border-neutral-700 min-h-full w-80 p-4"
+            className="menu bg-black border-r border-neutral-700 min-h-full w-80 p-4"
           >
             <div>
               <div className="space-y-6 mt-3">
@@ -167,7 +167,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4">
                       <DSButton
                         onClick={applyAllNicknames}
-                        className="border border-neutral-500 hover:bg-neutral-700"
+                        className="border border-neutral-700 hover:bg-neutral-900"
                         disabled={
                           isApplyingAll ||
                           members.some((m: Member) => !m.nickname)
@@ -177,7 +177,7 @@ export default function Dashboard() {
                       </DSButton>
                       <DSButton
                         onClick={handleSaveArc}
-                        className="border border-neutral-500 hover:bg-neutral-700"
+                        className="border border-neutral-700 hover:bg-neutral-900"
                         disabled={
                           isSavingArc ||
                           !selectedServer ||
@@ -205,7 +205,7 @@ export default function Dashboard() {
 
                   <div className="mt-4">
                     <button
-                      className="flex items-center gap-1 py-1 text-neutral-200 transition-all text-md cursor-pointer relative"
+                      className="flex items-center gap-1 py-1 text-white transition-all text-md cursor-pointer relative"
                       onClick={() =>
                         setCategory((current) => {
                           const currentIndex = categories.indexOf(current);
@@ -230,7 +230,7 @@ export default function Dashboard() {
                       </AnimatePresence>
                     </button>
                     <DSInput
-                      className="transition-all bg-neutral-800 border rounded-lg border-neutral-600"
+                      className="transition-all bg-neutral-950 border rounded-lg border-neutral-700"
                       placeholder="Enter a movie, game, thing, etc"
                       value={theme}
                       onChange={(e) => setTheme(e.target.value)}
@@ -238,7 +238,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="border border-neutral-500 transition-all hover:bg-neutral-700"
+                        className="border border-neutral-700 transition-all hover:bg-neutral-900"
                         disabled={loading}
                       >
                         {loading ? (

@@ -4,7 +4,7 @@ export const buttonStyles = (disabled: boolean) => {
 
   const disabledStyles = "bg-transparent text-neutral-600 cursor-not-allowed";
   const enabledStyles =
-    "text-neutral-100 cursor-pointer hover:text-neutral-100 active:bg-neutral-100 active:text-neutral-950";
+    "cursor-pointer hover:text-neutral-100 active:bg-neutral-900 active:text-neutral-950";
 
   return `${baseStyles} ${disabled ? disabledStyles : enabledStyles}`;
 };
