@@ -167,7 +167,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4">
                       <DSButton
                         onClick={applyAllNicknames}
-                        className="bg-white text-black hover:bg-neutral-300"
+                        className="bg-neutral-200 text-black hover:bg-neutral-400"
                         disabled={
                           isApplyingAll ||
                           members.some((m: Member) => !m.nickname)
@@ -177,7 +177,7 @@ export default function Dashboard() {
                       </DSButton>
                       <DSButton
                         onClick={handleSaveArc}
-                        className="bg-white disabled:bg-neutral-500 text-black hover:bg-neutral-300"
+                        className="bg-neutral-200 disabled:bg-neutral-500 text-black hover:bg-neutral-400"
                         disabled={
                           isSavingArc ||
                           !selectedServer ||
@@ -238,7 +238,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="transition-all bg-white text-black hover:bg-neutral-300"
+                        className="transition-all bg-neutral-200 text-black hover:bg-neutral-400"
                         disabled={loading}
                       >
                         {loading ? (

@@ -2,6 +2,7 @@
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Home,
   ScrollText,
@@ -80,7 +81,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
         <div className="menu h-full border-r border-neutral-700 w-60 bg-neutral-950 text-neutral-content fixed">
           <div className="flex flex-col h-full overflow-y-auto">
             <div className="sticky inline-flex top-0 p-2 px-4 border-neutral-700">
-              <img src="/Arclify.svg" width="48" height="48" />
+              <Image src="/Arclify.svg" width="48" height="48" alt="logo" />
               <h2 className="text-xl py-4 px-2 font-semibold">Arclify</h2>
             </div>
 
