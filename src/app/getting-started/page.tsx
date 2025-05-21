@@ -3,10 +3,10 @@ export default function GettingStarted() {
     <main className="p-8 font-sans text-center">
       <h1 className="text-3xl text-neutral-200 font-bold mb-2">Intro</h1>
       <p className="text-neutral-300 mb-6 mx-auto mt-2 max-w-4xl">
-        Thanks for being interested in using Arclify! This is a free Discord
-        platform that gives server owners and moderators a comprehensive suite
-        for managing their members&apos; nicknames efficiently. Some of the
-        unique features of the app include:
+        Thanks for being interested in using Arclify! This is a free platform
+        that gives Discord communities a comprehensive suite for managing their
+        members&apos; nicknames efficiently. Some of the unique features of the
+        app include:
       </p>
       <div className="mx-auto w-fit">
         <ul className="text-neutral-300 mb-8 mt-2 text-sm list-disc list-inside text-left">
