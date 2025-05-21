@@ -173,7 +173,7 @@ export default function Dashboard() {
                           members.some((m: Member) => !m.nickname)
                         }
                       >
-                        {isApplyingAll ? "Applying..." : "Apply Arc"}
+                        {isApplyingAll ? "Applying..." : "Apply All"}
                       </DSButton>
                       <DSButton
                         onClick={handleSaveArc}
