@@ -1,8 +1,8 @@
 export const menuButtonStyles =
-  "w-full flex justify-between items-center bg-black border rounded-lg border-neutral-700 p-2 text-left h-10";
+  "w-full flex justify-between items-center bg-black border rounded-lg border-[#252525] p-2 text-left h-10";
 
 export const menuItemsStyles =
-  "absolute z-10 mt-1 w-full bg-black border border-neutral-700 rounded-lg shadow-lg";
+  "absolute z-10 mt-1 w-full bg-black border border-[#252525] rounded-lg shadow-lg";
 
 export const menuItemStyles = (active: boolean) => {
   return `${

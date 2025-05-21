@@ -33,7 +33,7 @@ export const DSDialog = ({
           className="fixed inset-0 z-10 w-screen overflow-y-auto"
         >
           <div className="flex min-h-full font-[family-name:var(--font-geist-sans)] bg-black/70 transition-all items-center justify-center p-4">
-            <DialogPanel className="w-full max-w-md rounded-md p-6 bg-black border-neutral-700 border duration-300 ease-out">
+            <DialogPanel className="w-full max-w-md rounded-md p-6 bg-black border-[#252525] border duration-300 ease-out">
               <DialogTitle as="h3" className="font-medium text-white">
                 {title}
               </DialogTitle>

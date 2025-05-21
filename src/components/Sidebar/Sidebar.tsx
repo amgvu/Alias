@@ -65,9 +65,9 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
       </div>
 
       <div className="drawer-side z-20">
-        <div className="menu h-full border-r border-neutral-700 w-60 bg-neutral-950 text-neutral-content fixed">
+        <div className="menu h-full border-r border-[#252525] w-60 bg-neutral-950 text-neutral-content fixed">
           <div className="flex flex-col h-full overflow-y-auto">
-            <div className="sticky inline-flex top-0 p-2 px-4 border-neutral-700">
+            <div className="sticky inline-flex top-0 p-2 px-4 border-[#252525]">
               <Image src="/Arclify.svg" width="48" height="48" alt="logo" />
               <h2 className="text-xl py-4 px-2 font-semibold">Arclify</h2>
             </div>
@@ -88,7 +88,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
               </ul>
             </div>
 
-            <div className="sticky text-neutral-400 bottom-0 p-4 border-neutral-700">
+            <div className="sticky text-neutral-400 bottom-0 p-4 border-[#252525]">
               {session ? (
                 <button
                   onClick={handleDiscordLogout}

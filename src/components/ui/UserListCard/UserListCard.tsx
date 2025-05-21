@@ -121,6 +121,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
       initial={{ y: 0 }}
       animate={controls}
       className={`${styles.card} relative bg-no-repeat bg-left`}
+      style={{ backgroundImage: `url(${member.avatar_url})` }}
     >
       <div className="absolute inset-0"></div>
       <div className="flex items-center space-x-4 relative z-10">
@@ -195,7 +196,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="mt-4 pt-1 px-2 border-t border-neutral-700">
+            <div className="mt-4 pt-1 px-2 border-t border-[#252525]">
               <div className="flex items-center gap-2 mb-2 text-sm text-neutral-500">
                 Saved Nicknames
               </div>
@@ -220,7 +221,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                           setInputValue(nickname.nickname);
                           onNicknameChange(nickname.nickname);
                         }}
-                        className="px-3 py-1 text-sm bg-black border-neutral-700 border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
+                        className="px-3 py-1 text-sm bg-black border-[#252525] border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
                       >
                         {nickname.nickname}
                       </button>

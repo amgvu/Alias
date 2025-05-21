@@ -89,7 +89,7 @@ export const DSUserList: React.FC<UserListProps> = ({
             animate="visible"
             variants={roleGroupVariants}
           >
-            <div className="text-md text-neutral-200 font font-semibold border-b border-neutral-700 pb-1 mb-3">
+            <div className="text-md text-neutral-200 font font-semibold border-b border-[#252525] pb-1 mb-3">
               {roleName}
             </div>
             {groupedMembers[roleName].map((member) => (

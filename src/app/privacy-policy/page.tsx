@@ -1,338 +1,350 @@
+"use client";
+import { motion } from "framer-motion";
+
 export default function PrivacyPolicy() {
   return (
     <main className="max-w-screen-lg mx-auto text-neutral-200 px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
-      <p className="text-sm text-neutral-500 mb-8">
-        Last updated: May 20, 2025
-      </p>
-
-      <section className="prose prose-sm sm:prose lg:prose-xl mx-auto">
-        <p>
-          This Privacy Policy describes Our policies and procedures on the
-          collection, use and disclosure of Your information when You use the
-          Service and tells You about Your privacy rights and how the law
-          protects You. We use Your Personal data to provide and improve the
-          Service. By using the Service, You agree to the collection and use of
-          information in accordance with this Privacy Policy.
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2, delay: 0.1 }}
+      >
+        <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
+        <p className="text-sm text-neutral-500 mb-8">
+          Last updated: May 20, 2025
         </p>
 
-        <h2 className="font-bold mt-8">Interpretation and Definitions</h2>
-        <h3 className="font-bold mt-6">Interpretation</h3>
-        <p>
-          The words of which the initial letter is capitalized have meanings
-          defined under the following conditions. The following definitions
-          shall have the same meaning regardless of whether they appear in
-          singular or in plural.
-        </p>
+        <section className="prose prose-sm sm:prose lg:prose-xl mx-auto">
+          <p>
+            This Privacy Policy describes Our policies and procedures on the
+            collection, use and disclosure of Your information when You use the
+            Service and tells You about Your privacy rights and how the law
+            protects You. We use Your Personal data to provide and improve the
+            Service. By using the Service, You agree to the collection and use
+            of information in accordance with this Privacy Policy.
+          </p>
 
-        <h3 className="font-bold mt-6">Definitions</h3>
-        <p>For the purposes of this Privacy Policy:</p>
-        <ul>
-          <li>
-            <p>
-              <strong>Account</strong> means a unique account created for You to
-              access our Service or parts of our Service.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Affiliate</strong> means an entity that controls, is
-              controlled by or is under common control with a party, where
-              &apos;control&apos; means ownership of 50% or more of the shares,
-              equity interest or other securities entitled to vote for election
-              of directors or other managing authority.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Application</strong> refers to Arclify, the software
-              program provided by the Company.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Company</strong> (referred to as either &apos;the
-              Company&apos;, &apos;We&apos;, &apos;Us&apos; or &apos;Our&apos;
-              in this Agreement) refers to Arclify.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Country</strong> refers to: Texas, United States.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Device</strong> means any device that can access the
-              Service such as a computer, a cellphone or a digital tablet.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Personal Data</strong> is any information that relates to
-              an identified or identifiable individual.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Service</strong> refers to the Application.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Service Provider</strong> means any natural or legal
-              person who processes the data on behalf of the Company. It refers
-              to third-party companies or individuals employed by the Company to
-              facilitate the Service, to provide the Service on behalf of the
-              Company, to perform services related to the Service or to assist
-              the Company in analyzing how the Service is used.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Third-party Social Media Service</strong> refers to any
-              website or any social network website through which a User can log
-              in or create an account to use the Service.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Usage Data</strong> refers to data collected
-              automatically, either generated by the use of the Service or from
-              the Service infrastructure itself (for example, the duration of a
-              page visit).
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>You</strong> means the individual accessing or using the
-              Service, or the company, or other legal entity on behalf of which
-              such individual is accessing or using the Service, as applicable.
-            </p>
-          </li>
-        </ul>
+          <h2 className="font-bold mt-8">Interpretation and Definitions</h2>
+          <h3 className="font-bold mt-6">Interpretation</h3>
+          <p>
+            The words of which the initial letter is capitalized have meanings
+            defined under the following conditions. The following definitions
+            shall have the same meaning regardless of whether they appear in
+            singular or in plural.
+          </p>
 
-        <h2 className="font-bold mt-8">
-          Collecting and Using Your Personal Data
-        </h2>
-        <h3 className="font-bold mt-6">Types of Data Collected</h3>
-        <h4 className="font-bold mt-4">Personal Data</h4>
-        <p>
-          While using Our Service, We may ask You to provide Us with certain
-          personally identifiable information that can be used to contact or
-          identify You. Personally identifiable information may include, but is
-          not limited to:
-        </p>
-        <ul>
-          <li>Email address</li>
-          <li>Usage Data</li>
-        </ul>
+          <h3 className="font-bold mt-6">Definitions</h3>
+          <p>For the purposes of this Privacy Policy:</p>
+          <ul>
+            <li>
+              <p>
+                <strong>Account</strong> means a unique account created for You
+                to access our Service or parts of our Service.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Affiliate</strong> means an entity that controls, is
+                controlled by or is under common control with a party, where
+                &apos;control&apos; means ownership of 50% or more of the
+                shares, equity interest or other securities entitled to vote for
+                election of directors or other managing authority.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Application</strong> refers to Arclify, the software
+                program provided by the Company.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Company</strong> (referred to as either &apos;the
+                Company&apos;, &apos;We&apos;, &apos;Us&apos; or &apos;Our&apos;
+                in this Agreement) refers to Arclify.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Country</strong> refers to: Texas, United States.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Device</strong> means any device that can access the
+                Service such as a computer, a cellphone or a digital tablet.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Personal Data</strong> is any information that relates
+                to an identified or identifiable individual.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Service</strong> refers to the Application.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Service Provider</strong> means any natural or legal
+                person who processes the data on behalf of the Company. It
+                refers to third-party companies or individuals employed by the
+                Company to facilitate the Service, to provide the Service on
+                behalf of the Company, to perform services related to the
+                Service or to assist the Company in analyzing how the Service is
+                used.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Third-party Social Media Service</strong> refers to any
+                website or any social network website through which a User can
+                log in or create an account to use the Service.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Usage Data</strong> refers to data collected
+                automatically, either generated by the use of the Service or
+                from the Service infrastructure itself (for example, the
+                duration of a page visit).
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>You</strong> means the individual accessing or using the
+                Service, or the company, or other legal entity on behalf of
+                which such individual is accessing or using the Service, as
+                applicable.
+              </p>
+            </li>
+          </ul>
 
-        <h4 className="font-bold mt-4">Usage Data</h4>
-        <p>
-          Usage Data is collected automatically when using the Service. Usage
-          Data may include information such as Your Device&apos;s Internet
-          Protocol address (e.g. IP address), browser type, browser version, the
-          pages of our Service that You visit, the time and date of Your visit,
-          the time spent on those pages, unique device identifiers and other
-          diagnostic data.
-        </p>
-        <p>
-          When You access the Service by or through a mobile device, We may
-          collect certain information automatically, including, but not limited
-          to, the type of mobile device You use, Your mobile device unique ID,
-          the IP address of Your mobile device, Your mobile operating system,
-          the type of mobile Internet browser You use, unique device identifiers
-          and other diagnostic data.
-        </p>
+          <h2 className="font-bold mt-8">
+            Collecting and Using Your Personal Data
+          </h2>
+          <h3 className="font-bold mt-6">Types of Data Collected</h3>
+          <h4 className="font-bold mt-4">Personal Data</h4>
+          <p>
+            While using Our Service, We may ask You to provide Us with certain
+            personally identifiable information that can be used to contact or
+            identify You. Personally identifiable information may include, but
+            is not limited to:
+          </p>
+          <ul>
+            <li>Email address</li>
+            <li>Usage Data</li>
+          </ul>
 
-        <h4 className="font-bold mt-4">
-          Information from Third-Party Social Media Services
-        </h4>
-        <p>
-          The Company allows You to create an account and log in to use the
-          Service through the following Third-party Social Media Services:
-        </p>
-        <ul>
-          <li>Discord</li>
-        </ul>
-        <p>
-          If You decide to register through or otherwise grant us access to a
-          Third-party Social Media Service, We may collect Personal data that is
-          already associated with Your Third-party Social Media Service&apos;s
-          account, such as Your name, Your email address, Your activities or
-          Your contact list associated with that account.
-        </p>
+          <h4 className="font-bold mt-4">Usage Data</h4>
+          <p>
+            Usage Data is collected automatically when using the Service. Usage
+            Data may include information such as Your Device&apos;s Internet
+            Protocol address (e.g. IP address), browser type, browser version,
+            the pages of our Service that You visit, the time and date of Your
+            visit, the time spent on those pages, unique device identifiers and
+            other diagnostic data.
+          </p>
+          <p>
+            When You access the Service by or through a mobile device, We may
+            collect certain information automatically, including, but not
+            limited to, the type of mobile device You use, Your mobile device
+            unique ID, the IP address of Your mobile device, Your mobile
+            operating system, the type of mobile Internet browser You use,
+            unique device identifiers and other diagnostic data.
+          </p>
 
-        <h4 className="font-bold mt-4">Third-Party Service Providers</h4>
-        <p>We use the following services to operate and improve Arclify:</p>
-        <ul>
-          <li>
-            <strong>Vercel (Hosting):</strong> Our application is hosted on
-            Vercel.
-          </li>
-          <li>
-            <strong>Supabase (Database):</strong> User data is stored in
-            Supabase.
-          </li>
-          <li>
-            <strong>Google Gemini API (AI Processing):</strong> Certain
-            user-provided text queries may be processed via Google&apos;s Gemini
-            API.
-          </li>
-          <li>
-            <strong>Discord API (Authentication):</strong> If you log in via
-            Discord.
-          </li>
-        </ul>
-        <p>
-          We ensure all third-party providers comply with applicable data
-          protection laws.
-        </p>
+          <h4 className="font-bold mt-4">
+            Information from Third-Party Social Media Services
+          </h4>
+          <p>
+            The Company allows You to create an account and log in to use the
+            Service through the following Third-party Social Media Services:
+          </p>
+          <ul>
+            <li>Discord</li>
+          </ul>
+          <p>
+            If You decide to register through or otherwise grant us access to a
+            Third-party Social Media Service, We may collect Personal data that
+            is already associated with Your Third-party Social Media
+            Service&apos;s account, such as Your name, Your email address, Your
+            activities or Your contact list associated with that account.
+          </p>
 
-        <h3 className="font-bold mt-6">Use of Your Personal Data</h3>
-        <p>The Company may use Personal Data for the following purposes:</p>
-        <ul>
-          <li>
-            <p>
-              <strong>To provide and maintain our Service</strong>, including to
-              monitor the usage of our Service.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>To manage Your Account:</strong> to manage Your
-              registration as a user of the Service.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>For the performance of a contract:</strong> the
-              development, compliance and undertaking of the purchase contract
-              for the products, items or services You have purchased.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>To contact You:</strong> To contact You by email regarding
-              updates or informative communications related to the Service.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>To provide You</strong> with news, special offers and
-              general information about other goods, services and events which
-              we offer that are similar to those that You have already purchased
-              or enquired about unless You have opted not to receive such
-              information.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>To manage Your requests:</strong> To attend and manage
-              Your requests to Us.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>For business transfers:</strong> We may use Your
-              information in connection with a merger, sale of Company assets,
-              financing, or acquisition.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>For other purposes:</strong> We may use Your information
-              for data analysis, identifying usage trends, and to evaluate and
-              improve our Service.
-            </p>
-          </li>
-        </ul>
+          <h4 className="font-bold mt-4">Third-Party Service Providers</h4>
+          <p>We use the following services to operate and improve Arclify:</p>
+          <ul>
+            <li>
+              <strong>Vercel (Hosting):</strong> Our application is hosted on
+              Vercel.
+            </li>
+            <li>
+              <strong>Supabase (Database):</strong> User data is stored in
+              Supabase.
+            </li>
+            <li>
+              <strong>Google Gemini API (AI Processing):</strong> Certain
+              user-provided text queries may be processed via Google&apos;s
+              Gemini API.
+            </li>
+            <li>
+              <strong>Discord API (Authentication):</strong> If you log in via
+              Discord.
+            </li>
+          </ul>
+          <p>
+            We ensure all third-party providers comply with applicable data
+            protection laws.
+          </p>
 
-        <h3 className="font-bold mt-6">Retention of Your Personal Data</h3>
-        <p>
-          The Company will retain Your Personal Data only for as long as is
-          necessary for the purposes set out in this Privacy Policy. Server
-          logs, including IP addresses, are handled by our hosting provider,
-          Vercel. Vercel&apos;s default log retention for runtime logs is
-          generally short (e.g., 3 days). For longer retention, we may utilize
-          Vercel&apos;s log drain features to a secure third-party service.
-        </p>
+          <h3 className="font-bold mt-6">Use of Your Personal Data</h3>
+          <p>The Company may use Personal Data for the following purposes:</p>
+          <ul>
+            <li>
+              <p>
+                <strong>To provide and maintain our Service</strong>, including
+                to monitor the usage of our Service.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>To manage Your Account:</strong> to manage Your
+                registration as a user of the Service.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>For the performance of a contract:</strong> the
+                development, compliance and undertaking of the purchase contract
+                for the products, items or services You have purchased.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>To contact You:</strong> To contact You by email
+                regarding updates or informative communications related to the
+                Service.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>To provide You</strong> with news, special offers and
+                general information about other goods, services and events which
+                we offer that are similar to those that You have already
+                purchased or enquired about unless You have opted not to receive
+                such information.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>To manage Your requests:</strong> To attend and manage
+                Your requests to Us.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>For business transfers:</strong> We may use Your
+                information in connection with a merger, sale of Company assets,
+                financing, or acquisition.
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>For other purposes:</strong> We may use Your information
+                for data analysis, identifying usage trends, and to evaluate and
+                improve our Service.
+              </p>
+            </li>
+          </ul>
 
-        <h3 className="font-bold mt-6">Transfer of Your Personal Data</h3>
-        <p>
-          Your information, including Personal Data, may be processed outside
-          Your country, including in the U.S. and EU. We rely on Standard
-          Contractual Clauses or other legal mechanisms to ensure adequate
-          protection when transferring data internationally.
-        </p>
+          <h3 className="font-bold mt-6">Retention of Your Personal Data</h3>
+          <p>
+            The Company will retain Your Personal Data only for as long as is
+            necessary for the purposes set out in this Privacy Policy. Server
+            logs, including IP addresses, are handled by our hosting provider,
+            Vercel. Vercel&apos;s default log retention for runtime logs is
+            generally short (e.g., 3 days). For longer retention, we may utilize
+            Vercel&apos;s log drain features to a secure third-party service.
+          </p>
 
-        <h3 className="font-bold mt-6">Delete Your Personal Data</h3>
-        <p>
-          You have the right to delete or request that We assist in deleting the
-          Personal Data that We have collected about You.
-        </p>
-        <p>
-          You may update, amend, or delete Your information at any time by
-          signing in to Your Account and visiting the account settings section.
-          You may also contact Us to request access to, correct, or delete any
-          personal information.
-        </p>
+          <h3 className="font-bold mt-6">Transfer of Your Personal Data</h3>
+          <p>
+            Your information, including Personal Data, may be processed outside
+            Your country, including in the U.S. and EU. We rely on Standard
+            Contractual Clauses or other legal mechanisms to ensure adequate
+            protection when transferring data internationally.
+          </p>
 
-        <h3 className="font-bold mt-6">Disclosure of Your Personal Data</h3>
-        <h4 className="font-bold mt-4">Business Transactions</h4>
-        <p>
-          If the Company is involved in a merger, acquisition or asset sale,
-          Your Personal Data may be transferred.
-        </p>
-        <h4 className="font-bold mt-4">Law enforcement</h4>
-        <p>
-          Under certain circumstances, the Company may be required to disclose
-          Your Personal Data if required to do so by law.
-        </p>
+          <h3 className="font-bold mt-6">Delete Your Personal Data</h3>
+          <p>
+            You have the right to delete or request that We assist in deleting
+            the Personal Data that We have collected about You.
+          </p>
+          <p>
+            You may update, amend, or delete Your information at any time by
+            signing in to Your Account and visiting the account settings
+            section. You may also contact Us to request access to, correct, or
+            delete any personal information.
+          </p>
 
-        <h3 className="font-bold mt-6">Security of Your Personal Data</h3>
-        <p>
-          The security of Your Personal Data is important to Us. We encrypt data
-          in transit (HTTPS) and at rest, with access restricted to authorized
-          personnel only. However, no method of transmission over the Internet
-          is 100% secure.
-        </p>
+          <h3 className="font-bold mt-6">Disclosure of Your Personal Data</h3>
+          <h4 className="font-bold mt-4">Business Transactions</h4>
+          <p>
+            If the Company is involved in a merger, acquisition or asset sale,
+            Your Personal Data may be transferred.
+          </p>
+          <h4 className="font-bold mt-4">Law enforcement</h4>
+          <p>
+            Under certain circumstances, the Company may be required to disclose
+            Your Personal Data if required to do so by law.
+          </p>
 
-        <h2 className="font-bold mt-8">Children&apos;s Privacy</h2>
-        <p>
-          Our Service does not address anyone under the age of 13. We do not
-          knowingly collect personally identifiable information from anyone
-          under the age of 13.
-        </p>
+          <h3 className="font-bold mt-6">Security of Your Personal Data</h3>
+          <p>
+            The security of Your Personal Data is important to Us. We encrypt
+            data in transit (HTTPS) and at rest, with access restricted to
+            authorized personnel only. However, no method of transmission over
+            the Internet is 100% secure.
+          </p>
 
-        <h2 className="font-bold mt-8">Links to Other Websites</h2>
-        <p>
-          Our Service may contain links to other websites that are not operated
-          by Us. We have no control over and assume no responsibility for the
-          content, privacy policies or practices of any third party sites or
-          services.
-        </p>
+          <h2 className="font-bold mt-8">Children&apos;s Privacy</h2>
+          <p>
+            Our Service does not address anyone under the age of 13. We do not
+            knowingly collect personally identifiable information from anyone
+            under the age of 13.
+          </p>
 
-        <h2 className="font-bold mt-8">Changes to this Privacy Policy</h2>
-        <p>
-          We may update Our Privacy Policy from time to time. We will notify You
-          of any changes by posting the new Privacy Policy on this page and
-          updating the &quot;Last updated&quot; date.
-        </p>
+          <h2 className="font-bold mt-8">Links to Other Websites</h2>
+          <p>
+            Our Service may contain links to other websites that are not
+            operated by Us. We have no control over and assume no responsibility
+            for the content, privacy policies or practices of any third party
+            sites or services.
+          </p>
 
-        <h2 className="font-bold mt-8">Contact Us</h2>
-        <p>
-          If You have any questions about this Privacy Policy, You can contact
-          Us:
-        </p>
-        <ul>
-          <li>
-            By email:{" "}
-            <a href="mailto:arclify.dev@gmail.com">arclify.dev@gmail.com</a>
-          </li>
-        </ul>
-      </section>
+          <h2 className="font-bold mt-8">Changes to this Privacy Policy</h2>
+          <p>
+            We may update Our Privacy Policy from time to time. We will notify
+            You of any changes by posting the new Privacy Policy on this page
+            and updating the &quot;Last updated&quot; date.
+          </p>
+
+          <h2 className="font-bold mt-8">Contact Us</h2>
+          <p>
+            If You have any questions about this Privacy Policy, You can contact
+            Us:
+          </p>
+          <ul>
+            <li>
+              By email:{" "}
+              <a href="mailto:arclify.dev@gmail.com">arclify.dev@gmail.com</a>
+            </li>
+          </ul>
+        </section>
+      </motion.div>
     </main>
   );
 }

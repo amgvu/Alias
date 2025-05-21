@@ -5,19 +5,16 @@ export const fetchServers = async (
   accessToken: string,
   userId: string
 ): Promise<Server[]> => {
-  const response = await fetch(
-    "https://worble-production-a5eb.up.railway.app/api/servers",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        accessToken,
-        userId,
-      }),
-    }
-  );
+  const response = await fetch("http://localhost:3000/api/servers", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      accessToken,
+      userId,
+    }),
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
@@ -30,9 +27,7 @@ export const fetchServers = async (
 };
 
 export const fetchMembers = async (guildId: string) => {
-  const response = await fetch(
-    `https://worble-production-a5eb.up.railway.app/api/members/${guildId}`
-  );
+  const response = await fetch(`http://localhost:3000/api/members/${guildId}`);
   if (!response.ok) {
     throw new Error("Failed to fetch members");
   }
@@ -46,20 +41,17 @@ export const updateNickname = async (
   userId: string,
   nickname: string
 ) => {
-  const response = await fetch(
-    "https://worble-production-a5eb.up.railway.app/api/changeNickname",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        guild_id: guildId,
-        user_id: userId,
-        nickname,
-      }),
-    }
-  );
+  const response = await fetch("http://localhost:3000/api/changeNickname", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      guild_id: guildId,
+      user_id: userId,
+      nickname,
+    }),
+  });
 
   if (!response.ok) {
     const errorData = await response.json();
