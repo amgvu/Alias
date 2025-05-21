@@ -9,7 +9,6 @@ import {
   LogOut,
   ShieldX,
   Aperture,
-  Menu,
   Coffee,
   Mail,
 } from "lucide-react";
@@ -62,12 +61,6 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
       <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
 
       <div className="drawer-content flex flex-col min-h-screen">
-        <div className="lg:hidden fixed top-0 left-0 w-full bg-neutral-800 z-10 px-4 py-3">
-          <label htmlFor="sidebar-drawer" className="btn btn-square btn-ghost">
-            <Menu className="h-5 w-5" />
-          </label>
-        </div>
-
         <div>{children}</div>
       </div>
 
