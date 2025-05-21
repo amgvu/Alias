@@ -126,11 +126,6 @@ export default function Dashboard() {
         </div>
 
         <div className="drawer-side ml-60">
-          <label
-            htmlFor="my-drawer-2"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

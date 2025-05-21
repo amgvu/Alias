@@ -65,12 +65,6 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
       </div>
 
       <div className="drawer-side z-20">
-        <label
-          htmlFor="sidebar-drawer"
-          aria-label="close sidebar"
-          className="drawer-overlay"
-        ></label>
-
         <div className="menu h-full border-r border-neutral-700 w-60 bg-neutral-950 text-neutral-content fixed">
           <div className="flex flex-col h-full overflow-y-auto">
             <div className="sticky inline-flex top-0 p-2 px-4 border-neutral-700">
