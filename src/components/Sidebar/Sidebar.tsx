@@ -113,7 +113,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
               ) : (
                 <button
                   onClick={handleDiscordLogin}
-                  className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all bg-[#5865F2] hover:bg-[#454FBF] rounded-lg"
+                  className="flex items-center text-white gap-3 px-4 py-2 w-full cursor-pointer transition-all bg-[#5865F2] hover:bg-[#454FBF] rounded-lg"
                 >
                   <FaDiscord className="h-5 w-5" />
                   <span>Sign In with Discord</span>

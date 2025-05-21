@@ -1,7 +1,7 @@
 export default function GettingStarted() {
   return (
     <main className="p-8 font-sans text-center">
-      <h1 className="text-3xl font-bold mb-2">Intro</h1>
+      <h1 className="text-3xl text-neutral-200 font-bold mb-2">Intro</h1>
       <p className="text-neutral-300 mb-6 mx-auto mt-2 max-w-4xl">
         Thanks for being interested in using Arclify! This is a free Discord
         platform that gives server owners and moderators a comprehensive suite
@@ -23,13 +23,15 @@ export default function GettingStarted() {
           </li>
         </ul>
       </div>
-      <h1 className="text-3xl font-bold mb-2">Getting Started</h1>
+      <h1 className="text-3xl text-neutral-200 font-bold mb-2">
+        Getting Started
+      </h1>
       <p className="text-neutral-400 mb-8">
         Setup Arclify for your Discord server(s) in just a few simple steps
       </p>
       <div className="space-y-12">
         <div>
-          <h2 className="text-3xl font-semibold">
+          <h2 className="text-3xl text-neutral-200 font-semibold">
             1. Add Arclify&apos;s Discord bot into your server
           </h2>
           <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl">
@@ -38,7 +40,7 @@ export default function GettingStarted() {
           </p>
         </div>
         <div>
-          <h2 className="text-3xl font-semibold">
+          <h2 className="text-3xl text-neutral-200 font-semibold">
             2. Place the bot above all members you want to manage in the role
             heirarchy
           </h2>
@@ -50,7 +52,7 @@ export default function GettingStarted() {
           </p>
         </div>
         <div>
-          <h2 className="text-3xl font-semibold">
+          <h2 className="text-3xl text-neutral-200 font-semibold">
             3. Log into Arclify with your Discord account
           </h2>
           <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
@@ -60,7 +62,9 @@ export default function GettingStarted() {
           </p>
         </div>
         <div>
-          <h2 className="text-3xl font-semibold">4. Enter the the dashboard</h2>
+          <h2 className="text-3xl text-neutral-200 font-semibold">
+            4. Enter the the dashboard
+          </h2>
           <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
             Enjoy! Please note that some features are still in development and
             may have some bugs. If you encounter any issues, please report them
@@ -68,7 +72,7 @@ export default function GettingStarted() {
           </p>
         </div>
         <div>
-          <h2 className="text-3xl font-semibold">
+          <h2 className="text-3xl text-neutral-200 font-semibold">
             Bug Reports or Feature Requests?
           </h2>
           <p className="text-neutral-400 text-md font-regular mx-auto mt-2 max-w-2xl text-center">
