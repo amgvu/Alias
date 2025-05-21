@@ -7,7 +7,7 @@ export const menuItemsStyles =
 export const menuItemStyles = (active: boolean) => {
   return `${
     active
-      ? "cursor-pointer bg-neutral-900 transition-all rounded-lg text-zinc-100"
-      : "text-zinc-300"
+      ? "cursor-pointer bg-neutral-900 transition-all rounded-lg"
+      : "text-neutral-400 hover:text-white"
   } block w-full text-left px-4 py-2 text-sm`;
 };

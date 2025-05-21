@@ -176,7 +176,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           onClick={() => setIsExpanded(!isExpanded)}
           className="p-2 transition-all cursor-pointer rounded-lg"
         >
-          <motion.div animate={{ rotate: isExpanded ? 180 : 0 }}>
+          <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
             {isExpanded ? (
               <ChevronUp className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
             ) : (
@@ -220,7 +220,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                           setInputValue(nickname.nickname);
                           onNicknameChange(nickname.nickname);
                         }}
-                        className="px-3 py-1 text-sm bg-neutral-900 cursor-pointer transition-all hover:bg-neutral-800 rounded-full"
+                        className="px-3 py-1 text-sm bg-black border-neutral-700 border cursor-pointer transition-all hover:bg-neutral-800 rounded-full"
                       >
                         {nickname.nickname}
                       </button>

@@ -116,7 +116,7 @@ export default function Dashboard() {
                       isApplyingAll={isApplyingAll}
                     />
                   ) : (
-                    <div className="text-center font-semibold text-4xl text-neutral-500 py-5">
+                    <div className="text-center font-semibold text-4xl text-neutral-700 py-5">
                       Select a server to view and manage members
                     </div>
                   )}
@@ -167,7 +167,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4">
                       <DSButton
                         onClick={applyAllNicknames}
-                        className="border border-neutral-700 hover:bg-neutral-900"
+                        className="bg-white text-black hover:bg-neutral-300"
                         disabled={
                           isApplyingAll ||
                           members.some((m: Member) => !m.nickname)
@@ -177,7 +177,7 @@ export default function Dashboard() {
                       </DSButton>
                       <DSButton
                         onClick={handleSaveArc}
-                        className="border border-neutral-700 hover:bg-neutral-900"
+                        className="bg-white disabled:bg-neutral-500 text-black hover:bg-neutral-300"
                         disabled={
                           isSavingArc ||
                           !selectedServer ||
@@ -238,7 +238,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="border border-neutral-700 transition-all hover:bg-neutral-900"
+                        className="transition-all bg-white text-black hover:bg-neutral-300"
                         disabled={loading}
                       >
                         {loading ? (
