@@ -17,7 +17,6 @@ import {
   useArcManagement,
   useAuth,
 } from "@/lib/hooks";
-import { Member } from "@/types/types";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Dashboard() {
@@ -167,10 +166,11 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4">
                       <DSButton
                         onClick={applyAllNicknames}
-                        className="bg-neutral-200 text-black font-semibold hover:bg-neutral-400"
+                        className="bg-neutral-200 disabled:bg-neutral-500 text-black font-semibold hover:bg-neutral-400"
                         disabled={
                           isApplyingAll ||
-                          members.some((m: Member) => !m.nickname)
+                          !selectedServer ||
+                          members.length === 0
                         }
                       >
                         {isApplyingAll ? "Applying..." : "Apply All"}

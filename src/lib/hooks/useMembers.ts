@@ -12,7 +12,9 @@ export const useMembers = (guildId: string) => {
         const data = await fetchMembers(guildId);
         setMembers(data);
       } catch (error) {
-        setError(error instanceof Error ? error.message : 'Failed to fetch members');
+        setError(
+          error instanceof Error ? error.message : "Failed to fetch members"
+        );
       }
     };
 
