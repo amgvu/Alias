@@ -136,7 +136,7 @@ export default function Dashboard() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.1 }}
-            className="menu bg-black border-r border-neutral-700 min-h-full w-80 p-4"
+            className="menu bg-neutral-950 border-r border-neutral-700 min-h-full w-80 p-4"
           >
             <div>
               <div className="space-y-6 mt-3">
@@ -230,7 +230,7 @@ export default function Dashboard() {
                       </AnimatePresence>
                     </button>
                     <DSInput
-                      className="transition-all bg-neutral-950 border rounded-lg border-neutral-700"
+                      className="transition-all bg-black border text-neutral-100 rounded-lg border-neutral-700"
                       placeholder="Enter a movie, game, thing, etc"
                       value={theme}
                       onChange={(e) => setTheme(e.target.value)}
