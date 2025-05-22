@@ -125,7 +125,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="drawer-side ml-60">
+        <div className="drawer-side">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

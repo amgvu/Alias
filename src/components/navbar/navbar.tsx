@@ -70,24 +70,22 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
           {/* CENTER STUFF */}
 
-          <div className="flex-1 flex justify-center">
-            <NavigationMenu>
-              <NavigationMenuList className="flex gap-2">
-                {navItems.map((item) => (
-                  <NavigationMenuItem key={item.name}>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href}
-                        className="flex items-center gap-2 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md"
-                      >
-                        <span>{item.name}</span>
-                      </Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
+          <NavigationMenu>
+            <NavigationMenuList className="flex mr-9 gap-2">
+              {navItems.map((item) => (
+                <NavigationMenuItem key={item.name}>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={item.href}
+                      className="flex items-center gap-2 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md"
+                    >
+                      <span>{item.name}</span>
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
 
           {/* END STUFF */}
 
