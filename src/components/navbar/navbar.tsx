@@ -71,7 +71,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           {/* CENTER STUFF */}
 
           <NavigationMenu>
-            <NavigationMenuList className="flex mr-9 gap-2">
+            <NavigationMenuList className="flex mr-8 gap-2">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.name}>
                   <NavigationMenuLink asChild>
