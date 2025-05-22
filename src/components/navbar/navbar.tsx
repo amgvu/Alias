@@ -46,7 +46,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
               <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
-                  className="hover:bg-black focus:bg-black"
+                  className="hover:bg-background focus:bg-background"
                 >
                   <Link
                     href="/"
