@@ -74,7 +74,10 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             <NavigationMenuList className="flex ml-8 gap-2">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.name}>
-                  <NavigationMenuLink asChild>
+                  <NavigationMenuLink
+                    asChild
+                    className="focus:bg-background focus:text-white"
+                  >
                     <Link
                       href={item.href}
                       className="flex items-center gap-2 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md"
