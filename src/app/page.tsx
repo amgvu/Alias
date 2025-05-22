@@ -38,7 +38,7 @@ export default function Home() {
           </TextEffect>
 
           <div
-            className={`transition-opacity font-semibold duration-1000 ${
+            className={`transition-opacity invisible md:visible font-semibold duration-1000 ${
               showTextLoop ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -86,7 +86,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-2 font-[family-name:var(--font-geist-mono)] inline-flex items-center gap-4">
+        <div className="md:mt-2 mt-[-50px] font-[family-name:var(--font-geist-mono)] inline-flex items-center gap-4">
           <h3 className="font-semibold text-neutral-100 text-md">
             <TextEffect delay={1.7}>Join the Closed Beta</TextEffect>
           </h3>
