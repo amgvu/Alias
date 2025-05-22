@@ -95,18 +95,18 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 {session ? (
                   <button
                     onClick={handleDiscordLogout}
-                    className="flex items-center gap-2 px-4 py-1 cursor-pointer bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md transition-colors"
+                    className="flex text-sm items-center gap-2 px-4 py-1 cursor-pointer bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md transition-colors"
                   >
-                    <LogOut className="h-3 w-3" />
+                    <LogOut className="h-4 w-4" />
                     <span>Log Out</span>
                   </button>
                 ) : (
                   <button
                     onClick={handleDiscordLogin}
-                    className="flex items-center gap-2 px-4 py-1 cursor-pointer text-neutral-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-md transition-colors"
+                    className="flex text-sm items-center gap-2 px-4 py-1 cursor-pointer text-neutral-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-md transition-colors"
                   >
                     <FaDiscord className="h-4 w-4" />
-                    <span>Sign In with Discord</span>
+                    <span>Sign In</span>
                   </button>
                 )}
               </NavigationMenuItem>
