@@ -46,8 +46,8 @@ export default function Home() {
               className="overflow-y-clip md:text-3xl"
               transition={{
                 type: "spring",
-                stiffness: 900,
-                damping: 80,
+                stiffness: 1000,
+                damping: 100,
                 mass: 5,
               }}
               variants={{
@@ -76,11 +76,11 @@ export default function Home() {
               <span>Harry Potter</span>
               <span>Breaking Bad</span>
               <span>Succession</span>
-              <span>Restaurant Chains</span>
+              <span>NBA</span>
               <span>Star Wars</span>
               <span>Game Of Thrones</span>
               <span>DnD</span>
-              <span>Cars</span>
+              <span>One Piece</span>
             </TextLoop>
             <h3 className="inline-flex whitespace-pre-wrap text-3xl"> arc?</h3>
           </div>
