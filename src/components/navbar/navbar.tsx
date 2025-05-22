@@ -38,8 +38,8 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className="w-full font-[family-name:var(--font-geist-sans)] fixed top-0 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
+      <header className="w-full bg-neutral-950/20 backdrop-blur-lg font-[family-name:var(--font-geist-sans)] fixed top-0 z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-1">
           {/* START STUFF */}
           <NavigationMenu>
             <NavigationMenuList>
@@ -71,7 +71,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           {/* CENTER STUFF */}
 
           <NavigationMenu>
-            <NavigationMenuList className="flex mr-8 gap-2">
+            <NavigationMenuList className="flex ml-8 gap-2">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.name}>
                   <NavigationMenuLink asChild>
