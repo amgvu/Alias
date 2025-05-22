@@ -24,7 +24,6 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
   };
 
   const navItems = [
-    { name: "Home", href: "/" },
     ...(session
       ? [
           {
@@ -39,15 +38,18 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className="w-full bg-neutral-950 border-b font-[family-name:var(--font-geist-sans)] border-neutral-900 fixed top-0 z-50">
+      <header className="w-full bg-black font-[family-name:var(--font-geist-sans)] fixed top-0 z-50">
         <div className="max-w-7xl mx-auto">
           <NavigationMenu>
             <NavigationMenuList className="flex items-center justify-center space-x-4">
               <NavigationMenuItem>
-                <NavigationMenuLink asChild>
+                <NavigationMenuLink
+                  asChild
+                  className="hover:bg-black focus:bg-black"
+                >
                   <Link
                     href="/"
-                    className="flex flex-row hover:bg-neutral-950 items-center gap-2 px-4 py-4"
+                    className="flex flex-row items-center gap-2 px-4 py-4"
                   >
                     <Image
                       src="/Arclify.svg"
@@ -86,7 +88,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 ) : (
                   <button
                     onClick={handleDiscordLogin}
-                    className="flex items-center gap-2 px-4 py-2 cursor-pointer text-white bg-[#5865F2] hover:bg-[#454FBF] rounded-lg transition-colors"
+                    className="flex items-center gap-2 px-4 py-1 cursor-pointer text-neutral-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-lg transition-colors"
                   >
                     <FaDiscord className="h-4 w-4" />
                     <span>Sign In with Discord</span>
