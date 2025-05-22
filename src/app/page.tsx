@@ -17,7 +17,7 @@ export default function Home() {
 
   const handleSignUpClick = () => {
     window.open(
-      "https://form.typeform.com/to/D6pNxiIe",
+      "https://app.youform.com/forms/uwk5hpox",
       "_blank",
       "noopener,noreferrer"
     );
