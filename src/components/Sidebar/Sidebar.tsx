@@ -13,6 +13,12 @@ import {
   Mail,
 } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
@@ -36,80 +42,63 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
           },
         ]
       : []),
-
     {
       name: "Getting Started",
       href: "/getting-started",
       icon: <Coffee className="h-5 w-5" />,
     },
-
     { name: "Contact", href: "/contact", icon: <Mail className="h-5 w-5" /> },
-    {
-      name: "Privacy Policy",
-      href: "/privacy-policy",
-      icon: <ShieldX className="h-5 w-5" />,
-    },
-    {
-      name: "Terms Of Service",
-      href: "/terms-of-service",
-      icon: <ScrollText className="h-5 w-5" />,
-    },
   ];
 
   return (
-    <div className="drawer lg:drawer-open">
-      <input id="sidebar-drawer" type="checkbox" className="drawer-toggle" />
+    <div className="min-h-screen">
+      <NavigationMenu>
+        <NavigationMenuList className="items-center space-x-4">
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link href="/" className="flex items-center gap-2 px-4 py-2">
+                <Image src="/Arclify.svg" width="48" height="48" alt="logo" />
+                <span className="text-xl font-semibold">Arclify</span>
+              </Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
 
-      <div className="drawer-content flex flex-col min-h-screen">
-        <div>{children}</div>
-      </div>
-
-      <div className="drawer-side z-20">
-        <div className="menu h-full border-r border-[#252525] w-60 bg-neutral-950 text-neutral-content fixed">
-          <div className="flex flex-col h-full overflow-y-auto">
-            <div className="sticky inline-flex top-0 p-2 px-4 border-[#252525]">
-              <Image src="/Arclify.svg" width="48" height="48" alt="logo" />
-              <h2 className="text-xl py-4 px-2 font-semibold">Arclify</h2>
-            </div>
-
-            <div className="flex-1 p-4">
-              <ul className="space-y-2">
-                {navItems.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      href={item.href}
-                      className="flex items-center gap-3 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-lg"
-                    >
-                      {item.icon}
-                      <span>{item.name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="sticky text-neutral-400 bottom-0 p-4 border-[#252525]">
-              {session ? (
-                <button
-                  onClick={handleDiscordLogout}
-                  className="flex items-center gap-3 px-4 py-2 w-full cursor-pointer transition-all hover:text-white hover:bg-neutral-900 rounded-lg"
+          {navItems.map((item) => (
+            <NavigationMenuItem key={item.name}>
+              <NavigationMenuLink asChild>
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-2 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-lg"
                 >
-                  <LogOut className="h-5 w-5" />
-                  <span>Log Out</span>
-                </button>
-              ) : (
-                <button
-                  onClick={handleDiscordLogin}
-                  className="flex items-center text-white gap-3 px-4 py-2 w-full cursor-pointer transition-all bg-[#5865F2] hover:bg-[#454FBF] rounded-lg"
-                >
-                  <FaDiscord className="h-5 w-5" />
-                  <span>Sign In with Discord</span>
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+                  {item.icon}
+                  <span>{item.name}</span>
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          ))}
+
+          <NavigationMenuItem>
+            {session ? (
+              <button
+                onClick={handleDiscordLogout}
+                className="flex items-center gap-2 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-lg transition-colors"
+              >
+                <LogOut className="h-5 w-5" />
+                <span>Log Out</span>
+              </button>
+            ) : (
+              <button
+                onClick={handleDiscordLogin}
+                className="flex items-center gap-2 px-4 py-2 text-white bg-[#5865F2] hover:bg-[#454FBF] rounded-lg transition-colors"
+              >
+                <FaDiscord className="h-5 w-5" />
+                <span>Sign In with Discord</span>
+              </button>
+            )}
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+      <div>{children}</div>
     </div>
   );
 }
