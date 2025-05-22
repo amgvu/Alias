@@ -130,7 +130,7 @@ export default function Dashboard() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.1 }}
-            className="menu bg-neutral-950 border-r border-[#252525] min-h-full w-80 p-4"
+            className="menu bg-neutral-950 border-r border-t border-[#252525] min-h-full w-80 p-4"
           >
             <div>
               <div className="space-y-6 mt-3">
