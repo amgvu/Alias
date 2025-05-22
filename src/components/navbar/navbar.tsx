@@ -38,7 +38,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className="w-full bg-black font-[family-name:var(--font-geist-sans)] fixed top-0 z-50">
+      <header className="w-full font-[family-name:var(--font-geist-sans)] fixed top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
           {/* START STUFF */}
           <NavigationMenu>
@@ -70,22 +70,24 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
           {/* CENTER STUFF */}
 
-          <NavigationMenu>
-            <NavigationMenuList className="flex gap-2">
-              {navItems.map((item) => (
-                <NavigationMenuItem key={item.name}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href={item.href}
-                      className="flex items-center gap-2 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md"
-                    >
-                      <span>{item.name}</span>
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+          <div className="flex-1 flex justify-center">
+            <NavigationMenu>
+              <NavigationMenuList className="flex gap-2">
+                {navItems.map((item) => (
+                  <NavigationMenuItem key={item.name}>
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href={item.href}
+                        className="flex items-center gap-2 px-4 py-2 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md"
+                      >
+                        <span>{item.name}</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
 
           {/* END STUFF */}
 
@@ -95,9 +97,9 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 {session ? (
                   <button
                     onClick={handleDiscordLogout}
-                    className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md transition-colors"
+                    className="flex items-center gap-2 px-4 py-1 cursor-pointer bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-md transition-colors"
                   >
-                    <LogOut className="h-4 w-4" />
+                    <LogOut className="h-3 w-3" />
                     <span>Log Out</span>
                   </button>
                 ) : (
