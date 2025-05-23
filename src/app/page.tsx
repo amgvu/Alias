@@ -86,15 +86,15 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="md:mt-2 mt-[-50px] font-[family-name:var(--font-geist-mono)] inline-flex items-center gap-4">
-          <h3 className="font-semibold text-neutral-100 text-md">
-            <TextEffect delay={1.7}>Join the Closed Beta</TextEffect>
+        <div className="md:mt-2 mt-[-60px] font-[family-name:var(--font-geist-mono)] md:inline-flex items-center gap-4">
+          <h3 className="font-semibold md:mb-0 mb-3 text-neutral-100 text-md">
+            <TextEffect delay={1.0}>Join the Closed Beta</TextEffect>
           </h3>
           <motion.button
             onClick={handleSignUpClick}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 2.2 }}
+            transition={{ duration: 0.25, delay: 1.5 }}
             className="cursor-pointer font-semibold text-black bg-neutral-100 px-6 py-3 rounded-lg shadow-md hover:bg-neutral-400 transition duration-300"
           >
             Sign Up
