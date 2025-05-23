@@ -187,7 +187,6 @@ export default function Dashboard() {
                           members.length === 0
                         }
                       >
-
                         <SaveAll className="w-4 h-4 mr-[-2px]" />
                         {isSavingArc ? "Saving..." : "Save Set"}
                       </DSButton>
@@ -242,10 +241,9 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-
                         className={`transition-all bg-[#ededed] ${
-                          !loading && "disabled:bg-zinc-500"
-                        } font-semibold text-black hover:bg-zinc-400`}
+                          !loading && "disabled:bg-zinc-900"
+                        } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-medium hover:bg-zinc-700`}
                         disabled={
                           loading || !selectedServer || members.length === 0
                         }
