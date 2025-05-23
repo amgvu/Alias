@@ -72,7 +72,7 @@ const MobileDrawer = ({
           </div>
         </div>
         <DrawerFooter>
-          <DrawerClose className="px-4 py-2 place-items-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md">
+          <DrawerClose className="px-4 py-2 place-items-center text-zinc-400 hover:text-white cursor-pointer rounded-md">
             <X className="h-12 w-12" />
           </DrawerClose>
         </DrawerFooter>
