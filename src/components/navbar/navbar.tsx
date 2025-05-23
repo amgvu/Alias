@@ -104,11 +104,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
     { name: "Getting Started", href: "/getting-started" },
   ];
 
-  const resourceItems = [
-    { name: "Contact", href: "/contact" },
-    { name: "Privacy Policy", href: "/privacy-policy" },
-    { name: "Terms of Service", href: "/terms-of-service" },
-  ];
+  const resourceItems = [{ name: "Contact", href: "/contact" }];
 
   return (
     <>
