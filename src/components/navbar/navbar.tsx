@@ -3,7 +3,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
-import { LogOut, Menu } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import {
   NavigationMenu,
@@ -22,33 +22,58 @@ import {
 } from "@/components/ui/drawer";
 
 const MobileDrawer = ({
-  navItems,
+  productItems,
+  resourceItems,
 }: {
-  navItems: { name: string; href: string }[];
+  productItems: { name: string; href: string }[];
+  resourceItems: { name: string; href: string }[];
 }) => {
   return (
-    <Drawer>
+    <Drawer direction="right">
       <DrawerTrigger className="p-4">
         <Menu className="text-zinc-100 h-6 w-6" />
       </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle className="mb-[-40px]">Menu</DrawerTitle>
-        </DrawerHeader>
-        <div className="flex flex-col gap-2 p-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="px-2 py-2 rounded-md hover:bg-zinc-900 text-zinc-400 hover:text-white"
-            >
-              {item.name}
-            </Link>
-          ))}
+      <DrawerContent className="bg-zinc-950/40 font-[family-name:var(--font-geist-sans)] backdrop-blur-lg">
+        <div className="p-2">
+          <DrawerHeader>
+            <DrawerTitle className="text-zinc-400 text-xs ml-[-8px] font-medium mb-[-40px]">
+              Product
+            </DrawerTitle>
+          </DrawerHeader>
+          <div className="flex flex-col">
+            {productItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="px-2 py-1 rounded-md font-medium text-zinc-100 hover:text-zinc-400"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          <div>
+            <DrawerHeader>
+              <DrawerTitle className="text-zinc-400 text-xs ml-[-8px] font-medium mb-[-40px]">
+                Resources
+              </DrawerTitle>
+            </DrawerHeader>
+            <div className="flex flex-col">
+              {resourceItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="px-2 py-1 rounded-md font-medium text-zinc-100 hover:text-zinc-400"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
         <DrawerFooter>
-          <DrawerClose className="px-4 py-2 bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-md">
-            Close
+          <DrawerClose className="px-4 py-2 place-items-center text-zinc-400 hover:text-white cursor-pointer rounded-md">
+            <X className="h-12 w-12" />
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
@@ -67,7 +92,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
     signOut({ callbackUrl: "/", redirect: true });
   };
 
-  const navItems = [
+  const productItems = [
     ...(session
       ? [
           {
@@ -77,8 +102,9 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
         ]
       : []),
     { name: "Getting Started", href: "/getting-started" },
-    { name: "Contact", href: "/contact" },
   ];
+
+  const resourceItems = [{ name: "Contact", href: "/contact" }];
 
   return (
     <>
@@ -113,11 +139,10 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             </NavigationMenu>
           </div>
 
-          {/* Centered navigation items */}
           <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
               <NavigationMenuList className="flex gap-2">
-                {navItems.map((item) => (
+                {[...productItems, ...resourceItems].map((item) => (
                   <NavigationMenuItem key={item.name}>
                     <NavigationMenuLink
                       asChild
@@ -162,7 +187,10 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             </NavigationMenu>
 
             <div className="md:hidden">
-              <MobileDrawer navItems={navItems} />
+              <MobileDrawer
+                productItems={productItems}
+                resourceItems={resourceItems}
+              />
             </div>
           </div>
         </div>
