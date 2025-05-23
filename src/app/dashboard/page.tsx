@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { LoaderPinwheel, ChevronsUpDown } from "lucide-react";
+import {
+  LoaderPinwheel,
+  ChevronsUpDown,
+  WandSparkles,
+  CheckCheck,
+  SaveAll,
+} from "lucide-react";
 import {
   DSButton,
   DSMenu,
@@ -86,7 +92,7 @@ export default function Dashboard() {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
         <div className="drawer-content flex flex-col">
-          <div className="p-4">
+          <div className="">
             <div
               className={`w-auto transition-opacity duration-500 ${
                 isLoaded ? "opacity-100" : "opacity-0"
@@ -97,7 +103,7 @@ export default function Dashboard() {
               </div>
 
               <div className="flex flex-col">
-                <div className="text-4xl text-zinc-600 font-semibold text-center py-5"></div>
+                <div className="text-4xl text-zinc-600 font-semibold text-center py-2"></div>
                 <div className="justify-items-center">
                   {serversError || membersError ? (
                     <div className="mb-3 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400">
@@ -161,18 +167,19 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4">
                       <DSButton
                         onClick={applyAllNicknames}
-                        className="bg-[#ededed] disabled:bg-zinc-500 text-black font-semibold hover:bg-zinc-400"
+                        className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-medium hover:bg-zinc-700"
                         disabled={
                           isApplyingAll ||
                           !selectedServer ||
                           members.length === 0
                         }
                       >
+                        <CheckCheck className="w-4 h-4 mr-[-2px]" />
                         {isApplyingAll ? "Applying..." : "Apply All"}
                       </DSButton>
                       <DSButton
                         onClick={handleSaveArc}
-                        className="bg-[#ededed] font-semibold disabled:bg-zinc-500 text-black hover:bg-zinc-400"
+                        className="bg-zinc-800 font-medium disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
                         disabled={
                           isSavingArc ||
                           !selectedServer ||
@@ -180,6 +187,7 @@ export default function Dashboard() {
                           members.length === 0
                         }
                       >
+                        <SaveAll className="w-4 h-4 mr-[-2px]" />
                         {isSavingArc ? "Saving..." : "Save Arc"}
                       </DSButton>
                     </div>
@@ -233,11 +241,12 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="transition-all bg-[#ededed] disabled:bg-zinc-500 font-semibold text-black hover:bg-zinc-400"
+                        className="transition-all bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 font-medium text-zinc-100 hover:bg-zinc-700"
                         disabled={
                           loading || !selectedServer || members.length === 0
                         }
                       >
+                        <WandSparkles className="w-4 h-4 mr-[-2px]" />
                         {loading ? (
                           <LoaderPinwheel className="animate-spin w-5 h-5" />
                         ) : (

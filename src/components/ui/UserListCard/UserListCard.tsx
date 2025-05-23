@@ -4,7 +4,7 @@ import { DSInput, DSButton, DSDialog } from "@/components/";
 import { styles } from "./UserListCard.styles";
 import { Member, Nickname } from "@/types/types";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import { ChevronDown, ChevronUp, X } from "lucide-react";
+import { ChevronDown, ChevronUp, X, Check, RotateCcw } from "lucide-react";
 import { fetchNicknames, deleteNickname } from "@/lib/utilities/api";
 
 interface UserListCardProps {
@@ -121,7 +121,6 @@ export const UserListCard: React.FC<UserListCardProps> = ({
       initial={{ y: 0 }}
       animate={controls}
       className={`${styles.card} relative bg-no-repeat bg-left`}
-      style={{ backgroundImage: `url(${member.avatar_url})` }}
     >
       <div className="absolute inset-0"></div>
       <div className="flex items-center space-x-4 relative z-10">
@@ -154,7 +153,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           </div>
         </div>
 
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-1">
           <DSButton
             onClick={handleApplyNickname}
             disabled={isUpdating || !inputValue}
@@ -162,6 +161,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               isUpdating ? "motion-preset-pop motion-duration-1000" : ""
             }`}
           >
+            <Check className="w-4 h-4 mr-[-2px]" />
             {isUpdating ? "Applying..." : "Apply"}
           </DSButton>
           <DSButton
@@ -169,6 +169,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             disabled={isUpdating}
             className={`${styles.applyButton}`}
           >
+            <RotateCcw className="w-4 h-4 mr-[-2px]" />
             Reset
           </DSButton>
         </div>
