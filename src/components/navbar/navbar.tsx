@@ -15,7 +15,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -29,7 +28,7 @@ const MobileDrawer = ({
 }) => {
   return (
     <Drawer>
-      <DrawerTrigger className="p-2">
+      <DrawerTrigger className="p-4">
         <Menu className="text-zinc-100 h-6 w-6" />
       </DrawerTrigger>
       <DrawerContent>
@@ -112,9 +111,12 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
+          </div>
 
+          {/* Centered navigation items */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
             <NavigationMenu>
-              <NavigationMenuList className="hidden md:flex mr-8 gap-2">
+              <NavigationMenuList className="flex gap-2">
                 {navItems.map((item) => (
                   <NavigationMenuItem key={item.name}>
                     <NavigationMenuLink
