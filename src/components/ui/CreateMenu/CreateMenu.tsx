@@ -37,7 +37,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
       const fetchedArcs = await fetchArcs(selectedServer);
       setArcs(fetchedArcs);
     } catch (error) {
-      console.error("Failed to fetch arcs:", error);
+      console.error("Failed to fetch sets:", error);
     } finally {
       setIsLoading(false);
     }
@@ -46,7 +46,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
   const handleDeleteArc = async (arcId: number) => {
     if (
       !window.confirm(
-        "Are you sure you want to delete this arc? This action cannot be undone."
+        "Are you sure you want to delete this set? This action cannot be undone."
       )
     ) {
       return;
@@ -61,8 +61,8 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
         setSelectedArc(null);
       }
     } catch (error) {
-      console.error("Failed to delete arc:", error);
-      alert("Failed to delete arc. Please try again.");
+      console.error("Failed to delete set:", error);
+      alert("Failed to delete set. Please try again.");
     }
   };
 
@@ -95,7 +95,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
           displayValue={(arc: Arc | null) => arc?.arc_name || ""}
           onChange={(event) => setQuery(event.target.value)}
           className="w-full p-2 pr-10 bg-black border cursor-pointer focus:cursor-auto border-[#252525] rounded-lg transition-all text-neutral-100 focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
-          placeholder="Select or create an arc"
+          placeholder="Select or create a set"
         />
         <Combobox.Button
           as="div"
@@ -129,11 +129,11 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
         <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-black py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
           {isLoading ? (
             <div className="relative cursor-default select-none px-4 py-2 text-neutral-400">
-              Loading arcs...
+              Loading sets...
             </div>
           ) : filteredArcs.length === 0 && !showCreateOption ? (
             <div className="relative cursor-default select-none px-4 py-2 text-neutral-400">
-              No arcs found
+              No sets found
             </div>
           ) : (
             <>

@@ -153,7 +153,7 @@ export default function Dashboard() {
                 </div>
                 <div className="rounded-md">
                   <label className="block text-lg text-zinc-200 font-medium mb-3">
-                    My Arcs
+                    Nickname Sets
                   </label>
                   <DSCreateMenu
                     selectedServer={selectedServer}
@@ -187,8 +187,9 @@ export default function Dashboard() {
                           members.length === 0
                         }
                       >
+
                         <SaveAll className="w-4 h-4 mr-[-2px]" />
-                        {isSavingArc ? "Saving..." : "Save Arc"}
+                        {isSavingArc ? "Saving..." : "Save Set"}
                       </DSButton>
                     </div>
                   </ul>
@@ -196,10 +197,10 @@ export default function Dashboard() {
 
                 <div className="border-t border-[#252525] pt-4">
                   <label className="inline-block text-zinc-200 text-lg font-medium">
-                    Arc Studio
+                    Name Generator
                   </label>
                   <h2 className="inline-block mx-2 font-light text-zinc-500">
-                    experimental
+                    v0.2
                   </h2>
                   <h3 className="font-light mt-1 text-sm text-zinc-400">
                     Generate names for your members based on a theme and apply
@@ -241,14 +242,17 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="transition-all bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 font-medium text-zinc-100 hover:bg-zinc-700"
+
+                        className={`transition-all bg-[#ededed] ${
+                          !loading && "disabled:bg-zinc-500"
+                        } font-semibold text-black hover:bg-zinc-400`}
                         disabled={
                           loading || !selectedServer || members.length === 0
                         }
                       >
                         <WandSparkles className="w-4 h-4 mr-[-2px]" />
                         {loading ? (
-                          <LoaderPinwheel className="animate-spin w-5 h-5" />
+                          <LoaderPinwheel className="animate-spin w-5 h-5 text-zinc-100" />
                         ) : (
                           "Generate"
                         )}
