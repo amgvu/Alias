@@ -147,7 +147,7 @@ export default function Dashboard() {
                 </div>
                 <div className="rounded-md">
                   <label className="block text-lg text-zinc-200 font-medium mb-3">
-                    My Arcs
+                    Nickname Sets
                   </label>
                   <DSCreateMenu
                     selectedServer={selectedServer}
@@ -180,7 +180,7 @@ export default function Dashboard() {
                           members.length === 0
                         }
                       >
-                        {isSavingArc ? "Saving..." : "Save Arc"}
+                        {isSavingArc ? "Saving..." : "Save Set"}
                       </DSButton>
                     </div>
                   </ul>
@@ -188,10 +188,10 @@ export default function Dashboard() {
 
                 <div className="border-t border-[#252525] pt-4">
                   <label className="inline-block text-zinc-200 text-lg font-medium">
-                    Arc Studio
+                    Name Generator
                   </label>
                   <h2 className="inline-block mx-2 font-light text-zinc-500">
-                    experimental
+                    v0.2
                   </h2>
                   <h3 className="font-light mt-1 text-sm text-zinc-400">
                     Generate names for your members based on a theme and apply
@@ -233,13 +233,15 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4 mt-3">
                       <DSButton
                         onClick={handleGenerateCharacters}
-                        className="transition-all bg-[#ededed] disabled:bg-zinc-500 font-semibold text-black hover:bg-zinc-400"
+                        className={`transition-all bg-[#ededed] ${
+                          !loading && "disabled:bg-zinc-500"
+                        } font-semibold text-black hover:bg-zinc-400`}
                         disabled={
                           loading || !selectedServer || members.length === 0
                         }
                       >
                         {loading ? (
-                          <LoaderPinwheel className="animate-spin w-5 h-5" />
+                          <LoaderPinwheel className="animate-spin w-5 h-5 text-zinc-100" />
                         ) : (
                           "Generate"
                         )}
