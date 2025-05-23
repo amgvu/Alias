@@ -88,7 +88,7 @@ export default function Home() {
 
         <div className="md:mt-2 mt-[-60px] font-[family-name:var(--font-geist-mono)] md:inline-flex items-center gap-4">
           <h3 className="font-semibold md:mb-0 mb-3 text-neutral-100 text-md">
-            <TextEffect delay={1.0}>Join the Closed Beta</TextEffect>
+            <TextEffect delay={1.0}>Join Early Access</TextEffect>
           </h3>
           <motion.button
             onClick={handleSignUpClick}
