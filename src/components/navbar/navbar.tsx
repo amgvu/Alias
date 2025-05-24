@@ -101,10 +101,15 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           },
         ]
       : []),
-    { name: "Getting Started", href: "/getting-started" },
+    { name: "Features", href: "/features" },
+    { name: "Changelog", href: "/changelog" },
+    { name: "Documentation", href: "/documentation" },
   ];
 
-  const resourceItems = [{ name: "Contact", href: "/contact" }];
+  const resourceItems = [
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
+  ];
 
   return (
     <>
