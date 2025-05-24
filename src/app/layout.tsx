@@ -52,6 +52,19 @@ const gintoRegular = localFont({
   adjustFontFallback: "Arial",
 });
 
+const ggSansRegular = localFont({
+  src: [
+    {
+      path: "../../public/fonts/ggsans-Normal.woff2",
+      weight: "400",
+      style: "medium",
+    },
+  ],
+  variable: "--font-ggsans-regular",
+  display: "swap",
+  adjustFontFallback: "Arial",
+});
+
 export const metadata: Metadata = {
   title: "Arclify",
   description: "Streamline Discord Ops with Full-Stack Automation",
@@ -65,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gintoNord.variable} ${gintoMedium.variable} ${gintoRegular.variable} w-full h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gintoNord.variable} ${gintoMedium.variable} ${gintoRegular.variable} ${ggSansRegular.variable} w-full h-full`}
       >
         {children}
       </body>
