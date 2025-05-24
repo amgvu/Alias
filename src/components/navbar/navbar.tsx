@@ -113,7 +113,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className="w-full bg-neutral-950 border-b border-zinc-900 backdrop-blur-lg font-[family-name:var(--font-geist-sans)] fixed top-0 z-50">
+      <header className="w-full bg-neutral-950 border-b border-zinc-900 font-[family-name:var(--font-geist-sans)] fixed top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center md:px-32">
           <div className="flex items-center gap-4">
             <NavigationMenu>
