@@ -33,7 +33,7 @@ const MobileDrawer = ({
       <DrawerTrigger className="p-4">
         <Menu className="text-zinc-100 h-6 w-6" />
       </DrawerTrigger>
-      <DrawerContent className="bg-zinc-950/40 font-[family-name:var(--font-geist-sans)] backdrop-blur-lg">
+      <DrawerContent className="bg-zinc-950/40 font-[family-name:var(--font-ggsans-semi-bold)] backdrop-blur-lg">
         <div className="p-2">
           <DrawerHeader>
             <DrawerTitle className="text-zinc-400 text-md ml-[-8px] font-medium mb-[-40px]">

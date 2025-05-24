@@ -65,9 +65,35 @@ const ggSansRegular = localFont({
   adjustFontFallback: "Arial",
 });
 
+const ggSansMedium = localFont({
+  src: [
+    {
+      path: "../../public/fonts/ggsans-Medium.woff2",
+      weight: "400",
+      style: "medium",
+    },
+  ],
+  variable: "--font-ggsans-medium",
+  display: "swap",
+  adjustFontFallback: "Arial",
+});
+
+const ggSansSemiBold = localFont({
+  src: [
+    {
+      path: "../../public/fonts/ggsans-SemiBold.woff2",
+      weight: "400",
+      style: "medium",
+    },
+  ],
+  variable: "--font-ggsans-semi-bold",
+  display: "swap",
+  adjustFontFallback: "Arial",
+});
+
 export const metadata: Metadata = {
   title: "Arclify",
-  description: "Streamline Discord Ops with Full-Stack Automation",
+  description: "Automating the busywork of Discord community management",
 };
 
 export default function RootLayout({
@@ -78,7 +104,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gintoNord.variable} ${gintoMedium.variable} ${gintoRegular.variable} ${ggSansRegular.variable} w-full h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gintoNord.variable} ${gintoMedium.variable} ${gintoRegular.variable} ${ggSansRegular.variable} ${ggSansSemiBold.variable} ${ggSansMedium.variable} w-full h-full`}
       >
         {children}
       </body>
