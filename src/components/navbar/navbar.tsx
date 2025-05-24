@@ -36,16 +36,16 @@ const MobileDrawer = ({
       <DrawerContent className="bg-zinc-950/40 font-[family-name:var(--font-geist-sans)] backdrop-blur-lg">
         <div className="p-2">
           <DrawerHeader>
-            <DrawerTitle className="text-zinc-400 text-xs ml-[-8px] font-medium mb-[-40px]">
+            <DrawerTitle className="text-zinc-400 text-md ml-[-8px] font-medium mb-[-40px]">
               Product
             </DrawerTitle>
           </DrawerHeader>
-          <div className="flex flex-col">
+          <div className="flex mt-4 flex-col">
             {productItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="px-2 py-1 rounded-md font-medium text-zinc-100 hover:text-zinc-400"
+                className="px-2 py-0.5 rounded-md font-medium text-2xl text-zinc-100 hover:text-zinc-400"
               >
                 {item.name}
               </Link>
@@ -54,16 +54,16 @@ const MobileDrawer = ({
 
           <div>
             <DrawerHeader>
-              <DrawerTitle className="text-zinc-400 text-xs ml-[-8px] font-medium mb-[-40px]">
+              <DrawerTitle className="text-zinc-400 text-md ml-[-8px] font-medium mb-[-40px]">
                 Resources
               </DrawerTitle>
             </DrawerHeader>
-            <div className="flex flex-col">
+            <div className="flex mt-4 flex-col">
               {resourceItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-2 py-1 rounded-md font-medium text-zinc-100 hover:text-zinc-400"
+                  className="px-2 py-0.5 rounded-md font-medium text-2xl text-zinc-100 hover:text-zinc-400"
                 >
                   {item.name}
                 </Link>
