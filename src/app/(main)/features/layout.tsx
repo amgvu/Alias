@@ -1,12 +1,10 @@
-"use client";
-
-export default function ContactLayout({
+export default function FeaturesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen text-center">
       <main>{children}</main>
     </div>
   );
