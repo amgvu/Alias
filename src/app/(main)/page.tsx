@@ -17,12 +17,12 @@ export default function Home() {
       <main className="w-full max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
           <div className="flex flex-col gap-4 items-center md:items-start text-left md:col-span-2">
-            <h1 className="font-medium text-zinc-100 text-center md:text-left text-4xl md:text-7xl">
+            <h1 className="font-medium text-zinc-100 font-[family-name:var(--font-ginto-nord)] text-center md:text-left text-4xl md:text-7xl">
               <TextEffect per="char" speedReveal={3} delay={0.1}>
                 Automating the busywork of Discord community management
               </TextEffect>
             </h1>
-            <div className="text-left text-zinc-300 md:translate-x-0 translate-x-7 font-regular text-2xl md:text-4xl space-y-4">
+            <div className="text-left text-zinc-300 font-[family-name:var(--font-ginto-regular)] md:translate-x-0 translate-x-7 font-regular text-2xl md:text-4xl space-y-4">
               <div className="font-regular text-sm text-center md:text-left md:text-xl max-w-5/6 md:max-w-4/6">
                 <TextEffect per="line" speedReveal={1} delay={1}>
                   Arclify sets dynamic nicknames, personalizes identities, and
@@ -37,7 +37,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 1.5 }}
-                className="cursor-pointer font-medium text-black text-sm md:text-base bg-zinc-100 px-6 py-3 rounded-lg shadow-md hover:bg-neutral-400 transition duration-300"
+                className="cursor-pointer font-medium text-black font-[family-name:var(--font-ginto-medium)] text-sm md:text-base bg-zinc-100 px-6 py-3 rounded-lg shadow-md hover:bg-neutral-400 transition duration-300"
               >
                 Sign up for free early access
               </motion.button>

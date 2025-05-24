@@ -132,9 +132,9 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                         width="24"
                         height="24"
                         alt="logo"
-                        className="inline-block"
+                        className="mb-0.5 inline-block"
                       />
-                      <span className="text-xl text-zinc-100 font-semibold whitespace-nowrap">
+                      <span className="text-xl text-zinc-100 font-[family-name:var(--font-ginto-medium)] font-semibold whitespace-nowrap">
                         Arclify
                       </span>
                     </Link>
