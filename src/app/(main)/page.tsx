@@ -22,8 +22,8 @@ export default function Home() {
                 Automating the busywork of Discord community management
               </TextEffect>
             </h1>
-            <div className="text-left text-zinc-300 font-ginto md:translate-x-0 translate-x-7 text-2xl md:text-4xl space-y-4">
-              <div className="text-sm text-center md:text-left md:text-xl max-w-5/6 md:max-w-4/6">
+            <div className="text-left text-zinc-300 font-ginto md:translate-x-0 translate-x-5 text-2xl md:text-4xl space-y-4">
+              <div className="text-sm text-center md:text-left md:text-xl max-w-7/8 md:max-w-4/6">
                 <TextEffect per="line" speedReveal={1} delay={1}>
                   Arclify sets dynamic nicknames, personalizes identities, and
                   streamlines community workflows. Make Discord management
