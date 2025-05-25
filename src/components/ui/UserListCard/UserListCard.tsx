@@ -123,7 +123,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
       className={`${styles.card} relative bg-no-repeat bg-left`}
     >
       <div className="absolute inset-0"></div>
-      <div className="flex items-center space-x-4 relative z-10">
+      <div className="flex items-center space-x-2 relative z-10">
         <div className="h-full flex-shrink-0 relative">
           <img
             src={member.avatar_url}
@@ -137,7 +137,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             }}
           />
         </div>
-        <div className="w-full text-xl flex flex-col justify-center">
+        <div className="w-full text-lg flex flex-col justify-center">
           <DSInput
             value={inputValue}
             onChange={handleInputChange}
@@ -153,7 +153,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           </div>
         </div>
 
-        <div className="flex flex-col space-y-1">
+        <div className="flex flex-row space-x-2">
           <DSButton
             onClick={handleApplyNickname}
             disabled={isUpdating || !inputValue}
@@ -197,8 +197,8 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="mt-4 pt-1 px-2 border-t border-[#252525]">
-              <div className="flex items-center gap-2 mb-2 text-sm text-neutral-500">
+            <div className="mt-2 pt-1 px-2 border-t border-[#252525]">
+              <div className="flex items-center gap-2 mb-1 text-sm font-bold text-neutral-500">
                 Saved Nicknames
               </div>
               {isLoadingNicknames ? (
@@ -222,7 +222,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                           setInputValue(nickname.nickname);
                           onNicknameChange(nickname.nickname);
                         }}
-                        className="px-3 py-1 text-sm bg-black border-[#252525] border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
+                        className="px-3 py-1 text-sm font-medium bg-black border-[#252525] border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
                       >
                         {nickname.nickname}
                       </button>
