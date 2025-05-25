@@ -8,13 +8,7 @@ import {
   CheckCheck,
   SaveAll,
 } from "lucide-react";
-import {
-  DSButton,
-  DSMenu,
-  DSUserList,
-  DSCreateMenu,
-  DSInput,
-} from "@/components";
+import { DSButton, DSMenu, DSUserList, DSCreateMenu } from "@/components";
 import {
   useServerSelection,
   useMembers,
@@ -87,7 +81,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] text-white bg-background">
+    <div className="min-h-screen font-ggSans text-white bg-background">
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
@@ -99,7 +93,7 @@ export default function Dashboard() {
               }`}
             >
               <div className="flex justify-between items-center">
-                <div className="text-center font-bold font-[family-name:var(--font-geist-sans)]"></div>
+                <div className="text-center font-bold"></div>
               </div>
 
               <div className="flex flex-col">
@@ -167,7 +161,7 @@ export default function Dashboard() {
                     <div className="flex justify-end space-x-4">
                       <DSButton
                         onClick={applyAllNicknames}
-                        className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-medium hover:bg-zinc-700"
+                        className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
                         disabled={
                           isApplyingAll ||
                           !selectedServer ||
@@ -179,7 +173,7 @@ export default function Dashboard() {
                       </DSButton>
                       <DSButton
                         onClick={handleSaveArc}
-                        className="bg-zinc-800 font-medium disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+                        className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
                         disabled={
                           isSavingArc ||
                           !selectedServer ||
@@ -226,14 +220,14 @@ export default function Dashboard() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -5 }}
                           transition={{ duration: 0.1, ease: "easeInOut" }}
-                          className="hover:text-zinc-400 inline-block"
+                          className="hover:text-zinc-400 font-medium inline-block"
                         >
                           {category}
                         </motion.span>
                       </AnimatePresence>
                     </button>
-                    <DSInput
-                      className="transition-all bg-black border text-zinc-100 rounded-lg border-[#252525]"
+                    <input
+                      className="bg-black py-1.5 border text-md text-zinc-100 rounded-md border-[#252525] cursor-pointer pl-2 focus:cursor-auto max-w-full shadow-white/10 focus:outline-hidden focus:ring-1 focus:ring-neutral-100 transition duration-200 ease-in-out w-full"
                       placeholder="Enter a movie, game, thing, etc"
                       value={theme}
                       onChange={(e) => setTheme(e.target.value)}
@@ -243,7 +237,7 @@ export default function Dashboard() {
                         onClick={handleGenerateCharacters}
                         className={`transition-all bg-[#ededed] ${
                           !loading && "disabled:bg-zinc-900"
-                        } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-medium hover:bg-zinc-700`}
+                        } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700`}
                         disabled={
                           loading || !selectedServer || members.length === 0
                         }
