@@ -32,7 +32,7 @@ const gintoNord = localFont({
     },
   ],
   variable: "--font-gintoNord",
-  display: "auto",
+  display: "swap",
   adjustFontFallback: "Arial",
   preload: true,
 });
@@ -51,7 +51,7 @@ const ginto = localFont({
     },
   ],
   variable: "--font-ginto",
-  display: "auto",
+  display: "swap",
   adjustFontFallback: "Arial",
   preload: true,
 });
@@ -64,7 +64,7 @@ const ggSans = localFont({
     },
   ],
   variable: "--font-ggSans",
-  display: "auto",
+  display: "swap",
   adjustFontFallback: "Arial",
   preload: true,
 });
