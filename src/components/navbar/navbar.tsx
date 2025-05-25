@@ -169,25 +169,27 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             <NavigationMenu>
               <NavigationMenuList>
-                <NavigationMenuItem>
-                  {session ? (
-                    <button
-                      onClick={handleDiscordLogout}
-                      className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      <span>Log Out</span>
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleDiscordLogin}
-                      className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer text-zinc-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-md transition-colors"
-                    >
-                      <FaDiscord className="h-4 w-4" />
-                      <span>Sign In</span>
-                    </button>
-                  )}
-                </NavigationMenuItem>
+                {false && (
+                  <NavigationMenuItem>
+                    {session ? (
+                      <button
+                        onClick={handleDiscordLogout}
+                        className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        <span>Log Out</span>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleDiscordLogin}
+                        className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer text-zinc-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-md transition-colors"
+                      >
+                        <FaDiscord className="h-4 w-4" />
+                        <span>Sign In</span>
+                      </button>
+                    )}
+                  </NavigationMenuItem>
+                )}
               </NavigationMenuList>
             </NavigationMenu>
 
