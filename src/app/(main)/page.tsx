@@ -39,7 +39,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 1.5 }}
                 className="cursor-pointer font-medium text-black font-ginto text-sm md:text-base bg-zinc-100 px-6 py-3 rounded-lg shadow-md hover:bg-neutral-400 transition duration-300"
               >
-                Sign up for free early access
+                Join the early access waitlist
               </motion.button>
             </div>
           </div>
