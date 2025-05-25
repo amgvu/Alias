@@ -20,75 +20,64 @@ const gintoNord = localFont({
       weight: "700",
       style: "bold",
     },
-  ],
-  variable: "--font-ginto-nord",
-  display: "swap",
-  adjustFontFallback: "Arial",
-});
-
-const gintoMedium = localFont({
-  src: [
     {
-      path: "../../public/fonts/ABCGintoDiscord-Medium.woff2",
-      weight: "400",
-      style: "medium",
+      path: "../../public/fonts/ABCGintoDiscordNord-BoldItalic.woff2",
+      weight: "700",
+      style: "bold",
+    },
+    {
+      path: "../../public/fonts/ABCGintoDiscordNord-BlackItalic.woff2",
+      weight: "900",
+      style: "black",
     },
   ],
-  variable: "--font-ginto-medium",
-  display: "swap",
+  variable: "--font-ginto-nord",
+  display: "auto",
   adjustFontFallback: "Arial",
+  preload: true,
 });
 
-const gintoRegular = localFont({
+const ginto = localFont({
   src: [
     {
       path: "../../public/fonts/ABCGintoDiscord-Regular.woff2",
       weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/ABCGintoDiscord-Medium.woff2",
+      weight: "500",
       style: "medium",
     },
   ],
   variable: "--font-ginto-regular",
-  display: "swap",
+  display: "auto",
   adjustFontFallback: "Arial",
+  preload: true,
 });
 
-const ggSansRegular = localFont({
+const ggSans = localFont({
   src: [
     {
       path: "../../public/fonts/ggsans-Normal.woff2",
       weight: "400",
-      style: "medium",
+      style: "normal",
     },
-  ],
-  variable: "--font-ggsans-regular",
-  display: "swap",
-  adjustFontFallback: "Arial",
-});
-
-const ggSansMedium = localFont({
-  src: [
     {
       path: "../../public/fonts/ggsans-Medium.woff2",
-      weight: "400",
+      weight: "500",
       style: "medium",
     },
-  ],
-  variable: "--font-ggsans-medium",
-  display: "swap",
-  adjustFontFallback: "Arial",
-});
-
-const ggSansSemiBold = localFont({
-  src: [
     {
       path: "../../public/fonts/ggsans-SemiBold.woff2",
-      weight: "400",
-      style: "medium",
+      weight: "600",
+      style: "semi-bold",
     },
   ],
-  variable: "--font-ggsans-semi-bold",
-  display: "swap",
+  variable: "--font-ggsans",
+  display: "auto",
   adjustFontFallback: "Arial",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -104,7 +93,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gintoNord.variable} ${gintoMedium.variable} ${gintoRegular.variable} ${ggSansRegular.variable} ${ggSansSemiBold.variable} ${ggSansMedium.variable} w-full h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gintoNord.variable} ${ginto.variable} ${ggSans.variable} w-full h-full`}
       >
         {children}
       </body>
