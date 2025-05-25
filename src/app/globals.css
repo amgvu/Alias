@@ -16,7 +16,9 @@
 }
 
 @theme inline {
-  --font-ggSans: var(--font-ggSans)
+  --font-ggSans: var(--font-ggSans);
+  --font-ginto: var(--font-ginto);
+  --font-gintoNord: var(--font-gintoNord)
 }
 
 /*
