@@ -59,22 +59,11 @@ const ginto = localFont({
 const ggSans = localFont({
   src: [
     {
-      path: "../../public/fonts/ggsans-Normal.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/ggsans-Medium.woff2",
-      weight: "500",
-      style: "medium",
-    },
-    {
-      path: "../../public/fonts/ggsans-SemiBold.woff2",
-      weight: "600",
-      style: "semi-bold",
+      path: "../../public/fonts/ggsansvf-VF.woff2",
+      weight: "400 600",
     },
   ],
-  variable: "--font-ggsans",
+  variable: "--font-ggSans",
   display: "auto",
   adjustFontFallback: "Arial",
   preload: true,
@@ -93,7 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${gintoNord.variable} ${ginto.variable} ${ggSans.variable} w-full h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gintoNord.variable} ${ginto.variable} ${ggSans.variable} antialiased w-full h-full`}
       >
         {children}
       </body>
