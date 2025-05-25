@@ -13,17 +13,17 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-zinc-100 flex flex-col items-center justify-start p-8 sm:p-20">
+    <div className="min-h-screen bg-background text-zinc-100 flex flex-col mt-30 items-center justify-start p-8 sm:p-30">
       <main className="w-full max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          <div className="flex flex-col gap-4 items-center md:items-start text-left md:col-span-2">
-            <h1 className="text-zinc-100 font-gintoNord text-center md:text-left text-4xl md:text-7xl">
+        <div className="gap-6 items-center">
+          <div className="flex flex-col gap-4 items-center md:col-span-2">
+            <h1 className="text-zinc-100 font-gintoNord text-center text-4xl md:text-7xl">
               <TextEffect per="char" speedReveal={3} delay={0.1}>
                 Automating the busywork of Discord community management
               </TextEffect>
             </h1>
-            <div className="text-left text-zinc-300 font-ginto md:translate-x-0 translate-x-5 text-2xl md:text-4xl space-y-4">
-              <div className="text-sm text-center md:text-left md:text-xl max-w-7/8 md:max-w-4/6">
+            <div className="text-zinc-300 text-center font-ginto md:translate-x-0 translate-x-5 text-2xl md:text-4xl space-y-4">
+              <div className="text-sm text-center md:text-xl max-w-3/4 mx-7 md:mx-auto">
                 <TextEffect per="line" speedReveal={1} delay={1}>
                   Arclify sets dynamic nicknames, personalizes identities, and
                   streamlines community workflows. Make Discord management
