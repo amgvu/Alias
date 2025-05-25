@@ -26,7 +26,7 @@ export default function Home() {
               <div className="text-sm text-center md:text-left md:text-xl max-w-5/6 md:max-w-4/6">
                 <TextEffect per="line" speedReveal={1} delay={1}>
                   Arclify sets dynamic nicknames, personalizes identities, and
-                  streamlines community workflows - Make Discord management
+                  streamlines community workflows. Make Discord management
                   faster, smarter, and more expressive.
                 </TextEffect>
               </div>
