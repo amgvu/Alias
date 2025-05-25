@@ -13,7 +13,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-zinc-100 flex flex-col items-center justify-center p-8 gap-300 sm:p-20">
+    <div className="min-h-screen bg-background text-zinc-100 flex flex-col items-center justify-start p-8 sm:p-20">
       <main className="w-full max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
           <div className="flex flex-col gap-4 items-center md:items-start text-left md:col-span-2">
