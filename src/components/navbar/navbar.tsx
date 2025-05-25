@@ -169,7 +169,6 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             <NavigationMenu>
               <NavigationMenuList>
-                {`{false && (`}
                 <NavigationMenuItem>
                   {session ? (
                     <button
@@ -189,7 +188,6 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                     </button>
                   )}
                 </NavigationMenuItem>
-                {`)}`}
               </NavigationMenuList>
             </NavigationMenu>
 
