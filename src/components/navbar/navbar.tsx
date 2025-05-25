@@ -33,7 +33,7 @@ const MobileDrawer = ({
       <DrawerTrigger className="p-4">
         <Menu className="text-zinc-100 h-6 w-6" />
       </DrawerTrigger>
-      <DrawerContent className="bg-zinc-950/40 font-[family-name:var(--font-ggsans-semi-bold)] backdrop-blur-lg">
+      <DrawerContent className="bg-zinc-950/40 font-ginto backdrop-blur-lg">
         <div className="p-2">
           <DrawerHeader>
             <DrawerTitle className="text-zinc-400 text-md ml-[-8px] font-medium mb-[-40px]">
@@ -113,7 +113,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className="w-full bg-neutral-950 border-b border-zinc-900 font-ggSans font-medium fixed top-0 z-50">
+      <header className="w-full bg-neutral-950 border-b border-zinc-900 font-ginto font-medium fixed top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center md:px-32">
           <div className="flex items-center gap-4">
             <NavigationMenu>
@@ -129,12 +129,12 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                     >
                       <Image
                         src="/Arclify.svg"
-                        width="24"
-                        height="24"
+                        width="26"
+                        height="26"
                         alt="logo"
-                        className="mb-0.5 inline-block"
+                        className="inline-block"
                       />
-                      <span className="text-xl text-zinc-100 font-semibold whitespace-nowrap">
+                      <span className="text-xl text-zinc-100 font-gintoNord whitespace-nowrap">
                         Arclify
                       </span>
                     </Link>
