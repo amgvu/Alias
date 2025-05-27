@@ -1,10 +1,10 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Arc } from "@/types/types";
 import { motion } from "framer-motion";
-import { fetchArcs, deleteArc } from "@/lib/utils/api";
+import { useArcManagement } from "@/lib/hooks/useArcManagement";
 
 interface DSCreateMenuProps {
   selectedServer: string;
@@ -13,73 +13,26 @@ interface DSCreateMenuProps {
   onCreateNewArc: (newArcName: string) => void;
 }
 
+import { useState } from "react";
+import { Member } from "@/types/types";
+
 const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
   selectedServer,
   selectedArc,
   setSelectedArc,
 }) => {
-  const [query, setQuery] = useState("");
-  const [arcs, setArcs] = useState<Arc[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  useEffect(() => {
-    setSelectedArc(null);
-    setQuery("");
-    setArcs([]);
-  }, [selectedServer, setSelectedArc]);
-
-  const handleOpen = async () => {
-    if (!selectedServer) return;
-
-    setIsLoading(true);
-    try {
-      const fetchedArcs = await fetchArcs(selectedServer);
-      setArcs(fetchedArcs);
-    } catch (error) {
-      console.error("Failed to fetch sets:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDeleteArc = async (arcId: number) => {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete this set? This action cannot be undone."
-      )
-    ) {
-      return;
-    }
-
-    try {
-      await deleteArc(arcId);
-      const updatedArcs = await fetchArcs(selectedServer);
-      setArcs(updatedArcs);
-
-      if (selectedArc?.id === arcId) {
-        setSelectedArc(null);
-      }
-    } catch (error) {
-      console.error("Failed to delete set:", error);
-      alert("Failed to delete set. Please try again.");
-    }
-  };
-
-  const filteredArcs =
-    query === ""
-      ? arcs
-      : arcs.filter(
-          (arc) =>
-            arc.arc_name &&
-            arc.arc_name.toLowerCase().includes(query.toLowerCase())
-        );
-
-  const showCreateOption =
-    query !== "" &&
-    !filteredArcs.some(
-      (arc) => arc.arc_name.toLowerCase() === query.toLowerCase()
-    );
+  const [members, setMembers] = useState<Member[]>([]);
+  const {
+    query,
+    setQuery,
+    isLoading,
+    isExpanded,
+    setIsExpanded,
+    handleOpen,
+    handleDeleteArc,
+    filteredArcs,
+    showCreateOption,
+  } = useArcManagement(selectedServer, members, setMembers);
 
   return (
     <Combobox
@@ -137,7 +90,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
             </div>
           ) : (
             <>
-              {filteredArcs.map((arc) => (
+              {(filteredArcs as Arc[]).map((arc: Arc) => (
                 <Combobox.Option
                   key={arc.id}
                   value={arc}
@@ -165,7 +118,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
                         }}
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleDeleteArc(arc.id);
+                          handleDeleteArc(arc.id, selectedArc, setSelectedArc);
                         }}
                         className="hover:text-red-400 ml-2"
                       >
