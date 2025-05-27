@@ -15,12 +15,18 @@ import {
   useMemberManagement,
   useThemeGenerator,
   useArcManagement,
-  useAuth,
 } from "@/lib/hooks";
 import { motion, AnimatePresence } from "framer-motion";
+import { createClient } from "@/lib/utils/supabase/client";
+import { Session } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
-  const { session, status } = useAuth();
+  const router = useRouter();
+  const supabase = createClient();
+  const [session, setSession] = useState<Session | null>(null);
+  const [loadingSession, setLoadingSession] = useState<boolean>(true);
+
   const {
     servers,
     serversError,
@@ -69,15 +75,56 @@ export default function Dashboard() {
   ];
 
   useEffect(() => {
+    const getInitialSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setSession(session);
+      setLoadingSession(false);
+
+      if (!session) {
+        router.replace("/auth/signin");
+      }
+    };
+
+    getInitialSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, newSession) => {
+      setSession(newSession);
+
+      if (event === "SIGNED_OUT") {
+        router.replace("/auth/signin");
+      }
+    });
+
+    return () => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    };
+  }, [supabase, router]);
+
+  useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
+  if (loadingSession) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-zinc-400">
+        <LoaderPinwheel className="animate-spin w-10 h-10 mr-2" />
+        <span className="text-xl">Loading</span>
+      </div>
+    );
   }
 
   if (!session) {
-    return <div>Redirecting to sign-in...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-red-400">
+        You are not authenticated. Redirecting...
+      </div>
+    );
   }
 
   return (
