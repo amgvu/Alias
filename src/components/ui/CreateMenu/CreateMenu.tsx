@@ -4,7 +4,7 @@ import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Arc } from "@/types/types";
 import { motion } from "framer-motion";
-import { fetchArcs, deleteArc } from "@/lib/utilities/api";
+import { fetchArcs, deleteArc } from "@/lib/utils/api";
 
 interface DSCreateMenuProps {
   selectedServer: string;

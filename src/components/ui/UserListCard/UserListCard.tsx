@@ -5,7 +5,7 @@ import { styles } from "./UserListCard.styles";
 import { Member, Nickname } from "@/types/types";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { ChevronDown, ChevronUp, X, Check, RotateCcw } from "lucide-react";
-import { fetchNicknames, deleteNickname } from "@/lib/utilities/api";
+import { fetchNicknames, deleteNickname } from "@/lib/utils/api";
 
 interface UserListCardProps {
   member: Member;
