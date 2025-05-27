@@ -1,10 +1,10 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Arc } from "@/types/types";
 import { motion } from "framer-motion";
-import { fetchArcs, deleteArc } from "@/lib/utilities/api";
+import { useArcManagement } from "@/lib/hooks/useArcManagement";
 
 interface DSCreateMenuProps {
   selectedServer: string;
@@ -13,73 +13,26 @@ interface DSCreateMenuProps {
   onCreateNewArc: (newArcName: string) => void;
 }
 
+import { useState } from "react";
+import { Member } from "@/types/types";
+
 const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
   selectedServer,
   selectedArc,
   setSelectedArc,
 }) => {
-  const [query, setQuery] = useState("");
-  const [arcs, setArcs] = useState<Arc[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  useEffect(() => {
-    setSelectedArc(null);
-    setQuery("");
-    setArcs([]);
-  }, [selectedServer, setSelectedArc]);
-
-  const handleOpen = async () => {
-    if (!selectedServer) return;
-
-    setIsLoading(true);
-    try {
-      const fetchedArcs = await fetchArcs(selectedServer);
-      setArcs(fetchedArcs);
-    } catch (error) {
-      console.error("Failed to fetch arcs:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDeleteArc = async (arcId: number) => {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete this arc? This action cannot be undone."
-      )
-    ) {
-      return;
-    }
-
-    try {
-      await deleteArc(arcId);
-      const updatedArcs = await fetchArcs(selectedServer);
-      setArcs(updatedArcs);
-
-      if (selectedArc?.id === arcId) {
-        setSelectedArc(null);
-      }
-    } catch (error) {
-      console.error("Failed to delete arc:", error);
-      alert("Failed to delete arc. Please try again.");
-    }
-  };
-
-  const filteredArcs =
-    query === ""
-      ? arcs
-      : arcs.filter(
-          (arc) =>
-            arc.arc_name &&
-            arc.arc_name.toLowerCase().includes(query.toLowerCase())
-        );
-
-  const showCreateOption =
-    query !== "" &&
-    !filteredArcs.some(
-      (arc) => arc.arc_name.toLowerCase() === query.toLowerCase()
-    );
+  const [members, setMembers] = useState<Member[]>([]);
+  const {
+    query,
+    setQuery,
+    isLoading,
+    isExpanded,
+    setIsExpanded,
+    handleOpen,
+    handleDeleteArc,
+    filteredArcs,
+    showCreateOption,
+  } = useArcManagement(selectedServer, members, setMembers);
 
   return (
     <Combobox
@@ -94,8 +47,8 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
           onFocus={handleOpen}
           displayValue={(arc: Arc | null) => arc?.arc_name || ""}
           onChange={(event) => setQuery(event.target.value)}
-          className="w-full p-2 pr-10 bg-neutral-950 border cursor-pointer focus:cursor-auto border-neutral-700 rounded-lg transition-all text-white focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
-          placeholder="Select or create an arc"
+          className="w-full p-2 pr-10 bg-black border cursor-pointer focus:cursor-auto border-[#252525] rounded-lg transition-all text-neutral-100 focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
+          placeholder="Select or create a set"
         />
         <Combobox.Button
           as="div"
@@ -126,18 +79,18 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-neutral-700 overflow-y-auto rounded-lg bg-neutral-950 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
+        <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-black py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
           {isLoading ? (
             <div className="relative cursor-default select-none px-4 py-2 text-neutral-400">
-              Loading arcs...
+              Loading sets...
             </div>
           ) : filteredArcs.length === 0 && !showCreateOption ? (
             <div className="relative cursor-default select-none px-4 py-2 text-neutral-400">
-              No arcs found
+              No sets found
             </div>
           ) : (
             <>
-              {filteredArcs.map((arc) => (
+              {(filteredArcs as Arc[]).map((arc: Arc) => (
                 <Combobox.Option
                   key={arc.id}
                   value={arc}
@@ -165,7 +118,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
                         }}
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleDeleteArc(arc.id);
+                          handleDeleteArc(arc.id, selectedArc, setSelectedArc);
                         }}
                         className="hover:text-red-400 ml-2"
                       >

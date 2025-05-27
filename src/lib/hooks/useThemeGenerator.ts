@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Member } from "@/types/types";
-import { characterGen } from "@/lib/utilities/gemini/characters";
+import { characterGen } from "@/lib/utils/gemini/characters";
 
 export const useThemeGenerator = (
   members: Member[],

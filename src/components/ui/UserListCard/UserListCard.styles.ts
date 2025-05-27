@@ -1,10 +1,10 @@
 export const styles = {
-  card: "w-full place-items-center bg-neutral-950 border border-neutral-700 py-2 px-6 rounded-md duration-200 transition-all",
-  avatar: "w-18 h-18 border-2 border-neutral-700 rounded-full object-cover",
+  card: "w-full place-items-center-left bg-[#101012] border border-zinc-800 px-4 py-1.5 rounded-md duration-200 transition-all",
+  avatar: "w-12 h-12 border-1 border-zinc-700 rounded-full object-cover",
   memberDetails: "flex-1",
   nicknameInput:
-    "w-full font-medium focus:outline-hidden focus:ring-1 focus:ring-[#4E4E4E]",
-  username: "text-sm font-light italic text-neutral-500 pl-2",
+    "w-full max-w-128 font-bold rounded-md focus:outline-hidden focus:ring-1 focus:ring-[#4E4E4E]",
+  username: "text-sm font-regular text-zinc-500 pl-2",
   applyButton:
-    "bg-neutral-200 font-semibold hover:bg-neutral-400 hover:text-neutral-800 text-sm text-black px-4 py-1 transition-all",
+    "bg-zinc-800 font-bold hover:bg-zinc-700 border border-zinc-700 text-sm text-zinc-100 transition-all",
 };

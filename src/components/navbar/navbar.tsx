@@ -1,0 +1,311 @@
+"use client";
+
+import { createClient } from "@/lib/utils/supabase/client";
+import Link from "next/link";
+import Image from "next/image";
+import { LogOut, Menu, X } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Session } from "@supabase/supabase-js";
+
+interface NavItem {
+  name: string;
+  href: string;
+}
+
+interface MobileDrawerProps {
+  productItems: NavItem[];
+  resourceItems: NavItem[];
+  session: Session | null;
+  signInWithDiscord: () => Promise<void>;
+  signOutUser: () => Promise<void>;
+}
+
+const MobileDrawer = ({
+  productItems,
+  resourceItems,
+  session,
+  signInWithDiscord,
+  signOutUser,
+}: MobileDrawerProps) => {
+  return (
+    <Drawer direction="right">
+      <DrawerTrigger className="p-4">
+        <Menu className="text-zinc-100 h-6 w-6" />
+      </DrawerTrigger>
+      <DrawerContent className="bg-zinc-950/40 font-ginto backdrop-blur-lg">
+        <div className="p-2">
+          <DrawerHeader>
+            <DrawerTitle className="text-zinc-400 text-md ml-[-8px] font-medium mb-[-40px]">
+              Product
+            </DrawerTitle>
+          </DrawerHeader>
+          <div className="flex mt-4 flex-col">
+            {productItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="px-2 py-0.5 rounded-md font-medium text-2xl text-zinc-100 hover:text-zinc-400"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          <div>
+            <DrawerHeader>
+              <DrawerTitle className="text-zinc-400 text-md ml-[-8px] font-medium mb-[-40px]">
+                Resources
+              </DrawerTitle>
+            </DrawerHeader>
+            <div className="flex mt-4 flex-col">
+              {resourceItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="px-2 py-0.5 rounded-md font-medium text-2xl text-zinc-100 hover:text-zinc-400"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+        <DrawerFooter>
+          {session ? (
+            <button
+              onClick={signOutUser}
+              className="flex justify-center items-center gap-2 px-4 py-1 cursor-pointer bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors text-lg"
+            >
+              <LogOut className="h-5 w-5" />
+              <span>Log Out</span>
+            </button>
+          ) : (
+            <button
+              onClick={signInWithDiscord}
+              className="flex justify-center items-center gap-2 px-4 py-1 cursor-pointer text-zinc-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-md transition-colors text-lg"
+            >
+              <FaDiscord className="h-5 w-5" />
+              <span>Sign In</span>
+            </button>
+          )}
+          <DrawerClose className="px-4 py-2 place-items-center text-zinc-400 hover:text-white cursor-pointer rounded-md">
+            <X className="h-12 w-12" />
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
+export default function Navbar({ children }: { children: React.ReactNode }) {
+  const supabase = createClient();
+  const router = useRouter();
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getInitialSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setSession(session);
+      setLoading(false);
+    };
+
+    getInitialSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, newSession) => {
+      setSession(newSession);
+      if (event === "SIGNED_OUT") {
+        router.refresh();
+      }
+    });
+
+    return () => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    };
+  }, [supabase, router]);
+
+  async function signInWithDiscord() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "discord",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+
+    if (error) {
+      console.error("Error signing in with Discord:", error.message);
+    } else if (data.url) {
+      router.push(data.url);
+    }
+  }
+
+  async function signOutWithDiscord() {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Error signing out:", error.message);
+    } else {
+      router.push("/");
+      router.refresh();
+    }
+  }
+
+  const productItems: NavItem[] = [
+    ...(session
+      ? [
+          {
+            name: "Dashboard",
+            href: "/dashboard",
+          },
+        ]
+      : []),
+    { name: "Features", href: "/features" },
+    { name: "Changelog", href: "/changelog" },
+    { name: "Documentation", href: "/documentation" },
+  ];
+
+  const resourceItems: NavItem[] = [
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
+  ];
+
+  if (loading) {
+    return (
+      <header className="w-full bg-neutral-950 border-b border-zinc-900 font-ginto font-medium fixed top-0 z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center md:px-32">
+          <div className="flex items-center gap-4 py-4">
+            <Image
+              src="/Arclify.svg"
+              width="26"
+              height="26"
+              alt="logo"
+              className="inline-block"
+            />
+            <span className="text-xl text-zinc-100 font-gintoNord whitespace-nowrap">
+              Arclify
+            </span>
+          </div>
+          <div className="text-zinc-400">Loading...</div>
+        </div>
+      </header>
+    );
+  }
+
+  return (
+    <>
+      <header className="w-full bg-neutral-950 border-b border-zinc-900 font-ginto font-medium fixed top-0 z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center md:px-32">
+          <div className="flex items-center gap-4">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink
+                    asChild
+                    className="hover:bg-background focus:bg-background"
+                  >
+                    <Link
+                      href="/"
+                      className="flex flex-row items-center gap-2 px-4 py-4"
+                    >
+                      <Image
+                        src="/Arclify.svg"
+                        width="26"
+                        height="26"
+                        alt="logo"
+                        className="inline-block"
+                      />
+                      <span className="text-xl text-zinc-100 font-gintoNord whitespace-nowrap">
+                        Arclify
+                      </span>
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
+            <NavigationMenu>
+              <NavigationMenuList className="flex gap-2">
+                {[...productItems, ...resourceItems].map((item) => (
+                  <NavigationMenuItem key={item.name}>
+                    <NavigationMenuLink
+                      asChild
+                      className="focus:bg-background focus:text-zinc-400"
+                    >
+                      <Link
+                        href={item.href}
+                        className="flex items-center gap-2 px-4 py-2 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md"
+                      >
+                        <span>{item.name}</span>
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  {session ? (
+                    <button
+                      onClick={signOutWithDiscord}
+                      className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      <span>Log Out</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={signInWithDiscord}
+                      className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer text-zinc-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-md transition-colors"
+                    >
+                      <FaDiscord className="h-4 w-4" />
+                      <span>Sign In</span>
+                    </button>
+                  )}
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+
+            <div className="md:hidden">
+              <MobileDrawer
+                productItems={productItems}
+                resourceItems={resourceItems}
+                session={session}
+                signInWithDiscord={signInWithDiscord}
+                signOutUser={signOutWithDiscord}
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+      <main className="pt-15">{children}</main>
+    </>
+  );
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Member, Nickname } from "@/types/types";
-import { updateNickname, saveNicknames } from "@/lib/utilities";
+import { updateNickname, saveNicknames } from "@/lib/utils/api";
 
 export const useMemberManagement = (
   selectedServer: string,

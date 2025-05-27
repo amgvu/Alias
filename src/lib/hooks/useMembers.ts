@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchMembers } from "../utilities/api";
+import { fetchMembers } from "../utils/api";
 import { Member } from "@/types/types";
 
 export const useMembers = (guildId: string) => {
@@ -12,7 +12,9 @@ export const useMembers = (guildId: string) => {
         const data = await fetchMembers(guildId);
         setMembers(data);
       } catch (error) {
-        setError(error instanceof Error ? error.message : 'Failed to fetch members');
+        setError(
+          error instanceof Error ? error.message : "Failed to fetch members"
+        );
       }
     };
 

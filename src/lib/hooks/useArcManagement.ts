@@ -6,7 +6,9 @@ import {
   checkExistingArc,
   deleteArcNicknames,
   fetchArcNicknames,
-} from "@/lib/utilities/api";
+  fetchArcs,
+  deleteArc,
+} from "@/lib/utils/api";
 
 export const useArcManagement = (
   selectedServer: string,
@@ -15,6 +17,10 @@ export const useArcManagement = (
 ) => {
   const [selectedArc, setSelectedArc] = useState<Arc | null>(null);
   const [isSavingArc, setIsSavingArc] = useState(false);
+  const [query, setQuery] = useState("");
+  const [arcs, setArcs] = useState<Arc[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const loadArcNicknames = async () => {
@@ -102,11 +108,80 @@ export const useArcManagement = (
     }
   };
 
+  useEffect(() => {
+    setQuery("");
+    setArcs([]);
+  }, [selectedServer]);
+
+  const handleOpen = async () => {
+    if (!selectedServer) return;
+    setIsLoading(true);
+    try {
+      const fetchedArcs = await fetchArcs(selectedServer);
+      setArcs(fetchedArcs);
+    } catch (error) {
+      console.error("Failed to fetch sets:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDeleteArc = async (
+    arcId: number,
+    selectedArc: Arc | null,
+    setSelectedArc: (arc: Arc | null) => void
+  ) => {
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this set? This action cannot be undone."
+      )
+    ) {
+      return;
+    }
+    try {
+      await deleteArc(arcId);
+      const updatedArcs = await fetchArcs(selectedServer);
+      setArcs(updatedArcs);
+      if (selectedArc?.id === arcId) {
+        setSelectedArc(null);
+      }
+    } catch (error) {
+      console.error("Failed to delete set:", error);
+      alert("Failed to delete set. Please try again.");
+    }
+  };
+
+  const filteredArcs =
+    query === ""
+      ? arcs
+      : arcs.filter(
+          (arc) =>
+            arc.arc_name &&
+            arc.arc_name.toLowerCase().includes(query.toLowerCase())
+        );
+
+  const showCreateOption =
+    query !== "" &&
+    !filteredArcs.some(
+      (arc) => arc.arc_name.toLowerCase() === query.toLowerCase()
+    );
+
   return {
     selectedArc,
     setSelectedArc,
     isSavingArc,
     handleSaveArc,
     handleCreateNewArc,
+    query,
+    setQuery,
+    arcs,
+    setArcs,
+    isLoading,
+    isExpanded,
+    setIsExpanded,
+    handleOpen,
+    handleDeleteArc,
+    filteredArcs,
+    showCreateOption,
   };
 };
