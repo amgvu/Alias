@@ -83,7 +83,7 @@ export default function Dashboard() {
       setLoadingSession(false);
 
       if (!session) {
-        router.replace("/auth/signin");
+        router.replace("/");
       }
     };
 
@@ -95,7 +95,7 @@ export default function Dashboard() {
       setSession(newSession);
 
       if (event === "SIGNED_OUT") {
-        router.replace("/auth/signin");
+        router.replace("/");
       }
     });
 
