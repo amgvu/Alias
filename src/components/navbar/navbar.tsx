@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import Image from "next/image";
 import { LogOut, Menu, X } from "lucide-react";
@@ -84,13 +86,23 @@ const MobileDrawer = ({
 export default function Navbar({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
 
-  const handleDiscordLogin = () => {
-    signIn("discord", { callbackUrl: "/dashboard" });
-  };
+  async function signInWithDiscord() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "discord",
+    });
+  }
 
-  const handleDiscordLogout = () => {
-    signOut({ callbackUrl: "/", redirect: true });
-  };
+  async function signOutWithDiscord() {
+    const { error } = await supabase.auth.signOut();
+  }
+
+  //const handleDiscordLogin = () => {
+  //signIn("discord", { callbackUrl: "/dashboard" });
+  //};
+
+  //const handleDiscordLogout = () => {
+  //signOut({ callbackUrl: "/", redirect: true });
+  //};
 
   const productItems = [
     ...(session
@@ -172,7 +184,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 <NavigationMenuItem>
                   {session ? (
                     <button
-                      onClick={handleDiscordLogout}
+                      onClick={signOutWithDiscord}
                       className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors"
                     >
                       <LogOut className="h-4 w-4" />
@@ -180,7 +192,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                     </button>
                   ) : (
                     <button
-                      onClick={handleDiscordLogin}
+                      onClick={signInWithDiscord}
                       className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer text-zinc-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-md transition-colors"
                     >
                       <FaDiscord className="h-4 w-4" />
