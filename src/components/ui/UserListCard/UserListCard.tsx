@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import { DSInput, DSButton, DSDialog } from "@/components/";
+import Image from "next/image";
 import { styles } from "./UserListCard.styles";
 import { Member, Nickname } from "@/types/types";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
@@ -125,14 +125,14 @@ export const UserListCard: React.FC<UserListCardProps> = ({
       <div className="absolute inset-0"></div>
       <div className="flex items-center space-x-2 relative z-10">
         <div className="h-full flex-shrink-0 relative">
-          <img
+          <Image
             src={member.avatar_url}
             alt={`${member.username}'s avatar`}
             width={128}
             height={128}
             className={styles.avatar}
             loading="lazy"
-            onError={(e) => {
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
               e.currentTarget.src = "/default-avatar.png";
             }}
           />
