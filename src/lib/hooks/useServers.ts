@@ -10,7 +10,7 @@ export const useServers = () => {
 
   useEffect(() => {
     const getServers = async () => {
-      if (session?.accessToken && session.user?.id) {
+      if (session?.accessToken && session.user?.discordId) {
         const cachedServers = localStorage.getItem("cachedServers");
         const cachedTimestamp = localStorage.getItem("serversTimestamp");
 
@@ -32,7 +32,10 @@ export const useServers = () => {
         }
 
         try {
-          const data = await fetchServers(session.accessToken, session.user.id);
+          const data = await fetchServers(
+            session.accessToken,
+            session.user.discordId
+          );
           setServers(data);
 
           localStorage.setItem("cachedServers", JSON.stringify(data));

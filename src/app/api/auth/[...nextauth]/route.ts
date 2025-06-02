@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 interface DiscordProfile {
   id: string;
@@ -11,6 +12,13 @@ interface DiscordProfile {
 }
 
 const handler = NextAuth({
+  adapter: SupabaseAdapter({
+    url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    secret: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
+  }),
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID!,
@@ -24,6 +32,8 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, account, profile }) {
+      console.log("Session Callback - token:", token);
+      console.log("Session Callback - user:", profile);
       if (account) {
         token.accessToken = account.access_token;
       }
@@ -35,6 +45,7 @@ const handler = NextAuth({
     async session({ session, token }) {
       session.accessToken = token.accessToken as string;
       session.user.id = token.sub as string;
+      session.user.discordId = token.id as string;
       return session;
     },
   },

@@ -5,6 +5,7 @@ declare module "next-auth" {
     accessToken?: string;
     user: {
       id: string;
+      discordId?: string;
       name?: string | null;
       email?: string | null;
       image?: string | null;
