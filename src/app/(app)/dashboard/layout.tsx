@@ -1,19 +1,15 @@
-"use client";
-import { gintoNord, ginto, ggSans } from "@/lib/utilities/fonts";
-import ClientProvider from "@/contexts/ClientProvider";
+import { Metadata } from "next";
+import LayoutHTML from "./layoutHTML";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Arclify dashboard",
+};
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <ClientProvider>
-      <body
-        className={`${gintoNord.variable} ${ginto.variable} ${ggSans.variable} antialiased min-h-screen w-full h-full`}
-      >
-        <main>{children}</main>
-      </body>
-    </ClientProvider>
-  );
+  return <LayoutHTML>{children}</LayoutHTML>;
 }
