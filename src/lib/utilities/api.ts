@@ -1,5 +1,5 @@
 import { Server, Arc, ArcNickname, Nickname } from "@/types/types";
-import { supabase } from "../supabase";
+import { supabase } from "./supabase";
 
 export const fetchServers = async (
   accessToken: string,
