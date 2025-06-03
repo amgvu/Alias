@@ -1,6 +1,6 @@
 "use client";
 import { gintoNord, ginto, ggSans } from "@/lib/utilities/fonts";
-import ClientProvider from "@/components/ClientProvider";
+import ClientProvider from "@/contexts/ClientProvider";
 
 export default function DashboardLayout({
   children,
