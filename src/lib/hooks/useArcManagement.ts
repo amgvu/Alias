@@ -69,18 +69,18 @@ export const useArcManagement = (
         } catch (error) {
           console.error("Failed to fetch arc nicknames:", error);
         }
-      } else {
-        setMembers((prevMembers) =>
-          prevMembers.map((member) => ({
-            ...member,
-            nickname:
-              initialFetchedNicknames[member.user_id] ||
-              member.userTag ||
-              member.username ||
-              "",
-          }))
-        );
-      }
+      } //else {
+      //  setMembers((prevMembers) =>
+      //    prevMembers.map((member) => ({
+      //      ...member,
+      //      nickname:
+      //        initialFetchedNicknames[member.user_id] ||
+      //        member.userTag ||
+      //        member.username ||
+      //        "",
+      //    }))
+      //  );
+      // }
     };
 
     loadArcNicknames();
