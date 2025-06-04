@@ -1,4 +1,5 @@
 import { DSUserList } from "@/components";
+import { TitleUpdater } from "./TitleUpdater";
 import { Member } from "@/types/types";
 
 interface ServerContentProps {
@@ -24,6 +25,7 @@ export default function ServerContent({
 }: ServerContentProps) {
   return (
     <div className="flex flex-col">
+      <TitleUpdater />
       <div className="text-4xl text-zinc-600 font-semibold text-center py-2"></div>
       <div className="justify-items-center">
         {serversError || membersError ? (
