@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Arc, ArcNickname, Member } from "@/types/types";
+import { useSupabase } from "@/contexts/SupabaseProvider";
+import { useSession } from "next-auth/react";
 import {
   createArc,
   saveArcNicknames,
@@ -13,14 +15,46 @@ export const useArcManagement = (
   members: Member[],
   setMembers: React.Dispatch<React.SetStateAction<Member[]>>
 ) => {
+  const { supabase } = useSupabase();
+  const { data: session, status } = useSession();
   const [selectedArc, setSelectedArc] = useState<Arc | null>(null);
   const [isSavingArc, setIsSavingArc] = useState(false);
+  const [initialFetchedNicknames, setInitialFetchedNicknames] = useState<
+    Record<string, string>
+  >({});
+
+  useEffect(() => {
+    if (supabase) {
+    }
+  }, [supabase, session, status]);
+
+  useEffect(() => {
+    if (
+      members.length > 0 &&
+      Object.keys(initialFetchedNicknames).length === 0
+    ) {
+      const initialNicksMap = members.reduce((acc, member) => {
+        acc[member.user_id] = member.nickname;
+        return acc;
+      }, {} as Record<string, string>);
+      setInitialFetchedNicknames(initialNicksMap);
+    }
+  }, [members, initialFetchedNicknames]);
 
   useEffect(() => {
     const loadArcNicknames = async () => {
+      if (!supabase) {
+        console.log("Skipping loadArcNicknames - supabase not ready");
+        return;
+      }
+
       if (selectedArc) {
         try {
-          const arcNicknames = await fetchArcNicknames(selectedArc.id);
+          console.log("Fetching arc nicknames for arc:", selectedArc.id);
+          const arcNicknames = await fetchArcNicknames(
+            supabase,
+            selectedArc.id
+          );
 
           setMembers((prevMembers) => {
             return prevMembers.map((member) => {
@@ -35,17 +69,30 @@ export const useArcManagement = (
         } catch (error) {
           console.error("Failed to fetch arc nicknames:", error);
         }
-      } else {
-        setMembers((prevMembers) =>
-          prevMembers.map((member) => ({ ...member, nickname: "" }))
-        );
-      }
+      } //else {
+      //  setMembers((prevMembers) =>
+      //    prevMembers.map((member) => ({
+      //      ...member,
+      //      nickname:
+      //        initialFetchedNicknames[member.user_id] ||
+      //        member.userTag ||
+      //        member.username ||
+      //        "",
+      //    }))
+      //  );
+      // }
     };
 
     loadArcNicknames();
-  }, [selectedArc, setMembers]);
+  }, [selectedArc, setMembers, supabase, initialFetchedNicknames]);
 
   const handleSaveArc = async () => {
+    if (!supabase) {
+      alert("Database connection not available. Please try again.");
+      console.log("Save blocked - supabase:", !!supabase);
+      return;
+    }
+
     if (!selectedServer || !selectedArc || !selectedArc.arc_name) {
       alert("Please select a server, arc, and ensure members are loaded.");
       return;
@@ -55,6 +102,7 @@ export const useArcManagement = (
 
     try {
       const existingArc = await checkExistingArc(
+        supabase,
         selectedServer,
         selectedArc.arc_name
       );
@@ -68,11 +116,12 @@ export const useArcManagement = (
           return;
         }
 
-        await deleteArcNicknames(existingArc.id);
+        await deleteArcNicknames(supabase, existingArc.id);
       }
 
       const arc =
-        existingArc || (await createArc(selectedServer, selectedArc.arc_name));
+        existingArc ||
+        (await createArc(supabase, selectedServer, selectedArc.arc_name));
 
       const newNicknames: ArcNickname[] = members.map((member) => ({
         arc_id: arc.id!,
@@ -82,7 +131,7 @@ export const useArcManagement = (
         userTag: member.userTag || member.username,
       }));
 
-      await saveArcNicknames(newNicknames);
+      await saveArcNicknames(supabase, newNicknames);
       alert("Arc saved successfully!");
     } catch (error) {
       console.error(error);
@@ -93,8 +142,13 @@ export const useArcManagement = (
   };
 
   const handleCreateNewArc = async (newArcName: string) => {
+    if (!supabase) {
+      alert("Database connection not available. Please try again.");
+      return;
+    }
+
     try {
-      const newArc = await createArc(selectedServer, newArcName);
+      const newArc = await createArc(supabase, selectedServer, newArcName);
       setSelectedArc(newArc);
     } catch (error) {
       console.error("Failed to create new arc:", error);

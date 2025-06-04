@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Server, Arc, ArcNickname, Nickname } from "@/types/types";
+
+import { SupabaseClient } from "@supabase/supabase-js";
 import { supabase } from "./supabase";
 
 export const fetchServers = async (
@@ -75,6 +78,7 @@ export const updateNickname = async (
 };
 
 export const fetchNicknames = async (
+  supabase: SupabaseClient,
   guild_id: string,
   userId: string
 ): Promise<Nickname[]> => {
@@ -98,6 +102,7 @@ export const fetchNicknames = async (
 };
 
 export const saveNicknames = async (
+  supabase: SupabaseClient,
   guildId: string,
   nicknames: Nickname[]
 ): Promise<{
@@ -180,6 +185,7 @@ export const saveNicknames = async (
 };
 
 export const deleteNickname = async (
+  supabase: SupabaseClient,
   guildId: string,
   userId: string,
   nickname: string
@@ -199,6 +205,7 @@ export const deleteNickname = async (
 ///////////////////////CRUD OPERATIONS FOR ARCS///////////////////////
 
 export const createArc = async (
+  supabase: SupabaseClient,
   guildId: string,
   arcName: string
 ): Promise<Arc> => {
@@ -215,7 +222,10 @@ export const createArc = async (
   return data;
 };
 
-export const deleteArc = async (arcId: number): Promise<void> => {
+export const deleteArc = async (
+  supabase: SupabaseClient,
+  arcId: number
+): Promise<void> => {
   const { data: arcNicknames, error: fetchError } = await supabase
     .from("arc_nicknames")
     .select("guild_id, user_id, nickname")
@@ -263,7 +273,10 @@ export const deleteArc = async (arcId: number): Promise<void> => {
   }
 };
 
-export const fetchArcs = async (guild_id: string): Promise<Arc[]> => {
+export const fetchArcs = async (
+  supabase: SupabaseClient,
+  guild_id: string
+): Promise<Arc[]> => {
   const { data, error } = await supabase
     .from("arcs")
     .select("*")
@@ -277,6 +290,7 @@ export const fetchArcs = async (guild_id: string): Promise<Arc[]> => {
 };
 
 export const saveArcNicknames = async (
+  supabase: SupabaseClient,
   arcNicknames: ArcNickname[]
 ): Promise<void> => {
   const { error } = await supabase.from("arc_nicknames").insert(
@@ -295,6 +309,7 @@ export const saveArcNicknames = async (
 };
 
 export const checkExistingArc = async (
+  supabase: SupabaseClient,
   guildId: string,
   arcName: string
 ): Promise<Arc | null> => {
@@ -313,6 +328,7 @@ export const checkExistingArc = async (
 };
 
 export const fetchArcNicknames = async (
+  supabase: SupabaseClient,
   arcId: number
 ): Promise<ArcNickname[]> => {
   const { data, error } = await supabase
@@ -327,7 +343,10 @@ export const fetchArcNicknames = async (
   return data;
 };
 
-export const deleteArcNicknames = async (arcId: number): Promise<void> => {
+export const deleteArcNicknames = async (
+  supabase: SupabaseClient,
+  arcId: number
+): Promise<void> => {
   const { error } = await supabase
     .from("arc_nicknames")
     .delete()
@@ -362,6 +381,7 @@ const compareNicknames = (
 };
 
 export const checkDuplicateArcNicknames = async (
+  supabase: SupabaseClient,
   guildId: string,
   newNicknames: ArcNickname[]
 ): Promise<boolean> => {
@@ -375,7 +395,7 @@ export const checkDuplicateArcNicknames = async (
   }
 
   for (const arc of arcs) {
-    const existingNicknames = await fetchArcNicknames(arc.id);
+    const existingNicknames = await fetchArcNicknames(supabase, arc.id);
 
     if (compareNicknames(newNicknames, existingNicknames)) {
       return true;

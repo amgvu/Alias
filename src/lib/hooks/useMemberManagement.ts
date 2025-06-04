@@ -1,14 +1,23 @@
 import { useState, useEffect } from "react";
 import { Member, Nickname } from "@/types/types";
+import { useSupabase } from "@/contexts/SupabaseProvider";
+import { useSession } from "next-auth/react";
 import { updateNickname, saveNicknames } from "@/lib/utilities";
 
 export const useMemberManagement = (
   selectedServer: string,
   fetchedMembers: Member[]
 ) => {
+  const { supabase } = useSupabase();
+  const { data: session, status } = useSession();
   const [members, setMembers] = useState<Member[]>([]);
   const [isUpdating, setIsUpdating] = useState<string | null>(null);
   const [isApplyingAll, setIsApplyingAll] = useState(false);
+
+  useEffect(() => {
+    if (supabase) {
+    }
+  }, [supabase, session, status]);
 
   useEffect(() => {
     if (fetchedMembers) {
@@ -35,6 +44,7 @@ export const useMemberManagement = (
     nickname: string,
     saveToDb: boolean = true
   ) => {
+    if (!supabase) return;
     try {
       setIsUpdating(userId);
 
@@ -43,7 +53,7 @@ export const useMemberManagement = (
       if (saveToDb) {
         const member = members.find((m: Member) => m.user_id === userId);
         if (member) {
-          await saveNicknames(selectedServer, [
+          await saveNicknames(supabase, selectedServer, [
             {
               userId: member.user_id,
               nickname: member.nickname,
@@ -60,6 +70,7 @@ export const useMemberManagement = (
   };
 
   const applyAllNicknames = async () => {
+    if (!supabase) return;
     setIsApplyingAll(true);
     try {
       const nicknamesToSave: Nickname[] = members.map((member: Member) => ({
@@ -68,7 +79,7 @@ export const useMemberManagement = (
         userTag: member.username,
       }));
 
-      await saveNicknames(selectedServer, nicknamesToSave);
+      await saveNicknames(supabase, selectedServer, nicknamesToSave);
 
       const updatePromises = members.map((member: Member) =>
         handleUpdateNickname(member.user_id, member.nickname, false)

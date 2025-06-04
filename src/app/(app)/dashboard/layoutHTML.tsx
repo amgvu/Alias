@@ -1,6 +1,7 @@
 "use client";
 import { gintoNord, ginto, ggSans } from "@/lib/utilities/fonts";
 import ClientProvider from "@/contexts/ClientProvider";
+import { SupabaseProvider } from "@/contexts/SupabaseProvider";
 
 export default function LayoutHTML({
   children,
@@ -9,11 +10,13 @@ export default function LayoutHTML({
 }) {
   return (
     <ClientProvider>
-      <body
-        className={`${gintoNord.variable} ${ginto.variable} ${ggSans.variable} antialiased min-h-screen w-full h-full`}
-      >
-        <main>{children}</main>
-      </body>
+      <SupabaseProvider>
+        <body
+          className={`${gintoNord.variable} ${ginto.variable} ${ggSans.variable} antialiased min-h-screen w-full h-full`}
+        >
+          <main>{children}</main>
+        </body>
+      </SupabaseProvider>
     </ClientProvider>
   );
 }
