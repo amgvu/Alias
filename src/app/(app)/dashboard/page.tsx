@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 import {
   useServerSelection,
   useMembers,
@@ -23,7 +24,7 @@ export default function Dashboard() {
   } = useServerSelection();
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showLoading, setShowLoading] = useState(true); // Add loading state
+  const [showLoading, setShowLoading] = useState(true);
 
   const { members: fetchedMembers, error: membersError } =
     useMembers(selectedServer);
@@ -73,7 +74,13 @@ export default function Dashboard() {
   if (showLoading || status === "loading") {
     return (
       <div className="flex items-center justify-center h-screen">
-        <LoaderCircle className="text-zinc-300 animate-spin h-24 w-24" />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.1, delay: 0.1 }}
+        >
+          <LoaderCircle className="text-zinc-300 animate-spin h-24 w-24" />
+        </motion.div>
       </div>
     );
   }
