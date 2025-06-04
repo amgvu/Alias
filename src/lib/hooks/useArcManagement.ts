@@ -19,11 +19,27 @@ export const useArcManagement = (
   const { data: session, status } = useSession();
   const [selectedArc, setSelectedArc] = useState<Arc | null>(null);
   const [isSavingArc, setIsSavingArc] = useState(false);
+  const [initialFetchedNicknames, setInitialFetchedNicknames] = useState<
+    Record<string, string>
+  >({});
 
   useEffect(() => {
     if (supabase) {
     }
   }, [supabase, session, status]);
+
+  useEffect(() => {
+    if (
+      members.length > 0 &&
+      Object.keys(initialFetchedNicknames).length === 0
+    ) {
+      const initialNicksMap = members.reduce((acc, member) => {
+        acc[member.user_id] = member.nickname;
+        return acc;
+      }, {} as Record<string, string>);
+      setInitialFetchedNicknames(initialNicksMap);
+    }
+  }, [members, initialFetchedNicknames]);
 
   useEffect(() => {
     const loadArcNicknames = async () => {
@@ -55,13 +71,20 @@ export const useArcManagement = (
         }
       } else {
         setMembers((prevMembers) =>
-          prevMembers.map((member) => ({ ...member, nickname: "" }))
+          prevMembers.map((member) => ({
+            ...member,
+            nickname:
+              initialFetchedNicknames[member.user_id] ||
+              member.userTag ||
+              member.username ||
+              "",
+          }))
         );
       }
     };
 
     loadArcNicknames();
-  }, [selectedArc, setMembers, supabase]);
+  }, [selectedArc, setMembers, supabase, initialFetchedNicknames]);
 
   const handleSaveArc = async () => {
     if (!supabase) {
