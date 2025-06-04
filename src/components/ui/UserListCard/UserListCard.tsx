@@ -6,6 +6,7 @@ import { Member, Nickname } from "@/types/types";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import { ChevronDown, ChevronUp, X, Check, RotateCcw } from "lucide-react";
 import { fetchNicknames, deleteNickname } from "@/lib/utilities/api";
+import { useSupabase } from "@/contexts/SupabaseProvider";
 
 interface UserListCardProps {
   member: Member;
@@ -34,6 +35,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   const [nicknameToDelete, setNicknameToDelete] = useState<Nickname | null>(
     null
   );
+  const { supabase } = useSupabase();
   const controls = useAnimation();
 
   useEffect(() => {
@@ -44,11 +46,13 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
   useEffect(() => {
     const fetchPreviousNicknames = async () => {
+      if (!supabase) return;
       if (isExpanded && selectedServer && member.user_id) {
         setIsLoadingNicknames(true);
         setFetchError(null);
         try {
           const nicknames = await fetchNicknames(
+            supabase,
             selectedServer,
             member.user_id
           );
@@ -65,7 +69,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     };
 
     fetchPreviousNicknames();
-  }, [isExpanded, selectedServer, member.user_id]);
+  }, [supabase, isExpanded, selectedServer, member.user_id]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -84,8 +88,14 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   };
 
   const confirmDeleteNickname = () => {
+    if (!supabase) return;
     if (nicknameToDelete && selectedServer && member.user_id) {
-      deleteNickname(selectedServer, member.user_id, nicknameToDelete.nickname)
+      deleteNickname(
+        supabase,
+        selectedServer,
+        member.user_id,
+        nicknameToDelete.nickname
+      )
         .then(() => {
           setPreviousNicknames((prevNicknames) =>
             prevNicknames.filter(
