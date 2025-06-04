@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 import { SupabaseAdapter } from "@auth/supabase-adapter";
+import jwt from "jsonwebtoken";
 
 interface DiscordProfile {
   id: string;
@@ -33,7 +34,6 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, account, profile }) {
       console.log("Session Callback - token:", token);
-      console.log("Session Callback - user:", profile);
       if (account) {
         token.accessToken = account.access_token;
       }
@@ -46,6 +46,18 @@ const handler = NextAuth({
       session.accessToken = token.accessToken as string;
       session.user.id = token.sub as string;
       session.user.discordId = token.id as string;
+
+      const supabaseSigningSecret = process.env.SUPABASE_JWT_SECRET;
+      if (supabaseSigningSecret && session.user.id) {
+        const payload = {
+          aud: "authenticated",
+          exp: Math.floor(Date.now() / 1000) + 60 * 60,
+          sub: session.user.id,
+          email: session.user.email,
+          role: "authenticated",
+        };
+        session.supabaseAccessToken = jwt.sign(payload, supabaseSigningSecret);
+      }
       return session;
     },
   },

@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { Arc } from "@/types/types";
 import { motion } from "framer-motion";
 import { fetchArcs, deleteArc } from "@/lib/utilities/api";
+import { useSupabase } from "@/contexts/SupabaseProvider";
 
 interface DSCreateMenuProps {
   selectedServer: string;
@@ -22,6 +23,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const { supabase } = useSupabase();
 
   useEffect(() => {
     setSelectedArc(null);
@@ -30,11 +32,12 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
   }, [selectedServer, setSelectedArc]);
 
   const handleOpen = async () => {
+    if (!supabase) return;
     if (!selectedServer) return;
 
     setIsLoading(true);
     try {
-      const fetchedArcs = await fetchArcs(selectedServer);
+      const fetchedArcs = await fetchArcs(supabase, selectedServer);
       setArcs(fetchedArcs);
     } catch (error) {
       console.error("Failed to fetch sets:", error);
@@ -44,6 +47,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
   };
 
   const handleDeleteArc = async (arcId: number) => {
+    if (!supabase) return;
     if (
       !window.confirm(
         "Are you sure you want to delete this set? This action cannot be undone."
@@ -53,8 +57,8 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
     }
 
     try {
-      await deleteArc(arcId);
-      const updatedArcs = await fetchArcs(selectedServer);
+      await deleteArc(supabase, arcId);
+      const updatedArcs = await fetchArcs(supabase, selectedServer);
       setArcs(updatedArcs);
 
       if (selectedArc?.id === arcId) {
