@@ -6,7 +6,7 @@ import Navbar from "@/components/ui/navbar/navbar";
 
 export const metadata: Metadata = {
   title: "Arclify",
-  description: "Streamline Discord Ops with Full-Stack Automation",
+  description: "Automating the busywork of Discord community management",
 };
 
 export default function MainLayout({
