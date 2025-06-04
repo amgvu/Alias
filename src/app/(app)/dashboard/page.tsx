@@ -73,7 +73,7 @@ export default function Dashboard() {
   if (showLoading || status === "loading") {
     return (
       <div className="flex items-center justify-center h-screen">
-        <LoaderCircle className="text-zinc-100 animate-spin h-24 w-24" />
+        <LoaderCircle className="text-zinc-300 animate-spin h-24 w-24" />
       </div>
     );
   }
