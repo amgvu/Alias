@@ -28,6 +28,7 @@ interface SidebarProps {
   setTheme: (theme: string) => void;
   loading: boolean;
   handleGenerateCharacters: () => void;
+  categories: string[];
 }
 
 export default function Sidebar({
@@ -49,15 +50,8 @@ export default function Sidebar({
   setTheme,
   loading,
   handleGenerateCharacters,
+  categories,
 }: SidebarProps) {
-  const categories = [
-    "Fictional Characters",
-    "Real People",
-    "Objects",
-    "Places",
-    "Abstract Concepts",
-  ];
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
