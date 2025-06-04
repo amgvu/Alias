@@ -3,7 +3,7 @@ import LayoutHTML from "./layoutHTML";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "Arclify dashboard",
+  description: "Arclify's dashboard",
 };
 
 export default function DashboardLayout({
