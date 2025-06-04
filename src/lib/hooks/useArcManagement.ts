@@ -8,7 +8,7 @@ import {
   checkExistingArc,
   deleteArcNicknames,
   fetchArcNicknames,
-} from "@/lib/utilities/api";
+} from "@/lib/utilities";
 
 export const useArcManagement = (
   selectedServer: string,

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// to be deprecated
 import { Server, Arc, ArcNickname, Nickname } from "@/types/types";
 
 import { SupabaseClient } from "@supabase/supabase-js";

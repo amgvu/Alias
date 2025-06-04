@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchMembers } from "../utilities/api";
+import { fetchMembers } from "@/lib/utilities";
 import { Member } from "@/types/types";
 
 export const useMembers = (guildId: string) => {
