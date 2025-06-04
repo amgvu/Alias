@@ -6,17 +6,20 @@ export const updateNickname = async (
   userId: string,
   nickname: string
 ) => {
-  const response = await fetch("http://localhost:3000/api/changeNickname", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      guild_id: guildId,
-      user_id: userId,
-      nickname,
-    }),
-  });
+  const response = await fetch(
+    "https://worble-production-a5eb.up.railway.app/api/changeNickname",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        guild_id: guildId,
+        user_id: userId,
+        nickname,
+      }),
+    }
+  );
 
   if (!response.ok) {
     const errorData = await response.json();
