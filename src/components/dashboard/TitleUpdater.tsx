@@ -7,7 +7,7 @@ export function TitleUpdater() {
 
   useEffect(() => {
     if (session?.user?.name) {
-      document.title = `${session.user.name}'s Dashboard | Arclify`;
+      document.title = `${session.user.name} | Arclify`;
     }
     return () => {
       document.title = "Arclify";
