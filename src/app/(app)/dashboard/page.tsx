@@ -10,6 +10,7 @@ import {
   useAuth,
 } from "@/lib/hooks";
 import { DashboardLayout, ServerContent, Sidebar } from "@/components";
+import { LoaderCircle } from "lucide-react";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -22,6 +23,8 @@ export default function Dashboard() {
   } = useServerSelection();
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showLoading, setShowLoading] = useState(true); // Add loading state
+
   const { members: fetchedMembers, error: membersError } =
     useMembers(selectedServer);
 
@@ -61,11 +64,18 @@ export default function Dashboard() {
   ];
 
   useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+    if (status !== "loading") {
+      setShowLoading(false);
+      setIsLoaded(true);
+    }
+  }, [status]);
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
+  if (showLoading || status === "loading") {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LoaderCircle className="text-zinc-100 animate-spin h-24 w-24" />
+      </div>
+    );
   }
 
   if (!session) {
