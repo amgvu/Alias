@@ -40,7 +40,11 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
   useEffect(() => {
     if (!isInputFocused) {
-      setInputValue(member.nickname || member.globalName || "");
+      const valueToSet =
+        member.nickname !== null && member.nickname !== undefined
+          ? member.nickname
+          : member.globalName || "";
+      setInputValue(valueToSet);
     }
   }, [member.nickname, member.globalName, isInputFocused]);
 
