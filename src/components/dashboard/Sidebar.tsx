@@ -7,6 +7,11 @@ import {
   SaveAll,
 } from "lucide-react";
 import { DSButton, DSMenu, DSCreateMenu } from "@/components";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Member, Arc } from "@/types/types";
 
 interface SidebarProps {
@@ -86,29 +91,43 @@ export default function Sidebar({
           <div>
             <ul>
               <div className="flex justify-end space-x-4">
-                <DSButton
-                  onClick={applyAllNicknames}
-                  className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
-                  disabled={
-                    isApplyingAll || !selectedServer || members.length === 0
-                  }
-                >
-                  <CheckCheck className="w-4 h-4 mr-[-2px]" />
-                  {isApplyingAll ? "Applying..." : "Apply All"}
-                </DSButton>
-                <DSButton
-                  onClick={handleSaveArc}
-                  className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
-                  disabled={
-                    isSavingArc ||
-                    !selectedServer ||
-                    !selectedArc ||
-                    members.length === 0
-                  }
-                >
-                  <SaveAll className="w-4 h-4 mr-[-2px]" />
-                  {isSavingArc ? "Saving..." : "Save Set"}
-                </DSButton>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <TooltipContent>
+                      <p>Applies all nicknames to server</p>
+                    </TooltipContent>
+                    <DSButton
+                      onClick={applyAllNicknames}
+                      className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
+                      disabled={
+                        isApplyingAll || !selectedServer || members.length === 0
+                      }
+                    >
+                      <CheckCheck className="w-4 h-4 mr-[-2px]" />
+                      {isApplyingAll ? "Applying..." : "Apply All"}
+                    </DSButton>
+                  </TooltipTrigger>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <TooltipContent>
+                      <p>Saves all current nicknames as a set</p>
+                    </TooltipContent>
+                    <DSButton
+                      onClick={handleSaveArc}
+                      className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+                      disabled={
+                        isSavingArc ||
+                        !selectedServer ||
+                        !selectedArc ||
+                        members.length === 0
+                      }
+                    >
+                      <SaveAll className="w-4 h-4 mr-[-2px]" />
+                      {isSavingArc ? "Saving..." : "Save Set"}
+                    </DSButton>
+                  </TooltipTrigger>
+                </Tooltip>
               </div>
             </ul>
           </div>
@@ -155,20 +174,29 @@ export default function Sidebar({
                 onChange={(e) => setTheme(e.target.value)}
               />
               <div className="flex justify-end space-x-4 mt-3">
-                <DSButton
-                  onClick={handleGenerateCharacters}
-                  className={`transition-all bg-[#ededed] ${
-                    !loading && "disabled:bg-zinc-900"
-                  } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700`}
-                  disabled={loading || !selectedServer || members.length === 0}
-                >
-                  <WandSparkles className="w-4 h-4 mr-[-2px]" />
-                  {loading ? (
-                    <LoaderPinwheel className="animate-spin w-5 h-5 text-zinc-100" />
-                  ) : (
-                    "Generate"
-                  )}
-                </DSButton>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <TooltipContent>
+                      <p>Creates new nicknames but DOES NOT apply them</p>
+                    </TooltipContent>
+                    <DSButton
+                      onClick={handleGenerateCharacters}
+                      className={`transition-all bg-[#ededed] ${
+                        !loading && "disabled:bg-zinc-900"
+                      } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700`}
+                      disabled={
+                        loading || !selectedServer || members.length === 0
+                      }
+                    >
+                      <WandSparkles className="w-4 h-4 mr-[-2px]" />
+                      {loading ? (
+                        <LoaderPinwheel className="animate-spin w-5 h-5 text-zinc-100" />
+                      ) : (
+                        "Generate"
+                      )}
+                    </DSButton>
+                  </TooltipTrigger>
+                </Tooltip>
               </div>
             </div>
           </div>
