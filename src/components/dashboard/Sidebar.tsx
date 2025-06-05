@@ -136,7 +136,6 @@ export default function Sidebar({
             <label className="inline-block text-zinc-200 text-lg font-medium">
               Name Generator
             </label>
-            <h2 className="inline-block mx-2 font-light text-zinc-500">v0.2</h2>
             <h3 className="font-light mt-1 text-sm text-zinc-400">
               Generate names for your members based on a theme and apply them
               within seconds.
