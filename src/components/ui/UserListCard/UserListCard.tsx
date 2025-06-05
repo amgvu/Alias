@@ -163,7 +163,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute inset-0 z-20 flex items-center justify-center bg-black/50 backdrop-blur-sm rounded-lg"
+            className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg"
           >
             <Loader2 className="animate-spin w-10 h-10 text-white" />
           </motion.div>
