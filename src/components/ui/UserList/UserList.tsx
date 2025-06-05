@@ -105,6 +105,7 @@ export const DSUserList: React.FC<UserListProps> = ({
                   member={member}
                   selectedServer={selectedServer}
                   isUpdating={isUpdating === member.user_id}
+                  isApplyingAll={isApplyingAll} // <-- add this line
                   onNicknameChange={(nickname) => {
                     onNicknameChange(memberIndices[member.user_id], nickname);
                   }}

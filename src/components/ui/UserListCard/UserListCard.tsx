@@ -5,13 +5,22 @@ import Image from "next/image";
 import { styles } from "./UserListCard.styles";
 import { Member, Nickname } from "@/types/types";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import { ChevronDown, ChevronUp, X, Check, RotateCcw } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  X,
+  Check,
+  RotateCcw,
+  Loader2,
+} from "lucide-react";
 import { fetchNicknames, deleteNickname } from "@/lib/utilities";
 import { useSupabase } from "@/contexts/SupabaseProvider";
+import { useMemo } from "react";
 
 interface UserListCardProps {
   member: Member;
   isUpdating: boolean;
+  isApplyingAll?: boolean;
   selectedServer: string;
   onNicknameChange: (nickname: string) => void;
   onApplyNickname: () => void;
@@ -20,6 +29,7 @@ interface UserListCardProps {
 export const UserListCard: React.FC<UserListCardProps> = ({
   member,
   isUpdating,
+  isApplyingAll = false,
   selectedServer,
   onNicknameChange,
   onApplyNickname,
@@ -39,6 +49,8 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   const [isUserCurrentlyEditing, setIsUserCurrentlyEditing] = useState(false);
   const { supabase } = useSupabase();
   const controls = useAnimation();
+
+  const showOverlay = isUpdating || isApplyingAll; // make it so that it changes for each individual user if its actually updating or not
 
   useEffect(() => {
     if (!isUserCurrentlyEditing) {
@@ -132,7 +144,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
   const handleApplyNickname = async () => {
     await controls.start({
-      y: [0, 350, 0],
+      y: [0, 150, 0],
       transition: { duration: 0.1, ease: "easeOut" },
     });
     onApplyNickname();
@@ -144,6 +156,19 @@ export const UserListCard: React.FC<UserListCardProps> = ({
       animate={controls}
       className={`${styles.card} relative bg-no-repeat bg-left`}
     >
+      <AnimatePresence>
+        {showOverlay && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 z-20 flex items-center justify-center bg-black/50 backdrop-blur-sm rounded-lg"
+          >
+            <Loader2 className="animate-spin w-10 h-10 text-white" />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="absolute inset-0"></div>
       <div className="flex items-center space-x-2 relative z-10">
         <div className="h-full flex-shrink-0 relative">
