@@ -15,7 +15,11 @@ import {
 } from "lucide-react";
 import { fetchNicknames, deleteNickname } from "@/lib/utilities";
 import { useSupabase } from "@/contexts/SupabaseProvider";
-import { useMemo } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface UserListCardProps {
   member: Member;
@@ -201,38 +205,59 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         </div>
 
         <div className="flex flex-row space-x-2">
-          <DSButton
-            onClick={handleApplyNickname}
-            disabled={isUpdating || !inputValue}
-            className={`${styles.applyButton} ${
-              isUpdating ? "motion-preset-pop motion-duration-1000" : ""
-            }`}
-          >
-            <Check className="w-4 h-4 mr-[-2px]" />
-            {isUpdating ? "Applying..." : "Apply"}
-          </DSButton>
-          <DSButton
-            onClick={handleRevert}
-            disabled={isUpdating}
-            className={`${styles.applyButton}`}
-          >
-            <RotateCcw className="w-4 h-4 mr-[-2px]" />
-            Reset
-          </DSButton>
+          <Tooltip>
+            <TooltipTrigger>
+              <TooltipContent>
+                <p>Applies nickname to server</p>
+              </TooltipContent>
+              <DSButton
+                onClick={handleApplyNickname}
+                disabled={isUpdating || !inputValue}
+                className={`${styles.applyButton} ${
+                  isUpdating ? "motion-preset-pop motion-duration-1000" : ""
+                }`}
+              >
+                <Check className="w-4 h-4 mr-[-2px]" />
+                {isUpdating ? "Applying..." : "Apply"}
+              </DSButton>
+            </TooltipTrigger>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger>
+              <TooltipContent>
+                <p>Resets to default username</p>
+              </TooltipContent>
+              <DSButton
+                onClick={handleRevert}
+                disabled={isUpdating}
+                className={`${styles.applyButton}`}
+              >
+                <RotateCcw className="w-4 h-4 mr-[-2px]" />
+                Reset
+              </DSButton>
+            </TooltipTrigger>
+          </Tooltip>
         </div>
 
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="p-2 transition-all cursor-pointer rounded-lg"
-        >
-          <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
-            {isExpanded ? (
-              <ChevronUp className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
-            )}
-          </motion.div>
-        </button>
+        <Tooltip>
+          <TooltipTrigger>
+            <TooltipContent>
+              <p>Saved Nicknames</p>
+            </TooltipContent>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="p-2 transition-all cursor-pointer rounded-lg"
+            >
+              <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
+                {isExpanded ? (
+                  <ChevronUp className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
+                ) : (
+                  <ChevronDown className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
+                )}
+              </motion.div>
+            </button>
+          </TooltipTrigger>
+        </Tooltip>
       </div>
 
       <AnimatePresence>
