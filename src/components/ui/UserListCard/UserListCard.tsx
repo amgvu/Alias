@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { DSInput, DSButton, DSDialog } from "@/components/";
 import Image from "next/image";
@@ -35,18 +36,19 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   const [nicknameToDelete, setNicknameToDelete] = useState<Nickname | null>(
     null
   );
+  const [isUserCurrentlyEditing, setIsUserCurrentlyEditing] = useState(false);
   const { supabase } = useSupabase();
   const controls = useAnimation();
 
   useEffect(() => {
-    if (!isInputFocused) {
+    if (!isUserCurrentlyEditing) {
       const valueToSet =
         member.nickname !== null && member.nickname !== undefined
           ? member.nickname
           : member.globalName || "";
       setInputValue(valueToSet);
     }
-  }, [member.nickname, member.globalName, isInputFocused]);
+  }, [member.nickname, member.globalName, isUserCurrentlyEditing]);
 
   useEffect(() => {
     const fetchPreviousNicknames = async () => {
@@ -76,8 +78,14 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   }, [supabase, isExpanded, selectedServer, member.user_id]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsUserCurrentlyEditing(true);
     setInputValue(e.target.value);
     onNicknameChange(e.target.value);
+  };
+
+  const handleBlur = () => {
+    setIsInputFocused(false);
+    setIsUserCurrentlyEditing(false);
   };
 
   const handleRevert = () => {
@@ -156,7 +164,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             value={inputValue}
             onChange={handleInputChange}
             onFocus={() => setIsInputFocused(true)}
-            onBlur={() => setIsInputFocused(false)}
+            onBlur={handleBlur}
             placeholder={`Nickname for ${member.username}`}
             className={styles.nicknameInput}
             disabled={isUpdating}
