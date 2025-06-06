@@ -274,9 +274,16 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 Saved Nicknames
               </div>
               {isLoadingNicknames ? (
-                <div className="text-neutral-400 text-xs">
-                  Loading nicknames...
-                </div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex items-center gap-2 text-neutral-400 text-xs"
+                >
+                  <Loader2 className="animate-spin w-4 h-4" />
+                  <span>Loading nicknames...</span>
+                </motion.div>
               ) : fetchError ? (
                 <div className="text-red-400">{fetchError}</div>
               ) : (
