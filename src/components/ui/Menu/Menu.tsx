@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import {
   menuButtonStyles,
@@ -70,18 +70,24 @@ const DSMenu: React.FC<DSMenuProps> = ({
                 Loading Servers...
               </motion.div>
             ) : (
-              items.map((item) => (
-                <Menu.Item key={item}>
-                  {({ active }) => (
-                    <button
-                      className={menuItemStyles(active)}
-                      onClick={() => setSelectedItem(item)}
-                    >
-                      {item}
-                    </button>
-                  )}
-                </Menu.Item>
-              ))
+              <AnimatePresence>
+                {items.map((item) => (
+                  <Menu.Item key={item}>
+                    {({ active }) => (
+                      <motion.button
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className={menuItemStyles(active)}
+                        onClick={() => setSelectedItem(item)}
+                      >
+                        {item}
+                      </motion.button>
+                    )}
+                  </Menu.Item>
+                ))}
+              </AnimatePresence>
             )}
           </div>
         </Menu.Items>
