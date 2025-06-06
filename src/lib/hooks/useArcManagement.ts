@@ -49,7 +49,6 @@ export const useArcManagement = (
 
       if (selectedArc) {
         try {
-          console.log("Fetching arc nicknames for arc:", selectedArc.id);
           const arcNicknames = await fetchArcNicknames(
             supabase,
             selectedArc.id
@@ -88,7 +87,6 @@ export const useArcManagement = (
   const handleSaveArc = async () => {
     if (!supabase) {
       alert("Database connection not available. Please try again.");
-      console.log("Save blocked - supabase:", !!supabase);
       return;
     }
 
