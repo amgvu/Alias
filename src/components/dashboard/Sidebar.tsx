@@ -107,7 +107,7 @@ export default function Sidebar({
                           className="flex items-center justify-center w-full"
                         >
                           <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
-                          <p className="ml-2">Applying Names...</p>
+                          <p className="ml-2">Applying Nicknames...</p>
                         </motion.div>
                       ) : (
                         <motion.div
