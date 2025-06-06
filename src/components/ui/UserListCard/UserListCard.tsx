@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { DSInput, DSButton, DSDialog } from "@/components/";
+import { DSInput, DSButton } from "@/components/";
 import Image from "next/image";
 import { styles } from "./UserListCard.styles";
 import { Member, Nickname } from "@/types/types";
@@ -46,12 +46,9 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   const [previousNicknames, setPreviousNicknames] = useState<Nickname[]>([]);
   const [isLoadingNicknames, setIsLoadingNicknames] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
-  const [isPromptOpen, setIsPromptOpen] = useState(false);
-  const [nicknameToDelete, setNicknameToDelete] = useState<Nickname | null>(
-    null
-  );
   const [isUserCurrentlyEditing, setIsUserCurrentlyEditing] = useState(false);
   const [showResetSuccess, setShowResetSuccess] = useState(false);
+  const [deletingNicknames, setDeletingNicknames] = useState<string[]>([]);
   const { supabase } = useSupabase();
   const controls = useAnimation();
 
@@ -70,7 +67,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   useEffect(() => {
     const fetchPreviousNicknames = async () => {
       if (!supabase) return;
-      if (isExpanded && selectedServer && member.user_id) {
+      if (selectedServer && member.user_id) {
         setIsLoadingNicknames(true);
         setFetchError(null);
         try {
@@ -92,7 +89,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     };
 
     fetchPreviousNicknames();
-  }, [supabase, isExpanded, selectedServer, member.user_id]);
+  }, [supabase, selectedServer, member.user_id]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsUserCurrentlyEditing(true);
@@ -113,40 +110,32 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     setTimeout(() => setShowResetSuccess(false), 400);
   };
 
-  const handleDeleteNickname = (nickname: Nickname) => {
-    setNicknameToDelete(nickname);
-    setIsPromptOpen(true);
-  };
-
-  const confirmDeleteNickname = () => {
+  const confirmDeleteNickname = (nickname: Nickname) => {
     if (!supabase) return;
-    if (nicknameToDelete && selectedServer && member.user_id) {
+    if (nickname && selectedServer && member.user_id) {
+      setDeletingNicknames((prev) => [...prev, nickname.nickname]);
       deleteNickname(
         supabase,
         selectedServer,
         member.user_id,
-        nicknameToDelete.nickname
+        nickname.nickname
       )
         .then(() => {
           setPreviousNicknames((prevNicknames) =>
-            prevNicknames.filter(
-              (nick) => nick.nickname !== nicknameToDelete.nickname
-            )
+            prevNicknames.filter((nick) => nick.nickname !== nickname.nickname)
           );
         })
         .catch((error) => {
           console.error("Error deleting nickname:", error);
         })
         .finally(() => {
-          setIsPromptOpen(false);
-          setNicknameToDelete(null);
+          setTimeout(() => {
+            setDeletingNicknames((prev) =>
+              prev.filter((n) => n !== nickname.nickname)
+            );
+          }, 200);
         });
     }
-  };
-
-  const cancelDeleteNickname = () => {
-    setIsPromptOpen(false);
-    setNicknameToDelete(null);
   };
 
   const handleApplyNickname = async () => {
@@ -317,7 +306,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             className="overflow-hidden"
           >
             <div className="mt-2 pt-1 px-2 border-t border-[#252525]">
-              <div className="flex items-center gap-2 mb-1 text-sm font-bold text-neutral-500">
+              <div className="flex items-center gap-2 mb-1 text-sm font-bold text-zinc-500">
                 Saved Nicknames
               </div>
               {isLoadingNicknames ? (
@@ -326,43 +315,59 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="flex items-center gap-2 text-neutral-400 text-xs"
+                  className="flex items-center gap-2 text-zinc-400 text-xs"
                 >
                   <Loader2 className="animate-spin w-4 h-4" />
                   <span>Loading nicknames...</span>
                 </motion.div>
               ) : fetchError ? (
                 <div className="text-red-400">{fetchError}</div>
+              ) : previousNicknames.length === 0 ? (
+                <div className="text-zinc-500 text-xs italic mb-2">
+                  No nicknames found. Add some!
+                </div>
               ) : (
                 <div className="flex flex-wrap mb-1 gap-2">
                   {previousNicknames.map((nickname, index) => (
-                    <motion.div
+                    <AnimatePresence
                       key={`${nickname.userId}-${nickname.nickname}`}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="relative"
                     >
-                      <button
-                        onClick={() => {
-                          setInputValue(nickname.nickname);
-                          onNicknameChange(nickname.nickname);
-                        }}
-                        className="px-3 py-1 text-sm font-medium bg-black border-[#252525] border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
-                      >
-                        {nickname.nickname}
-                      </button>
+                      {!deletingNicknames.includes(nickname.nickname) && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="relative"
+                        >
+                          <button
+                            onClick={() => {
+                              setInputValue(nickname.nickname);
+                              onNicknameChange(nickname.nickname);
+                            }}
+                            className="px-3 py-1 text-sm font-medium bg-black border-[#252525] border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
+                          >
+                            {nickname.nickname}
+                          </button>
 
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteNickname(nickname);
-                        }}
-                        className="absolute bottom-4 -right-1 p-1 cursor-pointer text-sm text-neutral-950 bg-red-400 rounded-full transition hover:bg-red-500"
-                      >
-                        <X className="w-3 h-3" />
-                      </button>
-                    </motion.div>
+                          <button
+                            onClick={() => {
+                              setDeletingNicknames((prev) => [
+                                ...prev,
+                                nickname.nickname,
+                              ]);
+                              setTimeout(
+                                () => confirmDeleteNickname(nickname),
+                                200
+                              );
+                            }}
+                            className="absolute bottom-4 -right-1 p-1 cursor-pointer text-sm text-neutral-950 bg-red-400 rounded-full transition hover:bg-red-500"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   ))}
                 </div>
               )}
@@ -370,13 +375,6 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-      <DSDialog
-        isOpen={isPromptOpen}
-        title="Confirm Deletion"
-        message={`Are you sure you want to delete the nickname "${nicknameToDelete?.nickname}"?`}
-        onConfirm={confirmDeleteNickname}
-        onCancel={cancelDeleteNickname}
-      />
     </motion.div>
   );
 };
