@@ -44,7 +44,6 @@ export const useArcManagement = (
   useEffect(() => {
     const loadArcNicknames = async () => {
       if (!supabase) {
-        console.log("Skipping loadArcNicknames - supabase not ready");
         return;
       }
 
