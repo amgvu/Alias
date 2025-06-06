@@ -3,7 +3,7 @@ import { Combobox, Transition } from "@headlessui/react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import { Arc } from "@/types/types";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { fetchArcs, deleteArc } from "@/lib/utilities";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 
@@ -23,6 +23,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [removingArcIds, setRemovingArcIds] = useState<number[]>([]);
   const { supabase } = useSupabase();
 
   useEffect(() => {
@@ -46,28 +47,31 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
     }
   };
 
+  const fadeOutArc = (arcId: number) => {
+    setRemovingArcIds((prev) => [...prev, arcId]);
+  };
+
   const handleDeleteArc = async (arcId: number) => {
-    if (!supabase) return;
-    if (
-      !window.confirm(
-        "Are you sure you want to delete this set? This action cannot be undone."
-      )
-    ) {
-      return;
-    }
-
-    try {
-      await deleteArc(supabase, arcId);
-      const updatedArcs = await fetchArcs(supabase, selectedServer);
-      setArcs(updatedArcs);
-
-      if (selectedArc?.id === arcId) {
-        setSelectedArc(null);
+    setTimeout(async () => {
+      setArcs((prev) => prev.filter((arc) => arc.id !== arcId));
+      if (!supabase) return;
+      try {
+        await deleteArc(supabase, arcId);
+        let updatedArcs = await fetchArcs(supabase, selectedServer);
+        updatedArcs = updatedArcs.filter(
+          (arc) => !removingArcIds.concat(arcId).includes(arc.id)
+        );
+        setArcs(updatedArcs);
+        if (selectedArc?.id === arcId) {
+          setSelectedArc(null);
+        }
+      } catch (error) {
+        console.error("Failed to delete set:", error);
+        alert("Failed to delete set. Please try again.");
+      } finally {
+        setRemovingArcIds((prev) => prev.filter((id) => id !== arcId));
       }
-    } catch (error) {
-      console.error("Failed to delete set:", error);
-      alert("Failed to delete set. Please try again.");
-    }
+    }, 200);
   };
 
   const filteredArcs =
@@ -143,49 +147,66 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
               Loading sets...
             </motion.div>
           ) : filteredArcs.length === 0 && !showCreateOption ? (
-            <div className="relative cursor-default select-none px-4 py-2 text-neutral-400">
-              No sets found
-            </div>
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="relative cursor-default select-none px-4 py-2 text-neutral-400"
+              >
+                No sets found
+              </motion.div>
+            </AnimatePresence>
           ) : (
             <>
-              {filteredArcs.map((arc) => (
-                <Combobox.Option
-                  key={arc.id}
-                  value={arc}
-                  className={({ active }) => `
-                    relative cursor-pointer select-none py-2 pl-4 pr-4
-                    ${
-                      active
-                        ? "bg-neutral-900 transition-all rounded-lg text-neutral-white"
-                        : "text-neutral-400 hover:text-white"
-                    }
-                  `}
-                >
-                  {({ selected }) => (
-                    <div className="flex justify-between items-center w-full">
-                      <span
-                        className={`block truncate ${
-                          selected ? "font-medium" : "font-normal"
-                        }`}
-                      >
-                        {arc.arc_name}
-                      </span>
-                      <button
-                        onMouseDown={(e) => {
-                          e.stopPropagation();
-                        }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteArc(arc.id);
-                        }}
-                        className="hover:text-red-400 ml-2"
-                      >
-                        <TrashIcon className="h-4 w-4 text-red-400 transition-all duration-200 hover:text-red-700 cursor-pointer" />
-                      </button>
-                    </div>
-                  )}
-                </Combobox.Option>
-              ))}
+              <AnimatePresence>
+                {filteredArcs.map((arc) =>
+                  !removingArcIds.includes(arc.id) ? (
+                    <Combobox.Option key={arc.id} value={arc} as={Fragment}>
+                      {({ active, selected }) => (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className={`
+              relative cursor-pointer select-none py-2 pl-4 pr-4
+              flex justify-between items-center w-full
+              ${
+                active
+                  ? "bg-neutral-900 transition-all rounded-lg text-neutral-white"
+                  : "text-neutral-400 hover:text-white"
+              }
+            `}
+                          layout
+                        >
+                          <span
+                            className={`block truncate ${
+                              selected ? "font-medium" : "font-normal"
+                            }`}
+                          >
+                            {arc.arc_name}
+                          </span>
+                          <button
+                            onMouseDown={(e) => {
+                              e.stopPropagation();
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              fadeOutArc(arc.id);
+                              handleDeleteArc(arc.id);
+                            }}
+                            className="hover:text-red-400 ml-2"
+                          >
+                            <TrashIcon className="h-4 w-4 text-red-400 transition-all duration-200 hover:text-red-700 cursor-pointer" />
+                          </button>
+                        </motion.div>
+                      )}
+                    </Combobox.Option>
+                  ) : null
+                )}
+              </AnimatePresence>
               {showCreateOption && (
                 <Combobox.Option
                   value={{ id: -1, arc_name: query, guild_id: selectedServer }}
