@@ -51,6 +51,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     null
   );
   const [isUserCurrentlyEditing, setIsUserCurrentlyEditing] = useState(false);
+  const [showResetSuccess, setShowResetSuccess] = useState(false);
   const { supabase } = useSupabase();
   const controls = useAnimation();
 
@@ -108,6 +109,8 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     const globalName = member.globalName || "";
     setInputValue(globalName);
     onNicknameChange(globalName);
+    setShowResetSuccess(true);
+    setTimeout(() => setShowResetSuccess(false), 400);
   };
 
   const handleDeleteNickname = (nickname: Nickname) => {
@@ -210,16 +213,38 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               <TooltipContent>
                 <p>Applies nickname to server</p>
               </TooltipContent>
-              <DSButton
-                onClick={handleApplyNickname}
-                disabled={isUpdating || !inputValue}
-                className={`${styles.applyButton} ${
-                  isUpdating ? "motion-preset-pop motion-duration-1000" : ""
-                }`}
-              >
-                <Check className="w-4 h-4 mr-[-2px]" />
-                {isUpdating ? "Applying..." : "Apply"}
-              </DSButton>
+              <AnimatePresence mode="wait">
+                {isUpdating ? (
+                  <motion.div
+                    key="apply-loader"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className={`flex items-center justify-center w-[90px] h-[36px]`}
+                  >
+                    <Loader2 className="animate-spin w-5 h-5 text-zinc-100" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="apply-btn"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="inline-block"
+                  >
+                    <DSButton
+                      onClick={handleApplyNickname}
+                      disabled={isUpdating || !inputValue}
+                      className={`${styles.applyButton}`}
+                    >
+                      <Check className="w-4 h-4 mr-[-2px]" />
+                      Apply
+                    </DSButton>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </TooltipTrigger>
           </Tooltip>
           <Tooltip>
@@ -227,14 +252,36 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               <TooltipContent>
                 <p>Resets to default username</p>
               </TooltipContent>
-              <DSButton
-                onClick={handleRevert}
-                disabled={isUpdating}
-                className={`${styles.applyButton}`}
-              >
-                <RotateCcw className="w-4 h-4 mr-[-2px]" />
-                Reset
-              </DSButton>
+              <div className="relative inline-block">
+                <motion.div
+                  animate={{
+                    opacity: showResetSuccess ? 0 : 1,
+                    transition: { duration: 0.1 },
+                  }}
+                  className="inline-block"
+                >
+                  <DSButton
+                    onClick={handleRevert}
+                    disabled={isUpdating}
+                    className={`${styles.applyButton} transition-all duration-200`}
+                  >
+                    <RotateCcw className="w-4 h-4 mr-[-2px]" />
+                    Reset
+                  </DSButton>
+                </motion.div>
+                {showResetSuccess && (
+                  <motion.div
+                    key="reset-success"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  >
+                    <Check className="w-5 h-5 text-zinc-100" />
+                  </motion.div>
+                )}
+              </div>
             </TooltipTrigger>
           </Tooltip>
         </div>
