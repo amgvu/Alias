@@ -42,7 +42,7 @@ export default function ServerContent({
             isApplyingAll={isApplyingAll}
           />
         ) : (
-          <div className="text-center font-semibold text-4xl text-zinc-700 py-5">
+          <div className="text-center font-semibold text-4xl text-zinc-500 py-5">
             Select a server to view and manage members
           </div>
         )}
