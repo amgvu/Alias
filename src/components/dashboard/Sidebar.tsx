@@ -94,7 +94,9 @@ export default function Sidebar({
                 <Tooltip>
                   <TooltipTrigger>
                     <TooltipContent>
-                      <p>Applies all nicknames to server</p>
+                      <p className="font-ggSans">
+                        Applies all nicknames to server
+                      </p>
                     </TooltipContent>
                     <AnimatePresence mode="wait">
                       {isApplyingAll ? (
@@ -138,7 +140,9 @@ export default function Sidebar({
                 <Tooltip>
                   <TooltipTrigger>
                     <TooltipContent>
-                      <p>Saves all current nicknames as a set</p>
+                      <p className="font-ggSans">
+                        Saves all current nicknames as a set
+                      </p>
                     </TooltipContent>
                     <AnimatePresence mode="wait">
                       {isSavingArc ? (
@@ -228,7 +232,9 @@ export default function Sidebar({
                 <Tooltip>
                   <TooltipTrigger>
                     <TooltipContent>
-                      <p>Creates new nicknames but DOES NOT apply them</p>
+                      <p className="font-ggSans">
+                        Creates new nicknames but DOES NOT apply them
+                      </p>
                     </TooltipContent>
                     <AnimatePresence mode="wait">
                       {loading ? (

@@ -200,7 +200,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           <Tooltip>
             <TooltipTrigger>
               <TooltipContent>
-                <p>Applies nickname to server</p>
+                <p className="font-ggSans">Applies nickname to server</p>
               </TooltipContent>
               <AnimatePresence mode="wait">
                 {isUpdating ? (
@@ -239,7 +239,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           <Tooltip>
             <TooltipTrigger>
               <TooltipContent>
-                <p>Resets to default username</p>
+                <p className="font-ggSans">Resets to default username</p>
               </TooltipContent>
               <div className="relative inline-block">
                 <motion.div
@@ -275,25 +275,18 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           </Tooltip>
         </div>
 
-        <Tooltip>
-          <TooltipTrigger>
-            <TooltipContent>
-              <p>Saved Nicknames</p>
-            </TooltipContent>
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="p-2 transition-all cursor-pointer rounded-lg"
-            >
-              <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
-                {isExpanded ? (
-                  <ChevronUp className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
-                )}
-              </motion.div>
-            </button>
-          </TooltipTrigger>
-        </Tooltip>
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="p-2 transition-all cursor-pointer rounded-lg"
+        >
+          <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
+            {isExpanded ? (
+              <ChevronUp className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
+            )}
+          </motion.div>
+        </button>
       </div>
 
       <AnimatePresence>
