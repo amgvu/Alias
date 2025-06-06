@@ -59,10 +59,16 @@ const DSMenu: React.FC<DSMenuProps> = ({
         <Menu.Items className={menuItemsStyles}>
           <div className="py-1">
             {items.length === 0 ? (
-              <div className="flex items-center gap-2 text-zinc-400 text-sm py-2 justify-center">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center gap-2 text-zinc-400 text-sm py-2 justify-center"
+              >
                 <Loader2 className="animate-spin w-5 h-5" />
-                Loading...
-              </div>
+                Loading Servers...
+              </motion.div>
             ) : (
               items.map((item) => (
                 <Menu.Item key={item}>

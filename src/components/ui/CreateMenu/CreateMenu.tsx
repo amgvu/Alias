@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import { Arc } from "@/types/types";
 import { motion } from "framer-motion";
 import { fetchArcs, deleteArc } from "@/lib/utilities";
@@ -132,9 +132,16 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
       >
         <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-black py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
           {isLoading ? (
-            <div className="relative cursor-default select-none px-4 py-2 text-neutral-400">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative cursor-default select-none px-4 py-2 text-neutral-400 flex items-center gap-2"
+            >
+              <Loader2 className="animate-spin w-5 h-5" />
               Loading sets...
-            </div>
+            </motion.div>
           ) : filteredArcs.length === 0 && !showCreateOption ? (
             <div className="relative cursor-default select-none px-4 py-2 text-neutral-400">
               No sets found
