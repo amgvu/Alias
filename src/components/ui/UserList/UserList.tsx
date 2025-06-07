@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { UserListCard } from "../UserListCard/UserListCard";
 import { styles } from "./UserList.styles";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Member } from "@/types/types";
 import { useState, useEffect } from "react";
 
@@ -46,6 +47,7 @@ export const DSUserList: React.FC<UserListProps> = ({
   isApplyingAll,
 }) => {
   const [animationKey, setAnimationKey] = useState(0);
+  const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
 
   useEffect(() => {
     if (isApplyingAll) {
@@ -78,9 +80,50 @@ export const DSUserList: React.FC<UserListProps> = ({
     return acc;
   }, {} as Record<string, number>);
 
+  const allUserIds = members.map((m) => m.user_id);
+  const areAllMembersSelected =
+    allUserIds.length > 0 &&
+    allUserIds.every((id) => selectedUserIds.includes(id));
+
+  const handleGlobalCheckboxChange = () => {
+    if (areAllMembersSelected) {
+      setSelectedUserIds([]);
+    } else {
+      setSelectedUserIds(allUserIds);
+    }
+  };
+
+  const areAllRoleMembersSelected = (roleName: string) => {
+    const userIds = groupedMembers[roleName].map((m) => m.user_id);
+    return userIds.every((id) => selectedUserIds.includes(id));
+  };
+
+  const handleRoleCheckboxChange = (roleName: string) => {
+    const userIds = groupedMembers[roleName].map((m) => m.user_id);
+    const allSelected = areAllRoleMembersSelected(roleName);
+    if (allSelected) {
+      setSelectedUserIds((prev) => prev.filter((id) => !userIds.includes(id)));
+    } else {
+      setSelectedUserIds((prev) => [
+        ...prev,
+        ...userIds.filter((id) => !prev.includes(id)),
+      ]);
+    }
+  };
+
   return (
     <div className={styles.scrollContainer}>
       <div className={styles.container}>
+        <div className="flex items-center gap-2 mb-3">
+          <Checkbox
+            className="border-zinc-100 cursor-pointer transition-all duration-200"
+            checked={areAllMembersSelected}
+            onCheckedChange={handleGlobalCheckboxChange}
+          />
+          <span className="text-md text-zinc-400 text-sm font-semibold border-[#252525]">
+            Select All
+          </span>
+        </div>
         {sortedRoles.map((roleName, roleIndex) => (
           <motion.div
             key={roleName}
@@ -88,32 +131,61 @@ export const DSUserList: React.FC<UserListProps> = ({
             initial="hidden"
             animate="visible"
             variants={roleGroupVariants}
+            className="relative"
           >
-            <div className="text-md text-zinc-400 text-sm font-medium border-[#252525] mt-3 mb-1">
-              {roleName}
+            <div className="flex items-center gap-2 mt-3 mb-1">
+              <Checkbox
+                className="border-zinc-300 cursor-pointer transition-all duration-200"
+                checked={areAllRoleMembersSelected(roleName)}
+                onCheckedChange={() => handleRoleCheckboxChange(roleName)}
+              />
+              <span className="text-md text-zinc-400 text-sm font-medium border-[#252525]">
+                {roleName}
+              </span>
             </div>
-            {groupedMembers[roleName].map((member) => (
-              <motion.div
-                key={`${member.user_id}-${animationKey}`}
-                className="mb-1"
-                custom={memberIndices[member.user_id]}
-                initial="initial"
-                variants={shiftVariants}
-              >
-                <UserListCard
-                  member={member}
-                  selectedServer={selectedServer}
-                  isUpdating={isUpdating === member.user_id}
-                  isApplyingAll={isApplyingAll}
-                  onNicknameChange={(nickname) => {
-                    onNicknameChange(memberIndices[member.user_id], nickname);
-                  }}
-                  onApplyNickname={() =>
-                    onApplyNickname(member.user_id, member.nickname)
-                  }
-                />
-              </motion.div>
-            ))}
+            <div className="relative">
+              <div className="absolute left-2 top-0 bottom-0 w-px bg-zinc-800" />
+              <div className="flex flex-col gap-1 relative z-10">
+                {groupedMembers[roleName].map((member) => (
+                  <motion.div
+                    key={`${member.user_id}-${animationKey}`}
+                    className="mb-1"
+                    custom={memberIndices[member.user_id]}
+                    initial="initial"
+                    variants={shiftVariants}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        className="border-zinc-500 cursor-pointer transition-all duration-200"
+                        checked={selectedUserIds.includes(member.user_id)}
+                        onCheckedChange={() => {
+                          setSelectedUserIds((prev) =>
+                            prev.includes(member.user_id)
+                              ? prev.filter((id) => id !== member.user_id)
+                              : [...prev, member.user_id]
+                          );
+                        }}
+                      />
+                      <UserListCard
+                        member={member}
+                        selectedServer={selectedServer}
+                        isUpdating={isUpdating === member.user_id}
+                        isApplyingAll={isApplyingAll}
+                        onNicknameChange={(nickname) => {
+                          onNicknameChange(
+                            memberIndices[member.user_id],
+                            nickname
+                          );
+                        }}
+                        onApplyNickname={() =>
+                          onApplyNickname(member.user_id, member.nickname)
+                        }
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>

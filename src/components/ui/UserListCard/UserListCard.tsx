@@ -222,16 +222,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                     className="inline-block"
-                  >
-                    <DSButton
-                      onClick={handleApplyNickname}
-                      disabled={isUpdating || !inputValue}
-                      className={`${styles.applyButton}`}
-                    >
-                      <Check className="w-4 h-4 mr-[-2px]" />
-                      Apply
-                    </DSButton>
-                  </motion.div>
+                  ></motion.div>
                 )}
               </AnimatePresence>
             </TooltipTrigger>
