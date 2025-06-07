@@ -114,9 +114,9 @@ export const DSUserList: React.FC<UserListProps> = ({
   return (
     <div className={styles.scrollContainer}>
       <div className={styles.container}>
-        <div className="flex items-center gap-2 mb-3">
+        <div className="flex items-center gap-2 mb-1">
           <Checkbox
-            className="border-zinc-100 cursor-pointer transition-all duration-200"
+            className="border-zinc-300 border-2 cursor-pointer "
             checked={areAllMembersSelected}
             onCheckedChange={handleGlobalCheckboxChange}
           />
@@ -135,7 +135,7 @@ export const DSUserList: React.FC<UserListProps> = ({
           >
             <div className="flex items-center gap-2 mt-3 mb-1">
               <Checkbox
-                className="border-zinc-300 cursor-pointer transition-all duration-200"
+                className="border-zinc-300 cursor-pointer "
                 checked={areAllRoleMembersSelected(roleName)}
                 onCheckedChange={() => handleRoleCheckboxChange(roleName)}
               />
@@ -144,7 +144,7 @@ export const DSUserList: React.FC<UserListProps> = ({
               </span>
             </div>
             <div className="relative">
-              <div className="absolute left-2 top-0 bottom-0 w-px bg-zinc-800" />
+              <div className="absolute left-[9.5px] top-[-4px] bottom-0 w-px bg-zinc-800" />
               <div className="flex flex-col gap-1 relative z-10">
                 {groupedMembers[roleName].map((member) => (
                   <motion.div
@@ -156,7 +156,7 @@ export const DSUserList: React.FC<UserListProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <Checkbox
-                        className="border-zinc-500 cursor-pointer transition-all duration-200"
+                        className="border-zinc-500 bg-zinc-950 cursor-pointer "
                         checked={selectedUserIds.includes(member.user_id)}
                         onCheckedChange={() => {
                           setSelectedUserIds((prev) =>
