@@ -19,7 +19,7 @@ const roleGroupVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: index * 0.2,
+      delay: index * 0.1,
       duration: 0.3,
     },
   }),
@@ -98,7 +98,6 @@ export const DSUserList: React.FC<UserListProps> = ({
                 className="mb-1"
                 custom={memberIndices[member.user_id]}
                 initial="initial"
-                animate={isApplyingAll ? "animate" : "initial"}
                 variants={shiftVariants}
               >
                 <UserListCard
