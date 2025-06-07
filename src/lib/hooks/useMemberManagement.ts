@@ -69,7 +69,6 @@ export const useMemberManagement = (
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const applyAllNicknames = async () => {
     if (!supabase) return;
     setIsApplyingAll(true);
@@ -127,7 +126,7 @@ export const useMemberManagement = (
     isApplyingAll,
     handleNicknameChange,
     handleUpdateNickname,
-    //applyAllNicknames,
+    applyAllNicknames,
     applyNicknamesToSelection,
   };
 };
