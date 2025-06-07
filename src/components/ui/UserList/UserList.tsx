@@ -156,7 +156,7 @@ export const DSUserList: React.FC<UserListProps> = ({
                   >
                     <div className="flex items-center gap-2">
                       <Checkbox
-                        className="border-zinc-500 bg-zinc-950 cursor-pointer "
+                        className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
                         checked={selectedUserIds.includes(member.user_id)}
                         onCheckedChange={() => {
                           setSelectedUserIds((prev) =>
