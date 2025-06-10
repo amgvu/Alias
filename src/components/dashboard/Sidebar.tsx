@@ -130,7 +130,7 @@ export default function Sidebar({
                             }
                           >
                             <CheckCheck className="w-4 h-4 mr-[-2px]" />
-                            Apply All
+                            Apply Names
                           </DSButton>
                         </motion.div>
                       )}

@@ -37,6 +37,7 @@ export default function Dashboard() {
     handleUpdateNickname,
     applyAllNicknames,
     setMembers,
+    applyNicknamesToSelection,
   } = useMemberManagement(selectedServer, fetchedMembers);
 
   const {
@@ -134,6 +135,7 @@ export default function Dashboard() {
           onApplyNickname={(userId: string, nickname: string) =>
             handleUpdateNickname(userId, nickname, true)
           }
+          onApplyToSelection={applyNicknamesToSelection}
         />
       </div>
     </DashboardLayout>

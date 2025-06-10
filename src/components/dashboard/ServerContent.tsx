@@ -11,6 +11,7 @@ interface ServerContentProps {
   isApplyingAll: boolean;
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
+  onApplyToSelection: (selectedMembers: Member[]) => void;
 }
 
 export default function ServerContent({
@@ -21,6 +22,7 @@ export default function ServerContent({
   isUpdating,
   isApplyingAll,
   onNicknameChange,
+  onApplyToSelection,
   onApplyNickname,
 }: ServerContentProps) {
   return (
@@ -40,6 +42,7 @@ export default function ServerContent({
             onNicknameChange={onNicknameChange}
             onApplyNickname={onApplyNickname}
             isApplyingAll={isApplyingAll}
+            onApplyToSelection={onApplyToSelection}
           />
         ) : (
           <div className="text-center font-semibold text-4xl text-zinc-500 py-5">
