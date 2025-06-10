@@ -38,6 +38,11 @@ const shiftVariants = {
   }),
 };
 
+const checkboxContainerVariants = {
+  hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.2 } },
+  visible: { width: "24px", opacity: 1, x: 0, transition: { duration: 0.2 } },
+};
+
 export const DSUserList: React.FC<UserListProps> = ({
   members,
   isUpdating,
@@ -48,6 +53,7 @@ export const DSUserList: React.FC<UserListProps> = ({
 }) => {
   const [animationKey, setAnimationKey] = useState(0);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+  const [showCheckboxes, setShowCheckboxes] = useState(false);
 
   useEffect(() => {
     if (isApplyingAll) {
@@ -114,13 +120,27 @@ export const DSUserList: React.FC<UserListProps> = ({
   return (
     <div className={styles.scrollContainer}>
       <div className={styles.container}>
-        <div className="flex items-center gap-2 mb-1">
-          <Checkbox
-            className="border-zinc-300 border-2 cursor-pointer "
-            checked={areAllMembersSelected}
-            onCheckedChange={handleGlobalCheckboxChange}
-          />
-          <span className="text-md text-zinc-400 text-sm font-semibold border-[#252525]">
+        <button
+          onClick={() => setShowCheckboxes(!showCheckboxes)}
+          className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 font-semibold rounded-md mb-4 shadow-lg transition-colors duration-200"
+        >
+          {showCheckboxes ? "Unselect Users" : "Select Users"}
+        </button>
+
+        <div className="flex items-center mb-1">
+          <motion.div
+            variants={checkboxContainerVariants}
+            initial="hidden"
+            animate={showCheckboxes ? "visible" : "hidden"}
+            className="overflow-hidden flex-shrink-0"
+          >
+            <Checkbox
+              className="border-zinc-300 border-2 cursor-pointer"
+              checked={areAllMembersSelected}
+              onCheckedChange={handleGlobalCheckboxChange}
+            />
+          </motion.div>
+          <span className="text-md text-zinc-400 text-sm font-semibold border-[#252525] ml-2">
             Select All
           </span>
         </div>
@@ -133,13 +153,20 @@ export const DSUserList: React.FC<UserListProps> = ({
             variants={roleGroupVariants}
             className="relative"
           >
-            <div className="flex items-center gap-2 mt-3 mb-1">
-              <Checkbox
-                className="border-zinc-300 cursor-pointer "
-                checked={areAllRoleMembersSelected(roleName)}
-                onCheckedChange={() => handleRoleCheckboxChange(roleName)}
-              />
-              <span className="text-md text-zinc-400 text-sm font-medium border-[#252525]">
+            <div className="flex items-center mt-3 mb-1">
+              <motion.div
+                variants={checkboxContainerVariants}
+                initial="hidden"
+                animate={showCheckboxes ? "visible" : "hidden"}
+                className="overflow-hidden flex-shrink-0"
+              >
+                <Checkbox
+                  className="border-zinc-300 cursor-pointer"
+                  checked={areAllRoleMembersSelected(roleName)}
+                  onCheckedChange={() => handleRoleCheckboxChange(roleName)}
+                />
+              </motion.div>
+              <span className="text-md text-zinc-400 text-sm font-medium border-[#252525] ml-2">
                 {roleName}
               </span>
             </div>
@@ -153,19 +180,27 @@ export const DSUserList: React.FC<UserListProps> = ({
                     custom={memberIndices[member.user_id]}
                     initial="initial"
                     variants={shiftVariants}
+                    animate={isApplyingAll ? "animate" : "initial"}
                   >
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
-                        checked={selectedUserIds.includes(member.user_id)}
-                        onCheckedChange={() => {
-                          setSelectedUserIds((prev) =>
-                            prev.includes(member.user_id)
-                              ? prev.filter((id) => id !== member.user_id)
-                              : [...prev, member.user_id]
-                          );
-                        }}
-                      />
+                    <div className="flex items-center">
+                      <motion.div
+                        variants={checkboxContainerVariants}
+                        initial="hidden"
+                        animate={showCheckboxes ? "visible" : "hidden"}
+                        className="overflow-hidden flex-shrink-0"
+                      >
+                        <Checkbox
+                          className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
+                          checked={selectedUserIds.includes(member.user_id)}
+                          onCheckedChange={() => {
+                            setSelectedUserIds((prev) =>
+                              prev.includes(member.user_id)
+                                ? prev.filter((id) => id !== member.user_id)
+                                : [...prev, member.user_id]
+                            );
+                          }}
+                        />
+                      </motion.div>
                       <UserListCard
                         member={member}
                         selectedServer={selectedServer}
