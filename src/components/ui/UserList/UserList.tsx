@@ -122,9 +122,9 @@ export const DSUserList: React.FC<UserListProps> = ({
       <div className={styles.container}>
         <button
           onClick={() => setShowCheckboxes(!showCheckboxes)}
-          className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 font-semibold rounded-md mb-4 shadow-lg transition-colors duration-200"
+          className="px-4 cursor-pointer py-2 bg-zinc-900 hover:bg-zinc-800 font-semibold rounded-md mb-4 shadow-lg transition-colors duration-200"
         >
-          {showCheckboxes ? "Unselect Users" : "Select Users"}
+          {showCheckboxes ? "Unselect" : "Select Users"}
         </button>
 
         <div className="flex items-center mb-1">
@@ -140,9 +140,6 @@ export const DSUserList: React.FC<UserListProps> = ({
               onCheckedChange={handleGlobalCheckboxChange}
             />
           </motion.div>
-          <span className="text-md text-zinc-400 text-sm font-semibold border-[#252525] ml-2">
-            Select All
-          </span>
         </div>
         {sortedRoles.map((roleName, roleIndex) => (
           <motion.div
@@ -171,7 +168,14 @@ export const DSUserList: React.FC<UserListProps> = ({
               </span>
             </div>
             <div className="relative">
-              <div className="absolute left-[9.5px] top-[-4px] bottom-0 w-px bg-zinc-800" />
+              <motion.div
+                variants={checkboxContainerVariants}
+                initial="hidden"
+                animate={showCheckboxes ? "visible" : "hidden"}
+                className="overflow-hidden flex-shrink-0"
+              >
+                <div className="absolute left-[9.5px] top-[-4px] bottom-0 w-px bg-zinc-800" />{" "}
+              </motion.div>
               <div className="flex flex-col gap-1 relative z-10">
                 {groupedMembers[roleName].map((member) => (
                   <motion.div
