@@ -109,55 +109,47 @@ export default function Sidebar({
           <div>
             <ul>
               <div className="flex justify-center space-x-4">
-                <Tooltip>
-                  <TooltipTrigger>
-                    <TooltipContent>
-                      <p className="font-ggSans">
-                        Applies all nicknames to server
-                      </p>
-                    </TooltipContent>
-                    <AnimatePresence mode="wait">
-                      {isApplyingAll ? (
-                        <motion.div
-                          key="apply-loader"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="flex items-center justify-center w-full"
-                        >
-                          <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
-                          <p className="ml-2">Applying Nicknames...</p>
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="apply-btn"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="w-full"
-                        >
-                          <DSButton
-                            onClick={handleApply}
-                            className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
-                            disabled={
-                              isApplyingAll ||
-                              !selectedServer ||
-                              members.length === 0 ||
-                              selectedUserIds.length === 0
-                            }
-                          >
-                            <CheckCheck className="w-4 h-4 mr-[-2px]" />
-                            {selectedUserIds.length > 0
-                              ? `Apply ${selectedUserIds.length} Nicknames`
-                              : "Apply"}
-                          </DSButton>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </TooltipTrigger>
-                </Tooltip>
+                <AnimatePresence mode="wait">
+                  {isApplyingAll ? (
+                    <motion.div
+                      key="apply-loader"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex w-full"
+                    >
+                      <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
+                      <p className="ml-2">Applying Nicknames...</p>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="apply-btn"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-full"
+                    >
+                      <DSButton
+                        onClick={handleApply}
+                        className="bg-zinc-800 px-7 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
+                        disabled={
+                          isApplyingAll ||
+                          !selectedServer ||
+                          members.length === 0 ||
+                          selectedUserIds.length === 0
+                        }
+                      >
+                        <CheckCheck className="w-4 h-4 mr-[-2px]" />
+                        {selectedUserIds.length > 0
+                          ? `Apply ${selectedUserIds.length} Nicknames`
+                          : "Apply"}
+                      </DSButton>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
                 <DSButton
                   onClick={() => setShowCheckboxes(!showCheckboxes)}
                   className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
@@ -165,53 +157,45 @@ export default function Sidebar({
                   <TextSelect className="w-4 h-4 mr-[-2px]" />
                   {showCheckboxes ? "Unselect" : "Select"}
                 </DSButton>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <TooltipContent>
-                      <p className="font-ggSans">
-                        Saves all current nicknames as a set
-                      </p>
-                    </TooltipContent>
-                    <AnimatePresence mode="wait">
-                      {isSavingArc ? (
-                        <motion.div
-                          key="save-loader"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="flex items-center justify-center w-full"
-                        >
-                          <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
-                          <p className="ml-2">Saving Set...</p>
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="save-btn"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="w-full"
-                        >
-                          <DSButton
-                            onClick={handleSaveArc}
-                            className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
-                            disabled={
-                              isSavingArc ||
-                              !selectedServer ||
-                              !selectedArc ||
-                              members.length === 0
-                            }
-                          >
-                            <SaveAll className="w-4 h-4 mr-[-2px]" />
-                            Save Set
-                          </DSButton>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </TooltipTrigger>
-                </Tooltip>
+
+                <AnimatePresence mode="wait">
+                  {isSavingArc ? (
+                    <motion.div
+                      key="save-loader"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center justify-center w-full"
+                    >
+                      <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
+                      <p className="ml-2">Saving Set...</p>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="save-btn"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-full"
+                    >
+                      <DSButton
+                        onClick={handleSaveArc}
+                        className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+                        disabled={
+                          isSavingArc ||
+                          !selectedServer ||
+                          !selectedArc ||
+                          members.length === 0
+                        }
+                      >
+                        <SaveAll className="w-4 h-4 mr-[-2px]" />
+                        Save Set
+                      </DSButton>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </ul>
           </div>
@@ -257,51 +241,42 @@ export default function Sidebar({
                 onChange={(e) => setTheme(e.target.value)}
               />
               <div className="flex justify-end space-x-4 mt-3">
-                <Tooltip>
-                  <TooltipTrigger>
-                    <TooltipContent>
-                      <p className="font-ggSans">
-                        Creates new nicknames but DOES NOT apply them
-                      </p>
-                    </TooltipContent>
-                    <AnimatePresence mode="wait">
-                      {loading ? (
-                        <motion.div
-                          key="loader"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="flex items-center justify-center w-full"
-                        >
-                          <Loader2 className="animate-spin w-8 h-8 text-zinc-100" />
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="button"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="w-full"
-                        >
-                          <DSButton
-                            onClick={handleGenerateCharacters}
-                            className={`transition-all bg-[#ededed] ${
-                              !loading && "disabled:bg-zinc-900"
-                            } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700`}
-                            disabled={
-                              loading || !selectedServer || members.length === 0
-                            }
-                          >
-                            <WandSparkles className="w-4 h-4 mr-[-2px]" />
-                            Generate
-                          </DSButton>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </TooltipTrigger>
-                </Tooltip>
+                <AnimatePresence mode="wait">
+                  {loading ? (
+                    <motion.div
+                      key="loader"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center justify-center w-full"
+                    >
+                      <Loader2 className="animate-spin w-8 h-8 text-zinc-100" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="button"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-full"
+                    >
+                      <DSButton
+                        onClick={handleGenerateCharacters}
+                        className={`transition-all bg-[#ededed] ${
+                          !loading && "disabled:bg-zinc-900"
+                        } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700`}
+                        disabled={
+                          loading || !selectedServer || members.length === 0
+                        }
+                      >
+                        <WandSparkles className="w-4 h-4 mr-[-2px]" />
+                        Generate
+                      </DSButton>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           </div>
