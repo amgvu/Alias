@@ -34,6 +34,9 @@ interface SidebarProps {
   loading: boolean;
   handleGenerateCharacters: () => void;
   categories: string[];
+  onApplyToSelection: (selectedMembers: Member[]) => void;
+  onSelectionChange?: (selectedIds: string[]) => void;
+  selectedUserIds?: string[];
 }
 
 export default function Sidebar({
@@ -44,7 +47,7 @@ export default function Sidebar({
   selectedArc,
   setSelectedArc,
   handleCreateNewArc,
-  applyAllNicknames,
+  //applyAllNicknames,
   isApplyingAll,
   isSavingArc,
   handleSaveArc,
@@ -56,7 +59,17 @@ export default function Sidebar({
   loading,
   handleGenerateCharacters,
   categories,
+  onApplyToSelection,
+  selectedUserIds = [],
 }: SidebarProps) {
+  const handleApply = () => {
+    if (!selectedUserIds || selectedUserIds.length === 0) return;
+    const selectedMembers = members.filter((member) =>
+      selectedUserIds.includes(member.user_id)
+    );
+    onApplyToSelection(selectedMembers);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -121,16 +134,19 @@ export default function Sidebar({
                           className="w-full"
                         >
                           <DSButton
-                            onClick={applyAllNicknames}
+                            onClick={handleApply}
                             className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
                             disabled={
                               isApplyingAll ||
                               !selectedServer ||
-                              members.length === 0
+                              members.length === 0 ||
+                              selectedUserIds.length === 0
                             }
                           >
                             <CheckCheck className="w-4 h-4 mr-[-2px]" />
-                            Apply Names
+                            {selectedUserIds.length > 0
+                              ? `Apply to ${selectedUserIds.length} Selected`
+                              : "Apply Names"}
                           </DSButton>
                         </motion.div>
                       )}

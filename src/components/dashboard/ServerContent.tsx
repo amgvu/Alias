@@ -12,6 +12,7 @@ interface ServerContentProps {
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
   onApplyToSelection: (selectedMembers: Member[]) => void;
+  onSelectionChange?: (selectedIds: string[]) => void;
 }
 
 export default function ServerContent({
@@ -22,8 +23,8 @@ export default function ServerContent({
   isUpdating,
   isApplyingAll,
   onNicknameChange,
-  onApplyToSelection,
   onApplyNickname,
+  onSelectionChange,
 }: ServerContentProps) {
   return (
     <div className="flex flex-col">
@@ -42,7 +43,7 @@ export default function ServerContent({
             onNicknameChange={onNicknameChange}
             onApplyNickname={onApplyNickname}
             isApplyingAll={isApplyingAll}
-            onApplyToSelection={onApplyToSelection}
+            onSelectionChange={onSelectionChange}
           />
         ) : (
           <div className="text-center font-semibold text-4xl text-zinc-500 py-5">

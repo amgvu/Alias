@@ -4,7 +4,6 @@ import { styles } from "./UserList.styles";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Member } from "@/types/types";
 import { useState, useEffect } from "react";
-import { Loader2 } from "lucide-react";
 
 interface UserListProps {
   members: Member[];
@@ -13,7 +12,7 @@ interface UserListProps {
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
   isApplyingAll: boolean;
-  onApplyToSelection: (selectedMembers: Member[]) => void;
+  onSelectionChange?: (selectedIds: string[]) => void;
 }
 
 const roleGroupVariants = {
@@ -52,11 +51,17 @@ export const DSUserList: React.FC<UserListProps> = ({
   onNicknameChange,
   onApplyNickname,
   isApplyingAll,
-  onApplyToSelection,
+  onSelectionChange,
 }) => {
   const [animationKey, setAnimationKey] = useState(0);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
+
+  useEffect(() => {
+    if (onSelectionChange) {
+      onSelectionChange(selectedUserIds);
+    }
+  }, [selectedUserIds, onSelectionChange]);
 
   useEffect(() => {
     if (isApplyingAll) {
@@ -75,14 +80,6 @@ export const DSUserList: React.FC<UserListProps> = ({
     },
     {}
   );
-
-  const handleApplyToSelection = () => {
-    if (selectedUserIds.length === 0) return;
-    const selectedMembers = members.filter((member) =>
-      selectedUserIds.includes(member.user_id)
-    );
-    onApplyToSelection(selectedMembers);
-  };
 
   const sortedRoles = Object.keys(groupedMembers).sort((a, b) => {
     const roleAPosition =
@@ -138,19 +135,6 @@ export const DSUserList: React.FC<UserListProps> = ({
           >
             {showCheckboxes ? "Unselect" : "Select Users"}
           </button>
-          {showCheckboxes && selectedUserIds.length > 0 && (
-            <button
-              onClick={handleApplyToSelection}
-              className="px-4 cursor-pointer py-2 bg-zinc-900 hover:bg-zinc-600 font-semibold rounded-md mb-4 shadow-lg transition-colors duration-200"
-              disabled={isApplyingAll}
-            >
-              {isApplyingAll ? (
-                <Loader2 className="animate-spin w-5 h-5 mx-2" />
-              ) : (
-                `Apply to Selected (${selectedUserIds.length})`
-              )}
-            </button>
-          )}
         </div>
         <div className="flex items-center mb-1">
           <motion.div
@@ -165,6 +149,7 @@ export const DSUserList: React.FC<UserListProps> = ({
               onCheckedChange={handleGlobalCheckboxChange}
             />
           </motion.div>
+          {showCheckboxes && <span className="mb-1 ml-1">Select All</span>}
         </div>
         {sortedRoles.map((roleName, roleIndex) => (
           <motion.div

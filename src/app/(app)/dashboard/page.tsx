@@ -57,6 +57,8 @@ export default function Dashboard() {
     handleCreateNewArc,
   } = useArcManagement(selectedServer, members, setMembers);
 
+  const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+
   const categories = [
     "Fictional Characters",
     "Real People",
@@ -113,6 +115,8 @@ export default function Dashboard() {
           loading={loading}
           handleGenerateCharacters={handleGenerateCharacters}
           categories={categories}
+          onApplyToSelection={applyNicknamesToSelection}
+          selectedUserIds={selectedUserIds}
         />
       }
     >
@@ -136,6 +140,7 @@ export default function Dashboard() {
             handleUpdateNickname(userId, nickname, true)
           }
           onApplyToSelection={applyNicknamesToSelection}
+          onSelectionChange={setSelectedUserIds}
         />
       </div>
     </DashboardLayout>
