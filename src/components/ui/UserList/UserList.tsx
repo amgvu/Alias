@@ -42,8 +42,8 @@ const shiftVariants = {
 };
 
 const checkboxContainerVariants = {
-  hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.2 } },
-  visible: { width: "24px", opacity: 1, x: 0, transition: { duration: 0.2 } },
+  hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.1 } },
+  visible: { width: "24px", opacity: 1, x: 0, transition: { duration: 0.1 } },
 };
 
 export const DSUserList: React.FC<UserListProps> = ({
@@ -184,7 +184,7 @@ export const DSUserList: React.FC<UserListProps> = ({
                 animate={showCheckboxes ? "visible" : "hidden"}
                 className="overflow-hidden flex-shrink-0"
               >
-                <div className="absolute left-[9.5px] top-[-4px] bottom-0 w-px bg-zinc-800" />{" "}
+                <div className="absolute left-[9.5px] top-[-4px] bottom-0 w-px bg-zinc-700" />
               </motion.div>
               <div className="flex flex-col gap-1 relative z-10">
                 {groupedMembers[roleName].map((member) => (
