@@ -137,18 +137,20 @@ export const DSUserList: React.FC<UserListProps> = ({
     <div className={styles.scrollContainer}>
       <div className={styles.container}>
         <div className="flex items-center">
-          <motion.div
-            variants={checkboxContainerVariants}
-            initial="hidden"
-            animate={showCheckboxes ? "visible" : "hidden"}
-            className="overflow-hidden flex-shrink-0"
-          >
-            <Checkbox
-              className="border-zinc-300 border-2 cursor-pointer"
-              checked={areAllMembersSelected}
-              onCheckedChange={handleGlobalCheckboxChange}
-            />
-          </motion.div>
+          {showCheckboxes && (
+            <motion.div
+              variants={checkboxContainerVariants}
+              initial="hidden"
+              animate={showCheckboxes ? "visible" : "hidden"}
+              className="overflow-hidden flex-shrink-0"
+            >
+              <Checkbox
+                className="border-zinc-300 border-2 cursor-pointer"
+                checked={areAllMembersSelected}
+                onCheckedChange={handleGlobalCheckboxChange}
+              />
+            </motion.div>
+          )}
           {showCheckboxes && <span className="mb-1 ml-1">Select All</span>}
         </div>
         {sortedRoles.map((roleName, roleIndex) => (

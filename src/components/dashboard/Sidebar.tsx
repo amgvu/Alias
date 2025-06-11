@@ -244,7 +244,7 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="flex items-center justify-center w-full"
+                      className="flex items-center justify-center"
                     >
                       <Loader2 className="animate-spin w-8 h-8 text-zinc-100" />
                     </motion.div>
@@ -255,7 +255,7 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="w-full"
+                      className=""
                     >
                       <DSButton
                         onClick={handleGenerateCharacters}
