@@ -93,6 +93,32 @@ export const useMemberManagement = (
     }
   };
 
+  const applyNicknamesToSelection = async (selectedMembers: Member[]) => {
+    if (!supabase) return;
+    setIsApplyingAll(true);
+    try {
+      const nicknamesToSave: Nickname[] = selectedMembers.map(
+        (member: Member) => ({
+          userId: member.user_id,
+          nickname: member.nickname,
+          userTag: member.username,
+        })
+      );
+
+      await saveNicknames(supabase, selectedServer, nicknamesToSave);
+
+      const updatePromises = selectedMembers.map((member: Member) =>
+        handleUpdateNickname(member.user_id, member.nickname, false)
+      );
+
+      await Promise.all(updatePromises);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsApplyingAll(false);
+    }
+  };
+
   return {
     members,
     setMembers,
@@ -101,5 +127,6 @@ export const useMemberManagement = (
     handleNicknameChange,
     handleUpdateNickname,
     applyAllNicknames,
+    applyNicknamesToSelection,
   };
 };

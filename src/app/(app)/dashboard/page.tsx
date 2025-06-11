@@ -37,6 +37,7 @@ export default function Dashboard() {
     handleUpdateNickname,
     applyAllNicknames,
     setMembers,
+    applyNicknamesToSelection,
   } = useMemberManagement(selectedServer, fetchedMembers);
 
   const {
@@ -55,6 +56,9 @@ export default function Dashboard() {
     handleSaveArc,
     handleCreateNewArc,
   } = useArcManagement(selectedServer, members, setMembers);
+
+  const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+  const [showCheckboxes, setShowCheckboxes] = useState(false);
 
   const categories = [
     "Fictional Characters",
@@ -112,6 +116,10 @@ export default function Dashboard() {
           loading={loading}
           handleGenerateCharacters={handleGenerateCharacters}
           categories={categories}
+          onApplyToSelection={applyNicknamesToSelection}
+          selectedUserIds={selectedUserIds}
+          showCheckboxes={showCheckboxes}
+          setShowCheckboxes={setShowCheckboxes}
         />
       }
     >
@@ -134,6 +142,10 @@ export default function Dashboard() {
           onApplyNickname={(userId: string, nickname: string) =>
             handleUpdateNickname(userId, nickname, true)
           }
+          onApplyToSelection={applyNicknamesToSelection}
+          onSelectionChange={setSelectedUserIds}
+          showCheckboxes={showCheckboxes}
+          setShowCheckboxes={setShowCheckboxes}
         />
       </div>
     </DashboardLayout>

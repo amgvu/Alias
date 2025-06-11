@@ -11,6 +11,10 @@ interface ServerContentProps {
   isApplyingAll: boolean;
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
+  onApplyToSelection: (selectedMembers: Member[]) => void;
+  onSelectionChange?: (selectedIds: string[]) => void;
+  showCheckboxes: boolean;
+  setShowCheckboxes: (show: boolean) => void;
 }
 
 export default function ServerContent({
@@ -22,6 +26,9 @@ export default function ServerContent({
   isApplyingAll,
   onNicknameChange,
   onApplyNickname,
+  onSelectionChange,
+  showCheckboxes,
+  setShowCheckboxes,
 }: ServerContentProps) {
   return (
     <div className="flex flex-col">
@@ -40,6 +47,9 @@ export default function ServerContent({
             onNicknameChange={onNicknameChange}
             onApplyNickname={onApplyNickname}
             isApplyingAll={isApplyingAll}
+            onSelectionChange={onSelectionChange}
+            showCheckboxes={showCheckboxes}
+            setShowCheckboxes={setShowCheckboxes}
           />
         ) : (
           <div className="text-center font-semibold text-4xl text-zinc-500 py-5">
