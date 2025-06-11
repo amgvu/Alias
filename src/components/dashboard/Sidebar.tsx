@@ -145,8 +145,8 @@ export default function Sidebar({
                           >
                             <CheckCheck className="w-4 h-4 mr-[-2px]" />
                             {selectedUserIds.length > 0
-                              ? `Apply to ${selectedUserIds.length} Selected`
-                              : "Apply Names"}
+                              ? `Apply ${selectedUserIds.length} Nicknames`
+                              : "Apply Nicknames"}
                           </DSButton>
                         </motion.div>
                       )}
