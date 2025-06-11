@@ -58,6 +58,7 @@ export default function Dashboard() {
   } = useArcManagement(selectedServer, members, setMembers);
 
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+  const [showCheckboxes, setShowCheckboxes] = useState(false);
 
   const categories = [
     "Fictional Characters",
@@ -117,6 +118,8 @@ export default function Dashboard() {
           categories={categories}
           onApplyToSelection={applyNicknamesToSelection}
           selectedUserIds={selectedUserIds}
+          showCheckboxes={showCheckboxes}
+          setShowCheckboxes={setShowCheckboxes}
         />
       }
     >
@@ -141,6 +144,8 @@ export default function Dashboard() {
           }
           onApplyToSelection={applyNicknamesToSelection}
           onSelectionChange={setSelectedUserIds}
+          showCheckboxes={showCheckboxes}
+          setShowCheckboxes={setShowCheckboxes}
         />
       </div>
     </DashboardLayout>

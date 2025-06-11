@@ -5,6 +5,7 @@ import {
   WandSparkles,
   CheckCheck,
   SaveAll,
+  TextSelect,
 } from "lucide-react";
 import { DSButton, DSMenu, DSCreateMenu } from "@/components";
 import {
@@ -37,6 +38,8 @@ interface SidebarProps {
   onApplyToSelection: (selectedMembers: Member[]) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
   selectedUserIds?: string[];
+  showCheckboxes: boolean;
+  setShowCheckboxes: (show: boolean) => void;
 }
 
 export default function Sidebar({
@@ -61,6 +64,8 @@ export default function Sidebar({
   categories,
   onApplyToSelection,
   selectedUserIds = [],
+  showCheckboxes,
+  setShowCheckboxes,
 }: SidebarProps) {
   const handleApply = () => {
     if (!selectedUserIds || selectedUserIds.length === 0) return;
@@ -146,13 +151,20 @@ export default function Sidebar({
                             <CheckCheck className="w-4 h-4 mr-[-2px]" />
                             {selectedUserIds.length > 0
                               ? `Apply ${selectedUserIds.length} Nicknames`
-                              : "Apply Nicknames"}
+                              : "Apply"}
                           </DSButton>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </TooltipTrigger>
                 </Tooltip>
+                <DSButton
+                  onClick={() => setShowCheckboxes(!showCheckboxes)}
+                  className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+                >
+                  <TextSelect className="w-4 h-4 mr-[-2px]" />
+                  {showCheckboxes ? "Unselect" : "Select"}
+                </DSButton>
                 <Tooltip>
                   <TooltipTrigger>
                     <TooltipContent>

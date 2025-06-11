@@ -13,6 +13,8 @@ interface UserListProps {
   onApplyNickname: (userId: string, nickname: string) => void;
   isApplyingAll: boolean;
   onSelectionChange?: (selectedIds: string[]) => void;
+  showCheckboxes: boolean;
+  setShowCheckboxes: (show: boolean) => void;
 }
 
 const roleGroupVariants = {
@@ -52,10 +54,16 @@ export const DSUserList: React.FC<UserListProps> = ({
   onApplyNickname,
   isApplyingAll,
   onSelectionChange,
+  showCheckboxes,
 }) => {
   const [animationKey, setAnimationKey] = useState(0);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
-  const [showCheckboxes, setShowCheckboxes] = useState(false);
+
+  useEffect(() => {
+    if (!showCheckboxes) {
+      setSelectedUserIds([]);
+    }
+  }, [showCheckboxes]);
 
   useEffect(() => {
     if (onSelectionChange) {
@@ -128,14 +136,6 @@ export const DSUserList: React.FC<UserListProps> = ({
   return (
     <div className={styles.scrollContainer}>
       <div className={styles.container}>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setShowCheckboxes(!showCheckboxes)}
-            className="px-4 cursor-pointer py-2 bg-zinc-900 hover:bg-zinc-800 font-semibold rounded-md mb-4 shadow-lg transition-colors duration-200"
-          >
-            {showCheckboxes ? "Unselect" : "Select Users"}
-          </button>
-        </div>
         <div className="flex items-center mb-1">
           <motion.div
             variants={checkboxContainerVariants}
