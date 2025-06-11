@@ -8,11 +8,6 @@ import {
   TextSelect,
 } from "lucide-react";
 import { DSButton, DSMenu, DSCreateMenu } from "@/components";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { Member, Arc } from "@/types/types";
 
 interface SidebarProps {
