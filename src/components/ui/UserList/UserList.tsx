@@ -136,7 +136,7 @@ export const DSUserList: React.FC<UserListProps> = ({
   return (
     <div className={styles.scrollContainer}>
       <div className={styles.container}>
-        <div className="flex items-center mb-1">
+        <div className="flex items-center">
           <motion.div
             variants={checkboxContainerVariants}
             initial="hidden"
