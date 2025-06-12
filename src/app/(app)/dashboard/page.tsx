@@ -60,6 +60,10 @@ export default function Dashboard() {
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
 
+  useEffect(() => {
+    setShowCheckboxes(false);
+  }, [members]);
+
   const categories = [
     "Fictional Characters",
     "Real People",
