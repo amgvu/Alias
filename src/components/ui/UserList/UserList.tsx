@@ -35,30 +35,32 @@ interface RoleHeaderProps {
   onCheckboxChange: () => void;
 }
 
-const RoleHeader: React.FC<RoleHeaderProps> = ({
+function RoleHeader({
   roleName,
   showCheckboxes,
   isAllSelected,
   onCheckboxChange,
-}) => (
-  <div className="flex items-center py-2">
-    <motion.div
-      variants={checkboxContainerVariants}
-      initial="hidden"
-      animate={showCheckboxes ? "visible" : "hidden"}
-      className="overflow-hidden flex-shrink-0"
-    >
-      <Checkbox
-        className="border-zinc-300 cursor-pointer"
-        checked={isAllSelected}
-        onCheckedChange={onCheckboxChange}
-      />
-    </motion.div>
-    <span className="text-md text-zinc-400 text-sm font-medium ml-2">
-      {roleName}
-    </span>
-  </div>
-);
+}: RoleHeaderProps) {
+  return (
+    <div className="flex items-center py-2">
+      <motion.div
+        variants={checkboxContainerVariants}
+        initial="hidden"
+        animate={showCheckboxes ? "visible" : "hidden"}
+        className="overflow-hidden flex-shrink-0"
+      >
+        <Checkbox
+          className="border-zinc-300 cursor-pointer"
+          checked={isAllSelected}
+          onCheckedChange={onCheckboxChange}
+        />
+      </motion.div>
+      <span className="text-md text-zinc-400 text-sm font-medium ml-2">
+        {roleName}
+      </span>
+    </div>
+  );
+}
 
 interface MemberItemProps {
   member: Member;
@@ -75,7 +77,7 @@ interface MemberItemProps {
   onApplyNickname: (userId: string, nickname: string) => void;
 }
 
-const MemberItem: React.FC<MemberItemProps> = ({
+function MemberItem({
   member,
   memberIndex,
   originalIndex,
@@ -88,46 +90,50 @@ const MemberItem: React.FC<MemberItemProps> = ({
   onCheckboxToggle,
   onNicknameChange,
   onApplyNickname,
-}) => (
-  <motion.div
-    key={`${member.user_id}-${animationKey}`}
-    className="relative"
-    custom={memberIndex}
-    initial="initial"
-    variants={shiftVariants}
-    animate={isApplyingAll ? "animate" : "initial"}
-  >
-    <div className="flex items-center py-1">
-      <motion.div
-        variants={checkboxContainerVariants}
-        initial="hidden"
-        animate={showCheckboxes ? "visible" : "hidden"}
-        className="overflow-hidden flex-shrink-0"
-      >
-        <Checkbox
-          className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
-          checked={isSelected}
-          onCheckedChange={() => onCheckboxToggle(member.user_id)}
+}: MemberItemProps) {
+  return (
+    <motion.div
+      key={`${member.user_id}-${animationKey}`}
+      className="relative"
+      custom={memberIndex}
+      initial="initial"
+      variants={shiftVariants}
+      animate={isApplyingAll ? "animate" : "initial"}
+    >
+      <div className="flex items-center py-1">
+        <motion.div
+          variants={checkboxContainerVariants}
+          initial="hidden"
+          animate={showCheckboxes ? "visible" : "hidden"}
+          className="overflow-hidden flex-shrink-0"
+        >
+          <Checkbox
+            className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
+            checked={isSelected}
+            onCheckedChange={() => onCheckboxToggle(member.user_id)}
+          />
+        </motion.div>
+
+        <UserListCard
+          member={member}
+          selectedServer={selectedServer}
+          isUpdating={isUpdating}
+          isApplyingAll={isApplyingAll}
+          onNicknameChange={(nickname) =>
+            onNicknameChange(originalIndex, nickname)
+          }
+          onApplyNickname={() =>
+            onApplyNickname(member.user_id, member.nickname)
+          }
         />
-      </motion.div>
+      </div>
 
-      <UserListCard
-        member={member}
-        selectedServer={selectedServer}
-        isUpdating={isUpdating}
-        isApplyingAll={isApplyingAll}
-        onNicknameChange={(nickname) =>
-          onNicknameChange(originalIndex, nickname)
-        }
-        onApplyNickname={() => onApplyNickname(member.user_id, member.nickname)}
-      />
-    </div>
-
-    {showCheckboxes && (
-      <div className="absolute left-[9.5px] top-0 bottom-0 w-px bg-zinc-700 -z-10" />
-    )}
-  </motion.div>
-);
+      {showCheckboxes && (
+        <div className="absolute left-[9.5px] top-0 bottom-0 w-px bg-zinc-700 -z-10" />
+      )}
+    </motion.div>
+  );
+}
 
 const shiftVariants = {
   initial: { y: 0 },
@@ -146,7 +152,7 @@ const checkboxContainerVariants = {
   visible: { width: "24px", opacity: 1, x: 0, transition: { duration: 0.15 } },
 };
 
-export const DSUserList: React.FC<UserListProps> = ({
+export function DSUserList({
   members,
   isUpdating,
   selectedServer,
@@ -155,7 +161,7 @@ export const DSUserList: React.FC<UserListProps> = ({
   isApplyingAll,
   onSelectionChange,
   showCheckboxes,
-}) => {
+}: UserListProps) {
   const [animationKey, setAnimationKey] = useState(0);
   const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(
     new Set()
@@ -380,6 +386,6 @@ export const DSUserList: React.FC<UserListProps> = ({
       </div>
     </div>
   );
-};
+}
 
 export default DSUserList;
