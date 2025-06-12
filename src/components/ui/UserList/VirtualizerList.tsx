@@ -15,7 +15,7 @@ interface VirtualItem {
 
 interface VirtualizerListProps {
   members: Member[];
-  isUpdating: string | null;
+  isUpdating: Set<string>;
   selectedServer: string;
   isApplyingAll: boolean;
   animationKey: number;
@@ -158,7 +158,7 @@ export default function VirtualizerList({
                   originalIndex={item.originalIndex!}
                   isSelected={selectedUserIds.has(item.member.user_id)}
                   showCheckboxes={showCheckboxes}
-                  isUpdating={isUpdating === item.member.user_id}
+                  isUpdating={isUpdating}
                   selectedServer={selectedServer}
                   isApplyingAll={isApplyingAll}
                   animationKey={animationKey}

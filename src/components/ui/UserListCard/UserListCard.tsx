@@ -9,7 +9,7 @@ import { useUserListCard } from "@/lib/hooks/useUserListCard";
 
 interface UserListCardProps {
   member: Member;
-  isUpdating: boolean;
+  isUpdating: Set<string>;
   isApplyingAll?: boolean;
   selectedServer: string;
   onNicknameChange: (nickname: string) => void;
@@ -19,7 +19,6 @@ interface UserListCardProps {
 export const UserListCard: React.FC<UserListCardProps> = ({
   member,
   isUpdating,
-  isApplyingAll = false,
   selectedServer,
   onNicknameChange,
   onApplyNickname,
@@ -50,7 +49,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     onApplyNickname,
   });
 
-  const showOverlay = isUpdating || isApplyingAll;
+  const showOverlay = isUpdating.has(member.user_id);
 
   return (
     <motion.div
@@ -95,7 +94,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             onBlur={handleBlur}
             placeholder={`Nickname for ${member.username}`}
             className={styles.nicknameInput}
-            disabled={isUpdating}
+            disabled={showOverlay} // Use showOverlay or isUpdating.has(member.user_id)
           />
           <div className={styles.username}>
             {member.username}
@@ -105,7 +104,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
         <div className="flex flex-row space-x-2">
           <AnimatePresence mode="wait">
-            {isUpdating ? (
+            {showOverlay ? ( // Use showOverlay here
               <motion.div
                 key="apply-loader"
                 initial={{ opacity: 0 }}
@@ -127,7 +126,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               >
                 <DSButton
                   onClick={handleApplyNickname}
-                  disabled={isUpdating || !inputValue}
+                  disabled={showOverlay || !inputValue} // Use showOverlay here
                   className={`${styles.applyButton}`}
                 >
                   <Check className="w-4 h-4 mr-[-2px]" />
@@ -147,7 +146,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             >
               <DSButton
                 onClick={handleRevert}
-                disabled={isUpdating}
+                disabled={showOverlay} // Use showOverlay here
                 className={`${styles.applyButton} transition-all duration-200`}
               >
                 <RotateCcw className="w-4 h-4 mr-[-2px]" />

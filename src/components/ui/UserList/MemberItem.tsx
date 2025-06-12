@@ -10,7 +10,7 @@ interface MemberItemProps {
   originalIndex: number;
   isSelected: boolean;
   showCheckboxes: boolean;
-  isUpdating: boolean;
+  isUpdating: Set<string>;
   selectedServer: string;
   isApplyingAll: boolean;
   animationKey: number;

@@ -8,7 +8,7 @@ import VirtualizerList from "./VirtualizerList";
 
 interface UserListProps {
   members: Member[];
-  isUpdating: string | null;
+  isUpdating: Set<string>;
   selectedServer: string;
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
