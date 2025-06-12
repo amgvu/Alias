@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { UserListCard } from "../UserListCard/UserListCard";
+import MemberItem from "./MemberItem";
+import RoleHeader from "./RoleHeader";
 import { styles } from "./UserList.styles";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Member } from "@/types/types";
@@ -28,126 +29,6 @@ interface VirtualItem {
   memberIndex?: number;
   originalIndex?: number;
 }
-
-interface RoleHeaderProps {
-  roleName: string;
-  showCheckboxes: boolean;
-  isAllSelected: boolean;
-  onCheckboxChange: () => void;
-}
-
-function RoleHeader({
-  roleName,
-  showCheckboxes,
-  isAllSelected,
-  onCheckboxChange,
-}: RoleHeaderProps) {
-  return (
-    <div className="flex items-center py-3.5">
-      <motion.div
-        variants={checkboxContainerVariants}
-        initial="hidden"
-        animate={showCheckboxes ? "visible" : "hidden"}
-        className="overflow-hidden flex-shrink-0"
-      >
-        <Checkbox
-          className="border-zinc-300 cursor-pointer"
-          checked={isAllSelected}
-          onCheckedChange={onCheckboxChange}
-        />
-      </motion.div>
-      <span className="text-md text-zinc-400 text-sm font-medium ml-2">
-        {roleName}
-      </span>
-    </div>
-  );
-}
-
-interface MemberItemProps {
-  member: Member;
-  memberIndex: number;
-  originalIndex: number;
-  isSelected: boolean;
-  showCheckboxes: boolean;
-  isUpdating: boolean;
-  selectedServer: string;
-  isApplyingAll: boolean;
-  animationKey: number;
-  onCheckboxToggle: (userId: string) => void;
-  onNicknameChange: (index: number, nickname: string) => void;
-  onApplyNickname: (userId: string, nickname: string) => void;
-}
-
-function MemberItem({
-  member,
-  memberIndex,
-  originalIndex,
-  isSelected,
-  showCheckboxes,
-  isUpdating,
-  selectedServer,
-  isApplyingAll,
-  animationKey,
-  onCheckboxToggle,
-  onNicknameChange,
-  onApplyNickname,
-}: MemberItemProps) {
-  return (
-    <motion.div
-      key={`${member.user_id}-${animationKey}`}
-      className="relative"
-      custom={memberIndex}
-      initial="initial"
-      variants={shiftVariants}
-      animate={isApplyingAll ? "animate" : "initial"}
-    >
-      <div className="flex items-center py-1">
-        <motion.div
-          variants={checkboxContainerVariants}
-          initial="hidden"
-          animate={showCheckboxes ? "visible" : "hidden"}
-          className="overflow-hidden flex-shrink-0"
-        >
-          <Checkbox
-            className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
-            checked={isSelected}
-            onCheckedChange={() => onCheckboxToggle(member.user_id)}
-          />
-        </motion.div>
-
-        <UserListCard
-          member={member}
-          selectedServer={selectedServer}
-          isUpdating={isUpdating}
-          isApplyingAll={isApplyingAll}
-          onNicknameChange={(nickname) =>
-            onNicknameChange(originalIndex, nickname)
-          }
-          onApplyNickname={() =>
-            onApplyNickname(member.user_id, member.nickname)
-          }
-        />
-      </div>
-    </motion.div>
-  );
-}
-
-const shiftVariants = {
-  initial: { y: 0 },
-  animate: (index: number) => ({
-    y: [0, 10, 0],
-    transition: {
-      duration: 0.25,
-      ease: [0.25, 0.1, 0.25, 1],
-      delay: (index % 50) * 0.06,
-    },
-  }),
-};
-
-const checkboxContainerVariants = {
-  hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.15 } },
-  visible: { width: "32px", opacity: 1, x: 0, transition: { duration: 0.15 } },
-};
 
 export function DSUserList({
   members,
@@ -184,6 +65,16 @@ export function DSUserList({
     });
 
     return { grouped, sortedRoles };
+  };
+
+  const checkboxContainerVariants = {
+    hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.15 } },
+    visible: {
+      width: "32px",
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.15 },
+    },
   };
 
   const createVirtualItems = () => {
@@ -233,6 +124,8 @@ export function DSUserList({
       [virtualItems]
     ),
   });
+
+  const items = virtualizer.getVirtualItems();
 
   const getAllUserIds = () => members.map((m) => m.user_id);
 
@@ -306,8 +199,6 @@ export function DSUserList({
     }
   }, [isApplyingAll]);
 
-  const items = virtualizer.getVirtualItems();
-
   return (
     <div className={styles.scrollContainer}>
       <div className={styles.container}>
@@ -360,6 +251,7 @@ export function DSUserList({
                       onCheckboxChange={() =>
                         handleRoleCheckboxChange(item.roleName!)
                       }
+                      checkboxContainerVariants={checkboxContainerVariants}
                     />
                   ) : item.type === "member" && item.member ? (
                     <MemberItem
@@ -375,6 +267,7 @@ export function DSUserList({
                       onCheckboxToggle={handleCheckboxToggle}
                       onNicknameChange={onNicknameChange}
                       onApplyNickname={onApplyNickname}
+                      checkboxContainerVariants={checkboxContainerVariants}
                     />
                   ) : null}
                 </div>
