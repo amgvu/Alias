@@ -128,10 +128,6 @@ function MemberItem({
           }
         />
       </div>
-
-      {showCheckboxes && (
-        <div className="absolute left-[9.5px] top-0 bottom-0 w-px bg-zinc-700 -z-10" />
-      )}
     </motion.div>
   );
 }
@@ -150,7 +146,7 @@ const shiftVariants = {
 
 const checkboxContainerVariants = {
   hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.15 } },
-  visible: { width: "24px", opacity: 1, x: 0, transition: { duration: 0.15 } },
+  visible: { width: "32px", opacity: 1, x: 0, transition: { duration: 0.15 } },
 };
 
 export function DSUserList({
