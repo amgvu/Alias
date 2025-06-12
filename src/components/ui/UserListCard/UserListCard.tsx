@@ -6,7 +6,9 @@ import { styles } from "./UserListCard.styles";
 import { Member, Nickname } from "@/types/types";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";
 import {
-  ChevronDown,
+  Menu,
+  List,
+  BookUser,
   ChevronUp,
   X,
   Check,
@@ -279,29 +281,30 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           onClick={() => setIsExpanded(!isExpanded)}
           className="p-2 transition-all cursor-pointer rounded-lg"
         >
-          <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
-            {isExpanded ? (
-              <ChevronUp className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
-            )}
-          </motion.div>
+          <BookUser className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
         </button>
       </div>
 
       <AnimatePresence>
         {isExpanded && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden"
+            className="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm rounded-lg z-10 flex flex-col"
           >
-            <div className="mt-2 pt-1 px-2 border-t border-[#252525]">
-              <div className="flex items-center gap-2 mb-1 text-sm font-bold text-zinc-500">
+            <div className="px-2 py-1 flex-1">
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="p-2 right-3.5 top-3.5 fixed transition-all cursor-pointer rounded-lg"
+              >
+                <X className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
+              </button>
+              <div className="flex items-center gap-2 mb-1 text-sm font-bold text-zinc-300">
                 Saved Nicknames
               </div>
+
               {isLoadingNicknames ? (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -314,13 +317,13 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                   <span>Loading nicknames...</span>
                 </motion.div>
               ) : fetchError ? (
-                <div className="text-red-400">{fetchError}</div>
+                <div className="text-red-500">{fetchError}</div>
               ) : previousNicknames.length === 0 ? (
-                <div className="text-zinc-500 text-xs italic mb-2">
+                <div className="text-zinc-500 text-xs italic">
                   No nicknames found. Add some!
                 </div>
               ) : (
-                <div className="flex flex-wrap mb-1 gap-2">
+                <div className="flex flex-wrap gap-2">
                   {previousNicknames.map((nickname, index) => (
                     <AnimatePresence
                       key={`${nickname.userId}-${nickname.nickname}`}
@@ -338,7 +341,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                               setInputValue(nickname.nickname);
                               onNicknameChange(nickname.nickname);
                             }}
-                            className="px-3 py-1 text-sm font-medium bg-black border-[#252525] border cursor-pointer transition-all hover:bg-neutral-900 rounded-full"
+                            className="px-3 py-1 text-sm font-medium bg-zinc-950 border-zinc-600 border cursor-pointer transition-all hover:bg-zinc-700/80 rounded-md"
                           >
                             {nickname.nickname}
                           </button>
@@ -354,7 +357,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                                 200
                               );
                             }}
-                            className="absolute bottom-4 -right-1 p-1 cursor-pointer text-sm text-neutral-950 bg-red-400 rounded-full transition hover:bg-red-500"
+                            className="absolute -top-1 -right-1 p-1 cursor-pointer text-sm text-white bg-red-400 rounded-full transition hover:bg-red-500"
                           >
                             <X className="w-3 h-3" />
                           </button>
