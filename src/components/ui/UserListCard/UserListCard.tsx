@@ -278,7 +278,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             initial={{ opacity: 0, scale: 1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.1 }}
             className="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm rounded-lg z-10 flex flex-col"
           >
             <div className="px-2 py-1 flex-1">
