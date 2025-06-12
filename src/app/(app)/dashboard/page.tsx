@@ -62,7 +62,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     setShowCheckboxes(false);
-  }, [members]);
+  }, [selectedServer]);
 
   const categories = [
     "Fictional Characters",
