@@ -340,6 +340,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                             onClick={() => {
                               setInputValue(nickname.nickname);
                               onNicknameChange(nickname.nickname);
+                              setIsExpanded(!isExpanded);
                             }}
                             className="px-3 py-1 text-sm font-medium bg-zinc-950 border-zinc-600 border cursor-pointer transition-all hover:bg-zinc-700/80 rounded-md"
                           >
