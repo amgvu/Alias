@@ -1,5 +1,5 @@
 export const styles = {
-  card: "w-full place-items-center-left bg-[#101012] border border-zinc-800 px-4 py-1.5 rounded-md duration-200 transition-all",
+  card: "w-full place-items-center-left bg-[#101012] border border-zinc-800 px-4 py-2 rounded-md duration-200 transition-all",
   avatar: "w-12 h-12 border-1 border-zinc-700 rounded-full object-cover",
   memberDetails: "flex-1",
   nicknameInput:

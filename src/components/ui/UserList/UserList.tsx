@@ -43,7 +43,7 @@ function RoleHeader({
   onCheckboxChange,
 }: RoleHeaderProps) {
   return (
-    <div className="flex items-center py-2">
+    <div className="flex items-center py-3.5">
       <motion.div
         variants={checkboxContainerVariants}
         initial="hidden"
@@ -223,7 +223,7 @@ export function DSUserList({
     estimateSize: useCallback(
       (index: number) => {
         const item = virtualItems[index];
-        return item?.type === "role-header" ? 40 : 80;
+        return item?.type === "role-header" ? 40 : 75;
       },
       [virtualItems]
     ),
@@ -311,22 +311,24 @@ export function DSUserList({
   return (
     <div className={styles.scrollContainer}>
       <div className={styles.container}>
-        <div className="flex items-center mb-4">
-          <motion.div
-            variants={checkboxContainerVariants}
-            initial="hidden"
-            animate={showCheckboxes ? "visible" : "hidden"}
-            className="overflow-hidden flex-shrink-0"
-          >
-            <Checkbox
-              className="border-zinc-300 border-2 cursor-pointer"
-              checked={areAllMembersSelected()}
-              onCheckedChange={handleGlobalCheckboxChange}
-            />
-          </motion.div>
+        <div className="flex items-center">
+          {showCheckboxes && (
+            <motion.div
+              variants={checkboxContainerVariants}
+              initial="hidden"
+              animate={showCheckboxes ? "visible" : "hidden"}
+              className="overflow-hidden flex-shrink-0"
+            >
+              <Checkbox
+                className="border-zinc-300 border-2 cursor-pointer"
+                checked={areAllMembersSelected()}
+                onCheckedChange={handleGlobalCheckboxChange}
+              />
+            </motion.div>
+          )}
           {showCheckboxes && <span className="mb-1 ml-1">Select All</span>}
         </div>
-        <div ref={parentRef} className="h-[1600px] overflow-auto">
+        <div ref={parentRef} className="h-[1650px] overflow-auto">
           <div
             style={{
               height: `${virtualizer.getTotalSize()}px`,
@@ -346,7 +348,7 @@ export function DSUserList({
                     top: 0,
                     left: 0,
                     width: "100%",
-                    height: `${virtualItem.size}px`,
+                    height: "`${virtualItem.size}px`",
                     transform: `translateY(${virtualItem.start}px)`,
                   }}
                 >
