@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { styles } from "./UserList.styles";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Member } from "@/types/types";
+import { Loader2 } from "lucide-react";
 import { useCheckboxSelection } from "@/lib/hooks/useCheckboxSelection";
 import VirtualizerList from "./VirtualizerList";
 
@@ -16,6 +17,7 @@ interface UserListProps {
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
   setShowCheckboxes: (show: boolean) => void;
+  isInitialLoad?: boolean;
 }
 
 export function DSUserList({
@@ -27,8 +29,13 @@ export function DSUserList({
   isApplyingAll,
   onSelectionChange,
   showCheckboxes,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setShowCheckboxes,
+  isInitialLoad = true,
 }: UserListProps) {
   const [animationKey, setAnimationKey] = useState(0);
+  const [displayServer, setDisplayServer] = useState(selectedServer);
+  const [isLoading, setIsLoading] = useState(isInitialLoad);
 
   const {
     selectedUserIds,
@@ -50,8 +57,39 @@ export function DSUserList({
     }
   }, [isApplyingAll]);
 
+  useEffect(() => {
+    if (selectedServer !== displayServer || isInitialLoad) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setDisplayServer(selectedServer);
+        setIsLoading(false);
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [selectedServer, displayServer, isInitialLoad]);
+
+  if (isLoading) {
+    return (
+      <div
+        className={`${styles.scrollContainer} flex items-center justify-center`}
+      >
+        <div className="flex flex-col mt-8 items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-zinc-800" />
+          <p className="text-zinc-500 font-semibold">Refreshing Members...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={styles.scrollContainer}>
+    <motion.div
+      key={displayServer}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      className={styles.scrollContainer}
+    >
       <div className={styles.container}>
         <div className="flex items-center">
           {showCheckboxes && (
@@ -74,7 +112,7 @@ export function DSUserList({
         <VirtualizerList
           members={members}
           isUpdating={isUpdating}
-          selectedServer={selectedServer}
+          selectedServer={displayServer}
           isApplyingAll={isApplyingAll}
           animationKey={animationKey}
           showCheckboxes={showCheckboxes}
@@ -87,7 +125,7 @@ export function DSUserList({
           areAllRoleMembersSelected={areAllRoleMembersSelected}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 
