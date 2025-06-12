@@ -4,7 +4,7 @@ import { styles } from "./UserList.styles";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Member } from "@/types/types";
 import { useCheckboxSelection } from "@/lib/hooks/useCheckboxSelection";
-import { VirtualizedMemberList } from "./VirtualizerList";
+import VirtualizerList from "./VirtualizerList";
 
 interface UserListProps {
   members: Member[];
@@ -71,7 +71,7 @@ export function DSUserList({
           {showCheckboxes && <span className="mb-1 ml-1">Select All</span>}
         </div>
 
-        <VirtualizedMemberList
+        <VirtualizerList
           members={members}
           isUpdating={isUpdating}
           selectedServer={selectedServer}

@@ -13,7 +13,7 @@ interface VirtualItem {
   originalIndex?: number;
 }
 
-interface VirtualizedMemberListProps {
+interface VirtualizerListProps {
   members: Member[];
   isUpdating: string | null;
   selectedServer: string;
@@ -30,7 +30,7 @@ interface VirtualizedMemberListProps {
   areAllRoleMembersSelected: (roleName: string) => boolean;
 }
 
-export const VirtualizedMemberList: React.FC<VirtualizedMemberListProps> = ({
+export default function VirtualizerList({
   members,
   isUpdating,
   selectedServer,
@@ -44,7 +44,7 @@ export const VirtualizedMemberList: React.FC<VirtualizedMemberListProps> = ({
   onCheckboxToggle,
   onRoleCheckboxChange,
   areAllRoleMembersSelected,
-}) => {
+}: VirtualizerListProps) {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const groupedMembers = useCallback(() => {
@@ -174,4 +174,4 @@ export const VirtualizedMemberList: React.FC<VirtualizedMemberListProps> = ({
       </div>
     </div>
   );
-};
+}
