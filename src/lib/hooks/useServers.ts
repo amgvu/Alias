@@ -57,7 +57,7 @@ export const useServers = () => {
     if (session) {
       const timeoutId = setTimeout(() => {
         getServers();
-      }, 1000);
+      }, 2000);
 
       return () => clearTimeout(timeoutId);
     }
