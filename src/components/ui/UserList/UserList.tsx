@@ -328,7 +328,7 @@ export function DSUserList({
           )}
           {showCheckboxes && <span className="mb-1 ml-1">Select All</span>}
         </div>
-        <div ref={parentRef} className="h-[1650px] overflow-auto">
+        <div ref={parentRef} className="h-[1630px] overflow-auto">
           <div
             style={{
               height: `${virtualizer.getTotalSize()}px`,
@@ -348,7 +348,7 @@ export function DSUserList({
                     top: 0,
                     left: 0,
                     width: "100%",
-                    height: "`${virtualItem.size}px`",
+                    height: `${virtualItem.size}px`,
                     transform: `translateY(${virtualItem.start}px)`,
                   }}
                 >
