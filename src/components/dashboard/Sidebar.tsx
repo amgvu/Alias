@@ -103,7 +103,7 @@ export default function Sidebar({
           </div>
           <div>
             <ul>
-              <div className="flex justify-center space-x-4">
+              <div className="flex items-center justify-center space-x-4">
                 <AnimatePresence mode="wait">
                   {isApplyingAll ? (
                     <motion.div
@@ -112,7 +112,7 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="flex w-full"
+                      className="flex"
                     >
                       <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
                       <p className="ml-2">Applying Nicknames...</p>
@@ -124,11 +124,11 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="w-full"
+                      className=""
                     >
                       <DSButton
                         onClick={handleApply}
-                        className="bg-zinc-800 px-7 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
+                        className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
                         disabled={
                           isApplyingAll ||
                           !selectedServer ||
@@ -161,7 +161,7 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="flex items-center justify-center w-full"
+                      className="flex items-center justify-center"
                     >
                       <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
                       <p className="ml-2">Saving Set...</p>
@@ -173,7 +173,7 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="w-full"
+                      className=""
                     >
                       <DSButton
                         onClick={handleSaveArc}
@@ -244,7 +244,7 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="flex items-center justify-center w-full"
+                      className="flex items-center justify-center"
                     >
                       <Loader2 className="animate-spin w-8 h-8 text-zinc-100" />
                     </motion.div>
@@ -255,7 +255,7 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="w-full"
+                      className=""
                     >
                       <DSButton
                         onClick={handleGenerateCharacters}

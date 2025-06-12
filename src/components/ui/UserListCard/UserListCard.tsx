@@ -199,82 +199,69 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         </div>
 
         <div className="flex flex-row space-x-2">
-          <Tooltip>
-            <TooltipTrigger>
-              <TooltipContent>
-                <p className="font-ggSans">Applies nickname to server</p>
-              </TooltipContent>
-              <AnimatePresence mode="wait">
-                {isUpdating ? (
-                  <motion.div
-                    key="apply-loader"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className={`flex items-center justify-center w-[90px] h-[36px]`}
-                  >
-                    <Loader2 className="animate-spin w-5 h-5 text-zinc-100" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="apply-btn"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="inline-block"
-                  >
-                    <DSButton
-                      onClick={handleApplyNickname}
-                      disabled={isUpdating || !inputValue}
-                      className={`${styles.applyButton}`}
-                    >
-                      <Check className="w-4 h-4 mr-[-2px]" />
-                      Apply
-                    </DSButton>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </TooltipTrigger>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger>
-              <TooltipContent>
-                <p className="font-ggSans">Resets to default username</p>
-              </TooltipContent>
-              <div className="relative inline-block">
-                <motion.div
-                  animate={{
-                    opacity: showResetSuccess ? 0 : 1,
-                    transition: { duration: 0.1 },
-                  }}
-                  className="inline-block"
+          <AnimatePresence mode="wait">
+            {isUpdating ? (
+              <motion.div
+                key="apply-loader"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className={`flex items-center justify-center w-[90px] h-[36px]`}
+              >
+                <Loader2 className="animate-spin w-5 h-5 text-zinc-100" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="apply-btn"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="inline-block"
+              >
+                <DSButton
+                  onClick={handleApplyNickname}
+                  disabled={isUpdating || !inputValue}
+                  className={`${styles.applyButton}`}
                 >
-                  <DSButton
-                    onClick={handleRevert}
-                    disabled={isUpdating}
-                    className={`${styles.applyButton} transition-all duration-200`}
-                  >
-                    <RotateCcw className="w-4 h-4 mr-[-2px]" />
-                    Reset
-                  </DSButton>
-                </motion.div>
-                {showResetSuccess && (
-                  <motion.div
-                    key="reset-success"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                  >
-                    <Check className="w-5 h-5 text-zinc-100" />
-                  </motion.div>
-                )}
-              </div>
-            </TooltipTrigger>
-          </Tooltip>
+                  <Check className="w-4 h-4 mr-[-2px]" />
+                  Apply
+                </DSButton>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="relative inline-block">
+            <motion.div
+              animate={{
+                opacity: showResetSuccess ? 0 : 1,
+                transition: { duration: 0.1 },
+              }}
+              className="inline-block"
+            >
+              <DSButton
+                onClick={handleRevert}
+                disabled={isUpdating}
+                className={`${styles.applyButton} transition-all duration-200`}
+              >
+                <RotateCcw className="w-4 h-4 mr-[-2px]" />
+                Reset
+              </DSButton>
+            </motion.div>
+            {showResetSuccess && (
+              <motion.div
+                key="reset-success"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                <Check className="w-5 h-5 text-zinc-100" />
+              </motion.div>
+            )}
+          </div>
         </div>
 
         <button
