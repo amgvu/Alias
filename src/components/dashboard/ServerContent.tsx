@@ -7,7 +7,7 @@ interface ServerContentProps {
   serversError: string | null;
   membersError: string | null;
   members: Member[];
-  isUpdating: string | null;
+  isUpdating: Set<string>;
   isApplyingAll: boolean;
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
