@@ -153,14 +153,9 @@ export const useUserListCard = ({
   );
 
   const handleApplyNickname = useCallback(async () => {
-    await controls.start({
-      y: [0, 150, 0],
-      transition: { duration: 0.1, ease: "easeOut" },
-    });
     onApplyNickname();
-  }, [controls, onApplyNickname]);
+  }, [onApplyNickname]);
 
-  // Handle image error
   const handleImageError = useCallback(
     (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       e.currentTarget.src = "/default-avatar.png";

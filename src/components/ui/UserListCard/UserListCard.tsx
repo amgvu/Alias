@@ -31,7 +31,6 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     fetchError,
     deletingNicknames,
     showResetSuccess,
-    controls,
 
     handleInputChange,
     handleBlur,
@@ -54,7 +53,6 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   return (
     <motion.div
       initial={{ y: 0 }}
-      animate={controls}
       className={`${styles.card} relative bg-no-repeat bg-left`}
     >
       <AnimatePresence>
@@ -63,10 +61,16 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.1 }}
             className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg"
           >
-            <Loader2 className="animate-spin w-10 h-10 text-white" />
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+            >
+              <Loader2 className="animate-spin w-10 h-10 text-white" />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -94,7 +98,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             onBlur={handleBlur}
             placeholder={`Nickname for ${member.username}`}
             className={styles.nicknameInput}
-            disabled={showOverlay} // Use showOverlay or isUpdating.has(member.user_id)
+            disabled={showOverlay}
           />
           <div className={styles.username}>
             {member.username}
@@ -104,7 +108,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
         <div className="flex flex-row space-x-2">
           <AnimatePresence mode="wait">
-            {showOverlay ? ( // Use showOverlay here
+            {showOverlay ? (
               <motion.div
                 key="apply-loader"
                 initial={{ opacity: 0 }}
@@ -126,7 +130,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               >
                 <DSButton
                   onClick={handleApplyNickname}
-                  disabled={showOverlay || !inputValue} // Use showOverlay here
+                  disabled={showOverlay || !inputValue}
                   className={`${styles.applyButton}`}
                 >
                   <Check className="w-4 h-4 mr-[-2px]" />
@@ -146,7 +150,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             >
               <DSButton
                 onClick={handleRevert}
-                disabled={showOverlay} // Use showOverlay here
+                disabled={showOverlay}
                 className={`${styles.applyButton} transition-all duration-200`}
               >
                 <RotateCcw className="w-4 h-4 mr-[-2px]" />

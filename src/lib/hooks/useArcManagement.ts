@@ -129,7 +129,6 @@ export const useArcManagement = (
       }));
 
       await saveArcNicknames(supabase, newNicknames);
-      //alert("Arc saved successfully!");
     } catch (error) {
       console.error(error);
       alert("Failed to save arc. Please try again.");
