@@ -275,9 +275,9 @@ export const UserListCard: React.FC<UserListCardProps> = ({
       <AnimatePresence>
         {isExpanded && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 1 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            exit={{ opacity: 0, scale: 1 }}
             transition={{ duration: 0.2 }}
             className="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm rounded-lg z-10 flex flex-col"
           >
