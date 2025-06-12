@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { UserListCard } from "../UserListCard/UserListCard";
 import { styles } from "./UserList.styles";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Member } from "@/types/types";
-import { useState, useEffect } from "react";
 
 interface UserListProps {
   members: Member[];
@@ -17,17 +20,117 @@ interface UserListProps {
   setShowCheckboxes: (show: boolean) => void;
 }
 
-const roleGroupVariants = {
-  hidden: { opacity: 0, y: -50 },
-  visible: (index: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: index * 0.1,
-      duration: 0.3,
-    },
-  }),
-};
+interface VirtualItem {
+  type: "role-header" | "member";
+  id: string;
+  roleName?: string;
+  member?: Member;
+  memberIndex?: number;
+  originalIndex?: number;
+}
+
+interface RoleHeaderProps {
+  roleName: string;
+  showCheckboxes: boolean;
+  isAllSelected: boolean;
+  onCheckboxChange: () => void;
+}
+
+function RoleHeader({
+  roleName,
+  showCheckboxes,
+  isAllSelected,
+  onCheckboxChange,
+}: RoleHeaderProps) {
+  return (
+    <div className="flex items-center py-3.5">
+      <motion.div
+        variants={checkboxContainerVariants}
+        initial="hidden"
+        animate={showCheckboxes ? "visible" : "hidden"}
+        className="overflow-hidden flex-shrink-0"
+      >
+        <Checkbox
+          className="border-zinc-300 cursor-pointer"
+          checked={isAllSelected}
+          onCheckedChange={onCheckboxChange}
+        />
+      </motion.div>
+      <span className="text-md text-zinc-400 text-sm font-medium ml-2">
+        {roleName}
+      </span>
+    </div>
+  );
+}
+
+interface MemberItemProps {
+  member: Member;
+  memberIndex: number;
+  originalIndex: number;
+  isSelected: boolean;
+  showCheckboxes: boolean;
+  isUpdating: boolean;
+  selectedServer: string;
+  isApplyingAll: boolean;
+  animationKey: number;
+  onCheckboxToggle: (userId: string) => void;
+  onNicknameChange: (index: number, nickname: string) => void;
+  onApplyNickname: (userId: string, nickname: string) => void;
+}
+
+function MemberItem({
+  member,
+  memberIndex,
+  originalIndex,
+  isSelected,
+  showCheckboxes,
+  isUpdating,
+  selectedServer,
+  isApplyingAll,
+  animationKey,
+  onCheckboxToggle,
+  onNicknameChange,
+  onApplyNickname,
+}: MemberItemProps) {
+  return (
+    <motion.div
+      key={`${member.user_id}-${animationKey}`}
+      className="relative"
+      custom={memberIndex}
+      initial="initial"
+      variants={shiftVariants}
+      animate={isApplyingAll ? "animate" : "initial"}
+    >
+      <div className="flex items-center py-1">
+        <motion.div
+          variants={checkboxContainerVariants}
+          initial="hidden"
+          animate={showCheckboxes ? "visible" : "hidden"}
+          className="overflow-hidden flex-shrink-0"
+        >
+          <Checkbox
+            className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
+            checked={isSelected}
+            onCheckedChange={() => onCheckboxToggle(member.user_id)}
+          />
+        </motion.div>
+
+        <UserListCard
+          member={member}
+          selectedServer={selectedServer}
+          isUpdating={isUpdating}
+          isApplyingAll={isApplyingAll}
+          onNicknameChange={(nickname) =>
+            onNicknameChange(originalIndex, nickname)
+          }
+          onApplyNickname={() =>
+            onApplyNickname(member.user_id, member.nickname)
+          }
+        />
+      </div>
+    </motion.div>
+  );
+}
 
 const shiftVariants = {
   initial: { y: 0 },
@@ -36,17 +139,17 @@ const shiftVariants = {
     transition: {
       duration: 0.25,
       ease: [0.25, 0.1, 0.25, 1],
-      delay: index * 0.06,
+      delay: (index % 50) * 0.06,
     },
   }),
 };
 
 const checkboxContainerVariants = {
-  hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.1 } },
-  visible: { width: "24px", opacity: 1, x: 0, transition: { duration: 0.1 } },
+  hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.15 } },
+  visible: { width: "32px", opacity: 1, x: 0, transition: { duration: 0.15 } },
 };
 
-export const DSUserList: React.FC<UserListProps> = ({
+export function DSUserList({
   members,
   isUpdating,
   selectedServer,
@@ -55,19 +158,145 @@ export const DSUserList: React.FC<UserListProps> = ({
   isApplyingAll,
   onSelectionChange,
   showCheckboxes,
-}) => {
+}: UserListProps) {
   const [animationKey, setAnimationKey] = useState(0);
-  const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+  const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(
+    new Set()
+  );
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const groupedMembers = () => {
+    const grouped = members.reduce((acc: Record<string, Member[]>, member) => {
+      const highestRole = member.roles[0]?.name || "No Role";
+      if (!acc[highestRole]) {
+        acc[highestRole] = [];
+      }
+      acc[highestRole].push(member);
+      return acc;
+    }, {});
+
+    const sortedRoles = Object.keys(grouped).sort((a, b) => {
+      const roleAPosition =
+        members.find((m) => m.roles[0]?.name === a)?.roles[0]?.position ?? -1;
+      const roleBPosition =
+        members.find((m) => m.roles[0]?.name === b)?.roles[0]?.position ?? -1;
+      return roleBPosition - roleAPosition;
+    });
+
+    return { grouped, sortedRoles };
+  };
+
+  const createVirtualItems = () => {
+    const items: VirtualItem[] = [];
+    let memberIndex = 0;
+    const { grouped, sortedRoles } = groupedMembers();
+
+    sortedRoles.forEach((roleName) => {
+      items.push({
+        type: "role-header",
+        id: `role-${roleName}`,
+        roleName,
+      });
+
+      grouped[roleName].forEach((member, indexInRole) => {
+        const originalIndex = members.findIndex(
+          (m) => m.user_id === member.user_id
+        );
+        items.push({
+          type: "member",
+          id: `member-${member.user_id}`,
+          member,
+          memberIndex: memberIndex++,
+          originalIndex,
+        });
+      });
+    });
+
+    return items;
+  };
+
+  const virtualItems = createVirtualItems();
+
+  const virtualizer = useVirtualizer({
+    count: virtualItems.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: useCallback(
+      (index: number) => {
+        const item = virtualItems[index];
+        return item?.type === "role-header" ? 40 : 75;
+      },
+      [virtualItems]
+    ),
+    overscan: 5,
+    getItemKey: useCallback(
+      (index: number) => virtualItems[index]?.id || index,
+      [virtualItems]
+    ),
+  });
+
+  const getAllUserIds = () => members.map((m) => m.user_id);
+
+  const areAllMembersSelected = () => {
+    const allUserIds = getAllUserIds();
+    return (
+      allUserIds.length > 0 && allUserIds.every((id) => selectedUserIds.has(id))
+    );
+  };
+
+  const handleCheckboxToggle = useCallback((userId: string) => {
+    setSelectedUserIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(userId)) {
+        newSet.delete(userId);
+      } else {
+        newSet.add(userId);
+      }
+      return newSet;
+    });
+  }, []);
+
+  const handleGlobalCheckboxChange = useCallback(() => {
+    const allSelected = areAllMembersSelected();
+    const allUserIds = getAllUserIds();
+
+    if (allSelected) {
+      setSelectedUserIds(new Set());
+    } else {
+      setSelectedUserIds(new Set(allUserIds));
+    }
+  }, [members, selectedUserIds]);
+
+  const areAllRoleMembersSelected = (roleName: string) => {
+    const { grouped } = groupedMembers();
+    const userIds = grouped[roleName]?.map((m) => m.user_id) || [];
+    return userIds.length > 0 && userIds.every((id) => selectedUserIds.has(id));
+  };
+
+  const handleRoleCheckboxChange = (roleName: string) => {
+    const { grouped } = groupedMembers();
+    const userIds = grouped[roleName]?.map((m) => m.user_id) || [];
+    const allSelected = areAllRoleMembersSelected(roleName);
+
+    setSelectedUserIds((prev) => {
+      const newSet = new Set(prev);
+      if (allSelected) {
+        userIds.forEach((id) => newSet.delete(id));
+      } else {
+        userIds.forEach((id) => newSet.add(id));
+      }
+      return newSet;
+    });
+  };
 
   useEffect(() => {
     if (!showCheckboxes) {
-      setSelectedUserIds([]);
+      setSelectedUserIds(new Set());
     }
   }, [showCheckboxes]);
 
   useEffect(() => {
     if (onSelectionChange) {
-      onSelectionChange(selectedUserIds);
+      onSelectionChange(Array.from(selectedUserIds));
     }
   }, [selectedUserIds, onSelectionChange]);
 
@@ -77,61 +306,7 @@ export const DSUserList: React.FC<UserListProps> = ({
     }
   }, [isApplyingAll]);
 
-  const groupedMembers = members.reduce(
-    (acc: Record<string, Member[]>, member) => {
-      const highestRole = member.roles[0]?.name || "No Role";
-      if (!acc[highestRole]) {
-        acc[highestRole] = [];
-      }
-      acc[highestRole].push(member);
-      return acc;
-    },
-    {}
-  );
-
-  const sortedRoles = Object.keys(groupedMembers).sort((a, b) => {
-    const roleAPosition =
-      members.find((m) => m.roles[0]?.name === a)?.roles[0]?.position ?? -1;
-    const roleBPosition =
-      members.find((m) => m.roles[0]?.name === b)?.roles[0]?.position ?? -1;
-    return roleBPosition - roleAPosition;
-  });
-
-  const memberIndices = members.reduce((acc, member, index) => {
-    acc[member.user_id] = index;
-    return acc;
-  }, {} as Record<string, number>);
-
-  const allUserIds = members.map((m) => m.user_id);
-  const areAllMembersSelected =
-    allUserIds.length > 0 &&
-    allUserIds.every((id) => selectedUserIds.includes(id));
-
-  const handleGlobalCheckboxChange = () => {
-    if (areAllMembersSelected) {
-      setSelectedUserIds([]);
-    } else {
-      setSelectedUserIds(allUserIds);
-    }
-  };
-
-  const areAllRoleMembersSelected = (roleName: string) => {
-    const userIds = groupedMembers[roleName].map((m) => m.user_id);
-    return userIds.every((id) => selectedUserIds.includes(id));
-  };
-
-  const handleRoleCheckboxChange = (roleName: string) => {
-    const userIds = groupedMembers[roleName].map((m) => m.user_id);
-    const allSelected = areAllRoleMembersSelected(roleName);
-    if (allSelected) {
-      setSelectedUserIds((prev) => prev.filter((id) => !userIds.includes(id)));
-    } else {
-      setSelectedUserIds((prev) => [
-        ...prev,
-        ...userIds.filter((id) => !prev.includes(id)),
-      ]);
-    }
-  };
+  const items = virtualizer.getVirtualItems();
 
   return (
     <div className={styles.scrollContainer}>
@@ -146,102 +321,70 @@ export const DSUserList: React.FC<UserListProps> = ({
             >
               <Checkbox
                 className="border-zinc-300 border-2 cursor-pointer"
-                checked={areAllMembersSelected}
+                checked={areAllMembersSelected()}
                 onCheckedChange={handleGlobalCheckboxChange}
               />
             </motion.div>
           )}
           {showCheckboxes && <span className="mb-1 ml-1">Select All</span>}
         </div>
-        {sortedRoles.map((roleName, roleIndex) => (
-          <motion.div
-            key={roleName}
-            custom={roleIndex}
-            initial="hidden"
-            animate="visible"
-            variants={roleGroupVariants}
-            className="relative"
+        <div ref={parentRef} className="h-[1630px] overflow-auto">
+          <div
+            style={{
+              height: `${virtualizer.getTotalSize()}px`,
+              width: "100%",
+              position: "relative",
+            }}
           >
-            <div className="flex items-center mt-3 mb-1">
-              <motion.div
-                variants={checkboxContainerVariants}
-                initial="hidden"
-                animate={showCheckboxes ? "visible" : "hidden"}
-                className="overflow-hidden flex-shrink-0"
-              >
-                <Checkbox
-                  className="border-zinc-300 cursor-pointer"
-                  checked={areAllRoleMembersSelected(roleName)}
-                  onCheckedChange={() => handleRoleCheckboxChange(roleName)}
-                />
-              </motion.div>
-              <span className="text-md text-zinc-400 text-sm font-medium border-[#252525] ml-2">
-                {roleName}
-              </span>
-            </div>
-            <div className="relative">
-              <motion.div
-                variants={checkboxContainerVariants}
-                initial="hidden"
-                animate={showCheckboxes ? "visible" : "hidden"}
-                className="overflow-hidden flex-shrink-0"
-              >
-                <div className="absolute left-[9.5px] top-[-4px] bottom-0 w-px bg-zinc-700" />
-              </motion.div>
-              <div className="flex flex-col gap-1 relative z-10">
-                {groupedMembers[roleName].map((member) => (
-                  <motion.div
-                    key={`${member.user_id}-${animationKey}`}
-                    className="mb-1"
-                    custom={memberIndices[member.user_id]}
-                    initial="initial"
-                    variants={shiftVariants}
-                    animate={isApplyingAll ? "animate" : "initial"}
-                  >
-                    <div className="flex items-center">
-                      <motion.div
-                        variants={checkboxContainerVariants}
-                        initial="hidden"
-                        animate={showCheckboxes ? "visible" : "hidden"}
-                        className="overflow-hidden flex-shrink-0"
-                      >
-                        <Checkbox
-                          className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
-                          checked={selectedUserIds.includes(member.user_id)}
-                          onCheckedChange={() => {
-                            setSelectedUserIds((prev) =>
-                              prev.includes(member.user_id)
-                                ? prev.filter((id) => id !== member.user_id)
-                                : [...prev, member.user_id]
-                            );
-                          }}
-                        />
-                      </motion.div>
-                      <UserListCard
-                        member={member}
-                        selectedServer={selectedServer}
-                        isUpdating={isUpdating === member.user_id}
-                        isApplyingAll={isApplyingAll}
-                        onNicknameChange={(nickname) => {
-                          onNicknameChange(
-                            memberIndices[member.user_id],
-                            nickname
-                          );
-                        }}
-                        onApplyNickname={() =>
-                          onApplyNickname(member.user_id, member.nickname)
-                        }
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            {items.map((virtualItem) => {
+              const item = virtualItems[virtualItem.index];
+              if (!item) return null;
+
+              return (
+                <div
+                  key={virtualItem.key}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: `${virtualItem.size}px`,
+                    transform: `translateY(${virtualItem.start}px)`,
+                  }}
+                >
+                  {item.type === "role-header" && item.roleName ? (
+                    <RoleHeader
+                      roleName={item.roleName}
+                      showCheckboxes={showCheckboxes}
+                      isAllSelected={areAllRoleMembersSelected(item.roleName)}
+                      onCheckboxChange={() =>
+                        handleRoleCheckboxChange(item.roleName!)
+                      }
+                    />
+                  ) : item.type === "member" && item.member ? (
+                    <MemberItem
+                      member={item.member}
+                      memberIndex={item.memberIndex!}
+                      originalIndex={item.originalIndex!}
+                      isSelected={selectedUserIds.has(item.member.user_id)}
+                      showCheckboxes={showCheckboxes}
+                      isUpdating={isUpdating === item.member.user_id}
+                      selectedServer={selectedServer}
+                      isApplyingAll={isApplyingAll}
+                      animationKey={animationKey}
+                      onCheckboxToggle={handleCheckboxToggle}
+                      onNicknameChange={onNicknameChange}
+                      onApplyNickname={onApplyNickname}
+                    />
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default DSUserList;
