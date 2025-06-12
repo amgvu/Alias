@@ -321,7 +321,7 @@ export function DSUserList({
             >
               <Checkbox
                 className="border-zinc-300 border-2 cursor-pointer"
-                checked={areAllMembersSelected}
+                checked={areAllMembersSelected()}
                 onCheckedChange={handleGlobalCheckboxChange}
               />
             </motion.div>
