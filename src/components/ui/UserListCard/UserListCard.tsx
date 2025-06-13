@@ -110,7 +110,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     ? {}
     : {
         transform: CSS.Translate.toString(dragTransform),
-        opacity: isDragSource ? 0.5 : 1,
+        opacity: isDragSource ? 0.3 : 1,
         zIndex: isDragging ? 1000 : "auto",
       };
 
@@ -238,7 +238,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             {inputValue && !showOverlay && !isExpanded && !isDragOverlay && (
               <div
                 ref={setDragRef}
-                className={`right-0 top-1/2 transform mr-2 p-1 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-50 transition-opacity flex items-center justify-center rounded hover:bg-zinc-600 bg-zinc-800`}
+                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-50 transition-all flex items-center justify-center rounded hover:bg-zinc-600`}
                 {...draggableAttributes}
                 {...draggableListeners}
               >
