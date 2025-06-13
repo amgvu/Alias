@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import {
   DndContext,
@@ -7,7 +7,6 @@ import {
   DragEndEvent,
   DragStartEvent,
 } from "@dnd-kit/core";
-import { useState } from "react";
 import MemberItem from "./MemberItem";
 import RoleHeader from "./RoleHeader";
 import UserListCard from "../UserListCard/UserListCard";
@@ -69,6 +68,9 @@ export default function VirtualizerList({
     nickname: string;
     username: string;
   } | null>(null);
+
+  const [swappedUsers, setSwappedUsers] = useState<Set<string>>(new Set());
+  const [swapAnimationKey, setSwapAnimationKey] = useState(0);
 
   const groupedMembers = useCallback(() => {
     const grouped = members.reduce((acc: Record<string, Member[]>, member) => {
@@ -171,9 +173,16 @@ export default function VirtualizerList({
       const fromNickname = active.data.current.nickname;
       const toNickname = over.data.current.currentNickname;
 
+      setSwappedUsers(new Set([fromUserId, toUserId]));
+      setSwapAnimationKey((prev) => prev + 1);
+
       if (onNicknameSwap) {
         onNicknameSwap(fromUserId, toUserId, fromNickname, toNickname);
       }
+
+      setTimeout(() => {
+        setSwappedUsers(new Set());
+      }, 600);
     }
 
     setActiveId(null);
@@ -240,6 +249,8 @@ export default function VirtualizerList({
                     onApplyNickname={onApplyNickname}
                     onNicknameSwap={onNicknameSwap}
                     checkboxContainerVariants={checkboxContainerVariants}
+                    isSwapped={swappedUsers.has(item.member.user_id)}
+                    swapAnimationKey={swapAnimationKey}
                   />
                 ) : null}
               </div>

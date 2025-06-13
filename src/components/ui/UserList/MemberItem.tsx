@@ -36,6 +36,8 @@ interface MemberItemProps {
       transition: { duration: number };
     };
   };
+  isSwapped?: boolean;
+  swapAnimationKey?: number;
 }
 
 const shiftVariants = {
@@ -48,6 +50,20 @@ const shiftVariants = {
       delay: (index % 50) * 0.06,
     },
   }),
+};
+
+const swapVariants = {
+  initial: {
+    scale: 1,
+  },
+  swap: {
+    y: [0, 4, 0],
+    transition: {
+      duration: 0.2,
+      ease: [0.25, 0.1, 0.25, 1],
+      times: [0, 0.5, 1],
+    },
+  },
 };
 
 export default function MemberItem({
@@ -65,17 +81,27 @@ export default function MemberItem({
   onApplyNickname,
   onNicknameSwap,
   checkboxContainerVariants,
+  isSwapped = false,
+  swapAnimationKey = 0,
 }: MemberItemProps) {
   return (
     <motion.div
-      key={`${member.user_id}-${animationKey}`}
+      key={`${member.user_id}-${animationKey}-${swapAnimationKey}`}
       className="relative"
       custom={memberIndex}
       initial="initial"
       variants={shiftVariants}
       animate={isApplyingAll ? "animate" : "initial"}
     >
-      <div className="flex items-center py-1">
+      <motion.div
+        className="flex items-center py-1 rounded-md"
+        variants={swapVariants}
+        initial="initial"
+        animate={isSwapped ? "swap" : "initial"}
+        style={{
+          transformStyle: "preserve-3d",
+        }}
+      >
         <motion.div
           variants={checkboxContainerVariants}
           initial="hidden"
@@ -89,20 +115,27 @@ export default function MemberItem({
           />
         </motion.div>
 
-        <UserListCard
-          member={member}
-          selectedServer={selectedServer}
-          isUpdating={isUpdating}
-          isApplyingAll={isApplyingAll}
-          onNicknameChange={(nickname) =>
-            onNicknameChange(originalIndex, nickname)
-          }
-          onApplyNickname={() =>
-            onApplyNickname(member.user_id, member.nickname)
-          }
-          onNicknameSwap={onNicknameSwap}
-        />
-      </div>
+        <motion.div
+          className="flex-1"
+          style={{
+            backfaceVisibility: "hidden",
+          }}
+        >
+          <UserListCard
+            member={member}
+            selectedServer={selectedServer}
+            isUpdating={isUpdating}
+            isApplyingAll={isApplyingAll}
+            onNicknameChange={(nickname) =>
+              onNicknameChange(originalIndex, nickname)
+            }
+            onApplyNickname={() =>
+              onApplyNickname(member.user_id, member.nickname)
+            }
+            onNicknameSwap={onNicknameSwap}
+          />
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 }
