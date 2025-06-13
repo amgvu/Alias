@@ -41,7 +41,6 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   onApplyNickname,
   isDragOverlay = false,
   draggedNickname,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onNicknameSwap,
 }) => {
   const {
@@ -117,9 +116,19 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     ? draggedNickname || inputValue
     : inputValue;
 
+  if (isDragOverlay) {
+    return (
+      <div className="bg-zinc-900/10 backdrop-blur-lg rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center w-116">
+        <div className="text-lg ml-2 font-semibold text-white mb-1">
+          {displayValue}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <motion.div
-      ref={isDragOverlay ? undefined : setDropRef}
+      ref={setDropRef}
       initial={{ y: 0 }}
       className={`${
         styles.card
