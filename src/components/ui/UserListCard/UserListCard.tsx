@@ -119,7 +119,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
   if (isDragOverlay) {
     return (
-      <div className="bg-zinc-900/10 backdrop-blur-lg rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center w-116">
+      <div className="bg-zinc-900/10 backdrop-blur-lg rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-start w-116">
         <div className="text-lg ml-2 font-semibold text-white mb-1">
           {displayValue}
         </div>
@@ -217,35 +217,23 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
         <div className="w-full text-lg flex flex-col justify-center">
           <div className="relative flex items-center group">
-            <div
-              ref={setDragRef}
-              className={`flex-1 ${
-                inputValue && !showOverlay && !isExpanded
-                  ? "cursor-grab active:cursor-grabbing"
-                  : ""
-              }`}
-              {...(inputValue && !showOverlay && !isExpanded
-                ? draggableAttributes
-                : {})}
-              {...(inputValue && !showOverlay && !isExpanded
-                ? draggableListeners
-                : {})}
-            >
-              <DSInput
-                value={displayValue}
-                onChange={handleInputChange}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                placeholder={`Nickname for ${member.username}`}
-                className={`${styles.nicknameInput} ${
-                  inputValue && !showOverlay && !isExpanded ? "pr-8" : ""
-                }`}
-                disabled={showOverlay}
-              />
-            </div>
+            <DSInput
+              value={displayValue}
+              onChange={handleInputChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              placeholder={`Nickname for ${member.username}`}
+              className={styles.nicknameInput}
+              disabled={showOverlay}
+            />
 
             {inputValue && !showOverlay && !isExpanded && !isDragOverlay && (
-              <div className="absolute right-2 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-50 transition-opacity pointer-events-none">
+              <div
+                ref={setDragRef}
+                className={`right-0 top-1/2 transform mr-2 p-1 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-50 transition-opacity flex items-center justify-center rounded border border-gray-600 hover:border-gray-400 bg-zinc-800`}
+                {...draggableAttributes}
+                {...draggableListeners}
+              >
                 <GripVertical className="w-4 h-4 text-gray-400" />
               </div>
             )}
