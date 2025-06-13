@@ -59,7 +59,7 @@ const swapVariants = {
   swap: {
     y: [0, 4, 0],
     transition: {
-      duration: 0.2,
+      duration: 0.25,
       ease: [0.25, 0.1, 0.25, 1],
       times: [0, 0.5, 1],
     },
