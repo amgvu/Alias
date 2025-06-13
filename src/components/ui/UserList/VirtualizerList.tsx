@@ -1,7 +1,16 @@
 import React, { useCallback, useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import {
+  DndContext,
+  DragOverlay,
+  closestCenter,
+  DragEndEvent,
+  DragStartEvent,
+} from "@dnd-kit/core";
+import { useState } from "react";
 import MemberItem from "./MemberItem";
 import RoleHeader from "./RoleHeader";
+import UserListCard from "../UserListCard/UserListCard";
 import { Member } from "@/types/types";
 
 interface VirtualItem {
@@ -28,6 +37,13 @@ interface VirtualizerListProps {
   onCheckboxToggle: (userId: string) => void;
   onRoleCheckboxChange: (roleName: string) => void;
   areAllRoleMembersSelected: (roleName: string) => boolean;
+
+  onNicknameSwap?: (
+    fromUserId: string,
+    toUserId: string,
+    fromNickname: string,
+    toNickname: string
+  ) => void;
 }
 
 export default function VirtualizerList({
@@ -44,8 +60,15 @@ export default function VirtualizerList({
   onCheckboxToggle,
   onRoleCheckboxChange,
   areAllRoleMembersSelected,
+  onNicknameSwap,
 }: VirtualizerListProps) {
   const parentRef = useRef<HTMLDivElement>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [draggedData, setDraggedData] = useState<{
+    userId: string;
+    nickname: string;
+    username: string;
+  } | null>(null);
 
   const groupedMembers = useCallback(() => {
     const grouped = members.reduce((acc: Record<string, Member[]>, member) => {
@@ -118,60 +141,126 @@ export default function VirtualizerList({
 
   const items = virtualizer.getVirtualItems();
 
-  return (
-    <div ref={parentRef} className="h-[1630px] overflow-auto">
-      <div
-        style={{
-          height: `${virtualizer.getTotalSize()}px`,
-          width: "100%",
-          position: "relative",
-        }}
-      >
-        {items.map((virtualItem) => {
-          const item = virtualItems[virtualItem.index];
-          if (!item) return null;
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string);
+    if (event.active.data.current?.type === "nickname") {
+      setDraggedData({
+        userId: event.active.data.current.userId,
+        nickname: event.active.data.current.nickname,
+        username: event.active.data.current.username,
+      });
+    }
+  };
 
-          return (
-            <div
-              key={virtualItem.key}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: `${virtualItem.size}px`,
-                transform: `translateY(${virtualItem.start}px)`,
-              }}
-            >
-              {item.type === "role-header" && item.roleName ? (
-                <RoleHeader
-                  roleName={item.roleName}
-                  showCheckboxes={showCheckboxes}
-                  isAllSelected={areAllRoleMembersSelected(item.roleName)}
-                  onCheckboxChange={() => onRoleCheckboxChange(item.roleName!)}
-                  checkboxContainerVariants={checkboxContainerVariants}
-                />
-              ) : item.type === "member" && item.member ? (
-                <MemberItem
-                  member={item.member}
-                  memberIndex={item.memberIndex!}
-                  originalIndex={item.originalIndex!}
-                  isSelected={selectedUserIds.has(item.member.user_id)}
-                  showCheckboxes={showCheckboxes}
-                  isUpdating={isUpdating}
-                  selectedServer={selectedServer}
-                  isApplyingAll={isApplyingAll}
-                  animationKey={animationKey}
-                  onCheckboxToggle={onCheckboxToggle}
-                  onNicknameChange={onNicknameChange}
-                  onApplyNickname={onApplyNickname}
-                  checkboxContainerVariants={checkboxContainerVariants}
-                />
-              ) : null}
-            </div>
-          );
-        })}
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over || !active.data.current || !over.data.current) {
+      setActiveId(null);
+      setDraggedData(null);
+      return;
+    }
+
+    if (
+      active.data.current.type === "nickname" &&
+      over.data.current.type === "usercard" &&
+      active.data.current.userId !== over.data.current.userId
+    ) {
+      const fromUserId = active.data.current.userId;
+      const toUserId = over.data.current.userId;
+      const fromNickname = active.data.current.nickname;
+      const toNickname = over.data.current.currentNickname;
+
+      if (onNicknameSwap) {
+        onNicknameSwap(fromUserId, toUserId, fromNickname, toNickname);
+      }
+    }
+
+    setActiveId(null);
+    setDraggedData(null);
+  };
+
+  const activeMember = draggedData
+    ? members.find((m) => m.user_id === draggedData.userId)
+    : null;
+
+  return (
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
+      <div ref={parentRef} className="h-[1630px] overflow-auto">
+        <div
+          style={{
+            height: `${virtualizer.getTotalSize()}px`,
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          {items.map((virtualItem) => {
+            const item = virtualItems[virtualItem.index];
+            if (!item) return null;
+
+            return (
+              <div
+                key={virtualItem.key}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: `${virtualItem.size}px`,
+                  transform: `translateY(${virtualItem.start}px)`,
+                }}
+              >
+                {item.type === "role-header" && item.roleName ? (
+                  <RoleHeader
+                    roleName={item.roleName}
+                    showCheckboxes={showCheckboxes}
+                    isAllSelected={areAllRoleMembersSelected(item.roleName)}
+                    onCheckboxChange={() =>
+                      onRoleCheckboxChange(item.roleName!)
+                    }
+                    checkboxContainerVariants={checkboxContainerVariants}
+                  />
+                ) : item.type === "member" && item.member ? (
+                  <MemberItem
+                    member={item.member}
+                    memberIndex={item.memberIndex!}
+                    originalIndex={item.originalIndex!}
+                    isSelected={selectedUserIds.has(item.member.user_id)}
+                    showCheckboxes={showCheckboxes}
+                    isUpdating={isUpdating}
+                    selectedServer={selectedServer}
+                    isApplyingAll={isApplyingAll}
+                    animationKey={animationKey}
+                    onCheckboxToggle={onCheckboxToggle}
+                    onNicknameChange={onNicknameChange}
+                    onApplyNickname={onApplyNickname}
+                    onNicknameSwap={onNicknameSwap}
+                    checkboxContainerVariants={checkboxContainerVariants}
+                  />
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+
+      <DragOverlay>
+        {activeId && activeMember && draggedData ? (
+          <UserListCard
+            member={activeMember}
+            selectedServer={selectedServer}
+            isUpdating={new Set()}
+            isDragOverlay={true}
+            draggedNickname={draggedData.nickname}
+            onNicknameChange={() => {}}
+            onApplyNickname={() => {}}
+          />
+        ) : null}
+      </DragOverlay>
+    </DndContext>
   );
 }

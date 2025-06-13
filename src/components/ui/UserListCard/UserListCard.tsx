@@ -4,8 +4,18 @@ import Image from "next/image";
 import { styles } from "./UserListCard.styles";
 import { Member } from "@/types/types";
 import { AnimatePresence, motion } from "framer-motion";
-import { BookUser, X, Check, RotateCcw, Loader2 } from "lucide-react";
+import {
+  BookUser,
+  X,
+  Check,
+  RotateCcw,
+  Loader2,
+  GripVertical,
+  ArrowDownUp,
+} from "lucide-react";
 import { useUserListCard } from "@/lib/hooks/useUserListCard";
+import { useDraggable, useDroppable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
 interface UserListCardProps {
   member: Member;
@@ -14,6 +24,14 @@ interface UserListCardProps {
   selectedServer: string;
   onNicknameChange: (nickname: string) => void;
   onApplyNickname: () => void;
+  isDragOverlay?: boolean;
+  draggedNickname?: string;
+  onNicknameSwap?: (
+    fromUserId: string,
+    toUserId: string,
+    fromNickname: string,
+    toNickname: string
+  ) => void;
 }
 
 export const UserListCard: React.FC<UserListCardProps> = ({
@@ -22,6 +40,10 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   selectedServer,
   onNicknameChange,
   onApplyNickname,
+  isDragOverlay = false,
+  draggedNickname,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onNicknameSwap,
 }) => {
   const {
     inputValue,
@@ -47,13 +69,82 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     onNicknameChange,
     onApplyNickname,
   });
-
   const showOverlay = isUpdating.has(member.user_id);
+  const {
+    attributes: draggableAttributes,
+    listeners: draggableListeners,
+    setNodeRef: setDragRef,
+    transform: dragTransform,
+    isDragging,
+  } = useDraggable({
+    id: `nickname-${member.user_id}`,
+    data: {
+      type: "nickname",
+      userId: member.user_id,
+      nickname: inputValue || "",
+      username: member.username,
+    },
+    disabled: !inputValue || showOverlay || isExpanded,
+  });
+
+  const {
+    setNodeRef: setDropRef,
+    isOver,
+    active,
+  } = useDroppable({
+    id: `card-${member.user_id}`,
+    data: {
+      type: "usercard",
+      userId: member.user_id,
+      currentNickname: inputValue || "",
+    },
+  });
+
+  const isDropTarget =
+    isOver &&
+    active?.data.current?.type === "nickname" &&
+    active?.data.current?.userId !== member.user_id;
+  const isDragSource = isDragging && !isDragOverlay;
+
+  const dragStyle = isDragOverlay
+    ? {}
+    : {
+        transform: CSS.Translate.toString(dragTransform),
+        opacity: isDragSource ? 0.5 : 1,
+        zIndex: isDragging ? 1000 : "auto",
+      };
+
+  const displayValue = isDragOverlay
+    ? draggedNickname || inputValue
+    : inputValue;
+
+  if (isDragOverlay) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="bg-zinc-900/10 backdrop-blur-lg rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12 w-64">
+          <div className="text-lg ml-2 text-center font-semibold text-white mb-1 flex items-center justify-center">
+            <ArrowDownUp className="inline-block mt-0.5 text-blue-400 mr-2" />
+            {displayValue}
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
+      ref={setDropRef}
       initial={{ y: 0 }}
-      className={`${styles.card} relative bg-no-repeat bg-left`}
+      className={`${
+        styles.card
+      } relative bg-no-repeat bg-left transition-all duration-200 ${
+        isDropTarget ? "ring-2 ring-blue-400 ring-opacity-50 bg-blue-50/10" : ""
+      } ${isDragSource ? "opacity-50" : ""}`}
+      style={dragStyle}
     >
       <AnimatePresence>
         {showOverlay && (
@@ -106,6 +197,17 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         )}
       </AnimatePresence>
 
+      <AnimatePresence>
+        {isDropTarget && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-blue-400/20 border-2 border-blue-400 border-dashed rounded-lg z-10 flex items-center justify-center"
+          ></motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="absolute inset-0"></div>
 
       <div className="flex items-center space-x-2 relative z-10">
@@ -122,15 +224,29 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         </div>
 
         <div className="w-full text-lg flex flex-col justify-center">
-          <DSInput
-            value={inputValue}
-            onChange={handleInputChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            placeholder={`Nickname for ${member.username}`}
-            className={styles.nicknameInput}
-            disabled={showOverlay}
-          />
+          <div className="relative flex items-center group">
+            <DSInput
+              value={displayValue}
+              onChange={handleInputChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              placeholder={`Nickname for ${member.username}`}
+              className={styles.nicknameInput}
+              disabled={showOverlay}
+            />
+
+            {inputValue && !showOverlay && !isExpanded && !isDragOverlay && (
+              <div
+                ref={setDragRef}
+                className={`right-0 top-1/2 transform mr-2 p-1 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-50 transition-opacity flex items-center justify-center rounded hover:bg-zinc-600 bg-zinc-800`}
+                {...draggableAttributes}
+                {...draggableListeners}
+              >
+                <GripVertical className="w-4 h-4 text-gray-400" />
+              </div>
+            )}
+          </div>
+
           <div className={styles.username}>
             {member.username}
             {member.userTag}

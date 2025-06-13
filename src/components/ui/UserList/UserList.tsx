@@ -18,6 +18,12 @@ interface UserListProps {
   showCheckboxes: boolean;
   setShowCheckboxes: (show: boolean) => void;
   isInitialLoad?: boolean;
+  onNicknameSwap?: (
+    fromUserId: string,
+    toUserId: string,
+    fromNickname: string,
+    toNickname: string
+  ) => void;
 }
 
 export function DSUserList({
@@ -32,6 +38,7 @@ export function DSUserList({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setShowCheckboxes,
   isInitialLoad = true,
+  onNicknameSwap,
 }: UserListProps) {
   const [animationKey, setAnimationKey] = useState(0);
   const [displayServer, setDisplayServer] = useState(selectedServer);
@@ -68,6 +75,25 @@ export function DSUserList({
       return () => clearTimeout(timer);
     }
   }, [selectedServer, displayServer, isInitialLoad]);
+
+  const handleNicknameSwap = (
+    fromUserId: string,
+    toUserId: string,
+    fromNickname: string,
+    toNickname: string
+  ) => {
+    const fromIndex = members.findIndex((m) => m.user_id === fromUserId);
+    const toIndex = members.findIndex((m) => m.user_id === toUserId);
+
+    if (fromIndex !== -1 && toIndex !== -1) {
+      onNicknameChange(fromIndex, toNickname);
+      onNicknameChange(toIndex, fromNickname);
+
+      if (onNicknameSwap) {
+        onNicknameSwap(fromUserId, toUserId, fromNickname, toNickname);
+      }
+    }
+  };
 
   if (isLoading) {
     return (
@@ -123,6 +149,7 @@ export function DSUserList({
           onCheckboxToggle={handleCheckboxToggle}
           onRoleCheckboxChange={handleRoleCheckboxChange}
           areAllRoleMembersSelected={areAllRoleMembersSelected}
+          onNicknameSwap={handleNicknameSwap}
         />
       </div>
     </motion.div>
