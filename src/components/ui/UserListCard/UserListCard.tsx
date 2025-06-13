@@ -11,6 +11,7 @@ import {
   RotateCcw,
   Loader2,
   GripVertical,
+  ArrowDownUp,
 } from "lucide-react";
 import { useUserListCard } from "@/lib/hooks/useUserListCard";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
@@ -119,8 +120,9 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
   if (isDragOverlay) {
     return (
-      <div className="bg-zinc-900/10 backdrop-blur-lg rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-start w-116">
-        <div className="text-lg ml-2 font-semibold text-white mb-1">
+      <div className="bg-zinc-900/10 backdrop-blur-lg rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12 w-64">
+        <div className="text-lg ml-2 text-center font-semibold text-white mb-1 flex items-center justify-center">
+          <ArrowDownUp className="inline-block mt-0.5 text-blue-400 mr-2" />
           {displayValue}
         </div>
       </div>
