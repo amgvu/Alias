@@ -41,6 +41,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   onApplyNickname,
   isDragOverlay = false,
   draggedNickname,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onNicknameSwap,
 }) => {
   const {
