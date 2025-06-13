@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { Member } from "@/types/types";
-
 import UserListCard from "../UserListCard/UserListCard";
 import { Checkbox } from "../checkbox";
 
@@ -17,6 +16,12 @@ interface MemberItemProps {
   onCheckboxToggle: (userId: string) => void;
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
+  onNicknameSwap?: (
+    fromUserId: string,
+    toUserId: string,
+    fromNickname: string,
+    toNickname: string
+  ) => void;
   checkboxContainerVariants: {
     hidden: {
       width: number;
@@ -58,6 +63,7 @@ export default function MemberItem({
   onCheckboxToggle,
   onNicknameChange,
   onApplyNickname,
+  onNicknameSwap,
   checkboxContainerVariants,
 }: MemberItemProps) {
   return (
@@ -94,6 +100,7 @@ export default function MemberItem({
           onApplyNickname={() =>
             onApplyNickname(member.user_id, member.nickname)
           }
+          onNicknameSwap={onNicknameSwap}
         />
       </div>
     </motion.div>
