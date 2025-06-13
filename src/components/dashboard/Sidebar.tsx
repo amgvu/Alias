@@ -102,8 +102,8 @@ export default function Sidebar({
             />
           </div>
           <div>
-            <ul>
-              <div className="flex items-center justify-center space-x-4">
+            <ul className="space-y-2">
+              <div className="flex gap-2">
                 <AnimatePresence mode="wait">
                   {isApplyingAll ? (
                     <motion.div
@@ -112,10 +112,10 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="flex"
+                      className="flex items-center justify-center w-full"
                     >
-                      <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
-                      <p className="ml-2">Applying Nicknames...</p>
+                      <Loader2 className="animate-spin w-4 h-4 text-zinc-100" />
+                      <p className="ml-2 text-sm text-zinc-100">Applying...</p>
                     </motion.div>
                   ) : (
                     <motion.div
@@ -124,11 +124,11 @@ export default function Sidebar({
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className=""
+                      className="w-full"
                     >
                       <DSButton
                         onClick={handleApply}
-                        className="bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
+                        className="w-full bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
                         disabled={
                           isApplyingAll ||
                           !selectedServer ||
@@ -138,7 +138,7 @@ export default function Sidebar({
                       >
                         <CheckCheck className="w-4 h-4 mr-[-2px]" />
                         {selectedUserIds.length > 0
-                          ? `Apply ${selectedUserIds.length} Nicknames`
+                          ? `Apply ${selectedUserIds.length}`
                           : "Apply"}
                       </DSButton>
                     </motion.div>
@@ -147,51 +147,50 @@ export default function Sidebar({
 
                 <DSButton
                   onClick={() => setShowCheckboxes(!showCheckboxes)}
-                  className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+                  className="w-full bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
                 >
                   <TextSelect className="w-4 h-4 mr-[-2px]" />
                   {showCheckboxes ? "Unselect" : "Select"}
                 </DSButton>
-
-                <AnimatePresence mode="wait">
-                  {isSavingArc ? (
-                    <motion.div
-                      key="save-loader"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex items-center justify-center"
-                    >
-                      <Loader2 className="animate-spin w-6 h-6 text-zinc-100" />
-                      <p className="ml-2">Saving Set...</p>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="save-btn"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className=""
-                    >
-                      <DSButton
-                        onClick={handleSaveArc}
-                        className="bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
-                        disabled={
-                          isSavingArc ||
-                          !selectedServer ||
-                          !selectedArc ||
-                          members.length === 0
-                        }
-                      >
-                        <SaveAll className="w-4 h-4 mr-[-2px]" />
-                        Save Set
-                      </DSButton>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
+
+              <AnimatePresence mode="wait">
+                {isSavingArc ? (
+                  <motion.div
+                    key="save-loader"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center justify-center"
+                  >
+                    <Loader2 className="animate-spin w-4 h-4 text-zinc-100" />
+                    <p className="ml-2 text-sm text-zinc-100">Saving Set...</p>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="save-btn"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <DSButton
+                      onClick={handleSaveArc}
+                      className="w-full bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+                      disabled={
+                        isSavingArc ||
+                        !selectedServer ||
+                        !selectedArc ||
+                        members.length === 0
+                      }
+                    >
+                      <SaveAll className="w-4 h-4 mr-[-2px]" />
+                      Save Set
+                    </DSButton>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </ul>
           </div>
 
