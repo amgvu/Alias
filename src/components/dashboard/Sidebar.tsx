@@ -23,6 +23,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 interface SidebarProps {
   servers: { id: string; name: string }[];
@@ -76,6 +77,8 @@ export default function Sidebar({
   showCheckboxes,
   setShowCheckboxes,
 }: SidebarProps) {
+  const { data: session } = useSession();
+
   const handleApply = () => {
     if (!selectedUserIds || selectedUserIds.length === 0) return;
     const selectedMembers = members.filter((member) =>
@@ -375,6 +378,29 @@ export default function Sidebar({
             </AccordionItem>
           </Accordion>
         </div>
+        {session?.user && (
+          <div className="border-t bottom-0 w-80 absolute border-[#252525]">
+            <div className="py-2 px-4 rounded-br-2xl bg-zinc-900/50">
+              <p className="text-zinc-400 text-xs font-medium mb-3">
+                Signed in as:
+              </p>
+              <div className="flex items-center gap-3">
+                <Image
+                  src={session.user.image || "/default-avatar.png"}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className="rounded-full ring-2 ring-zinc-700/50"
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-zinc-200 font-medium text-sm truncate">
+                    {session.user.name}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
