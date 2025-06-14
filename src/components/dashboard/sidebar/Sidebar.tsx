@@ -1,18 +1,7 @@
 import { motion } from "framer-motion";
-import {
-  Settings,
-  Binoculars,
-  Landmark,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ChevronsLeft,
-} from "lucide-react";
+
 import { Member, Arc } from "@/types/types";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 
 import { ServerPanel } from "./ServerPanel";
 import { NicknamesPanel } from "./NicknamesPanel";
@@ -110,36 +99,6 @@ export default function Sidebar({
               handleGenerateCharacters={handleGenerateCharacters}
               categories={categories}
             />
-            <AccordionItem value="p">
-              <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-4">
-                  <Landmark className="w-4.5 h-4.5" />
-                  <span>Roles</span>
-                </div>
-              </AccordionTrigger>
-
-              <AccordionContent className="pb-4"></AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="g">
-              <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-4">
-                  <Binoculars className="w-4.5 h-4.5" />
-                  <span>Monitoring</span>
-                </div>
-              </AccordionTrigger>
-
-              <AccordionContent className="pb-4"></AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="s">
-              <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-4">
-                  <Settings className="w-4.5 h-4.5" />
-                  <span>Utilities</span>
-                </div>
-              </AccordionTrigger>
-
-              <AccordionContent className="pb-4"></AccordionContent>
-            </AccordionItem>
           </Accordion>
         </div>
       </div>

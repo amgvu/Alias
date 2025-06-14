@@ -7,8 +7,6 @@ import {
   Server,
   Users,
   LogOut,
-  PanelLeftClose,
-  PanelLeftOpen,
 } from "lucide-react";
 import {
   Sidebar,
@@ -22,7 +20,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
 
@@ -84,46 +81,31 @@ export function NavigationSidebar({
     >
       <SidebarHeader
         className={`
-          py-4 bg-zinc-900/20 border-b border-[#252525]
+           py-3 bg-zinc-900/20 border-b border-[#252525]
           flex items-center
           ${isMinimized ? "justify-center" : "justify-between px-4"}
         `}
       >
         <div className="flex items-center">
-          <h1 className="space-x-2 mt-1 flex items-center">
-            <Image
-              src="/Arclify.svg"
-              width="30"
-              height="30"
-              alt="logo"
-              className="inline-block -translate-y-1"
-            />
-            {!isMinimized && (
-              <span className="text-zinc-200 text-xl font-gintoNord whitespace-nowrap">
-                Arclify
-              </span>
-            )}
+          <h1 className="mt-1 flex items-center">
+            <button className="cursor-pointer" onClick={toggleMinimize}>
+              <Image
+                src="/Arclify.svg"
+                width="38"
+                height="38"
+                alt="logo"
+                className="inline-block"
+              />
+            </button>
           </h1>
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={toggleMinimize}
-          className="text-zinc-400 hover:bg-zinc-800 hover:text-zinc-300"
-        >
-          {isMinimized ? (
-            <PanelLeftOpen className="h-5 w-5" />
-          ) : (
-            <PanelLeftClose className="h-5 w-5" />
-          )}
-        </Button>
       </SidebarHeader>
 
       <SidebarContent className="px-2">
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-zinc-500 text-xs font-medium mb-2 tracking-wider uppercase">
-              Navigation
+            <SidebarGroupLabel className="text-zinc-500 text-xs font-medium mb-2 tracking-wide uppercase">
+              Workspace
             </SidebarGroupLabel>
           )}
           <SidebarGroupContent>
@@ -182,14 +164,8 @@ export function NavigationSidebar({
               ) : (
                 <></>
               )}
-              {!isMinimized ? (
-                <button
-                  onClick={handleDiscordLogout}
-                  className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors"
-                >
-                  <LogOut className="h-6 w-6" />
-                </button>
-              ) : (
+
+              {!isMinimized && (
                 <button
                   onClick={handleDiscordLogout}
                   className="flex text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md p-2 transition-colors"
