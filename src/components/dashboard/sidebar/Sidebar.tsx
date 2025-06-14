@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 
 import { Member, Arc } from "@/types/types";
-import { Accordion } from "@/components/ui/accordion";
 
 import { NicknamesPanel } from "./NicknamesPanel";
 
@@ -59,33 +58,27 @@ export default function Sidebar({
     >
       <div>
         <div className="space-y-6 px-4 py-2">
-          <Accordion
-            type="multiple"
-            defaultValue={["servers", "nicknames"]}
-            className="w-full"
-          >
-            <NicknamesPanel
-              selectedServer={selectedServer}
-              selectedArc={selectedArc}
-              setSelectedArc={setSelectedArc}
-              handleCreateNewArc={handleCreateNewArc}
-              isApplyingAll={isApplyingAll}
-              isSavingArc={isSavingArc}
-              handleSaveArc={handleSaveArc}
-              members={members}
-              onApplyToSelection={onApplyToSelection}
-              selectedUserIds={selectedUserIds}
-              showCheckboxes={showCheckboxes}
-              setShowCheckboxes={setShowCheckboxes}
-              category={category}
-              setCategory={setCategory}
-              theme={theme}
-              setTheme={setTheme}
-              loading={loading}
-              handleGenerateCharacters={handleGenerateCharacters}
-              categories={categories}
-            />
-          </Accordion>
+          <NicknamesPanel
+            selectedServer={selectedServer}
+            selectedArc={selectedArc}
+            setSelectedArc={setSelectedArc}
+            handleCreateNewArc={handleCreateNewArc}
+            isApplyingAll={isApplyingAll}
+            isSavingArc={isSavingArc}
+            handleSaveArc={handleSaveArc}
+            members={members}
+            onApplyToSelection={onApplyToSelection}
+            selectedUserIds={selectedUserIds}
+            showCheckboxes={showCheckboxes}
+            setShowCheckboxes={setShowCheckboxes}
+            category={category}
+            setCategory={setCategory}
+            theme={theme}
+            setTheme={setTheme}
+            loading={loading}
+            handleGenerateCharacters={handleGenerateCharacters}
+            categories={categories}
+          />
         </div>
       </div>
     </motion.div>

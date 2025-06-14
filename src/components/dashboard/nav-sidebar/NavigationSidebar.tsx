@@ -4,6 +4,7 @@ import {
   Settings,
   Binoculars,
   Landmark,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Server,
   Users,
   LogOut,
@@ -33,11 +34,6 @@ interface NavigationSidebarProps {
 }
 
 const navigationItems = [
-  {
-    title: "Server",
-    icon: Server,
-    value: "server",
-  },
   {
     title: "Nicknames",
     icon: Users,
