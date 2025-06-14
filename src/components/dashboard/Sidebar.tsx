@@ -105,7 +105,7 @@ export default function Sidebar({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-zinc-950 border-r rounded-2xl border-[#252525] h-screen w-80"
+      className="bg-zinc-950 border-r rounded-xl border-[#252525] h-screen w-80"
     >
       <div>
         <div className="py-4 bg-zinc-900/20 border-b border-[#252525] rounded-tr-2xl">
@@ -385,7 +385,7 @@ export default function Sidebar({
         </div>
         {session?.user && (
           <div className="border-t bottom-0 w-80 absolute border-[#252525]">
-            <div className="py-3 px-4 rounded-br-2xl bg-zinc-900/50">
+            <div className="py-3 px-4 rounded-br-2xl bg-zinc-900/20">
               <p className="text-zinc-400 text-xs font-medium mb-3 tracking-wider">
                 Signed in as:
               </p>

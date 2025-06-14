@@ -12,6 +12,7 @@ import {
   Loader2,
   GripVertical,
   ArrowDownUp,
+  NotebookText,
 } from "lucide-react";
 import { useUserListCard } from "@/lib/hooks/useUserListCard";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
@@ -323,7 +324,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           onClick={handleExpansionToggle}
           className="p-2 transition-all cursor-pointer rounded-lg"
         >
-          <BookUser className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
+          <NotebookText className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
         </button>
       </div>
 
