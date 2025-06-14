@@ -238,11 +238,11 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             {inputValue && !showOverlay && !isExpanded && !isDragOverlay && (
               <div
                 ref={setDragRef}
-                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-50 transition-all flex items-center justify-center rounded hover:bg-zinc-600`}
+                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 text-zinc-800 hover:text-zinc-600 cursor-grab active:cursor-grabbing group-hover:opacity-100 transition-all flex items-center justify-center rounded`}
                 {...draggableAttributes}
                 {...draggableListeners}
               >
-                <GripVertical className="w-4 h-4 text-gray-400" />
+                <GripVertical className="w-4 h-4" />
               </div>
             )}
           </div>
