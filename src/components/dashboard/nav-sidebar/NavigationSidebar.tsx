@@ -83,10 +83,10 @@ export function NavigationSidebar({
     >
       <SidebarHeader
         className={`
-           py-3 bg-zinc-900/20 border-b border-[#252525]
-          flex items-center
-          ${isMinimized ? "justify-center" : "justify-between px-4"}
-        `}
+    py-3 bg-zinc-900/20 border-b border-[#252525]
+    flex items-center
+    ${isMinimized ? "justify-center" : "justify-between px-4"}
+  `}
       >
         <div className="flex items-center">
           <h1 className="mt-1 flex items-center">
@@ -99,9 +99,12 @@ export function NavigationSidebar({
                 className="inline-block"
               />
             </button>
-            <DSMenu items={servers} setSelectedItem={handleServerSelection} />
           </h1>
         </div>
+
+        {!isMinimized && (
+          <DSMenu items={servers} setSelectedItem={handleServerSelection} />
+        )}
       </SidebarHeader>
 
       <SidebarContent className="px-2">

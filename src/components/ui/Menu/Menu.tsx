@@ -17,27 +17,22 @@ interface ServerItem {
 
 interface DSMenuProps {
   items: ServerItem[];
-
   setSelectedItem: (item: string) => void;
 }
 
-function DSMenu({
-  items,
-
-  setSelectedItem,
-}: DSMenuProps) {
+function DSMenu({ items, setSelectedItem }: DSMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <button>
-          <Server />
+          <Server className="h-5 w-5 text-zinc-300" />
           <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
             {isOpen ? (
-              <ChevronUp className="h-5 w-5 text-zinc-700 hover:text-white transition-all duration-200" />
+              <ChevronUp className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200" />
             ) : (
-              <ChevronDown className="h-5 w-5 text-zinc-700 hover:text-white transition-all duration-200" />
+              <ChevronDown className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200" />
             )}
           </motion.div>
         </button>
