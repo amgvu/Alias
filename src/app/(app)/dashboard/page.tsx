@@ -132,6 +132,9 @@ export default function Dashboard() {
       <NavigationSidebar
         activeSection={activeSection}
         onSectionChange={setActiveSection}
+        servers={servers}
+        selectedServerName={selectedServerName}
+        handleServerSelection={handleServerSelection}
       />
       <div
         className={`flex-1 transition-opacity duration-500 ${

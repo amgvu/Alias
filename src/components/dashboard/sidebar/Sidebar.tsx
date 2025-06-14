@@ -7,7 +7,7 @@ import { ServerPanel } from "./ServerPanel";
 import { NicknamesPanel } from "./NicknamesPanel";
 
 interface SidebarProps {
-  servers: { id: string; name: string }[];
+  servers: { id: string; name: string; iconURL: string }[];
   selectedServer: string;
   selectedServerName: string;
   handleServerSelection: (serverName: string) => void;

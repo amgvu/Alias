@@ -20,12 +20,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import DSMenu from "@/components/ui/Menu/Menu";
 
 import { useState } from "react";
 
 interface NavigationSidebarProps {
   activeSection?: string;
   onSectionChange?: (section: string) => void;
+  servers: { id: string; name: string; iconURL: string }[];
+  selectedServerName: string;
+  handleServerSelection: (serverName: string) => void;
 }
 
 const navigationItems = [
@@ -59,6 +63,9 @@ const navigationItems = [
 export function NavigationSidebar({
   activeSection = "server",
   onSectionChange,
+  servers,
+  selectedServerName,
+  handleServerSelection,
 }: NavigationSidebarProps) {
   const { data: session } = useSession();
   const [isMinimized, setIsMinimized] = useState(false);
@@ -97,6 +104,12 @@ export function NavigationSidebar({
                 className="inline-block"
               />
             </button>
+            <DSMenu
+              items={servers}
+              placeholder="Select a server"
+              selectedItem={selectedServerName}
+              setSelectedItem={handleServerSelection}
+            />
           </h1>
         </div>
       </SidebarHeader>

@@ -7,7 +7,7 @@ import {
 import { Users } from "lucide-react";
 
 interface ServerPanelProps {
-  servers: { id: string; name: string }[];
+  servers: { id: string; name: string; iconURL: string }[];
   selectedServerName: string;
   handleServerSelection: (serverName: string) => void;
 }
@@ -29,7 +29,7 @@ export function ServerPanel({
       <AccordionContent className="pb-4">
         <div className="rounded-md">
           <DSMenu
-            items={servers.map((server) => server.name)}
+            items={servers}
             placeholder="Select a server"
             selectedItem={selectedServerName}
             setSelectedItem={handleServerSelection}
