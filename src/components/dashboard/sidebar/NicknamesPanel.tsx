@@ -186,7 +186,7 @@ export function NicknamesPanel({
           </ul>
         </div>
 
-        <div className="border-t border-[#252525] pt-2">
+        <div className="border-t border-[#252525]">
           <div className="pt-1">
             <button
               className="flex items-center gap-1 py-1 text-zinc-200 transition-all text-md cursor-pointer relative"
