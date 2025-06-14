@@ -35,12 +35,12 @@ const DSMenu: React.FC<DSMenuProps> = ({
         <span className={!selectedItem ? "text-neutral-400" : ""}>{title}</span>
         <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
           {isExpanded ? (
-            <ChevronDown
+            <ChevronUp
               className="h-5 w-5 cursor-pointer text-neutral-700 hover:text-white transition-all duration-200"
               aria-hidden="true"
             />
           ) : (
-            <ChevronUp
+            <ChevronDown
               className="h-5 w-5 cursor-pointer text-neutral-700 hover:text-white transition-all duration-200"
               aria-hidden="true"
             />
