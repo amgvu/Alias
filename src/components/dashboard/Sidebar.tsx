@@ -36,7 +36,7 @@ interface SidebarProps {
   theme: string;
   setTheme: (theme: string) => void;
   loading: boolean;
-  handleGenerateCharacters: () => void;
+  handleGenerateCharacters: (selectedMembers: Member[]) => void;
   categories: string[];
   onApplyToSelection: (selectedMembers: Member[]) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
@@ -76,6 +76,14 @@ export default function Sidebar({
       selectedUserIds.includes(member.user_id)
     );
     onApplyToSelection(selectedMembers);
+  };
+
+  const handleGenerate = () => {
+    if (!selectedUserIds || selectedUserIds.length === 0) return;
+    const selectedMembers = members.filter((member) =>
+      selectedUserIds.includes(member.user_id)
+    );
+    handleGenerateCharacters(selectedMembers);
   };
 
   return (
@@ -180,6 +188,7 @@ export default function Sidebar({
                       <DSButton
                         onClick={() => setShowCheckboxes(!showCheckboxes)}
                         className="w-full bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+                        disabled={!selectedServer}
                       >
                         <TextSelect className="w-4 h-4 mr-[-2px]" />
                         {showCheckboxes ? "Unselect" : "Select"}
@@ -288,18 +297,21 @@ export default function Sidebar({
                             className=""
                           >
                             <DSButton
-                              onClick={handleGenerateCharacters}
+                              onClick={handleGenerate}
                               className={`transition-all bg-[#ededed] ${
                                 !loading && "disabled:bg-zinc-900"
                               } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700`}
                               disabled={
                                 loading ||
                                 !selectedServer ||
-                                members.length === 0
+                                members.length === 0 ||
+                                selectedUserIds.length === 0
                               }
                             >
                               <WandSparkles className="w-4 h-4 mr-[-2px]" />
-                              Generate
+                              {selectedUserIds.length > 0
+                                ? `Generate ${selectedUserIds.length}`
+                                : "Generate"}
                             </DSButton>
                           </motion.div>
                         )}

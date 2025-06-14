@@ -38,9 +38,9 @@ export const useThemeGenerator = (
     return sortedRoles.flatMap((roleName) => groupedMembers[roleName]);
   };
 
-  const handleGenerateCharacters = async () => {
-    if (!members || members.length === 0) {
-      alert("No members found in the server. Please select a valid server.");
+  const handleGenerateCharacters = async (selectedMembers: Member[]) => {
+    if (!selectedMembers || selectedMembers.length === 0) {
+      alert("No members selected.");
       return;
     }
 
@@ -64,24 +64,29 @@ export const useThemeGenerator = (
 
     setLoading(true);
     try {
-      const numCharacters = members.length;
+      const numCharacters = selectedMembers.length;
       const characters = await characterGen(theme, category, numCharacters);
       setGeneratedThemes(characters);
 
       const generatedNames = characters.split(",").map((name) => name.trim());
 
-      const sortedMembers = getSortedMembers(members);
+      const sortedSelectedMembers = getSortedMembers(selectedMembers);
 
       const nicknameMapping: { [key: string]: string } = {};
-      sortedMembers.forEach((member, index) => {
+      sortedSelectedMembers.forEach((member, index) => {
         nicknameMapping[member.user_id] =
           generatedNames[index] || member.nickname;
       });
 
-      const updatedMembers = members.map((member) => ({
-        ...member,
-        nickname: nicknameMapping[member.user_id],
-      }));
+      const updatedMembers = members.map((member) => {
+        if (nicknameMapping[member.user_id]) {
+          return {
+            ...member,
+            nickname: nicknameMapping[member.user_id],
+          };
+        }
+        return member;
+      });
 
       setMembers(updatedMembers);
     } catch (error) {
