@@ -40,7 +40,7 @@ export default function ServerContent({
               {serversError || membersError}
             </div>
           ) : selectedServer ? (
-            <div className="w-full max-w-[256ch] ml-auto">
+            <div className="w-full max-w-[272ch] ml-auto">
               <DSUserList
                 selectedServer={selectedServer}
                 members={members}
