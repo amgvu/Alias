@@ -134,13 +134,11 @@ export default function Dashboard() {
         onSectionChange={setActiveSection}
       />
       <div
-        className={`w-auto transition-opacity duration-500 ${
+        className={`flex-1 transition-opacity duration-500 ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="flex justify-between items-center">
-          <div className="text-center font-bold"></div>
-        </div>
+        <div className="flex justify-between items-center"></div>
         <ServerContent
           selectedServer={selectedServer}
           serversError={serversError}

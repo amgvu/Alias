@@ -33,28 +33,32 @@ export default function ServerContent({
   return (
     <div className="flex flex-col">
       <TitleUpdater />
-      <div className="justify-items-center">
-        {serversError || membersError ? (
-          <div className="mb-3 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400">
-            {serversError || membersError}
-          </div>
-        ) : selectedServer ? (
-          <DSUserList
-            selectedServer={selectedServer}
-            members={members}
-            isUpdating={isUpdating}
-            onNicknameChange={onNicknameChange}
-            onApplyNickname={onApplyNickname}
-            isApplyingAll={isApplyingAll}
-            onSelectionChange={onSelectionChange}
-            showCheckboxes={showCheckboxes}
-            setShowCheckboxes={setShowCheckboxes}
-          />
-        ) : (
-          <div className="text-center font-semibold text-4xl text-zinc-500 py-5">
-            Select a server to view and manage members
-          </div>
-        )}
+      <div className="flex w-full">
+        <div className="w-full pl-[calc(12.5rem+2rem)] pr-4">
+          {serversError || membersError ? (
+            <div className="mb-3 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400">
+              {serversError || membersError}
+            </div>
+          ) : selectedServer ? (
+            <div className="w-full max-w-[256ch] ml-auto">
+              <DSUserList
+                selectedServer={selectedServer}
+                members={members}
+                isUpdating={isUpdating}
+                onNicknameChange={onNicknameChange}
+                onApplyNickname={onApplyNickname}
+                isApplyingAll={isApplyingAll}
+                onSelectionChange={onSelectionChange}
+                showCheckboxes={showCheckboxes}
+                setShowCheckboxes={setShowCheckboxes}
+              />
+            </div>
+          ) : (
+            <div className="text-center font-semibold text-4xl text-zinc-500 py-5">
+              Select a server to view and manage members
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

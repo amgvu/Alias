@@ -13,10 +13,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Image from "next/image";
+
 import { ServerPanel } from "./ServerPanel";
 import { NicknamesPanel } from "./NicknamesPanel";
-import { SessionPanel } from "./SessionPanel";
 
 interface SidebarProps {
   servers: { id: string; name: string }[];
@@ -78,22 +77,6 @@ export default function Sidebar({
       className="bg-zinc-950 border-r translate-x-56 border-[#252525] h-screen w-80"
     >
       <div>
-        <div className="py-4 bg-zinc-900/20 border-b border-[#252525] ">
-          <div className="flex items-center justify-between px-4">
-            <h1 className="space-x-2 mt-1">
-              <Image
-                src="/Arclify.svg"
-                width="30"
-                height="30"
-                alt="logo"
-                className="inline-block -translate-y-1"
-              />
-              <span className="text-zinc-200 text-xl font-gintoNord whitespace-nowrap">
-                Arclify
-              </span>
-            </h1>
-          </div>
-        </div>
         <div className="space-y-6 px-4 py-2">
           <Accordion
             type="multiple"
@@ -159,7 +142,6 @@ export default function Sidebar({
             </AccordionItem>
           </Accordion>
         </div>
-        <SessionPanel />
       </div>
     </motion.div>
   );
