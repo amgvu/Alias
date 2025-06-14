@@ -5,7 +5,6 @@ import { styles } from "./UserListCard.styles";
 import { Member } from "@/types/types";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  BookUser,
   X,
   Check,
   RotateCcw,
