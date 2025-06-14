@@ -1,8 +1,6 @@
-import { ReactNode } from "react";
-
 interface DashboardLayoutProps {
-  children: ReactNode;
-  sidebar: ReactNode;
+  children: React.ReactNode;
+  sidebar: React.ReactNode;
 }
 
 export default function DashboardLayout({
@@ -11,17 +9,9 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   return (
     <div className="min-h-screen font-ggSans text-white bg-background">
-      <div className="drawer lg:drawer-open">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col">{children}</div>
-        <div className="drawer-side">
-          <label
-            htmlFor="my-drawer-2"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          {sidebar}
-        </div>
+      <div className="flex">
+        <div className="flex-shrink-0">{sidebar}</div>
+        <div className="flex flex-col flex-1">{children}</div>
       </div>
     </div>
   );
