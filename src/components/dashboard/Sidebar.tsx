@@ -381,7 +381,7 @@ export default function Sidebar({
         {session?.user && (
           <div className="border-t bottom-0 w-80 absolute border-[#252525]">
             <div className="py-2 px-4 rounded-br-2xl bg-zinc-900/50">
-              <p className="text-zinc-400 text-xs font-medium mb-3">
+              <p className="text-zinc-400 text-xs font-medium mb-3 tracking-wider">
                 Signed in as:
               </p>
               <div className="flex items-center gap-3">
