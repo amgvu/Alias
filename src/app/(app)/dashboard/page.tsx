@@ -103,10 +103,7 @@ export default function Dashboard() {
     <DashboardLayout
       sidebar={
         <Sidebar
-          servers={servers}
           selectedServer={selectedServer}
-          selectedServerName={selectedServerName}
-          handleServerSelection={handleServerSelection}
           selectedArc={selectedArc}
           setSelectedArc={setSelectedArc}
           handleCreateNewArc={handleCreateNewArc}

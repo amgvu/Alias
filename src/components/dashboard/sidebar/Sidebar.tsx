@@ -3,14 +3,10 @@ import { motion } from "framer-motion";
 import { Member, Arc } from "@/types/types";
 import { Accordion } from "@/components/ui/accordion";
 
-import { ServerPanel } from "./ServerPanel";
 import { NicknamesPanel } from "./NicknamesPanel";
 
 interface SidebarProps {
-  servers: { id: string; name: string; iconURL: string }[];
   selectedServer: string;
-  selectedServerName: string;
-  handleServerSelection: (serverName: string) => void;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
   handleCreateNewArc: (newArcName: string) => void;
@@ -34,14 +30,10 @@ interface SidebarProps {
 }
 
 export default function Sidebar({
-  servers,
   selectedServer,
-  selectedServerName,
-  handleServerSelection,
   selectedArc,
   setSelectedArc,
   handleCreateNewArc,
-  //applyAllNicknames,
   isApplyingAll,
   isSavingArc,
   handleSaveArc,
@@ -72,12 +64,6 @@ export default function Sidebar({
             defaultValue={["servers", "nicknames"]}
             className="w-full"
           >
-            <ServerPanel
-              servers={servers}
-              selectedServerName={selectedServerName}
-              handleServerSelection={handleServerSelection}
-            />
-
             <NicknamesPanel
               selectedServer={selectedServer}
               selectedArc={selectedArc}
