@@ -60,7 +60,6 @@ export function NavigationSidebar({
   activeSection = "server",
   onSectionChange,
   servers,
-  selectedServerName,
   handleServerSelection,
 }: NavigationSidebarProps) {
   const { data: session } = useSession();
@@ -100,12 +99,7 @@ export function NavigationSidebar({
                 className="inline-block"
               />
             </button>
-            <DSMenu
-              items={servers}
-              placeholder="Select a server"
-              selectedItem={selectedServerName}
-              setSelectedItem={handleServerSelection}
-            />
+            <DSMenu items={servers} setSelectedItem={handleServerSelection} />
           </h1>
         </div>
       </SidebarHeader>

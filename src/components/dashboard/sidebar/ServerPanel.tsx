@@ -14,7 +14,7 @@ interface ServerPanelProps {
 
 export function ServerPanel({
   servers,
-  selectedServerName,
+
   handleServerSelection,
 }: ServerPanelProps) {
   return (
@@ -28,12 +28,7 @@ export function ServerPanel({
 
       <AccordionContent className="pb-4">
         <div className="rounded-md">
-          <DSMenu
-            items={servers}
-            placeholder="Select a server"
-            selectedItem={selectedServerName}
-            setSelectedItem={handleServerSelection}
-          />
+          <DSMenu items={servers} setSelectedItem={handleServerSelection} />
         </div>
       </AccordionContent>
     </AccordionItem>

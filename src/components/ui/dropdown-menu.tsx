@@ -26,7 +26,7 @@ function DropdownMenuTrigger({
   return (
     <DropdownMenuPrimitive.Trigger
       data-slot="dropdown-menu-trigger"
-      className="w-full flex justify-between items-center bg-black border border-[#252525] rounded-lg p-2 text-left h-10 cursor-pointer"
+      className="w-full flex justify-between items-center rounded-lg p-2 text-left h-5 cursor-pointer"
       {...props}
     />
   );

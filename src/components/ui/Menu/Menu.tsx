@@ -5,6 +5,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import { Server } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
@@ -16,38 +17,33 @@ interface ServerItem {
 
 interface DSMenuProps {
   items: ServerItem[];
-  selectedItem: string;
+
   setSelectedItem: (item: string) => void;
-  placeholder?: string;
 }
 
 function DSMenu({
   items,
-  selectedItem,
+
   setSelectedItem,
-  placeholder,
 }: DSMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const title = selectedItem || placeholder;
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <button>
-          <span className={!selectedItem ? "text-neutral-400" : ""}>
-            {title}
-          </span>
+          <Server />
           <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
             {isOpen ? (
-              <ChevronUp className="h-5 w-5 text-neutral-700 hover:text-white transition-all duration-200" />
+              <ChevronUp className="h-5 w-5 text-zinc-700 hover:text-white transition-all duration-200" />
             ) : (
-              <ChevronDown className="h-5 w-5 text-neutral-700 hover:text-white transition-all duration-200" />
+              <ChevronDown className="h-5 w-5 text-zinc-700 hover:text-white transition-all duration-200" />
             )}
           </motion.div>
         </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-64 mt-2 p-1 max-h-60 overflow-auto">
+      <DropdownMenuContent className="w-48 mt-2 p-1 max-h-60 overflow-auto">
         {items.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
