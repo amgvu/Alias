@@ -199,7 +199,7 @@ export default function VirtualizerList({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div ref={parentRef} className="h-[1340px] overflow-auto">
+      <div ref={parentRef} className="h-screen overflow-auto">
         <div
           style={{
             height: `${virtualizer.getTotalSize()}px`,

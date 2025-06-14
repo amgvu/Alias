@@ -11,6 +11,7 @@ import {
   Settings,
   Binoculars,
   Landmark,
+  LogOut,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ChevronsLeft,
 } from "lucide-react";
@@ -23,7 +24,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 interface SidebarProps {
   servers: { id: string; name: string }[];
@@ -93,6 +94,10 @@ export default function Sidebar({
       selectedUserIds.includes(member.user_id)
     );
     handleGenerateCharacters(selectedMembers);
+  };
+
+  const handleDiscordLogout = () => {
+    signOut({ callbackUrl: "/", redirect: true });
   };
 
   return (
@@ -380,7 +385,7 @@ export default function Sidebar({
         </div>
         {session?.user && (
           <div className="border-t bottom-0 w-80 absolute border-[#252525]">
-            <div className="py-2 px-4 rounded-br-2xl bg-zinc-900/50">
+            <div className="py-3 px-4 rounded-br-2xl bg-zinc-900/50">
               <p className="text-zinc-400 text-xs font-medium mb-3 tracking-wider">
                 Signed in as:
               </p>
@@ -388,8 +393,8 @@ export default function Sidebar({
                 <Image
                   src={session.user.image || "/default-avatar.png"}
                   alt="Profile"
-                  width={40}
-                  height={40}
+                  width={36}
+                  height={36}
                   className="rounded-full ring-2 ring-zinc-800"
                 />
                 <div className="flex-1 min-w-0">
@@ -397,6 +402,12 @@ export default function Sidebar({
                     {session.user.name}
                   </p>
                 </div>
+                <button
+                  onClick={handleDiscordLogout}
+                  className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors"
+                >
+                  <LogOut className="h-6 w-6" />
+                </button>
               </div>
             </div>
           </div>

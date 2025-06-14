@@ -33,7 +33,6 @@ export default function ServerContent({
   return (
     <div className="flex flex-col">
       <TitleUpdater />
-      <div className="text-4xl text-zinc-600 font-semibold text-center py-2"></div>
       <div className="justify-items-center">
         {serversError || membersError ? (
           <div className="mb-3 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400">
