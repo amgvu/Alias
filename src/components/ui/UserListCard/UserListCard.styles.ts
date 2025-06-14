@@ -1,6 +1,6 @@
 export const styles = {
   card: "w-full place-items-center-left bg-[#101012] border border-zinc-800 px-4 py-2 rounded-md duration-200 transition-all",
-  avatar: "w-12 h-12 border-1 border-zinc-700 rounded-full object-cover",
+  avatar: "w-12 h-12 ring-2 ring-zinc-800 rounded-full object-cover",
   memberDetails: "flex-1",
   nicknameInput:
     "w-full max-w-128 hover:bg-zinc-800 bg-zinc-900 transition-all duration-200 font-bold rounded-md focus:outline-hidden focus:ring-1 focus:ring-[#4E4E4E]",

@@ -390,7 +390,7 @@ export default function Sidebar({
                   alt="Profile"
                   width={40}
                   height={40}
-                  className="rounded-full ring-2 ring-zinc-700/50"
+                  className="rounded-full ring-2 ring-zinc-800"
                 />
                 <div className="flex-1 min-w-0">
                   <p className="text-zinc-200 font-medium text-sm truncate">
