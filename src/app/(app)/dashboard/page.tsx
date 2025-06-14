@@ -12,6 +12,7 @@ import {
 } from "@/lib/hooks";
 import { DashboardLayout, ServerContent, Sidebar } from "@/components";
 import { LoaderCircle } from "lucide-react";
+import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -59,6 +60,7 @@ export default function Dashboard() {
 
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
+  const [activeSection, setActiveSection] = useState("server");
 
   useEffect(() => {
     setShowCheckboxes(false);
@@ -127,6 +129,10 @@ export default function Dashboard() {
         />
       }
     >
+      <NavigationSidebar
+        activeSection={activeSection}
+        onSectionChange={setActiveSection}
+      />
       <div
         className={`w-auto transition-opacity duration-500 ${
           isLoaded ? "opacity-100" : "opacity-0"
