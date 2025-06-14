@@ -123,7 +123,7 @@ export function DSUserList({
               variants={checkboxContainerVariants}
               initial="hidden"
               animate={showCheckboxes ? "visible" : "hidden"}
-              className="overflow-hidden  mt-4 flex-shrink-0"
+              className="overflow-hidden mt-4 flex-shrink-0"
             >
               <Checkbox
                 className="border-zinc-300 border-2 cursor-pointer"

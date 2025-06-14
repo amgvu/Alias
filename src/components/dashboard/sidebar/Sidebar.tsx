@@ -75,7 +75,7 @@ export default function Sidebar({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-zinc-950 border-r border-[#252525] h-screen w-64"
+      className="bg-zinc-950 border-r border-[#252525] h-screen w-80"
     >
       <div>
         <div className="py-4 bg-zinc-900/20 border-b border-[#252525] ">

@@ -2,7 +2,7 @@ export const menuButtonStyles =
   "w-full flex justify-between cursor-pointer items-center bg-black border rounded-lg border-[#252525] p-2 text-left h-10";
 
 export const menuItemsStyles =
-  "absolute z-10 mt-1 w-56 bg-black border border-[#252525] rounded-lg shadow-lg";
+  "absolute z-10 mt-1 w-72 bg-black border border-[#252525] rounded-lg shadow-lg";
 
 export const menuItemStyles = (active: boolean) => {
   return `${
