@@ -11,6 +11,7 @@ import {
   Settings,
   Binoculars,
   Landmark,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ChevronsLeft,
 } from "lucide-react";
 import { DSButton, DSMenu, DSCreateMenu } from "@/components";
@@ -101,7 +102,7 @@ export default function Sidebar({
       <div>
         <div className="py-4 bg-zinc-900/20 border-b border-[#252525] rounded-tr-2xl">
           <div className="flex items-center justify-between px-4">
-            <h1 className="space-x-2">
+            <h1 className="space-x-2 mt-1">
               <Image
                 src="/Arclify.svg"
                 width="30"
@@ -113,12 +114,9 @@ export default function Sidebar({
                 Arclify
               </span>
             </h1>
-            <button className="text-zinc-500 cursor-pointer hover:text-zinc-300 transition-all duration-200">
-              <ChevronsLeft className="h-4 w-4" />
-            </button>
           </div>
         </div>
-        <div className="space-y-6 mt-3 p-4">
+        <div className="space-y-6 px-4 py-2">
           <Accordion
             type="multiple"
             defaultValue={["servers", "nicknames"]}
@@ -126,8 +124,8 @@ export default function Sidebar({
           >
             <AccordionItem value="servers">
               <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
+                <div className="flex items-center gap-4">
+                  <Users className="w-4.5 h-4.5" />
                   <span>Servers</span>
                 </div>
               </AccordionTrigger>
@@ -146,8 +144,8 @@ export default function Sidebar({
 
             <AccordionItem value="nicknames">
               <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-2">
-                  <NotebookText className="w-5 h-5" />
+                <div className="flex items-center gap-4">
+                  <NotebookText className="w-4.5 h-4.5" />
                   <span>Nicknames</span>
                 </div>
               </AccordionTrigger>
@@ -347,60 +345,33 @@ export default function Sidebar({
             </AccordionItem>
             <AccordionItem value="p">
               <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-2">
-                  <Landmark className="w-5 h-5" />
+                <div className="flex items-center gap-4">
+                  <Landmark className="w-4.5 h-4.5" />
                   <span>Roles</span>
                 </div>
               </AccordionTrigger>
 
-              <AccordionContent className="pb-4">
-                <div className="rounded-md">
-                  <DSMenu
-                    items={servers.map((server) => server.name)}
-                    placeholder="Select a server"
-                    selectedItem={selectedServerName}
-                    setSelectedItem={handleServerSelection}
-                  />
-                </div>
-              </AccordionContent>
+              <AccordionContent className="pb-4"></AccordionContent>
             </AccordionItem>
             <AccordionItem value="g">
               <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-2">
-                  <Binoculars className="w-5 h-5" />
+                <div className="flex items-center gap-4">
+                  <Binoculars className="w-4.5 h-4.5" />
                   <span>Monitoring</span>
                 </div>
               </AccordionTrigger>
 
-              <AccordionContent className="pb-4">
-                <div className="rounded-md">
-                  <DSMenu
-                    items={servers.map((server) => server.name)}
-                    placeholder="Select a server"
-                    selectedItem={selectedServerName}
-                    setSelectedItem={handleServerSelection}
-                  />
-                </div>
-              </AccordionContent>
+              <AccordionContent className="pb-4"></AccordionContent>
             </AccordionItem>
             <AccordionItem value="s">
               <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-2">
-                  <Settings className="w-5 h-5" />
+                <div className="flex items-center gap-4">
+                  <Settings className="w-4.5 h-4.5" />
                   <span>Utilities</span>
                 </div>
               </AccordionTrigger>
 
-              <AccordionContent className="pb-4">
-                <div className="rounded-md">
-                  <DSMenu
-                    items={servers.map((server) => server.name)}
-                    placeholder="Select a server"
-                    selectedItem={selectedServerName}
-                    setSelectedItem={handleServerSelection}
-                  />
-                </div>
-              </AccordionContent>
+              <AccordionContent className="pb-4"></AccordionContent>
             </AccordionItem>
           </Accordion>
         </div>
