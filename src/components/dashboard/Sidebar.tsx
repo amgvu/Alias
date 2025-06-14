@@ -8,6 +8,12 @@ import {
   TextSelect,
   Users,
   NotebookText,
+  Settings,
+  Binoculars,
+  Landmark,
+  LogOut,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ChevronsLeft,
 } from "lucide-react";
 import { DSButton, DSMenu, DSCreateMenu } from "@/components";
 import { Member, Arc } from "@/types/types";
@@ -17,6 +23,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
 
 interface SidebarProps {
   servers: { id: string; name: string }[];
@@ -70,6 +78,8 @@ export default function Sidebar({
   showCheckboxes,
   setShowCheckboxes,
 }: SidebarProps) {
+  const { data: session } = useSession();
+
   const handleApply = () => {
     if (!selectedUserIds || selectedUserIds.length === 0) return;
     const selectedMembers = members.filter((member) =>
@@ -86,15 +96,35 @@ export default function Sidebar({
     handleGenerateCharacters(selectedMembers);
   };
 
+  const handleDiscordLogout = () => {
+    signOut({ callbackUrl: "/", redirect: true });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="menu bg-zinc-950 border-r rounded-2xl border-[#252525] min-h-full h-23 w-80 p-4"
+      className="bg-zinc-950 border-r rounded-2xl border-[#252525] h-screen w-80"
     >
       <div>
-        <div className="space-y-6 mt-3">
+        <div className="py-4 bg-zinc-900/20 border-b border-[#252525] rounded-tr-2xl">
+          <div className="flex items-center justify-between px-4">
+            <h1 className="space-x-2 mt-1">
+              <Image
+                src="/Arclify.svg"
+                width="30"
+                height="30"
+                alt="logo"
+                className="inline-block -translate-y-1"
+              />
+              <span className="text-zinc-200 text-xl font-gintoNord whitespace-nowrap">
+                Arclify
+              </span>
+            </h1>
+          </div>
+        </div>
+        <div className="space-y-6 px-4 py-2">
           <Accordion
             type="multiple"
             defaultValue={["servers", "nicknames"]}
@@ -102,8 +132,8 @@ export default function Sidebar({
           >
             <AccordionItem value="servers">
               <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
+                <div className="flex items-center gap-4">
+                  <Users className="w-4.5 h-4.5" />
                   <span>Servers</span>
                 </div>
               </AccordionTrigger>
@@ -122,8 +152,8 @@ export default function Sidebar({
 
             <AccordionItem value="nicknames">
               <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
-                <div className="flex items-center gap-2">
-                  <NotebookText className="w-5 h-5" />
+                <div className="flex items-center gap-4">
+                  <NotebookText className="w-4.5 h-4.5" />
                   <span>Nicknames</span>
                 </div>
               </AccordionTrigger>
@@ -321,8 +351,67 @@ export default function Sidebar({
                 </div>
               </AccordionContent>
             </AccordionItem>
+            <AccordionItem value="p">
+              <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
+                <div className="flex items-center gap-4">
+                  <Landmark className="w-4.5 h-4.5" />
+                  <span>Roles</span>
+                </div>
+              </AccordionTrigger>
+
+              <AccordionContent className="pb-4"></AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="g">
+              <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
+                <div className="flex items-center gap-4">
+                  <Binoculars className="w-4.5 h-4.5" />
+                  <span>Monitoring</span>
+                </div>
+              </AccordionTrigger>
+
+              <AccordionContent className="pb-4"></AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="s">
+              <AccordionTrigger className="text-lg text-zinc-400 font-medium hover:text-zinc-100 hover:no-underline">
+                <div className="flex items-center gap-4">
+                  <Settings className="w-4.5 h-4.5" />
+                  <span>Utilities</span>
+                </div>
+              </AccordionTrigger>
+
+              <AccordionContent className="pb-4"></AccordionContent>
+            </AccordionItem>
           </Accordion>
         </div>
+        {session?.user && (
+          <div className="border-t bottom-0 w-80 absolute border-[#252525]">
+            <div className="py-3 px-4 rounded-br-2xl bg-zinc-900/50">
+              <p className="text-zinc-400 text-xs font-medium mb-3 tracking-wider">
+                Signed in as:
+              </p>
+              <div className="flex items-center gap-3">
+                <Image
+                  src={session.user.image || "/default-avatar.png"}
+                  alt="Profile"
+                  width={36}
+                  height={36}
+                  className="rounded-full ring-2 ring-zinc-800"
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-zinc-200 font-medium text-sm truncate">
+                    {session.user.name}
+                  </p>
+                </div>
+                <button
+                  onClick={handleDiscordLogout}
+                  className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors"
+                >
+                  <LogOut className="h-6 w-6" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );
