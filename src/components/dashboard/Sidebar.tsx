@@ -100,7 +100,7 @@ export default function Sidebar({
                 </div>
               </AccordionTrigger>
 
-              <AccordionContent className="pb-4">
+              <AccordionContent className="pb-40">
                 <div className="rounded-md">
                   <DSMenu
                     items={servers.map((server) => server.name)}
@@ -119,7 +119,11 @@ export default function Sidebar({
                   <span>Nicknames</span>
                 </div>
               </AccordionTrigger>
+
               <AccordionContent className="pb-4 space-y-3">
+                <label className="inline-block text-zinc-200 text-lg font-medium">
+                  Nickname Sets
+                </label>
                 <DSCreateMenu
                   selectedServer={selectedServer}
                   selectedArc={selectedArc}
@@ -224,16 +228,12 @@ export default function Sidebar({
                   </ul>
                 </div>
 
-                <div className="border-t border-[#252525] pt-4">
+                <div className="border-t border-[#252525] pt-2">
                   <label className="inline-block text-zinc-200 text-lg font-medium">
                     Name Generator
                   </label>
-                  <h3 className="font-light mt-1 text-sm text-zinc-400">
-                    Generate names for your members based on a theme and apply
-                    them within seconds.
-                  </h3>
 
-                  <div className="mt-4">
+                  <div className="pt-1">
                     <button
                       className="flex items-center gap-1 py-1 text-zinc-200 transition-all text-md cursor-pointer relative"
                       onClick={() =>
