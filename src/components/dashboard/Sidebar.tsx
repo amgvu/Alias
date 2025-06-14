@@ -100,7 +100,7 @@ export default function Sidebar({
                 </div>
               </AccordionTrigger>
 
-              <AccordionContent className="pb-40">
+              <AccordionContent className="pb-4">
                 <div className="rounded-md">
                   <DSMenu
                     items={servers.map((server) => server.name)}

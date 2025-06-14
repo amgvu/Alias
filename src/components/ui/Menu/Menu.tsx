@@ -27,7 +27,7 @@ const DSMenu: React.FC<DSMenuProps> = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Menu as="div" className="relative w-full">
+    <Menu as="div" className="overflow-visible w-full">
       <Menu.Button
         className={menuButtonStyles}
         onClick={() => setIsExpanded(!isExpanded)}
