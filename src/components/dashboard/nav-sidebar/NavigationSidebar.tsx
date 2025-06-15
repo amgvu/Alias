@@ -1,6 +1,13 @@
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
-import { Settings, Binoculars, Landmark, Users, LogOut } from "lucide-react";
+import {
+  Settings,
+  Binoculars,
+  Users,
+  LogOut,
+  HelpCircle,
+  UserRoundPen,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -26,26 +33,37 @@ interface NavigationSidebarProps {
   handleServerSelection: (server: Server) => void;
 }
 
-const navigationItems = [
+const userItems = [
   {
     title: "Nicknames",
-    icon: Users,
+    icon: UserRoundPen,
     value: "nicknames",
   },
   {
     title: "Roles",
-    icon: Landmark,
+    icon: Users,
     value: "roles",
   },
+];
+
+const serverItems = [
   {
     title: "Monitoring",
     icon: Binoculars,
     value: "monitoring",
   },
+];
+
+const settingsItems = [
   {
-    title: "Utilities",
+    title: "Settings",
     icon: Settings,
-    value: "utilities",
+    value: "settings",
+  },
+  {
+    title: "Help",
+    icon: HelpCircle,
+    value: "help",
   },
 ];
 
@@ -108,16 +126,16 @@ export function NavigationSidebar({
         )}
       </SidebarHeader>
 
-      <SidebarContent className="">
+      <SidebarContent className="flex flex-col">
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium mb-0.5 tracking-wide uppercase">
-              Workspace
+            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium mb-0.5 tracking-wide">
+              Users
             </SidebarGroupLabel>
           )}
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigationItems.map((item) => (
+              {userItems.map((item) => (
                 <SidebarMenuItem key={item.value}>
                   <SidebarMenuButton
                     onClick={() => onSectionChange?.(item.value)}
@@ -140,6 +158,72 @@ export function NavigationSidebar({
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        <SidebarGroup>
+          {!isMinimized && (
+            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium mb-0.5 tracking-wide">
+              Server
+            </SidebarGroupLabel>
+          )}
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {serverItems.map((item) => (
+                <SidebarMenuItem key={item.value}>
+                  <SidebarMenuButton
+                    onClick={() => onSectionChange?.(item.value)}
+                    isActive={activeSection === item.value}
+                    className={`
+                      text-base font-medium transition-colors duration-200
+                      ${isMinimized ? "justify-center" : ""}
+                      ${
+                        activeSection === item.value
+                          ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
+                      }
+                    `}
+                  >
+                    <item.icon className="text-zinc-500" />
+                    {!isMinimized && <span>{item.title}</span>}
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <div className="mt-auto">
+          <SidebarGroup>
+            {!isMinimized && (
+              <SidebarGroupLabel className="text-zinc-400 text-xs font-medium mb-0.5 tracking-wide">
+                More
+              </SidebarGroupLabel>
+            )}
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {settingsItems.map((item) => (
+                  <SidebarMenuItem key={item.value}>
+                    <SidebarMenuButton
+                      onClick={() => onSectionChange?.(item.value)}
+                      isActive={activeSection === item.value}
+                      className={`
+                        text-base font-medium transition-colors duration-200
+                        ${isMinimized ? "justify-center" : ""}
+                        ${
+                          activeSection === item.value
+                            ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                            : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
+                        }
+                      `}
+                    >
+                      <item.icon className="text-zinc-500" />
+                      {!isMinimized && <span>{item.title}</span>}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </div>
       </SidebarContent>
 
       {session?.user && (
