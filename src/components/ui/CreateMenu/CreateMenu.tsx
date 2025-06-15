@@ -134,7 +134,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-100"
       >
-        <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-input py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
+        <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-card py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
           {isLoading ? (
             <motion.div
               initial={{ opacity: 0 }}
@@ -175,8 +175,8 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
               flex justify-between items-center w-full
               ${
                 active
-                  ? "bg-neutral-900 transition-all rounded-lg text-neutral-white"
-                  : "text-neutral-400 hover:text-white"
+                  ? "bg-[#1f1f23] transition-all rounded-lg text-neutral-white"
+                  : "text-zinc-200 hover:text-white"
               }
             `}
                           layout

@@ -43,7 +43,7 @@ function DropdownMenuContent({
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
         className={cn(
-          "bg-card text-white border border-zinc-700 rounded-md shadow-lg z-50 mt-1 w-72 p-1",
+          "bg-card text-white border border-border rounded-md shadow-lg z-50 mt-1 w-72 p-1",
           "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
           className
         )}

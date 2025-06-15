@@ -73,8 +73,8 @@ export function NicknamesPanel({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-4">
-        <NotebookText className="w-4.5 h-4.5" />
-        <span>Nickname Sets</span>
+        <NotebookText className="w-4.5 text-zinc-200 h-4.5" />
+        <span className="text-zinc-200">Nickname Sets</span>
       </div>
 
       <DSCreateMenu
@@ -97,8 +97,8 @@ export function NicknamesPanel({
                   transition={{ duration: 0.2 }}
                   className="flex items-center justify-center w-full"
                 >
-                  <Loader2 className="animate-spin w-4 h-4 text-zinc-100" />
-                  <p className="ml-2 text-sm text-zinc-100">Applying...</p>
+                  <Loader2 className="animate-spin w-4 h-4 text-zinc-200" />
+                  <p className="ml-2 text-sm text-zinc-200">Applying...</p>
                 </motion.div>
               ) : (
                 <motion.div
@@ -111,7 +111,7 @@ export function NicknamesPanel({
                 >
                   <DSButton
                     onClick={handleApply}
-                    className="w-full bg-zinc-800 disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700"
+                    className="w-full bg-zinc-800 disabled:bg-[#1a1a1c] disabled:text-zinc-600 border border-zinc-700 text-zinc-200 font-bold hover:bg-zinc-700"
                     disabled={
                       isApplyingAll ||
                       !selectedServer ||
@@ -130,7 +130,7 @@ export function NicknamesPanel({
 
             <DSButton
               onClick={() => setShowCheckboxes(!showCheckboxes)}
-              className="w-full bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+              className="w-full bg-zinc-800 font-bold disabled:bg-[#1a1a1c] disabled:text-zinc-600 border border-zinc-700 text-zinc-200 hover:bg-zinc-700"
               disabled={!selectedServer}
             >
               <TextSelect className="w-4 h-4 mr-[-2px]" />
@@ -148,8 +148,8 @@ export function NicknamesPanel({
                 transition={{ duration: 0.2 }}
                 className="flex items-center justify-center"
               >
-                <Loader2 className="animate-spin w-4 h-4 text-zinc-100" />
-                <p className="ml-2 text-sm text-zinc-100">Saving Set...</p>
+                <Loader2 className="animate-spin w-4 h-4 text-zinc-200" />
+                <p className="ml-2 text-sm text-zinc-200">Saving Set...</p>
               </motion.div>
             ) : (
               <motion.div
@@ -161,7 +161,7 @@ export function NicknamesPanel({
               >
                 <DSButton
                   onClick={handleSaveArc}
-                  className="w-full bg-zinc-800 font-bold disabled:bg-zinc-900 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 hover:bg-zinc-700"
+                  className="w-full bg-zinc-800 font-bold disabled:bg-[#1a1a1c] disabled:text-zinc-600 border border-zinc-700 text-zinc-200 hover:bg-zinc-700"
                   disabled={
                     isSavingArc ||
                     !selectedServer ||
@@ -205,7 +205,7 @@ export function NicknamesPanel({
             </AnimatePresence>
           </button>
           <input
-            className="bg-input py-1.5 border text-md text-zinc-100 rounded-md border-[#252525] cursor-pointer pl-2 focus:cursor-auto max-w-full shadow-white/10 focus:outline-hidden focus:ring-1 focus:ring-neutral-100 transition duration-200 ease-in-out w-full"
+            className="bg-input py-1.5 border text-md text-zinc-200 rounded-md border-[#252525] cursor-pointer pl-2 focus:cursor-auto max-w-full shadow-white/10 focus:outline-hidden focus:ring-1 focus:ring-neutral-100 transition duration-200 ease-in-out w-full"
             placeholder="Enter a movie, game, thing, etc"
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
@@ -221,7 +221,7 @@ export function NicknamesPanel({
                   transition={{ duration: 0.2 }}
                   className="flex items-center justify-center"
                 >
-                  <Loader2 className="animate-spin w-8 h-8 text-zinc-100" />
+                  <Loader2 className="animate-spin w-8 h-8 text-zinc-200" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -235,8 +235,8 @@ export function NicknamesPanel({
                   <DSButton
                     onClick={handleGenerate}
                     className={`transition-all bg-[#ededed] ${
-                      !loading && "disabled:bg-zinc-900"
-                    } bg-zinc-800 disabled:text-zinc-500 border border-zinc-700 text-zinc-100 font-bold hover:bg-zinc-700`}
+                      !loading && "disabled:bg-[#1a1a1c]"
+                    } bg-zinc-800 disabled:text-zinc-600 border border-zinc-700 text-zinc-200 font-bold hover:bg-zinc-700`}
                     disabled={
                       loading ||
                       !selectedServer ||

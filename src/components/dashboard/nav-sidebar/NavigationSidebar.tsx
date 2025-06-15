@@ -111,7 +111,7 @@ export function NavigationSidebar({
       <SidebarContent className="">
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-zinc-200 text-xs font-medium mb-0.5 tracking-wide uppercase">
+            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium mb-0.5 tracking-wide uppercase">
               Workspace
             </SidebarGroupLabel>
           )}
@@ -123,7 +123,7 @@ export function NavigationSidebar({
                     onClick={() => onSectionChange?.(item.value)}
                     isActive={activeSection === item.value}
                     className={`
-                      text-md font-medium transition-colors duration-200
+                      text-base font-medium transition-colors duration-200
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
@@ -132,7 +132,7 @@ export function NavigationSidebar({
                       }
                     `}
                   >
-                    <item.icon className="w-6 h-6" />
+                    <item.icon className="text-zinc-500" />
                     {!isMinimized && <span>{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
