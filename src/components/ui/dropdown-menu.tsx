@@ -43,7 +43,7 @@ function DropdownMenuContent({
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
         className={cn(
-          "bg-zinc-950 text-white border border-[#252525] rounded-md shadow-lg z-50 mt-1 w-72 p-1",
+          "bg-card text-white border border-zinc-700 rounded-md shadow-lg z-50 mt-1 w-72 p-1",
           "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
           className
         )}
@@ -76,7 +76,7 @@ function DropdownMenuItem({
       data-inset={inset}
       data-variant={variant}
       className={cn(
-        "hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200 transition-all rounded-md cursor-pointer px-2 py-2 text-xs",
+        "hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 transition-all rounded-md cursor-pointer px-2 py-2 text-xs",
 
         className
       )}

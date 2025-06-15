@@ -12,7 +12,7 @@ export default function LayoutHTML({
     <ClientProvider>
       <SupabaseProvider>
         <SidebarProvider>
-          <main>{children}</main>
+          <main className="bg-zinc-100">{children}</main>
         </SidebarProvider>
       </SupabaseProvider>
     </ClientProvider>

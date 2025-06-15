@@ -70,14 +70,14 @@ export function NavigationSidebar({
   return (
     <Sidebar
       className={`
-        bg-zinc-950 border-r border-[#252525]
+         bg-[#09090b] border-border
         transition-all duration-300 ease-in-out
         ${isMinimized ? "w-[70px]" : ""}
       `}
     >
       <SidebarHeader
         className={`
-    py-3 bg-zinc-900/20 border-b border-[#252525]
+    py-3 bg-zinc-900/20 border-b border-border
     flex items-center ${isMinimized ? "justify-center" : "justify-between"} px-4
   `}
       >
@@ -95,7 +95,7 @@ export function NavigationSidebar({
             />
           </button>
           {!isMinimized && (
-            <h1 className="text-zinc-300 font-medium text-sm truncate max-w-[120px]">
+            <h1 className="text-zinc-200 font-medium text-sm truncate max-w-[120px]">
               {selectedServer ? selectedServer.name : "Select a server"}
             </h1>
           )}
@@ -108,10 +108,10 @@ export function NavigationSidebar({
         )}
       </SidebarHeader>
 
-      <SidebarContent className="px-2">
+      <SidebarContent className="">
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-zinc-500 text-xs font-medium mb-2 tracking-wide uppercase">
+            <SidebarGroupLabel className="text-zinc-200 text-xs font-medium mb-0.5 tracking-wide uppercase">
               Workspace
             </SidebarGroupLabel>
           )}
@@ -123,16 +123,16 @@ export function NavigationSidebar({
                     onClick={() => onSectionChange?.(item.value)}
                     isActive={activeSection === item.value}
                     className={`
-                      text-lg font-medium transition-colors duration-200
+                      text-md font-medium transition-colors duration-200
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
                           ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
-                          : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/50"
+                          : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}
                   >
-                    <item.icon className="w-4.5 h-4.5" />
+                    <item.icon className="w-6 h-6" />
                     {!isMinimized && <span>{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -143,7 +143,7 @@ export function NavigationSidebar({
       </SidebarContent>
 
       {session?.user && (
-        <SidebarFooter className="border-t border-[#252525] p-0">
+        <SidebarFooter className="border-t border-border p-0">
           <div className="py-3 px-4 bg-zinc-900/20">
             {!isMinimized && (
               <p className="text-zinc-400 text-xs font-medium mb-3 tracking-wider">

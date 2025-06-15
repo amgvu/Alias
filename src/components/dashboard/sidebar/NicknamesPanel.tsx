@@ -205,7 +205,7 @@ export function NicknamesPanel({
             </AnimatePresence>
           </button>
           <input
-            className="bg-black py-1.5 border text-md text-zinc-100 rounded-md border-[#252525] cursor-pointer pl-2 focus:cursor-auto max-w-full shadow-white/10 focus:outline-hidden focus:ring-1 focus:ring-neutral-100 transition duration-200 ease-in-out w-full"
+            className="bg-input py-1.5 border text-md text-zinc-100 rounded-md border-[#252525] cursor-pointer pl-2 focus:cursor-auto max-w-full shadow-white/10 focus:outline-hidden focus:ring-1 focus:ring-neutral-100 transition duration-200 ease-in-out w-full"
             placeholder="Enter a movie, game, thing, etc"
             value={theme}
             onChange={(e) => setTheme(e.target.value)}

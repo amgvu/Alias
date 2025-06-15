@@ -102,7 +102,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
           onFocus={handleOpen}
           displayValue={(arc: Arc | null) => arc?.arc_name || ""}
           onChange={(event) => setQuery(event.target.value)}
-          className="w-full p-2 pr-10 bg-black border cursor-pointer focus:cursor-auto border-[#252525] rounded-lg transition-all text-neutral-100 focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
+          className="w-full p-2 pr-10 bg-input border cursor-pointer focus:cursor-auto border-[#252525] rounded-lg transition-all text-neutral-100 focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
           placeholder="Select or create a set"
         />
         <Combobox.Button
@@ -134,7 +134,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-100"
       >
-        <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-black py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
+        <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-input py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
           {isLoading ? (
             <motion.div
               initial={{ opacity: 0 }}
