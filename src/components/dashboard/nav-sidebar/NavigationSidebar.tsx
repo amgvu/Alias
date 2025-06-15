@@ -14,6 +14,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import DSMenu from "@/components/ui/Menu/Menu";
+import { Server as ServerIcon } from "lucide-react";
 import { Server } from "@/types/types";
 
 import { useState } from "react";
@@ -90,7 +91,7 @@ export function NavigationSidebar({
                 width="38"
                 height="38"
                 alt="logo"
-                className="inline-block"
+                className="inline-block rounded-full ring-2 ring-zinc-800"
               />
             </button>
           </h1>
