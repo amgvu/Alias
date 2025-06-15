@@ -78,11 +78,10 @@ export function NavigationSidebar({
       <SidebarHeader
         className={`
     py-3 bg-zinc-900/20 border-b border-[#252525]
-    flex items-center justify-between px-4
-    ${isMinimized ? "justify-center" : ""}
+    flex items-center ${isMinimized ? "justify-center" : "justify-between"} px-4
   `}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-1">
           <button
             className="cursor-pointer flex items-center"
             onClick={toggleMinimize}
@@ -95,12 +94,18 @@ export function NavigationSidebar({
               className="inline-block w-9 h-9 rounded-lg ring-zinc-800"
             />
           </button>
-          {!isMinimized && <h1>{selectedServer?.name}</h1>}
-
           {!isMinimized && (
-            <DSMenu items={servers} setSelectedItem={handleServerSelection} />
+            <h1 className="text-zinc-300 font-medium text-sm truncate max-w-[120px]">
+              {selectedServer ? selectedServer.name : "Select a server"}
+            </h1>
           )}
         </div>
+
+        {!isMinimized && (
+          <div className="flex-shrink-0">
+            <DSMenu items={servers} setSelectedItem={handleServerSelection} />
+          </div>
+        )}
       </SidebarHeader>
 
       <SidebarContent className="px-2">

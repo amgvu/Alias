@@ -34,7 +34,7 @@ export default function ServerContent({
     <div className="flex flex-col">
       <TitleUpdater />
       <div className="flex w-full">
-        <div className="w-full pl-[calc(12.5rem+2rem)] pr-4">
+        <div className="w-full pl-[calc(14.5rem+2rem)] pr-4">
           {serversError || membersError ? (
             <div className="mb-3 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400">
               {serversError || membersError}

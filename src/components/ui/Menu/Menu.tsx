@@ -36,7 +36,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
         </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-12 mt-2 p-1 max-h-60 overflow-auto">
+      <DropdownMenuContent className="w-16 flex flex-col mr-4 items-center max-h-60 overflow-auto">
         {items.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -64,7 +64,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
                       <Image
                         src={item.iconURL}
                         alt={item.name}
-                        className="w-6 h-6 inline-block rounded-lg mr-2"
+                        className="w-9 h-9 inline-block rounded-lg"
                         height="32"
                         width="32"
                       />
