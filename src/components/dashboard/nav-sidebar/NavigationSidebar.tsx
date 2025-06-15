@@ -78,24 +78,25 @@ export function NavigationSidebar({
       <SidebarHeader
         className={`
     py-3 bg-zinc-900/20 border-b border-[#252525]
-    flex items-center
-    ${isMinimized ? "justify-center" : "justify-between px-4"}
+    flex items-center justify-between px-4
+    ${isMinimized ? "justify-center" : ""}
   `}
       >
-        <div className="flex items-center">
-          <h1 className="mt-1 flex items-center">
-            <button className="cursor-pointer" onClick={toggleMinimize}>
-              <Image
-                src={selectedServer ? selectedServer.iconURL : "/Arclify.svg"}
-                width="36"
-                height="36"
-                alt="logo"
-                className={`inline-block w-10 rounded-lg ring-zinc-800 ${
-                  isMinimized ? "h-10 w-10" : "h-10 w-18"
-                }`}
-              />
-            </button>
-          </h1>
+        <div className="flex items-center gap-3">
+          <button
+            className="cursor-pointer flex items-center"
+            onClick={toggleMinimize}
+          >
+            <Image
+              src={selectedServer ? selectedServer.iconURL : "/Arclify.svg"}
+              width="36"
+              height="36"
+              alt="logo"
+              className="inline-block w-9 h-9 rounded-lg ring-zinc-800"
+            />
+          </button>
+          {!isMinimized && <h1>{selectedServer?.name}</h1>}
+
           {!isMinimized && (
             <DSMenu items={servers} setSelectedItem={handleServerSelection} />
           )}

@@ -4,7 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import { ChevronsUpDown, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
@@ -27,13 +27,12 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <button>
-          <motion.div animate={{ rotate: isOpen ? 360 : 0 }}>
-            {isOpen ? (
-              <ChevronUp className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200" />
-            ) : (
-              <ChevronDown className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200" />
-            )}
-          </motion.div>
+          <div>
+            <ChevronsUpDown
+              onClick={() => setIsOpen(true)}
+              className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200"
+            />
+          </div>
         </button>
       </DropdownMenuTrigger>
 
