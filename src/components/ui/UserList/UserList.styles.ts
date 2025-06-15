@@ -1,4 +1,4 @@
 export const styles = {
-  scrollContainer: "w-126/128",
+  scrollContainer: "w-full",
   container: "flex flex-col h-full",
 };

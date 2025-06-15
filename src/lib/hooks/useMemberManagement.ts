@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Member, Nickname } from "@/types/types";
+import { Member, Nickname, Server } from "@/types/types";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { useSession } from "next-auth/react";
 import { updateNickname, saveNicknames } from "@/lib/utilities";
 
 export const useMemberManagement = (
-  selectedServer: string,
+  selectedServer: Server | null,
   fetchedMembers: Member[]
 ) => {
   const { supabase } = useSupabase();
@@ -48,12 +48,12 @@ export const useMemberManagement = (
     try {
       setIsUpdating((prev) => new Set(prev).add(userId));
 
-      await updateNickname(selectedServer, userId, nickname);
+      await updateNickname(selectedServer?.id ?? "", userId, nickname);
 
       if (saveToDb) {
         const member = members.find((m: Member) => m.user_id === userId);
         if (member) {
-          await saveNicknames(supabase, selectedServer, [
+          await saveNicknames(supabase, selectedServer?.id ?? "", [
             {
               userId: member.user_id,
               nickname: member.nickname,
@@ -83,7 +83,7 @@ export const useMemberManagement = (
         userTag: member.username,
       }));
 
-      await saveNicknames(supabase, selectedServer, nicknamesToSave);
+      await saveNicknames(supabase, selectedServer?.id ?? "", nicknamesToSave);
 
       const updatePromises = members.map((member: Member) =>
         handleUpdateNickname(member.user_id, member.nickname, false)
@@ -113,7 +113,7 @@ export const useMemberManagement = (
         })
       );
 
-      await saveNicknames(supabase, selectedServer, nicknamesToSave);
+      await saveNicknames(supabase, selectedServer?.id ?? "", nicknamesToSave);
 
       const updatePromises = selectedMembers.map((member: Member) =>
         handleUpdateNickname(member.user_id, member.nickname, false)

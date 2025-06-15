@@ -2,7 +2,7 @@ import React from "react";
 import { DSInput, DSButton } from "@/components/";
 import Image from "next/image";
 import { styles } from "./UserListCard.styles";
-import { Member } from "@/types/types";
+import { Member, Server } from "@/types/types";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   X,
@@ -21,7 +21,7 @@ interface UserListCardProps {
   member: Member;
   isUpdating: Set<string>;
   isApplyingAll?: boolean;
-  selectedServer: string;
+  selectedServer: Server | null;
   onNicknameChange: (nickname: string) => void;
   onApplyNickname: () => void;
   isDragOverlay?: boolean;
@@ -65,7 +65,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     handleImageError,
   } = useUserListCard({
     member,
-    selectedServer,
+    selectedServer: selectedServer?.id ?? "",
     onNicknameChange,
     onApplyNickname,
   });

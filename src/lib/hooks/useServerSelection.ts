@@ -4,17 +4,18 @@ import { useServers } from "@/lib/hooks";
 
 export const useServerSelection = () => {
   const { servers, error: serversError } = useServers();
-  const [selectedServer, setSelectedServer] = useState("");
-  const [selectedServerName, setSelectedServerName] = useState<string>("");
+  const [selectedServer, setSelectedServer] = useState<Server | null>(null);
 
-  const handleServerSelection = (value: string) => {
-    const selected = servers.find((server: Server) => server.name === value);
+  const handleServerSelection = (value: string | Server) => {
+    const selected =
+      typeof value === "string"
+        ? servers.find((server: Server) => server.name === value)
+        : value;
+
     if (selected) {
-      setSelectedServerName(selected.name);
-      setSelectedServer(selected.id);
+      setSelectedServer(selected);
     } else {
-      setSelectedServerName("");
-      setSelectedServer("");
+      setSelectedServer(null);
     }
   };
 
@@ -22,7 +23,6 @@ export const useServerSelection = () => {
     servers,
     serversError,
     selectedServer,
-    selectedServerName,
     handleServerSelection,
   };
 };

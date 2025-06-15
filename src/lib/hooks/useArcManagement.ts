@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Arc, ArcNickname, Member } from "@/types/types";
+import { Arc, ArcNickname, Member, Server } from "@/types/types";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { useSession } from "next-auth/react";
 import {
@@ -11,7 +11,7 @@ import {
 } from "@/lib/utilities";
 
 export const useArcManagement = (
-  selectedServer: string,
+  selectedServer: Server | null,
   members: Member[],
   setMembers: React.Dispatch<React.SetStateAction<Member[]>>
 ) => {
@@ -67,18 +67,7 @@ export const useArcManagement = (
         } catch (error) {
           console.error("Failed to fetch arc nicknames:", error);
         }
-      } //else {
-      //  setMembers((prevMembers) =>
-      //    prevMembers.map((member) => ({
-      //      ...member,
-      //      nickname:
-      //        initialFetchedNicknames[member.user_id] ||
-      //        member.userTag ||
-      //        member.username ||
-      //        "",
-      //    }))
-      //  );
-      // }
+      }
     };
 
     loadArcNicknames();
@@ -100,7 +89,7 @@ export const useArcManagement = (
     try {
       const existingArc = await checkExistingArc(
         supabase,
-        selectedServer,
+        selectedServer.id,
         selectedArc.arc_name
       );
 
@@ -118,11 +107,11 @@ export const useArcManagement = (
 
       const arc =
         existingArc ||
-        (await createArc(supabase, selectedServer, selectedArc.arc_name));
+        (await createArc(supabase, selectedServer.id, selectedArc.arc_name));
 
       const newNicknames: ArcNickname[] = members.map((member) => ({
         arc_id: arc.id!,
-        guild_id: selectedServer,
+        guild_id: selectedServer.id,
         user_id: member.user_id,
         nickname: member.nickname,
         userTag: member.userTag || member.username,
@@ -144,7 +133,11 @@ export const useArcManagement = (
     }
 
     try {
-      const newArc = await createArc(supabase, selectedServer, newArcName);
+      const newArc = await createArc(
+        supabase,
+        selectedServer?.id ?? "",
+        newArcName
+      );
       setSelectedArc(newArc);
     } catch (error) {
       console.error("Failed to create new arc:", error);

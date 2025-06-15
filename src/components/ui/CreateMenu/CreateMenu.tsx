@@ -2,13 +2,13 @@ import { Fragment, useState, useEffect } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
-import { Arc } from "@/types/types";
+import { Arc, Server } from "@/types/types";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchArcs, deleteArc } from "@/lib/utilities";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 
 interface DSCreateMenuProps {
-  selectedServer: string;
+  selectedServer: Server | null;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
   onCreateNewArc: (newArcName: string) => void;
@@ -38,7 +38,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
 
     setIsLoading(true);
     try {
-      const fetchedArcs = await fetchArcs(supabase, selectedServer);
+      const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
       setArcs(fetchedArcs);
     } catch (error) {
       console.error("Failed to fetch sets:", error);
@@ -57,7 +57,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
       if (!supabase) return;
       try {
         await deleteArc(supabase, arcId);
-        let updatedArcs = await fetchArcs(supabase, selectedServer);
+        let updatedArcs = await fetchArcs(supabase, selectedServer?.id ?? "");
         updatedArcs = updatedArcs.filter(
           (arc) => !removingArcIds.concat(arcId).includes(arc.id)
         );
@@ -102,7 +102,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
           onFocus={handleOpen}
           displayValue={(arc: Arc | null) => arc?.arc_name || ""}
           onChange={(event) => setQuery(event.target.value)}
-          className="w-full p-2 pr-10 bg-black border cursor-pointer focus:cursor-auto border-[#252525] rounded-lg transition-all text-neutral-100 focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
+          className="w-full p-2 pr-10 bg-input border cursor-pointer focus:cursor-auto border-[#252525] rounded-lg transition-all text-neutral-100 focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
           placeholder="Select or create a set"
         />
         <Combobox.Button
@@ -134,7 +134,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-100"
       >
-        <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-black py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
+        <Combobox.Options className="absolute z-10 mt-1 max-h-48 w-full border border-[#252525] overflow-y-auto rounded-lg bg-card py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm">
           {isLoading ? (
             <motion.div
               initial={{ opacity: 0 }}
@@ -175,8 +175,8 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
               flex justify-between items-center w-full
               ${
                 active
-                  ? "bg-neutral-900 transition-all rounded-lg text-neutral-white"
-                  : "text-neutral-400 hover:text-white"
+                  ? "bg-[#1f1f23] transition-all rounded-lg text-neutral-white"
+                  : "text-zinc-200 hover:text-white"
               }
             `}
                           layout

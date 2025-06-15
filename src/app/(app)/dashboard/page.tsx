@@ -12,22 +12,20 @@ import {
 } from "@/lib/hooks";
 import { DashboardLayout, ServerContent, Sidebar } from "@/components";
 import { LoaderCircle } from "lucide-react";
+import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
+import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
-  const {
-    servers,
-    serversError,
-    selectedServer,
-    selectedServerName,
-    handleServerSelection,
-  } = useServerSelection();
+  const { servers, serversError, selectedServer, handleServerSelection } =
+    useServerSelection();
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
 
-  const { members: fetchedMembers, error: membersError } =
-    useMembers(selectedServer);
+  const { members: fetchedMembers, error: membersError } = useMembers(
+    selectedServer?.id ?? ""
+  );
 
   const {
     members,
@@ -59,6 +57,7 @@ export default function Dashboard() {
 
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
+  const [activeSection, setActiveSection] = useState("server");
 
   useEffect(() => {
     setShowCheckboxes(false);
@@ -101,10 +100,7 @@ export default function Dashboard() {
     <DashboardLayout
       sidebar={
         <Sidebar
-          servers={servers}
           selectedServer={selectedServer}
-          selectedServerName={selectedServerName}
-          handleServerSelection={handleServerSelection}
           selectedArc={selectedArc}
           setSelectedArc={setSelectedArc}
           handleCreateNewArc={handleCreateNewArc}
@@ -127,14 +123,22 @@ export default function Dashboard() {
         />
       }
     >
+      <NavigationTopBar className="" selectedServer={selectedServer} />
+      <div className="z-50">
+        <NavigationSidebar
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+          servers={servers}
+          selectedServer={selectedServer}
+          handleServerSelection={handleServerSelection}
+        />
+      </div>
       <div
-        className={`w-auto transition-opacity duration-500 ${
+        className={`flex-1 transition-opacity duration-500 ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="flex justify-between items-center">
-          <div className="text-center font-bold"></div>
-        </div>
+        <div className="flex justify-between items-center"></div>
         <ServerContent
           selectedServer={selectedServer}
           serversError={serversError}

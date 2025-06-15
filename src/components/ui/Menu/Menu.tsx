@@ -1,99 +1,84 @@
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronsUpDown, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
+import { Server } from "@/types/types";
 import {
-  menuButtonStyles,
-  menuItemsStyles,
-  menuItemStyles,
-} from "./Menu.styles";
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface DSMenuProps {
-  items: string[];
-  selectedItem: string;
-  setSelectedItem: (item: string) => void;
-  placeholder?: string;
+  items: Server[];
+  setSelectedItem: (item: Server) => void;
 }
 
-const DSMenu: React.FC<DSMenuProps> = ({
-  items,
-  selectedItem,
-  setSelectedItem,
-  placeholder,
-}) => {
-  const title = selectedItem || placeholder;
-
-  const [isExpanded, setIsExpanded] = useState(false);
+function DSMenu({ items, setSelectedItem }: DSMenuProps) {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Menu as="div" className="overflow-visible w-full">
-      <Menu.Button
-        className={menuButtonStyles}
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <span className={!selectedItem ? "text-neutral-400" : ""}>{title}</span>
-        <motion.div animate={{ rotate: isExpanded ? 360 : 0 }}>
-          {isExpanded ? (
-            <ChevronUp
-              className="h-5 w-5 cursor-pointer text-neutral-700 hover:text-white transition-all duration-200"
-              aria-hidden="true"
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger asChild>
+        <button>
+          <div>
+            <ChevronsUpDown
+              onClick={() => setIsOpen(true)}
+              className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200"
             />
-          ) : (
-            <ChevronDown
-              className="h-5 w-5 cursor-pointer text-neutral-700 hover:text-white transition-all duration-200"
-              aria-hidden="true"
-            />
-          )}
-        </motion.div>
-      </Menu.Button>
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-100"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-100"
-      >
-        <Menu.Items className={menuItemsStyles}>
-          <div className="py-1">
-            {items.length === 0 ? (
+          </div>
+        </button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent className="w-16 flex flex-col mr-4 items-center max-h-60 overflow-auto">
+        {items.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="flex items-center gap-2 text-zinc-400 text-sm py-2 justify-center"
+          >
+            <Loader2 className="animate-spin w-5 h-5" />
+            Loading Servers...
+          </motion.div>
+        ) : (
+          <AnimatePresence>
+            {items.map((item) => (
               <motion.div
+                key={item.name}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="flex items-center gap-2 text-zinc-400 text-sm py-2 justify-center"
               >
-                <Loader2 className="animate-spin w-5 h-5" />
-                Loading Servers...
+                <DropdownMenuItem onClick={() => setSelectedItem(item)}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Image
+                        src={item.iconURL}
+                        alt={item.name}
+                        className="w-9 h-9 inline-block rounded-lg"
+                        height="32"
+                        width="32"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent>{item.name}</TooltipContent>
+                  </Tooltip>
+                </DropdownMenuItem>
               </motion.div>
-            ) : (
-              <AnimatePresence>
-                {items.map((item) => (
-                  <Menu.Item key={item}>
-                    {({ active }) => (
-                      <motion.button
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className={menuItemStyles(active)}
-                        onClick={() => setSelectedItem(item)}
-                      >
-                        {item}
-                      </motion.button>
-                    )}
-                  </Menu.Item>
-                ))}
-              </AnimatePresence>
-            )}
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
+            ))}
+          </AnimatePresence>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
-};
+}
 
 export default DSMenu;

@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Member } from "@/types/types";
 import UserListCard from "../UserListCard/UserListCard";
 import { Checkbox } from "../checkbox";
-
+import { Server } from "@/types/types";
 interface MemberItemProps {
   member: Member;
   memberIndex: number;
@@ -10,7 +10,7 @@ interface MemberItemProps {
   isSelected: boolean;
   showCheckboxes: boolean;
   isUpdating: Set<string>;
-  selectedServer: string;
+  selectedServer: Server | null;
   isApplyingAll: boolean;
   animationKey: number;
   onCheckboxToggle: (userId: string) => void;
