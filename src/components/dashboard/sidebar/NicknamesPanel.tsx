@@ -71,10 +71,10 @@ export function NicknamesPanel({
   };
 
   return (
-    <div>
+    <div className="space-y-4">
       <div className="flex items-center gap-4">
         <NotebookText className="w-4.5 h-4.5" />
-        <span>Nicknames</span>
+        <span>Nickname Sets</span>
       </div>
 
       <DSCreateMenu
