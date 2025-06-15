@@ -124,13 +124,15 @@ export default function Dashboard() {
       }
     >
       <NavigationTopBar className="" selectedServer={selectedServer} />
-      <NavigationSidebar
-        activeSection={activeSection}
-        onSectionChange={setActiveSection}
-        servers={servers}
-        selectedServer={selectedServer}
-        handleServerSelection={handleServerSelection}
-      />
+      <div className="z-50">
+        <NavigationSidebar
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+          servers={servers}
+          selectedServer={selectedServer}
+          handleServerSelection={handleServerSelection}
+        />
+      </div>
       <div
         className={`flex-1 transition-opacity duration-500 ${
           isLoaded ? "opacity-100" : "opacity-0"
