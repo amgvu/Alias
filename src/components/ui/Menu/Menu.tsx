@@ -4,7 +4,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Loader2,
+  Server as ServerIcon,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
@@ -22,6 +27,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <button>
+          <ServerIcon className="h-5 w-5 text-zinc-400" />
           <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
             {isOpen ? (
               <ChevronUp className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200" />
@@ -58,7 +64,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
                   <Image
                     src={item.iconURL}
                     alt={item.name}
-                    className="w-5 h-5 inline-block rounded-full mr-2"
+                    className="w-7 h-7 inline-block rounded-lg mr-2"
                     height="12"
                     width="12"
                   />
