@@ -43,6 +43,7 @@ const userItems = [
     title: "Roles",
     icon: Users,
     value: "roles",
+    disabled: true,
   },
 ];
 
@@ -51,6 +52,7 @@ const serverItems = [
     title: "Monitoring",
     icon: Binoculars,
     value: "monitoring",
+    disabled: true,
   },
 ];
 
@@ -59,11 +61,13 @@ const settingsItems = [
     title: "Settings",
     icon: Settings,
     value: "settings",
+    disabled: true,
   },
   {
     title: "Help",
     icon: HelpCircle,
     value: "help",
+    disabled: true,
   },
 ];
 
@@ -138,7 +142,9 @@ export function NavigationSidebar({
               {userItems.map((item) => (
                 <SidebarMenuItem key={item.value}>
                   <SidebarMenuButton
-                    onClick={() => onSectionChange?.(item.value)}
+                    onClick={() =>
+                      !item.disabled && onSectionChange?.(item.value)
+                    }
                     isActive={activeSection === item.value}
                     className={`
                       text-base font-medium transition-colors duration-200
@@ -146,6 +152,8 @@ export function NavigationSidebar({
                       ${
                         activeSection === item.value
                           ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          : item.disabled
+                          ? "text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}
@@ -170,7 +178,9 @@ export function NavigationSidebar({
               {serverItems.map((item) => (
                 <SidebarMenuItem key={item.value}>
                   <SidebarMenuButton
-                    onClick={() => onSectionChange?.(item.value)}
+                    onClick={() =>
+                      !item.disabled && onSectionChange?.(item.value)
+                    }
                     isActive={activeSection === item.value}
                     className={`
                       text-base font-medium transition-colors duration-200
@@ -178,6 +188,8 @@ export function NavigationSidebar({
                       ${
                         activeSection === item.value
                           ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          : item.disabled
+                          ? "text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}
@@ -203,17 +215,21 @@ export function NavigationSidebar({
                 {settingsItems.map((item) => (
                   <SidebarMenuItem key={item.value}>
                     <SidebarMenuButton
-                      onClick={() => onSectionChange?.(item.value)}
+                      onClick={() =>
+                        !item.disabled && onSectionChange?.(item.value)
+                      }
                       isActive={activeSection === item.value}
                       className={`
-                        text-base font-medium transition-colors duration-200
-                        ${isMinimized ? "justify-center" : ""}
-                        ${
-                          activeSection === item.value
-                            ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
-                            : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
-                        }
-                      `}
+                      text-base font-medium transition-colors duration-200
+                      ${isMinimized ? "justify-center" : ""}
+                      ${
+                        activeSection === item.value
+                          ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          : item.disabled
+                          ? "text-zinc-600 cursor-not-allowed"
+                          : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
+                      }
+                    `}
                     >
                       <item.icon className="text-zinc-500" />
                       {!isMinimized && <span>{item.title}</span>}
