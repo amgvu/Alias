@@ -143,8 +143,8 @@ export function NavigationSidebar({
       </SidebarContent>
 
       {session?.user && (
-        <SidebarFooter className="border-t mb-6 rounded-t-md border-border p-0">
-          <div className="py-3 px-4 bg-zinc-900/20">
+        <SidebarFooter className="border-t mb-6 border-border p-0">
+          <div className="py-3 px-4 bg-sidebar">
             {!isMinimized && (
               <p className="text-zinc-400 text-xs font-medium mb-3 tracking-wider">
                 Signed in as:
