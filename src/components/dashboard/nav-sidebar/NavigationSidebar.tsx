@@ -71,13 +71,13 @@ export function NavigationSidebar({
     <Sidebar
       className={`
          bg-[#09090b] border-border
-        transition-all duration-300 ease-in-out
+        transition-all duration-300 mt-6 shadow-xl ease-in-out
         ${isMinimized ? "w-[70px]" : ""}
       `}
     >
       <SidebarHeader
         className={`
-    py-3 bg-zinc-900/20 border-b border-border
+    py-3 bg-sidebar border-b border- border-border
     flex items-center ${isMinimized ? "justify-center" : "justify-between"} px-4
   `}
       >
@@ -143,7 +143,7 @@ export function NavigationSidebar({
       </SidebarContent>
 
       {session?.user && (
-        <SidebarFooter className="border-t border-border p-0">
+        <SidebarFooter className="border-t mb-6 rounded-t-md border-border p-0">
           <div className="py-3 px-4 bg-zinc-900/20">
             {!isMinimized && (
               <p className="text-zinc-400 text-xs font-medium mb-3 tracking-wider">

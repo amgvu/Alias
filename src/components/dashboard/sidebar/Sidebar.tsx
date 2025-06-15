@@ -57,7 +57,10 @@ export default function Sidebar({
       className="bg-sidebar-accent border-r h-screen translate-x-62 border-border w-80"
     >
       <div>
-        <div className="space-y-6 px-4 py-16">
+        <div className="border-b border-border  p-4.5">
+          <h1 className="font-">Tools</h1>
+        </div>
+        <div className="space-y-6 px-4 py-4">
           <NicknamesPanel
             selectedServer={selectedServer}
             selectedArc={selectedArc}

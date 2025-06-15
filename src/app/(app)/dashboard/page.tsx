@@ -13,6 +13,7 @@ import {
 import { DashboardLayout, ServerContent, Sidebar } from "@/components";
 import { LoaderCircle } from "lucide-react";
 import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
+import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -122,6 +123,7 @@ export default function Dashboard() {
         />
       }
     >
+      <NavigationTopBar className="" selectedServer={selectedServer} />
       <NavigationSidebar
         activeSection={activeSection}
         onSectionChange={setActiveSection}
