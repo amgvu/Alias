@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 
-import { Member, Arc } from "@/types/types";
+import { Member, Arc, Server } from "@/types/types";
 
 import { NicknamesPanel } from "./NicknamesPanel";
 
 interface SidebarProps {
-  selectedServer: string;
+  selectedServer: Server | null;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
   handleCreateNewArc: (newArcName: string) => void;

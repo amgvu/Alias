@@ -10,7 +10,7 @@ import {
 import MemberItem from "./MemberItem";
 import RoleHeader from "./RoleHeader";
 import UserListCard from "../UserListCard/UserListCard";
-import { Member } from "@/types/types";
+import { Member, Server } from "@/types/types";
 
 interface VirtualItem {
   type: "role-header" | "member";
@@ -24,7 +24,7 @@ interface VirtualItem {
 interface VirtualizerListProps {
   members: Member[];
   isUpdating: Set<string>;
-  selectedServer: string;
+  selectedServer: Server | null;
   isApplyingAll: boolean;
   animationKey: number;
   showCheckboxes: boolean;

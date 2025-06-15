@@ -1,9 +1,9 @@
 import { DSUserList } from "@/components";
 import { TitleUpdater } from "./TitleUpdater";
-import { Member } from "@/types/types";
+import { Member, Server } from "@/types/types";
 
 interface ServerContentProps {
-  selectedServer: string | null;
+  selectedServer: Server | null;
   serversError: string | null;
   membersError: string | null;
   members: Member[];

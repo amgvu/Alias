@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { styles } from "./UserList.styles";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Member } from "@/types/types";
+import { Member, Server } from "@/types/types";
 import { Loader2 } from "lucide-react";
 import { useCheckboxSelection } from "@/lib/hooks/useCheckboxSelection";
 import VirtualizerList from "./VirtualizerList";
@@ -10,7 +10,7 @@ import VirtualizerList from "./VirtualizerList";
 interface UserListProps {
   members: Member[];
   isUpdating: Set<string>;
-  selectedServer: string;
+  selectedServer: Server;
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
   isApplyingAll: boolean;
@@ -110,7 +110,7 @@ export function DSUserList({
 
   return (
     <motion.div
-      key={displayServer}
+      key={displayServer.id}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}

@@ -1,14 +1,6 @@
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
-import {
-  Settings,
-  Binoculars,
-  Landmark,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Server,
-  Users,
-  LogOut,
-} from "lucide-react";
+import { Settings, Binoculars, Landmark, Users, LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -22,15 +14,16 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import DSMenu from "@/components/ui/Menu/Menu";
+import { Server } from "@/types/types";
 
 import { useState } from "react";
 
 interface NavigationSidebarProps {
   activeSection?: string;
   onSectionChange?: (section: string) => void;
-  servers: { id: string; name: string; iconURL: string }[];
-  selectedServerName: string;
-  handleServerSelection: (serverName: string) => void;
+  servers: Server[];
+  selectedServer: Server | null;
+  handleServerSelection: (server: Server) => void;
 }
 
 const navigationItems = [
@@ -60,6 +53,7 @@ export function NavigationSidebar({
   activeSection = "server",
   onSectionChange,
   servers,
+  selectedServer,
   handleServerSelection,
 }: NavigationSidebarProps) {
   const { data: session } = useSession();
@@ -92,7 +86,7 @@ export function NavigationSidebar({
           <h1 className="mt-1 flex items-center">
             <button className="cursor-pointer" onClick={toggleMinimize}>
               <Image
-                src="/Arclify.svg"
+                src={selectedServer ? selectedServer.iconURL : "/Arclify.svg"}
                 width="38"
                 height="38"
                 alt="logo"

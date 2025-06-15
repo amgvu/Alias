@@ -9,10 +9,10 @@ import {
   NotebookText,
 } from "lucide-react";
 import { DSButton, DSCreateMenu } from "@/components";
-import { Member, Arc } from "@/types/types";
+import { Member, Arc, Server } from "@/types/types";
 
 interface NicknamesPanelProps {
-  selectedServer: string;
+  selectedServer: Server | null;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
   handleCreateNewArc: (newArcName: string) => void;

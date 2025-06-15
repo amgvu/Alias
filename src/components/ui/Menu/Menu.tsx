@@ -5,19 +5,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
-import { Server } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
-
-interface ServerItem {
-  name: string;
-  iconURL: string;
-}
+import { Server } from "@/types/types";
 
 interface DSMenuProps {
-  items: ServerItem[];
-  setSelectedItem: (item: string) => void;
+  items: Server[];
+  setSelectedItem: (item: Server) => void;
 }
 
 function DSMenu({ items, setSelectedItem }: DSMenuProps) {
@@ -27,7 +22,6 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <button>
-          <Server className="h-5 w-5 text-zinc-300" />
           <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
             {isOpen ? (
               <ChevronUp className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200" />
@@ -60,7 +54,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <DropdownMenuItem onClick={() => setSelectedItem(item.name)}>
+                <DropdownMenuItem onClick={() => setSelectedItem(item)}>
                   <Image
                     src={item.iconURL}
                     alt={item.name}

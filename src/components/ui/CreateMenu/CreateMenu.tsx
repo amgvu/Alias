@@ -2,13 +2,13 @@ import { Fragment, useState, useEffect } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
-import { Arc } from "@/types/types";
+import { Arc, Server } from "@/types/types";
 import { motion, AnimatePresence } from "framer-motion";
 import { fetchArcs, deleteArc } from "@/lib/utilities";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 
 interface DSCreateMenuProps {
-  selectedServer: string;
+  selectedServer: Server | null;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
   onCreateNewArc: (newArcName: string) => void;
@@ -38,7 +38,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
 
     setIsLoading(true);
     try {
-      const fetchedArcs = await fetchArcs(supabase, selectedServer);
+      const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
       setArcs(fetchedArcs);
     } catch (error) {
       console.error("Failed to fetch sets:", error);
@@ -57,7 +57,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
       if (!supabase) return;
       try {
         await deleteArc(supabase, arcId);
-        let updatedArcs = await fetchArcs(supabase, selectedServer);
+        let updatedArcs = await fetchArcs(supabase, selectedServer?.id ?? "");
         updatedArcs = updatedArcs.filter(
           (arc) => !removingArcIds.concat(arcId).includes(arc.id)
         );

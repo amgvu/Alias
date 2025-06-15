@@ -16,19 +16,15 @@ import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/Navigation
 
 export default function Dashboard() {
   const { session, status } = useAuth();
-  const {
-    servers,
-    serversError,
-    selectedServer,
-    selectedServerName,
-    handleServerSelection,
-  } = useServerSelection();
+  const { servers, serversError, selectedServer, handleServerSelection } =
+    useServerSelection();
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
 
-  const { members: fetchedMembers, error: membersError } =
-    useMembers(selectedServer);
+  const { members: fetchedMembers, error: membersError } = useMembers(
+    selectedServer?.id ?? ""
+  );
 
   const {
     members,
@@ -130,7 +126,7 @@ export default function Dashboard() {
         activeSection={activeSection}
         onSectionChange={setActiveSection}
         servers={servers}
-        selectedServerName={selectedServerName}
+        selectedServer={selectedServer}
         handleServerSelection={handleServerSelection}
       />
       <div
