@@ -4,16 +4,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  ChevronDown,
-  ChevronUp,
-  Loader2,
-  Server as ServerIcon,
-} from "lucide-react";
+import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 import { Server } from "@/types/types";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface DSMenuProps {
   items: Server[];
@@ -27,8 +27,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <button>
-          <ServerIcon className="h-5 w-5 text-zinc-400" />
-          <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
+          <motion.div animate={{ rotate: isOpen ? 360 : 0 }}>
             {isOpen ? (
               <ChevronUp className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200" />
             ) : (
@@ -38,7 +37,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
         </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-48 mt-2 p-1 max-h-60 overflow-auto">
+      <DropdownMenuContent className="w-12 mt-2 p-1 max-h-60 overflow-auto">
         {items.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -61,14 +60,18 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
                 transition={{ duration: 0.2 }}
               >
                 <DropdownMenuItem onClick={() => setSelectedItem(item)}>
-                  <Image
-                    src={item.iconURL}
-                    alt={item.name}
-                    className="w-7 h-7 inline-block rounded-lg mr-2"
-                    height="12"
-                    width="12"
-                  />
-                  {item.name}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Image
+                        src={item.iconURL}
+                        alt={item.name}
+                        className="w-6 h-6 inline-block rounded-lg mr-2"
+                        height="32"
+                        width="32"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent>{item.name}</TooltipContent>
+                  </Tooltip>
                 </DropdownMenuItem>
               </motion.div>
             ))}

@@ -87,18 +87,19 @@ export function NavigationSidebar({
             <button className="cursor-pointer" onClick={toggleMinimize}>
               <Image
                 src={selectedServer ? selectedServer.iconURL : "/Arclify.svg"}
-                width="38"
-                height="38"
+                width="36"
+                height="36"
                 alt="logo"
-                className="inline-block rounded-lg ring-zinc-800"
+                className={`inline-block w-10 rounded-lg ring-zinc-800 ${
+                  isMinimized ? "h-10 w-10" : "h-10 w-18"
+                }`}
               />
             </button>
           </h1>
+          {!isMinimized && (
+            <DSMenu items={servers} setSelectedItem={handleServerSelection} />
+          )}
         </div>
-
-        {!isMinimized && (
-          <DSMenu items={servers} setSelectedItem={handleServerSelection} />
-        )}
       </SidebarHeader>
 
       <SidebarContent className="px-2">
