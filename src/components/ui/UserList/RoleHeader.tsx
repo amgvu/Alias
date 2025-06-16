@@ -30,7 +30,7 @@ export default function RoleHeader({
   checkboxContainerVariants,
 }: RoleHeaderProps) {
   return (
-    <div className="flex items-center py-3.5">
+    <div className="flex items-center py-1 ">
       <motion.div
         variants={checkboxContainerVariants}
         initial="hidden"

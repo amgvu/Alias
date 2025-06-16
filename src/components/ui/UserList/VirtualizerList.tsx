@@ -130,11 +130,11 @@ export default function VirtualizerList({
     estimateSize: useCallback(
       (index: number) => {
         const item = virtualItems[index];
-        return item?.type === "role-header" ? 40 : 75;
+        return item?.type === "role-header" ? 30 : 65;
       },
       [virtualItems]
     ),
-    overscan: 5,
+    overscan: 2,
     getItemKey: useCallback(
       (index: number) => virtualItems[index]?.id || index,
       [virtualItems]

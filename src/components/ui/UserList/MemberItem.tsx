@@ -94,7 +94,7 @@ export default function MemberItem({
       animate={isApplyingAll ? "animate" : "initial"}
     >
       <motion.div
-        className="flex items-center py-1 rounded-md"
+        className="flex items-center rounded-md"
         variants={swapVariants}
         initial="initial"
         animate={isSwapped ? "swap" : "initial"}
