@@ -7,6 +7,7 @@ import {
   LogOut,
   HelpCircle,
   UserRoundPen,
+  LayoutDashboard,
 } from "lucide-react";
 import {
   Sidebar,
@@ -32,6 +33,15 @@ interface NavigationSidebarProps {
   selectedServer: Server | null;
   handleServerSelection: (server: Server) => void;
 }
+
+const homeItems = [
+  {
+    title: "Dashboard",
+    icon: LayoutDashboard,
+    value: "dashboard",
+    disabled: true,
+  },
+];
 
 const userItems = [
   {
@@ -130,10 +140,46 @@ export function NavigationSidebar({
         )}
       </SidebarHeader>
 
+      <SidebarGroup>
+        {!isMinimized && (
+          <SidebarGroupLabel className="text-zinc-400 text-xs font-medium tracking-wide">
+            App
+          </SidebarGroupLabel>
+        )}
+        <SidebarGroupContent>
+          <SidebarMenu>
+            {homeItems.map((item) => (
+              <SidebarMenuItem key={item.value}>
+                <SidebarMenuButton
+                  onClick={() =>
+                    !item.disabled && onSectionChange?.(item.value)
+                  }
+                  isActive={activeSection === item.value}
+                  className={`
+                      text-base font-medium transition-colors duration-200
+                      ${isMinimized ? "justify-center" : ""}
+                      ${
+                        activeSection === item.value
+                          ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          : item.disabled
+                          ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
+                          : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
+                      }
+                    `}
+                >
+                  <item.icon className="text-zinc-500" />
+                  {!isMinimized && <span>{item.title}</span>}
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+
       <SidebarContent className="flex flex-col">
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium mb-0.5 tracking-wide">
+            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium tracking-wide">
               Users
             </SidebarGroupLabel>
           )}
@@ -153,7 +199,7 @@ export function NavigationSidebar({
                         activeSection === item.value
                           ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
                           : item.disabled
-                          ? "text-zinc-600 cursor-not-allowed"
+                          ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}
@@ -169,7 +215,7 @@ export function NavigationSidebar({
 
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium mb-0.5 tracking-wide">
+            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium tracking-wide">
               Server
             </SidebarGroupLabel>
           )}
@@ -189,7 +235,7 @@ export function NavigationSidebar({
                         activeSection === item.value
                           ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
                           : item.disabled
-                          ? "text-zinc-600 cursor-not-allowed"
+                          ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}

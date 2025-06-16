@@ -238,7 +238,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             {inputValue && !showOverlay && !isExpanded && !isDragOverlay && (
               <div
                 ref={setDragRef}
-                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 text-zinc-800 hover:text-zinc-600 cursor-grab active:cursor-grabbing group-hover:opacity-100 transition-all flex items-center justify-center rounded`}
+                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 text-zinc-600 hover:text-zinc-500 cursor-grab active:cursor-grabbing group-hover:opacity-100 transition-all flex items-center justify-center rounded`}
                 {...draggableAttributes}
                 {...draggableListeners}
               >
@@ -321,9 +321,9 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
         <button
           onClick={handleExpansionToggle}
-          className="p-2 transition-all cursor-pointer rounded-lg"
+          className="p-2 transition-all text-zinc-600 hover:text-zinc-500 cursor-pointer rounded-lg"
         >
-          <NotebookText className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
+          <NotebookText className="w-5 h-5 transition-all duration-200" />
         </button>
       </div>
 
@@ -336,10 +336,10 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             transition={{ duration: 0.1 }}
             className="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm rounded-lg z-10 flex flex-col"
           >
-            <div className="px-2 py-1 flex-1">
+            <div className="px-2 flex-1">
               <button
                 onClick={handleExpansionToggle}
-                className="p-2 right-3.5 top-3.5 fixed transition-all cursor-pointer rounded-lg"
+                className="p-2 right-3.5 top-3 fixed transition-all cursor-pointer rounded-lg"
               >
                 <X className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
               </button>
