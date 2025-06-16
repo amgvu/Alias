@@ -95,6 +95,7 @@ export function NavigationSidebar({
     signOut({ callbackUrl: "/", redirect: true });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const toggleMinimize = () => {
     setIsMinimized(!isMinimized);
   };
@@ -114,18 +115,14 @@ export function NavigationSidebar({
   `}
       >
         <div className="flex items-center gap-3 flex-1">
-          <button
-            className="cursor-pointer flex items-center"
-            onClick={toggleMinimize}
-          >
-            <Image
-              src={selectedServer ? selectedServer.iconURL : "/Arclify.svg"}
-              width="36"
-              height="36"
-              alt="logo"
-              className="inline-block w-9 h-9 rounded-lg ring-zinc-800"
-            />
-          </button>
+          <Image
+            src={selectedServer ? selectedServer.iconURL : "/Arclify.svg"}
+            width="36"
+            height="36"
+            alt="logo"
+            className="inline-block w-9 h-9 rounded-lg ring-zinc-800"
+          />
+
           {!isMinimized && (
             <h1 className="text-zinc-200 font-medium text-sm truncate max-w-[120px]">
               {selectedServer ? selectedServer.name : "Select a server"}
