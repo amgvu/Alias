@@ -9,11 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 import { Server } from "@/types/types";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 interface DSMenuProps {
   items: Server[];
@@ -36,7 +31,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
         </button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-16 flex flex-col mr-4 items-center max-h-60 overflow-auto">
+      <DropdownMenuContent className="w-52 flex flex-col mr-4 max-h-60 overflow-auto">
         {items.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -59,18 +54,14 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
                 transition={{ duration: 0.2 }}
               >
                 <DropdownMenuItem onClick={() => setSelectedItem(item)}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Image
-                        src={item.iconURL}
-                        alt={item.name}
-                        className="w-9 h-9 inline-block rounded-lg"
-                        height="32"
-                        width="32"
-                      />
-                    </TooltipTrigger>
-                    <TooltipContent>{item.name}</TooltipContent>
-                  </Tooltip>
+                  <Image
+                    src={item.iconURL}
+                    alt={item.name}
+                    className="w-9 h-9 inline-block rounded-lg"
+                    height="32"
+                    width="32"
+                  />
+                  <span className="ml-2">{item.name}</span>
                 </DropdownMenuItem>
               </motion.div>
             ))}
