@@ -62,6 +62,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
                     width="32"
                   />
                   <span className="ml-2">{item.name}</span>
+                  <span>{item.memberCount}</span>
                 </DropdownMenuItem>
               </motion.div>
             ))}

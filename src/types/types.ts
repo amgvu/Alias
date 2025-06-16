@@ -3,6 +3,7 @@ export interface Server {
   name: string;
   icon: string | null;
   iconURL: string;
+  memberCount: number;
 }
 
 export interface Member {
