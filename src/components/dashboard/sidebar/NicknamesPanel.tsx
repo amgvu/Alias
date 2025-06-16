@@ -181,7 +181,7 @@ export function NicknamesPanel({
       <div className="border-t border-[#252525]">
         <div className="pt-1">
           <button
-            className="flex items-center gap-1 py-1 text-zinc-200 transition-all text-md cursor-pointer relative"
+            className="flex items-center gap-1 py-1 text-zinc-200 transition-all text-sm cursor-pointer relative"
             onClick={() =>
               setCategory((current) => {
                 const currentIndex = categories.indexOf(current);
@@ -205,7 +205,7 @@ export function NicknamesPanel({
             </AnimatePresence>
           </button>
           <input
-            className="bg-input py-1.5 border text-md text-zinc-200 rounded-md border-[#252525] cursor-pointer pl-2 focus:cursor-auto max-w-full shadow-white/10 focus:outline-hidden focus:ring-1 focus:ring-neutral-100 transition duration-200 ease-in-out w-full"
+            className="bg-input py-1 border text-md text-zinc-200 rounded-md border-[#252525] cursor-pointer pl-2 focus:cursor-auto max-w-full shadow-white/10 focus:outline-hidden focus:ring-1 focus:ring-neutral-100 transition duration-200 ease-in-out w-full"
             placeholder="Enter a movie, game, thing, etc"
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
