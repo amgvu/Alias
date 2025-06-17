@@ -153,7 +153,7 @@ export function NavigationSidebar({
                   }
                   isActive={activeSection === item.value}
                   className={`
-                      text-base font-medium transition-colors duration-200
+                      text-base font-bold transition-colors duration-200
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
@@ -190,7 +190,7 @@ export function NavigationSidebar({
                     }
                     isActive={activeSection === item.value}
                     className={`
-                      text-base font-medium transition-colors duration-200
+                      text-base font-bold transition-colors duration-200
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
@@ -226,7 +226,7 @@ export function NavigationSidebar({
                     }
                     isActive={activeSection === item.value}
                     className={`
-                      text-base font-medium transition-colors duration-200
+                      text-base font-bold transition-colors duration-200
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
@@ -263,7 +263,7 @@ export function NavigationSidebar({
                       }
                       isActive={activeSection === item.value}
                       className={`
-                      text-base font-medium transition-colors duration-200
+                      text-base font-bold transition-colors duration-200
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value

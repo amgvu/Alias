@@ -54,7 +54,7 @@ export default function Sidebar({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-context-bar border-r h-screen translate-x-62 border-border w-80"
+      className="bg-context-bar border-r h-screen translate-x-64 border-border w-80"
     >
       <div>
         <div className="border-b border-border p-4.5">
