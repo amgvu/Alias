@@ -1,0 +1,186 @@
+import { motion } from "framer-motion";
+import { Users, Plus, Trash2 } from "lucide-react";
+import { Arc, Server } from "@/types/types";
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { useSupabase } from "@/contexts/SupabaseProvider";
+import { fetchArcs, deleteArc } from "@/lib/utilities";
+
+interface GroupsPanelProps {
+  selectedServer: Server | null;
+  selectedArc: Arc | null;
+  setSelectedArc: (arc: Arc | null) => void;
+  handleCreateNewArc: (newArcName: string) => void;
+}
+
+export default function GroupsPanel({
+  selectedServer,
+  selectedArc,
+  setSelectedArc,
+  handleCreateNewArc,
+}: GroupsPanelProps) {
+  const [newArcName, setNewArcName] = useState("");
+  const [arcs, setArcs] = useState<Arc[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [removingArcIds, setRemovingArcIds] = useState<number[]>([]);
+  const { supabase } = useSupabase();
+
+  useEffect(() => {
+    setSelectedArc(null);
+    setNewArcName("");
+    setArcs([]);
+    const loadArcs = async () => {
+      if (!supabase || !selectedServer) return;
+
+      setIsLoading(true);
+      try {
+        const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
+        setArcs(fetchedArcs);
+      } catch (error) {
+        console.error("Failed to fetch sets:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadArcs();
+  }, [selectedServer, setSelectedArc, supabase]);
+
+  const handleCreateClick = async () => {
+    if (newArcName.trim() && selectedServer) {
+      await handleCreateNewArc(newArcName.trim());
+      setNewArcName("");
+      if (supabase) {
+        setIsLoading(true);
+        try {
+          const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
+          setArcs(fetchedArcs);
+        } catch (error) {
+          console.error("Failed to re-fetch sets after creation:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    }
+  };
+
+  const handleDeleteArc = async (arcId: number) => {
+    setRemovingArcIds((prev) => [...prev, arcId]);
+    setTimeout(async () => {
+      setArcs((prev) => prev.filter((arc) => arc.id !== arcId));
+      if (!supabase || !selectedServer) return;
+      try {
+        await deleteArc(supabase, arcId);
+        if (selectedArc?.id === arcId) {
+          setSelectedArc(null);
+        }
+      } catch (error) {
+        console.error("Failed to delete set:", error);
+        alert("Failed to delete set. Please try again.");
+      } finally {
+        setRemovingArcIds((prev) => prev.filter((id) => id !== arcId));
+      }
+    }, 200);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.1 }}
+      className="bg-context-bar border-r h-screen translate-x-14 border-border w-64"
+    >
+      <div>
+        <div className="border-b border-border p-4.5">
+          <h1 className="font-">Groups</h1>
+        </div>
+        <div className="space-y-6 px-4 py-4">
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <Users className="w-4.5 text-text-primary h-4.5" />
+              <span className="text-text-primary">Nickname Sets</span>
+            </div>
+
+            <div className="flex gap-2">
+              <Input
+                placeholder="New set name"
+                value={newArcName}
+                onChange={(e) => setNewArcName(e.target.value)}
+                className="flex-grow bg-input border border-[#252525] text-neutral-100 focus:ring-1 focus:ring-border-active"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && newArcName.trim()) {
+                    handleCreateClick();
+                  }
+                }}
+                disabled={isLoading}
+              />
+              <Button
+                onClick={handleCreateClick}
+                disabled={!newArcName.trim() || isLoading}
+                className="bg-primary hover:bg-primary/90 text-white"
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+
+            <div className="grid gap-2 max-h-screen overflow-y-auto pr-2">
+              {isLoading ? (
+                <div className="relative cursor-default select-none py-2 text-neutral-400 flex items-center gap-2">
+                  <Trash2 className="animate-spin w-5 h-5" />
+                  Loading sets...
+                </div>
+              ) : arcs.length === 0 ? (
+                <Card className="border-dashed border-border p-4 text-center text-text-secondary bg-transparent shadow-none">
+                  No nickname sets found. Create one above!
+                </Card>
+              ) : (
+                arcs.map((arc) => (
+                  <motion.div
+                    key={arc.id}
+                    layout
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{
+                      opacity: removingArcIds.includes(arc.id) ? 0 : 1,
+                      y: 0,
+                    }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Card
+                      className={`cursor-pointer group ${
+                        selectedArc?.id === arc.id
+                          ? "border-primary ring-1 ring-primary"
+                          : "border-border hover:border-border-active"
+                      } transition-all relative`}
+                      onClick={() => setSelectedArc(arc)}
+                    >
+                      <CardHeader className="p-3 flex flex-row items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-text-primary flex-grow truncate pr-2">
+                          {arc.arc_name}
+                        </CardTitle>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteArc(arc.id);
+                          }}
+                          className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity p-1 h-fit"
+                          disabled={removingArcIds.includes(arc.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </CardHeader>
+                    </Card>
+                  </motion.div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}

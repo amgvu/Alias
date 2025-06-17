@@ -10,10 +10,12 @@ import {
   useArcManagement,
   useAuth,
 } from "@/lib/hooks";
-import { DashboardLayout, ServerContent, Sidebar } from "@/components";
+import { DashboardLayout, ServerContent } from "@/components";
 import { LoaderCircle } from "lucide-react";
 import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
 import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
+import Toolbar from "@/components/dashboard/toolbar/Toolbar";
+import GroupsPanel from "@/components/dashboard/toolbar/groups/GroupsPanel";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -99,7 +101,7 @@ export default function Dashboard() {
   return (
     <DashboardLayout
       sidebar={
-        <Sidebar
+        <Toolbar
           selectedServer={selectedServer}
           selectedArc={selectedArc}
           setSelectedArc={setSelectedArc}
@@ -120,6 +122,14 @@ export default function Dashboard() {
           selectedUserIds={selectedUserIds}
           showCheckboxes={showCheckboxes}
           setShowCheckboxes={setShowCheckboxes}
+        />
+      }
+      groupsbar={
+        <GroupsPanel
+          selectedServer={selectedServer}
+          selectedArc={selectedArc}
+          setSelectedArc={setSelectedArc}
+          handleCreateNewArc={handleCreateNewArc}
         />
       }
     >

@@ -94,7 +94,7 @@ export default function Toolbar({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
     >
-      <Sidebar className="bg-context-bar translate-x-64 mt-6 border-border w-16">
+      <Sidebar className="bg-context-bar translate-x-64 mt-6 border-border w-14">
         <SidebarContent className="py-4">
           <SidebarGroup>
             <SidebarGroupContent>
