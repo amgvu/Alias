@@ -100,12 +100,12 @@ export default function GroupsPanel({
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Users className="w-4.5 text-text-primary h-4.5" />
-              <span className="text-text-primary">Nickname Sets</span>
+              <span className="text-text-primary">Nickname Groups</span>
             </div>
 
             <div className="flex gap-2">
               <Input
-                placeholder="New set name"
+                placeholder="New group name"
                 value={newArcName}
                 onChange={(e) => setNewArcName(e.target.value)}
                 className="flex-grow bg-input border border-border text-text-primary focus:ring-1 focus:ring-border-active"
@@ -129,11 +129,11 @@ export default function GroupsPanel({
               {isLoading ? (
                 <div className="relative cursor-default select-none py-2 text-neutral-400 flex items-center gap-2">
                   <LoaderCircle className="animate-spin w-5 h-5" />
-                  Loading sets...
+                  Loading groups...
                 </div>
               ) : arcs.length === 0 ? (
                 <Card className="border-dashed border-border p-4 text-center text-text-secondary bg-transparent shadow-none">
-                  No nickname sets found. Create one above!
+                  No nickname groups found. Create one above!
                 </Card>
               ) : (
                 arcs.map((arc) => (
