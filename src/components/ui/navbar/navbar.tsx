@@ -113,7 +113,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className="w-full bg-neutral-950 border-b border-zinc-900 font-ginto font-medium fixed top-0 z-50">
+      <header className="w-full bg-sidebar border-b border-border-subtle font-ginto font-medium fixed top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center md:px-32">
           <div className="flex items-center gap-4">
             <NavigationMenu>
@@ -121,7 +121,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                 <NavigationMenuItem>
                   <NavigationMenuLink
                     asChild
-                    className="hover:bg-background focus:bg-background"
+                    className="hover:bg-sidebar focus:bg-sidebar"
                   >
                     <Link
                       href="/"
@@ -134,7 +134,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                         alt="logo"
                         className="inline-block"
                       />
-                      <span className="text-xl text-zinc-100 font-gintoNord whitespace-nowrap">
+                      <span className="text-xl text-text-primary font-gintoNord whitespace-nowrap">
                         Arclify
                       </span>
                     </Link>
@@ -151,11 +151,11 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                   <NavigationMenuItem key={item.name}>
                     <NavigationMenuLink
                       asChild
-                      className="focus:bg-background focus:text-zinc-400"
+                      className="focus:bg-sidebar focus:text-text-secondary"
                     >
                       <Link
                         href={item.href}
-                        className="flex items-center gap-2 px-4 py-2 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md"
+                        className="flex items-center gap-2 px-4 py-2 text-text-secondary hover:text-text-primary hover:bg-transparent-button-hover-sidebar rounded-md"
                       >
                         <span>{item.name}</span>
                       </Link>
@@ -173,7 +173,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                   {session ? (
                     <button
                       onClick={handleDiscordLogout}
-                      className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-md transition-colors"
+                      className="flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer bg-button text-text-primary hover:text-text-primary hover:bg-button-hover rounded-md transition-colors"
                     >
                       <LogOut className="h-4 w-4" />
                       <span>Log Out</span>

@@ -14,7 +14,7 @@ export function NavigationTopBar({
     <div
       className={`
         fixed top-0 left-0 right-0 z-25
-        bg-[#09090b] border-b border-border
+        bg-sidebar border-b border-border
         h-[25px] text-center px-4
         shadow-sm
         ${className}
@@ -23,7 +23,7 @@ export function NavigationTopBar({
       <div className=" gap-4">
         {selectedServer && (
           <div className=" gap-3">
-            <span className="text-zinc-200 font-medium text-sm">
+            <span className="text-text-primary font-medium text-sm">
               {selectedServer.name}
             </span>
           </div>

@@ -238,7 +238,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             {inputValue && !showOverlay && !isExpanded && !isDragOverlay && (
               <div
                 ref={setDragRef}
-                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 text-zinc-600 hover:text-zinc-500 cursor-grab active:cursor-grabbing group-hover:opacity-100 transition-all flex items-center justify-center rounded`}
+                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 text-lucide-button-card hover:text-zinc-500 cursor-grab active:cursor-grabbing group-hover:opacity-100 transition-all flex items-center justify-center rounded`}
                 {...draggableAttributes}
                 {...draggableListeners}
               >
@@ -321,7 +321,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
         <button
           onClick={handleExpansionToggle}
-          className="p-2 transition-all text-zinc-600 hover:text-zinc-500 cursor-pointer rounded-lg"
+          className="p-2 transition-all text-lucide-button-card hover:text-zinc-500 cursor-pointer rounded-lg"
         >
           <NotebookText className="w-5 h-5 transition-all duration-200" />
         </button>

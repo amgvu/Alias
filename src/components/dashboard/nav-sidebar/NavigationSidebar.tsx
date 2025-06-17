@@ -103,7 +103,7 @@ export function NavigationSidebar({
   return (
     <Sidebar
       className={`
-         bg-[#09090b] border-border
+         bg-sidebar border-border
         transition-all duration-300 mt-6 shadow-xl ease-in-out
         ${isMinimized ? "w-[70px]" : ""}
       `}
@@ -139,7 +139,7 @@ export function NavigationSidebar({
 
       <SidebarGroup>
         {!isMinimized && (
-          <SidebarGroupLabel className="text-zinc-400 text-xs font-medium tracking-wide">
+          <SidebarGroupLabel className="text-text-secondary text-xs font-medium tracking-wide">
             App
           </SidebarGroupLabel>
         )}
@@ -157,7 +157,7 @@ export function NavigationSidebar({
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
-                          ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          ? "text-text-primary hover:bg-button-hover-sidebar"
                           : item.disabled
                           ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
@@ -176,7 +176,7 @@ export function NavigationSidebar({
       <SidebarContent className="flex flex-col">
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium tracking-wide">
+            <SidebarGroupLabel className="text-text-secondary text-xs font-medium tracking-wide">
               Users
             </SidebarGroupLabel>
           )}
@@ -194,7 +194,7 @@ export function NavigationSidebar({
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
-                          ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          ? "text-text-primary hover:bg-button-hover-sidebar"
                           : item.disabled
                           ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
@@ -212,7 +212,7 @@ export function NavigationSidebar({
 
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-zinc-400 text-xs font-medium tracking-wide">
+            <SidebarGroupLabel className="text-text-secondary text-xs font-medium tracking-wide">
               Server
             </SidebarGroupLabel>
           )}
@@ -230,7 +230,7 @@ export function NavigationSidebar({
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
-                          ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          ? "text-text-primary hover:bg-button-hover-sidebar"
                           : item.disabled
                           ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
@@ -249,7 +249,7 @@ export function NavigationSidebar({
         <div className="mt-auto">
           <SidebarGroup>
             {!isMinimized && (
-              <SidebarGroupLabel className="text-zinc-400 text-xs font-medium mb-0.5 tracking-wide">
+              <SidebarGroupLabel className="text-text-secondary text-xs font-medium mb-0.5 tracking-wide">
                 More
               </SidebarGroupLabel>
             )}
@@ -267,7 +267,7 @@ export function NavigationSidebar({
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
-                          ? "text-zinc-100 bg-zinc-800/50 hover:bg-zinc-800"
+                          ? "text-text-primary hover:bg-button-hover-sidebar"
                           : item.disabled
                           ? "text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
@@ -289,7 +289,7 @@ export function NavigationSidebar({
         <SidebarFooter className="border-t mb-6 border-border p-0">
           <div className="py-3 px-4 bg-sidebar">
             {!isMinimized && (
-              <p className="text-zinc-400 text-xs font-medium mb-3 tracking-wider">
+              <p className="text-text-secondary text-xs font-medium mb-3 tracking-wider">
                 Signed in as:
               </p>
             )}
@@ -303,11 +303,11 @@ export function NavigationSidebar({
                 alt="Profile"
                 width={36}
                 height={36}
-                className="rounded-full ring-2 ring-zinc-800"
+                className="rounded-full ring-2 ring-border-subtle"
               />
               {!isMinimized ? (
                 <div className="flex-1 min-w-0">
-                  <p className="text-zinc-200 font-medium text-sm truncate">
+                  <p className="text-text-primary font-medium text-sm truncate">
                     {session.user.name}
                   </p>
                 </div>
@@ -318,7 +318,7 @@ export function NavigationSidebar({
               {!isMinimized && (
                 <button
                   onClick={handleDiscordLogout}
-                  className="flex text-zinc-400 hover:text-white cursor-pointer hover:bg-zinc-900 rounded-md p-2 transition-colors"
+                  className="flex text-text-primary hover:text-text-primary cursor-pointer hover:bg-button-hover-sidebar rounded-md p-2 transition-colors"
                   title="Logout"
                 >
                   <LogOut className="h-5 w-5" />
