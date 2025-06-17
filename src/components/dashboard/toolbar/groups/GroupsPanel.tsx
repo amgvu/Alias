@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Users, Plus, Trash2 } from "lucide-react";
+import { Users, Plus, Trash2, LoaderCircle } from "lucide-react";
 import { Arc, Server } from "@/types/types";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
@@ -90,7 +90,7 @@ export default function GroupsPanel({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-context-bar border-r h-screen translate-x-14 border-border w-64"
+      className="bg-panel border-r h-screen translate-x-14 border-border w-64"
     >
       <div>
         <div className="border-b border-border p-4.5">
@@ -108,7 +108,7 @@ export default function GroupsPanel({
                 placeholder="New set name"
                 value={newArcName}
                 onChange={(e) => setNewArcName(e.target.value)}
-                className="flex-grow bg-input border border-[#252525] text-neutral-100 focus:ring-1 focus:ring-border-active"
+                className="flex-grow bg-input border border-border text-text-primary focus:ring-1 focus:ring-border-active"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && newArcName.trim()) {
                     handleCreateClick();
@@ -119,7 +119,7 @@ export default function GroupsPanel({
               <Button
                 onClick={handleCreateClick}
                 disabled={!newArcName.trim() || isLoading}
-                className="bg-primary hover:bg-primary/90 text-white"
+                className="cursor-pointer bg-transparent text-zinc-500 hover:text-zinc-400 hover:bg-transparent "
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -128,7 +128,7 @@ export default function GroupsPanel({
             <div className="grid gap-2 max-h-screen overflow-y-auto pr-2">
               {isLoading ? (
                 <div className="relative cursor-default select-none py-2 text-neutral-400 flex items-center gap-2">
-                  <Trash2 className="animate-spin w-5 h-5" />
+                  <LoaderCircle className="animate-spin w-5 h-5" />
                   Loading sets...
                 </div>
               ) : arcs.length === 0 ? (
@@ -149,14 +149,14 @@ export default function GroupsPanel({
                     transition={{ duration: 0.2 }}
                   >
                     <Card
-                      className={`cursor-pointer group ${
+                      className={`cursor-pointer bg-card-panel group ${
                         selectedArc?.id === arc.id
-                          ? "border-primary ring-1 ring-primary"
+                          ? "border-border-subtle ring-1 ring-primary"
                           : "border-border hover:border-border-active"
                       } transition-all relative`}
                       onClick={() => setSelectedArc(arc)}
                     >
-                      <CardHeader className="p-3 flex flex-row items-center justify-between">
+                      <CardHeader className="p-2 flex flex-row items-center justify-between">
                         <CardTitle className="text-sm font-medium text-text-primary flex-grow truncate pr-2">
                           {arc.arc_name}
                         </CardTitle>
@@ -167,7 +167,7 @@ export default function GroupsPanel({
                             e.stopPropagation();
                             handleDeleteArc(arc.id);
                           }}
-                          className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity p-1 h-fit"
+                          className="text-red-400 hover:text-red-500 cursor-pointer hover:bg-button-hover-card transition-all duration-200 p-1 h-fit"
                           disabled={removingArcIds.includes(arc.id)}
                         >
                           <Trash2 className="h-4 w-4" />
