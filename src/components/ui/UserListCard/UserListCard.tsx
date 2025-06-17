@@ -334,14 +334,14 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1 }}
             transition={{ duration: 0.1 }}
-            className="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm rounded-lg z-10 flex flex-col"
+            className="absolute inset-0 bg-sidebar/80 backdrop-blur-sm rounded-lg z-10 flex flex-col"
           >
             <div className="px-2 flex-1">
               <button
                 onClick={handleExpansionToggle}
                 className="p-2 right-3.5 top-3 fixed transition-all cursor-pointer rounded-lg"
               >
-                <X className="w-5 h-5 text-neutral-700 hover:text-neutral-100 transition-all duration-200" />
+                <X className="w-5 h-5 text-lucide-button-card hover:text-neutral-100 transition-all duration-200" />
               </button>
 
               <div className="flex items-center gap-2 mb-1 text-sm font-bold text-zinc-300">
@@ -383,7 +383,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                             onClick={() =>
                               handleNicknameSelect(nickname.nickname)
                             }
-                            className="px-3 py-1 text-sm font-medium bg-zinc-950 border-zinc-600 border cursor-pointer transition-all hover:bg-zinc-700/80 rounded-md"
+                            className="px-3 py-1 text-sm font-medium bg-sidebar border-border-subtle border cursor-pointer transition-all hover:bg-card rounded-md"
                           >
                             {nickname.nickname}
                           </button>

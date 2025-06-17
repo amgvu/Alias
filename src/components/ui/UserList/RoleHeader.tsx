@@ -38,7 +38,7 @@ export default function RoleHeader({
         className="overflow-hidden flex-shrink-0"
       >
         <Checkbox
-          className="border-zinc-300 cursor-pointer"
+          className="border-zinc-300 bg-transparent cursor-pointer"
           checked={isAllSelected}
           onCheckedChange={onCheckboxChange}
         />

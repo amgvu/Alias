@@ -109,7 +109,7 @@ export default function MemberItem({
           className="overflow-hidden flex-shrink-0"
         >
           <Checkbox
-            className="border-zinc-500 bg-zinc-950 cursor-pointer transition-all"
+            className="border-zinc-500 bg-transparent cursor-pointer transition-all"
             checked={isSelected}
             onCheckedChange={() => onCheckboxToggle(member.user_id)}
           />

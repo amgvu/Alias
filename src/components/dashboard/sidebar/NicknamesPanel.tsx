@@ -234,7 +234,7 @@ export function NicknamesPanel({
                 >
                   <DSButton
                     onClick={handleGenerate}
-                    className={`transition-all bg-text-primary ${
+                    className={`transition-all bg-button ${
                       !loading && "disabled:bg-disabled-button"
                     } bg-button disabled:text-text-disabled border border-border-subtle text-text-primary font-bold hover:bg-button-hover`}
                     disabled={
