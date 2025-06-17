@@ -102,7 +102,7 @@ const DSCreateMenu: React.FC<DSCreateMenuProps> = ({
           onFocus={handleOpen}
           displayValue={(arc: Arc | null) => arc?.arc_name || ""}
           onChange={(event) => setQuery(event.target.value)}
-          className="w-full p-1 px-2 pr-10 bg-input border cursor-pointer focus:cursor-auto border-[#252525] rounded-lg transition-all text-neutral-100 focus:outline-hidden focus:ring-1 focus:ring-neutral-100"
+          className="w-full p-1 px-2 pr-10 bg-input border cursor-pointer focus:cursor-auto border-[#252525] rounded-lg transition-all text-neutral-100 focus:outline-hidden focus:ring-1 focus:ring-border-active"
           placeholder="Select or create a set"
         />
         <Combobox.Button
