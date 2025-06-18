@@ -154,7 +154,7 @@ export default function GroupsPanel({
                 </div>
               ) : arcs.length === 0 ? (
                 <Card className="border-dashed border-border p-4 text-center text-text-secondary bg-transparent shadow-none">
-                  No nickname groups found. Create one above!
+                  No groups found. Select users and create one!
                 </Card>
               ) : (
                 arcs.map((arc) => (
