@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { Users, Plus, Trash2, LoaderCircle } from "lucide-react";
 import { Arc, Server } from "@/types/types";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSupabase } from "@/contexts/SupabaseProvider";
-import { fetchArcs, deleteArc } from "@/lib/utilities";
+import { fetchArcs, fetchArcNicknames, deleteArc } from "@/lib/utilities";
 
 interface GroupsPanelProps {
   selectedServer: Server | null;
@@ -25,6 +25,9 @@ export default function GroupsPanel({
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [removingArcIds, setRemovingArcIds] = useState<number[]>([]);
+  const [arcMemberCounts, setArcMemberCounts] = useState<
+    Record<number, number>
+  >({});
   const { supabase } = useSupabase();
 
   useEffect(() => {
@@ -47,6 +50,24 @@ export default function GroupsPanel({
 
     loadArcs();
   }, [selectedServer, setSelectedArc, supabase]);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      if (!supabase || arcs.length === 0) return;
+      const counts: Record<number, number> = {};
+      await Promise.all(
+        arcs.map(async (arc) => {
+          const nicknames = await fetchArcNicknames(supabase, arc.id);
+          counts[arc.id] = nicknames.length;
+        })
+      );
+      setArcMemberCounts(counts);
+    };
+
+    if (arcs.length > 0) {
+      fetchCounts();
+    }
+  }, [arcs, supabase]);
 
   const handleCreateClick = async () => {
     if (newArcName.trim() && selectedServer) {
@@ -159,6 +180,11 @@ export default function GroupsPanel({
                       <CardHeader className="p-2 flex flex-row items-center justify-between">
                         <CardTitle className="text-sm font-medium text-text-primary flex-grow truncate pr-2">
                           {arc.arc_name}
+                          {arcMemberCounts[arc.id] !== undefined && (
+                            <p className="text-xs text-text-secondary">
+                              {arcMemberCounts[arc.id]} members
+                            </p>
+                          )}
                         </CardTitle>
                         <Button
                           variant="ghost"
