@@ -130,6 +130,10 @@ export default function Dashboard() {
           selectedArc={selectedArc}
           setSelectedArc={setSelectedArc}
           handleCreateNewArc={handleCreateNewArc}
+          showCheckboxes={showCheckboxes}
+          setShowCheckboxes={setShowCheckboxes}
+          isSavingArc={isSavingArc}
+          handleSaveArc={handleSaveArc}
         />
       }
     >

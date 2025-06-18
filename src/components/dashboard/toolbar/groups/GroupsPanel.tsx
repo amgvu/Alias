@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, Plus, Trash2, LoaderCircle } from "lucide-react";
+import { Users, Plus, Trash2, LoaderCircle, SaveAll } from "lucide-react";
 import { Arc, Server, ArcNickname } from "@/types/types";
 import React, { useEffect, useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
@@ -7,12 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { fetchArcs, fetchArcNicknames, deleteArc } from "@/lib/utilities";
+import { SelectionButton } from "../../selection/SelectionTool";
 
 interface GroupsPanelProps {
   selectedServer: Server | null;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
   handleCreateNewArc: (newArcName: string) => void;
+  showCheckboxes: boolean;
+  setShowCheckboxes: (show: boolean) => void;
+  isSavingArc: boolean;
+  handleSaveArc: () => Promise<void>;
 }
 
 export default function GroupsPanel({
@@ -20,6 +25,10 @@ export default function GroupsPanel({
   selectedArc,
   setSelectedArc,
   handleCreateNewArc,
+  showCheckboxes,
+  setShowCheckboxes,
+  isSavingArc,
+  handleSaveArc,
 }: GroupsPanelProps) {
   const [newArcName, setNewArcName] = useState("");
   const [arcs, setArcs] = useState<Arc[]>([]);
@@ -86,6 +95,13 @@ export default function GroupsPanel({
   }, [arcs, supabase]);
 
   const handleCreateClick = async () => {
+    if (selectedArc) {
+    } else {
+      await createNewArc();
+    }
+  };
+
+  const createNewArc = async () => {
     if (newArcName.trim() && selectedServer) {
       await handleCreateNewArc(newArcName.trim());
       setNewArcName("");
@@ -185,6 +201,23 @@ export default function GroupsPanel({
               </Button>
             </div>
 
+            {selectedArc && (
+              <div className="flex gap-2">
+                <Button
+                  onClick={handleSaveArc}
+                  disabled={isSavingArc || !selectedServer || !selectedArc}
+                  className="w-full bg-button font-bold disabled:bg-disabled-button disabled:text-text-disabled border border-border-subtle text-text-primary hover:bg-button-hover"
+                >
+                  {isSavingArc ? (
+                    <LoaderCircle className="animate-spin w-4 h-4" />
+                  ) : (
+                    <SaveAll className="w-4 h-4 mr-[-2px]" />
+                  )}
+                  Save Group
+                </Button>
+              </div>
+            )}
+
             <div className="grid gap-2 max-h-screen overflow-y-auto pr-2">
               {isLoading ? (
                 <div className="relative cursor-default select-none py-2 text-neutral-400 flex items-center gap-2">
@@ -276,17 +309,18 @@ export default function GroupsPanel({
                                       <ul className="space-y-1">
                                         {nicknames.map((nickname, index) => (
                                           <motion.li
-                                            key={nickname.user_tag}
+                                            key={nickname.userTag}
                                             initial={{ opacity: 0, y: -5 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{
                                               duration: 0.15,
                                               delay: index * 0.02,
                                             }}
-                                            className="text-xs bg-input p-2 rounded border border-border"
+                                            className="text-xs bg-context-bar p-2 rounded"
                                           >
+                                            <span></span>
                                             <div className="text-text-primary font-medium">
-                                              {nickname.user_tag}
+                                              {nickname.userTag}
                                             </div>
                                             <div className="text-text-secondary truncate">
                                               {nickname.nickname}
@@ -307,6 +341,11 @@ export default function GroupsPanel({
                 })
               )}
             </div>
+            <SelectionButton
+              selectedServer={selectedServer}
+              showCheckboxes={showCheckboxes}
+              setShowCheckboxes={setShowCheckboxes}
+            />
           </div>
         </div>
       </div>
