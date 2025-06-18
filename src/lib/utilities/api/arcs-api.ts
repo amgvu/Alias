@@ -96,7 +96,7 @@ export const saveArcNicknames = async (
       guild_id: nickname.guild_id,
       user_id: nickname.user_id,
       nickname: nickname.nickname,
-      user_tag: nickname.userTag,
+      user_tag: nickname.user_tag,
     }))
   );
 

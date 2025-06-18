@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Users, Plus, Trash2, LoaderCircle } from "lucide-react";
-import { Arc, Server } from "@/types/types";
-import React, { useEffect, useState } from "react";
+import { Arc, Server, ArcNickname } from "@/types/types";
+import React, { useEffect, useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,18 +25,24 @@ export default function GroupsPanel({
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [removingArcIds, setRemovingArcIds] = useState<number[]>([]);
+  const [arcNicknamesMap, setArcNicknamesMap] = useState<
+    Record<number, ArcNickname[]>
+  >({});
   const [arcMemberCounts, setArcMemberCounts] = useState<
     Record<number, number>
   >({});
+  const [hoveredArc, setHoveredArc] = useState<Arc | null>(null);
   const { supabase } = useSupabase();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setSelectedArc(null);
     setNewArcName("");
     setArcs([]);
+    setArcNicknamesMap({});
+    setArcMemberCounts({});
     const loadArcs = async () => {
       if (!supabase || !selectedServer) return;
-
       setIsLoading(true);
       try {
         const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
@@ -47,25 +53,35 @@ export default function GroupsPanel({
         setIsLoading(false);
       }
     };
-
     loadArcs();
   }, [selectedServer, setSelectedArc, supabase]);
 
   useEffect(() => {
-    const fetchCounts = async () => {
+    const fetchAllNicknamesAndCounts = async () => {
       if (!supabase || arcs.length === 0) return;
+      const nicknamesMap: Record<number, ArcNickname[]> = {};
       const counts: Record<number, number> = {};
       await Promise.all(
         arcs.map(async (arc) => {
-          const nicknames = await fetchArcNicknames(supabase, arc.id);
-          counts[arc.id] = nicknames.length;
+          try {
+            const nicknames = await fetchArcNicknames(supabase, arc.id);
+            nicknamesMap[arc.id] = nicknames;
+            counts[arc.id] = nicknames.length;
+          } catch (error) {
+            console.error(
+              `Failed to fetch nicknames for arc ${arc.id}:`,
+              error
+            );
+            nicknamesMap[arc.id] = [];
+            counts[arc.id] = 0;
+          }
         })
       );
+      setArcNicknamesMap(nicknamesMap);
       setArcMemberCounts(counts);
     };
-
     if (arcs.length > 0) {
-      fetchCounts();
+      fetchAllNicknamesAndCounts();
     }
   }, [arcs, supabase]);
 
@@ -91,6 +107,16 @@ export default function GroupsPanel({
     setRemovingArcIds((prev) => [...prev, arcId]);
     setTimeout(async () => {
       setArcs((prev) => prev.filter((arc) => arc.id !== arcId));
+      setArcNicknamesMap((prev) => {
+        const newMap = { ...prev };
+        delete newMap[arcId];
+        return newMap;
+      });
+      setArcMemberCounts((prev) => {
+        const newCounts = { ...prev };
+        delete newCounts[arcId];
+        return newCounts;
+      });
       if (!supabase || !selectedServer) return;
       try {
         await deleteArc(supabase, arcId);
@@ -104,6 +130,19 @@ export default function GroupsPanel({
         setRemovingArcIds((prev) => prev.filter((id) => id !== arcId));
       }
     }, 200);
+  };
+
+  const handleMouseEnter = (arc: Arc) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setHoveredArc(arc);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setHoveredArc(null);
+    }, 150);
   };
 
   return (
@@ -157,51 +196,115 @@ export default function GroupsPanel({
                   No groups found. Select users and create one!
                 </Card>
               ) : (
-                arcs.map((arc) => (
-                  <motion.div
-                    key={arc.id}
-                    layout
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{
-                      opacity: removingArcIds.includes(arc.id) ? 0 : 1,
-                      y: 0,
-                    }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Card
-                      className={`cursor-pointer bg-card-panel group ${
-                        selectedArc?.id === arc.id
-                          ? "border-border-subtle ring-1 ring-primary"
-                          : "border-border hover:border-border-active"
-                      } transition-all relative`}
-                      onClick={() => setSelectedArc(arc)}
+                arcs.map((arc) => {
+                  const isHovered = hoveredArc?.id === arc.id;
+                  const nicknames = arcNicknamesMap[arc.id] || [];
+
+                  return (
+                    <motion.div
+                      key={arc.id}
+                      layout
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{
+                        opacity: removingArcIds.includes(arc.id) ? 0 : 1,
+                        y: 0,
+                      }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.2 }}
                     >
-                      <CardHeader className="p-2 flex flex-row items-center justify-between">
-                        <CardTitle className="text-sm font-medium text-text-primary flex-grow truncate pr-2">
-                          {arc.arc_name}
-                          {arcMemberCounts[arc.id] !== undefined && (
-                            <p className="text-xs text-text-secondary">
-                              {arcMemberCounts[arc.id]} members
-                            </p>
-                          )}
-                        </CardTitle>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteArc(arc.id);
-                          }}
-                          className="text-red-400 hover:text-red-500 cursor-pointer hover:bg-button-hover-card transition-all duration-200 p-1 h-fit"
-                          disabled={removingArcIds.includes(arc.id)}
+                      <motion.div
+                        animate={{
+                          height:
+                            isHovered && nicknames.length > 0 ? "auto" : "auto",
+                          zIndex: isHovered ? 10 : 1,
+                        }}
+                        transition={{ duration: 0.2, ease: "easeInOut" }}
+                        className="relative"
+                      >
+                        <Card
+                          className={`cursor-pointer bg-card-panel group overflow-hidden ${
+                            selectedArc?.id === arc.id
+                              ? "border-border-subtle ring-1 ring-primary"
+                              : "border-border hover:border-border-active"
+                          } transition-all relative`}
+                          onClick={() => setSelectedArc(arc)}
+                          onMouseEnter={() => handleMouseEnter(arc)}
+                          onMouseLeave={handleMouseLeave}
                         >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </CardHeader>
-                    </Card>
-                  </motion.div>
-                ))
+                          <CardHeader className="p-2 flex flex-row items-center justify-between">
+                            <CardTitle className="text-sm font-medium text-text-primary flex-grow truncate pr-2">
+                              {arc.arc_name}
+                              {arcMemberCounts[arc.id] !== undefined && (
+                                <p className="text-xs text-text-secondary">
+                                  {arcMemberCounts[arc.id]} members
+                                </p>
+                              )}
+                            </CardTitle>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteArc(arc.id);
+                              }}
+                              className="text-red-400 hover:text-red-500 cursor-pointer hover:bg-button-hover-card transition-all duration-200 p-1 h-fit"
+                              disabled={removingArcIds.includes(arc.id)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </CardHeader>
+
+                          <AnimatePresence>
+                            {isHovered && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{
+                                  duration: 0.2,
+                                  ease: "easeInOut",
+                                }}
+                                className="overflow-hidden border-t border-border"
+                              >
+                                <div className="p-3">
+                                  {nicknames.length === 0 ? (
+                                    <p className="text-xs text-text-secondary">
+                                      No nicknames found for this group.
+                                    </p>
+                                  ) : (
+                                    <div className="max-h-40 overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+                                      <ul className="space-y-1">
+                                        {nicknames.map((nickname, index) => (
+                                          <motion.li
+                                            key={nickname.user_tag}
+                                            initial={{ opacity: 0, y: -5 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{
+                                              duration: 0.15,
+                                              delay: index * 0.02,
+                                            }}
+                                            className="text-xs bg-input p-2 rounded border border-border"
+                                          >
+                                            <div className="text-text-primary font-medium">
+                                              {nickname.user_tag}
+                                            </div>
+                                            <div className="text-text-secondary truncate">
+                                              {nickname.nickname}
+                                            </div>
+                                          </motion.li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  )}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </Card>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })
               )}
             </div>
           </div>
