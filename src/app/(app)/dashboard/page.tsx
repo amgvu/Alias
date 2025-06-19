@@ -14,8 +14,8 @@ import { DashboardLayout, ServerContent } from "@/components";
 import { LoaderCircle } from "lucide-react";
 import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
 import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
-import Toolbar from "@/components/dashboard/toolbar/Toolbar";
-import GroupsPanel from "@/components/dashboard/toolbar/groups/GroupsPanel";
+import Toolbar from "@/components/dashboard/menubar/Menubar";
+import GroupsPanel from "@/components/dashboard/menubar/groups/GroupsPanel";
 
 export default function Dashboard() {
   const { session, status } = useAuth();

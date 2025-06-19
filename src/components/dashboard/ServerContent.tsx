@@ -1,6 +1,7 @@
 import { DSUserList } from "@/components";
 import { TitleUpdater } from "./TitleUpdater";
 import { Member, Server } from "@/types/types";
+import { Toolbar } from "./selection/Toolbar";
 
 interface ServerContentProps {
   selectedServer: Server | null;
@@ -33,6 +34,11 @@ export default function ServerContent({
   return (
     <div className="flex flex-col">
       <TitleUpdater />
+      <Toolbar
+        selectedServer={selectedServer}
+        showCheckboxes={showCheckboxes}
+        setShowCheckboxes={setShowCheckboxes}
+      />
       <div className="flex w-full">
         <div className="w-full pl-[calc(2rem+2rem)] pr-4">
           {serversError || membersError ? (

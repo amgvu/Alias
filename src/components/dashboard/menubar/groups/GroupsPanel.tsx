@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { fetchArcs, fetchArcNicknames, deleteArc } from "@/lib/utilities";
-import { SelectionButton } from "../../selection/SelectionTool";
 
 interface GroupsPanelProps {
   selectedServer: Server | null;
@@ -25,8 +24,7 @@ export default function GroupsPanel({
   selectedArc,
   setSelectedArc,
   handleCreateNewArc,
-  showCheckboxes,
-  setShowCheckboxes,
+
   isSavingArc,
   handleSaveArc,
 }: GroupsPanelProps) {
@@ -309,7 +307,7 @@ export default function GroupsPanel({
                                       <ul className="space-y-1">
                                         {nicknames.map((nickname, index) => (
                                           <motion.li
-                                            key={nickname.userTag}
+                                            key={nickname.user_id}
                                             initial={{ opacity: 0, y: -5 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{
@@ -341,11 +339,6 @@ export default function GroupsPanel({
                 })
               )}
             </div>
-            <SelectionButton
-              selectedServer={selectedServer}
-              showCheckboxes={showCheckboxes}
-              setShowCheckboxes={setShowCheckboxes}
-            />
           </div>
         </div>
       </div>

@@ -32,7 +32,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 
-interface ToolbarProps {
+interface MenubarProps {
   selectedServer: Server | null;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
@@ -56,7 +56,7 @@ interface ToolbarProps {
   setShowCheckboxes: (show: boolean) => void;
 }
 
-export default function Toolbar({
+export default function Menubar({
   selectedServer,
   selectedArc,
   setSelectedArc,
@@ -76,7 +76,7 @@ export default function Toolbar({
   selectedUserIds = [],
   showCheckboxes,
   setShowCheckboxes,
-}: ToolbarProps) {
+}: MenubarProps) {
   const tools = [
     { icon: UsersRound, name: "Groups", id: "Groups" },
     { icon: Sparkles, name: "AI", id: "AI" },
