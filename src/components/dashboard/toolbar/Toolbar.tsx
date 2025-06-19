@@ -13,10 +13,10 @@ export function Toolbar({
   setShowCheckboxes,
 }: ToolbarProps) {
   return (
-    <div className="bg-panel w-screen translate-x-14 py-[12.9px] border-border border-r border-b">
+    <div className="bg-panel z-4 fixed w-screen translate-x-14 py-[12.9px] border-border border-r border-b">
       <button
         onClick={() => setShowCheckboxes(!showCheckboxes)}
-        className="bg-button ml-1 p-2 rounded-md cursor-pointer text-xs text-text-primary hover:bg-button-hover"
+        className="bg-button ml-68 p-2  rounded-md cursor-pointer text-xs text-text-primary hover:bg-button-hover"
         disabled={!selectedServer}
       >
         <SquareDashed className="w-4 inline-block h-4 mb-0.5 mr-1" />

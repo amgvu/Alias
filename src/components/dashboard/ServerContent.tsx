@@ -46,7 +46,7 @@ export default function ServerContent({
               {serversError || membersError}
             </div>
           ) : selectedServer ? (
-            <div className="ml-16 mr-129">
+            <div className="ml-80 my-15 mr-1">
               <DSUserList
                 selectedServer={selectedServer}
                 members={members}
