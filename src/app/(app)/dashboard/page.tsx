@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { Member } from "@/types/types";
 import {
   useServerSelection,
   useMembers,
@@ -55,6 +56,7 @@ export default function Dashboard() {
     isSavingArc,
     handleSaveArc,
     handleCreateNewArc,
+    handleCreateGroup,
   } = useArcManagement(selectedServer, members, setMembers);
 
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
@@ -129,11 +131,10 @@ export default function Dashboard() {
           selectedServer={selectedServer}
           selectedArc={selectedArc}
           setSelectedArc={setSelectedArc}
-          handleCreateNewArc={handleCreateNewArc}
-          showCheckboxes={showCheckboxes}
-          setShowCheckboxes={setShowCheckboxes}
-          isSavingArc={isSavingArc}
-          handleSaveArc={handleSaveArc}
+          members={members}
+          handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
+            handleCreateGroup(groupName, selectedMembers)
+          }
         />
       }
     >

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import { Arc, ArcNickname, Member, Server } from "@/types/types";
 import { useSupabase } from "@/contexts/SupabaseProvider";
@@ -8,6 +9,7 @@ import {
   checkExistingArc,
   deleteArcNicknames,
   fetchArcNicknames,
+  fetchArcs,
 } from "@/lib/utilities";
 
 export const useArcManagement = (
@@ -22,6 +24,8 @@ export const useArcManagement = (
   const [initialFetchedNicknames, setInitialFetchedNicknames] = useState<
     Record<string, string>
   >({});
+  const [arcs, setArcs] = useState<Arc[]>([]);
+  const [newArcName, setNewArcName] = useState("");
 
   useEffect(() => {
     if (supabase) {
@@ -145,11 +149,90 @@ export const useArcManagement = (
     }
   };
 
+  const handleCreateGroup = async (
+    groupName: string,
+    selectedMembers: Member[]
+  ) => {
+    if (!supabase) {
+      alert("Database connection not available. Please try again.");
+      return;
+    }
+
+    if (!selectedServer) {
+      alert("Please select a server first.");
+      return;
+    }
+
+    if (!groupName.trim()) {
+      alert("Please enter a group name.");
+      return;
+    }
+
+    if (selectedMembers.length === 0) {
+      alert("Please select at least one member for the group.");
+      return;
+    }
+
+    setIsSavingArc(true);
+
+    try {
+      const existingArc = await checkExistingArc(
+        supabase,
+        selectedServer.id,
+        groupName.trim()
+      );
+
+      let targetArc: Arc;
+
+      if (existingArc) {
+        const confirmOverwrite = window.confirm(
+          "A group with this name already exists. Do you want to overwrite it with the new members?"
+        );
+
+        if (!confirmOverwrite) {
+          return;
+        }
+
+        await deleteArcNicknames(supabase, existingArc.id);
+        targetArc = existingArc;
+      } else {
+        targetArc = await createArc(
+          supabase,
+          selectedServer.id,
+          groupName.trim()
+        );
+      }
+
+      const newNicknames: ArcNickname[] = selectedMembers.map((member) => ({
+        arc_id: targetArc.id!,
+        guild_id: selectedServer.id,
+        user_id: member.user_id,
+        nickname: member.nickname,
+        userTag: member.userTag || member.username,
+      }));
+
+      await saveArcNicknames(supabase, newNicknames);
+
+      setSelectedArc(targetArc);
+
+      const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
+      setArcs(fetchedArcs);
+
+      setNewArcName("");
+    } catch (error) {
+      console.error("Failed to create/update group:", error);
+      alert("Failed to create group. Please try again.");
+    } finally {
+      setIsSavingArc(false);
+    }
+  };
+
   return {
     selectedArc,
     setSelectedArc,
     isSavingArc,
     handleSaveArc,
     handleCreateNewArc,
+    handleCreateGroup,
   };
 };
