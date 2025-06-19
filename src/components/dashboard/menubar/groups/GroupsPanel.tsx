@@ -298,11 +298,8 @@ export default function GroupsPanel({
                                               }}
                                               className="text-xs bg-context-bar p-1 rounded"
                                             >
-                                              <span className="text-text-primary">
-                                                {nickname.user_id}
-                                              </span>
                                               <div className="text-text-primary font-medium">
-                                                {nickname.userTag}
+                                                {nickname.user_tag}
                                               </div>
                                               <div className="text-text-secondary truncate">
                                                 {nickname.nickname}

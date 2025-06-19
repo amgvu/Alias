@@ -118,7 +118,7 @@ export const useArcManagement = (
         guild_id: selectedServer.id,
         user_id: member.user_id,
         nickname: member.nickname,
-        userTag: member.userTag || member.username,
+        user_tag: member.userTag || member.username,
       }));
 
       await saveArcNicknames(supabase, newNicknames);
@@ -208,7 +208,7 @@ export const useArcManagement = (
         guild_id: selectedServer.id,
         user_id: member.user_id,
         nickname: member.nickname,
-        userTag: member.userTag || member.username,
+        user_tag: member.userTag || member.username,
       }));
 
       await saveArcNicknames(supabase, newNicknames);
