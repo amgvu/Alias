@@ -297,14 +297,14 @@ export default function GroupsPanel({
                                 }}
                                 className="overflow-hidden border-t border-border"
                               >
-                                <div className="p-3">
+                                <div className="p-2">
                                   {nicknames.length === 0 ? (
                                     <p className="text-xs text-text-secondary">
                                       No nicknames found for this group.
                                     </p>
                                   ) : (
                                     <div className="max-h-40 overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
-                                      <ul className="space-y-1">
+                                      <ul className="space-y-0.5">
                                         {nicknames.map((nickname, index) => (
                                           <motion.li
                                             key={nickname.user_id}
@@ -314,9 +314,9 @@ export default function GroupsPanel({
                                               duration: 0.15,
                                               delay: index * 0.02,
                                             }}
-                                            className="text-xs bg-context-bar p-2 rounded"
+                                            className="text-xs bg-context-bar p-1 rounded"
                                           >
-                                            <span></span>
+                                            <span>{nickname.user_id}</span>
                                             <div className="text-text-primary font-medium">
                                               {nickname.userTag}
                                             </div>
