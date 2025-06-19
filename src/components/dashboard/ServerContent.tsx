@@ -39,14 +39,14 @@ export default function ServerContent({
         showCheckboxes={showCheckboxes}
         setShowCheckboxes={setShowCheckboxes}
       />
-      <div className="flex w-full">
-        <div className="w-full pl-[calc(2rem+2rem)] pr-4">
+      <div className="flex">
+        <div className="w-full">
           {serversError || membersError ? (
             <div className="mb-3 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400">
               {serversError || membersError}
             </div>
           ) : selectedServer ? (
-            <div className="w-full max-w-[272ch] ml-auto">
+            <div className="ml-16 mr-129">
               <DSUserList
                 selectedServer={selectedServer}
                 members={members}
