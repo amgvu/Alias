@@ -41,10 +41,10 @@ export default function AIPanel({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-panel border-r translate-x-78 -translate-y-5 h-screen border-border w-64"
+      className="bg-panel border-r translate-x-78 -translate-y-[23.2px] h-screen border-border w-64"
     >
       <div>
-        <div className="border-b border-border p-4">
+        <div className="border-b border-border p-4.5">
           <h1 className="font-">AI</h1>
         </div>
         <div className="px-4 py-2">
