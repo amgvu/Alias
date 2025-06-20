@@ -36,7 +36,8 @@ export interface ArcNickname {
   guild_id: string;
   user_id: string;
   nickname: string;
-  userTag: string;
+  user_tag: string;
+  avatar_url: string;
 }
 
 export interface Nickname {

@@ -92,6 +92,7 @@
   --color-card: var(--card);
   --color-card-input: var(--card-input);
   --color-card-foreground: var(--card-foreground);
+  --color-card-panel: var(--card-panel);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
@@ -124,6 +125,7 @@
   --color-lucide-button-card: var(--lucide-button-card);
   --color-lucide-button-sidebar: var(--lucide-button-sidebar);
   --color-context-bar: var(--context-bar);
+  --color-panel: var(--panel);
 
   --color-border-subtle: var(--border-subtle);
   --color-border-active: var(--border-active);
@@ -164,6 +166,7 @@
   --card: oklch(0.2186 0.0039 286.08);
   --card-input: oklch(0.2739 0.0055 286.03);
   --card-foreground: oklch(0.141 0.005 285.823);
+  --card-panel: oklch(0.241 0.0076 285.82);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
   --primary: oklch(0.21 0.006 285.885);
@@ -209,6 +212,7 @@
   --lucide-button-card: oklch(0.2739 0.0055 286.03);
   --lucide-button-sidebar: oklch(0.2011 0.0039 286.04);
   --context-bar: oklch(0.2011 0.0039 286.04);
+  --panel: oklch(0.2186 0.0039 286.08);
 
   --text-primary: oklch(0.9197 0.004 286.32);
   --text-secondary: oklch(0.7118 0.0129 286.07);

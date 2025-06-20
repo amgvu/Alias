@@ -1,6 +1,7 @@
 import { DSUserList } from "@/components";
 import { TitleUpdater } from "./TitleUpdater";
 import { Member, Server } from "@/types/types";
+import { Toolbar } from "./toolbar/Toolbar";
 
 interface ServerContentProps {
   selectedServer: Server | null;
@@ -14,6 +15,7 @@ interface ServerContentProps {
   onApplyToSelection: (selectedMembers: Member[]) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
+  selectedUserIds: string[];
   setShowCheckboxes: (show: boolean) => void;
 }
 
@@ -26,21 +28,31 @@ export default function ServerContent({
   isApplyingAll,
   onNicknameChange,
   onApplyNickname,
+  onApplyToSelection,
   onSelectionChange,
   showCheckboxes,
+  selectedUserIds,
   setShowCheckboxes,
 }: ServerContentProps) {
   return (
     <div className="flex flex-col">
       <TitleUpdater />
-      <div className="flex w-full">
-        <div className="w-full pl-[calc(14.5rem+2rem)] pr-4">
+      <Toolbar
+        selectedServer={selectedServer}
+        showCheckboxes={showCheckboxes}
+        setShowCheckboxes={setShowCheckboxes}
+        members={members}
+        onApplyToSelection={onApplyToSelection}
+        selectedUserIds={selectedUserIds}
+      />
+      <div className="flex">
+        <div className="w-full">
           {serversError || membersError ? (
             <div className="mb-3 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400">
               {serversError || membersError}
             </div>
           ) : selectedServer ? (
-            <div className="w-full max-w-[272ch] ml-auto">
+            <div className="ml-80 my-15 mr-1">
               <DSUserList
                 selectedServer={selectedServer}
                 members={members}
@@ -54,7 +66,7 @@ export default function ServerContent({
               />
             </div>
           ) : (
-            <div className="text-center font-semibold text-4xl text-zinc-500 py-5">
+            <div className="text-center font-semibold text-4xl text-text-secondary py-20">
               Select a server to view and manage members
             </div>
           )}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { Member } from "@/types/types";
 import {
   useServerSelection,
   useMembers,
@@ -10,10 +11,11 @@ import {
   useArcManagement,
   useAuth,
 } from "@/lib/hooks";
-import { DashboardLayout, ServerContent, Sidebar } from "@/components";
+import { DashboardLayout, ServerContent } from "@/components";
 import { LoaderCircle } from "lucide-react";
 import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
 import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
+import Menubar from "@/components/dashboard/menubar/Menubar";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -53,6 +55,7 @@ export default function Dashboard() {
     isSavingArc,
     handleSaveArc,
     handleCreateNewArc,
+    handleCreateGroup,
   } = useArcManagement(selectedServer, members, setMembers);
 
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
@@ -99,7 +102,7 @@ export default function Dashboard() {
   return (
     <DashboardLayout
       sidebar={
-        <Sidebar
+        <Menubar
           selectedServer={selectedServer}
           selectedArc={selectedArc}
           setSelectedArc={setSelectedArc}
@@ -120,6 +123,9 @@ export default function Dashboard() {
           selectedUserIds={selectedUserIds}
           showCheckboxes={showCheckboxes}
           setShowCheckboxes={setShowCheckboxes}
+          handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
+            handleCreateGroup(groupName, selectedMembers)
+          }
         />
       }
     >
@@ -154,6 +160,7 @@ export default function Dashboard() {
           onSelectionChange={setSelectedUserIds}
           showCheckboxes={showCheckboxes}
           setShowCheckboxes={setShowCheckboxes}
+          selectedUserIds={selectedUserIds}
         />
       </div>
     </DashboardLayout>
