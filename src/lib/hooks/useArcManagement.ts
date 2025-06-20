@@ -119,6 +119,7 @@ export const useArcManagement = (
         user_id: member.user_id,
         nickname: member.nickname,
         user_tag: member.userTag || member.username,
+        avatar_url: member.avatar_url || "",
       }));
 
       await saveArcNicknames(supabase, newNicknames);
@@ -209,6 +210,7 @@ export const useArcManagement = (
         user_id: member.user_id,
         nickname: member.nickname,
         user_tag: member.userTag || member.username,
+        avatar_url: member.avatar_url || "",
       }));
 
       await saveArcNicknames(supabase, newNicknames);

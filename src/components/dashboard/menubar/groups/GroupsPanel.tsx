@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { fetchArcs, fetchArcNicknames, deleteArc } from "@/lib/utilities";
+import Image from "next/image";
 
 interface GroupsPanelProps {
   members: Member[];
@@ -296,13 +297,24 @@ export default function GroupsPanel({
                                                 duration: 0.15,
                                                 delay: index * 0.02,
                                               }}
-                                              className="text-xs bg-context-bar p-1 rounded"
+                                              className="text-xs bg-context-bar p-1 rounded flex items-start gap-2"
                                             >
-                                              <div className="text-text-primary font-medium">
-                                                {nickname.user_tag}
+                                              <div className="flex-shrink-0">
+                                                <Image
+                                                  src={nickname.avatar_url}
+                                                  height={32}
+                                                  width={32}
+                                                  alt="avatar url"
+                                                  className="inline-block ring ring-zinc-800 rounded-full"
+                                                />
                                               </div>
-                                              <div className="text-text-secondary truncate">
-                                                {nickname.nickname}
+                                              <div className="flex-1 min-w-0">
+                                                <div className="text-text-primary font-medium truncate">
+                                                  {nickname.user_tag}
+                                                </div>
+                                                <div className="text-text-secondary truncate">
+                                                  {nickname.nickname}
+                                                </div>
                                               </div>
                                             </motion.li>
                                           ))}

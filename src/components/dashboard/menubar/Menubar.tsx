@@ -1,23 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { motion } from "framer-motion";
-import {
-  Search,
-  FileText,
-  Image,
-  Settings,
-  Calculator,
-  Code,
-  Palette,
-  Database,
-  MessageSquare,
-  Upload,
-  Users,
-  Zap,
-  UsersRound,
-  Sparkles,
-  ReplaceAll,
-  History,
-} from "lucide-react";
+import { UsersRound, Sparkles, ReplaceAll, History } from "lucide-react";
 import { Member, Arc, Server } from "@/types/types";
 import { NicknamesPanel } from "./NicknamesPanel";
 import {
