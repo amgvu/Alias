@@ -66,7 +66,7 @@ export default function ServerContent({
               />
             </div>
           ) : (
-            <div className="text-center font-semibold text-4xl text-zinc-500 py-5">
+            <div className="text-center font-semibold text-4xl text-text-secondary py-20">
               Select a server to view and manage members
             </div>
           )}
