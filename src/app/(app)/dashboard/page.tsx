@@ -160,6 +160,7 @@ export default function Dashboard() {
           onSelectionChange={setSelectedUserIds}
           showCheckboxes={showCheckboxes}
           setShowCheckboxes={setShowCheckboxes}
+          selectedUserIds={selectedUserIds}
         />
       </div>
     </DashboardLayout>

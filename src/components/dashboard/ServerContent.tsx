@@ -15,6 +15,7 @@ interface ServerContentProps {
   onApplyToSelection: (selectedMembers: Member[]) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
+  selectedUserIds: string[];
   setShowCheckboxes: (show: boolean) => void;
 }
 
@@ -27,8 +28,10 @@ export default function ServerContent({
   isApplyingAll,
   onNicknameChange,
   onApplyNickname,
+  onApplyToSelection,
   onSelectionChange,
   showCheckboxes,
+  selectedUserIds,
   setShowCheckboxes,
 }: ServerContentProps) {
   return (
@@ -38,6 +41,9 @@ export default function ServerContent({
         selectedServer={selectedServer}
         showCheckboxes={showCheckboxes}
         setShowCheckboxes={setShowCheckboxes}
+        members={members}
+        onApplyToSelection={onApplyToSelection}
+        selectedUserIds={selectedUserIds}
       />
       <div className="flex">
         <div className="w-full">
