@@ -47,7 +47,7 @@ export default function AIPanel({
         <div className="border-b border-border p-4">
           <h1 className="font-">AI</h1>
         </div>
-        <div className="border-t px-4 border-border">
+        <div className="px-4 py-2">
           <div className="pt-1">
             <button
               className="flex items-center gap-1 py-1 text-text-primary transition-all text-sm cursor-pointer relative"
@@ -79,7 +79,7 @@ export default function AIPanel({
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
             />
-            <div className="flex justify-end space-x-4 mt-3">
+            <div className="flex flex-col items-center space-x-4 mt-2">
               <AnimatePresence mode="wait">
                 {loading ? (
                   <motion.div
@@ -99,8 +99,11 @@ export default function AIPanel({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className=""
+                    className="flex flex-col items-center"
                   >
+                    <span className="text-xs mb-1 text-text-secondary">
+                      Select users before choosing a theme
+                    </span>
                     <DSButton
                       onClick={handleGenerate}
                       className={`transition-all bg-button ${
