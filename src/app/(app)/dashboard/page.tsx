@@ -16,7 +16,6 @@ import { LoaderCircle } from "lucide-react";
 import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
 import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
 import Menubar from "@/components/dashboard/menubar/Menubar";
-import GroupsPanel from "@/components/dashboard/menubar/groups/GroupsPanel";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -124,14 +123,6 @@ export default function Dashboard() {
           selectedUserIds={selectedUserIds}
           showCheckboxes={showCheckboxes}
           setShowCheckboxes={setShowCheckboxes}
-        />
-      }
-      groupsbar={
-        <GroupsPanel
-          selectedServer={selectedServer}
-          selectedArc={selectedArc}
-          setSelectedArc={setSelectedArc}
-          members={members}
           handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
             handleCreateGroup(groupName, selectedMembers)
           }

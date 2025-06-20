@@ -157,7 +157,7 @@ export default function GroupsPanel({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-panel border-r fixed h-screen translate-x-14 border-border w-64"
+      className="bg-panel border-r translate-x-78 -translate-y-6 h-screen border-border w-64"
     >
       <div>
         <div className="border-b border-border p-4.5">

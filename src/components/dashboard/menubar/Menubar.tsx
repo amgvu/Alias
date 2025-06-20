@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { UsersRound, Sparkles, ReplaceAll, History } from "lucide-react";
 import { Member, Arc, Server } from "@/types/types";
-import { NicknamesPanel } from "./NicknamesPanel";
+import GroupsPanel from "./groups/GroupsPanel";
 import {
   Sidebar,
   SidebarContent,
@@ -37,6 +38,10 @@ interface MenubarProps {
   selectedUserIds?: string[];
   showCheckboxes: boolean;
   setShowCheckboxes: (show: boolean) => void;
+  handleCreateGroup: (
+    groupName: string,
+    selectedMembers: Member[]
+  ) => Promise<void>;
 }
 
 export default function Menubar({
@@ -59,7 +64,10 @@ export default function Menubar({
   selectedUserIds = [],
   showCheckboxes,
   setShowCheckboxes,
+  handleCreateGroup,
 }: MenubarProps) {
+  const [activeTool, setActiveTool] = useState<string | null>(null);
+
   const tools = [
     { icon: UsersRound, name: "Groups", id: "Groups" },
     { icon: Sparkles, name: "AI", id: "AI" },
@@ -68,40 +76,79 @@ export default function Menubar({
   ];
 
   const handleToolClick = (toolId: string) => {
-    console.log(`Selected tool: ${toolId}`);
+    setActiveTool(activeTool === toolId ? null : toolId);
+  };
+
+  const renderToolPanel = () => {
+    if (!activeTool) return null;
+
+    switch (activeTool) {
+      case "Groups":
+        return (
+          <GroupsPanel
+            selectedServer={selectedServer}
+            selectedArc={selectedArc}
+            setSelectedArc={setSelectedArc}
+            members={members}
+            handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
+              handleCreateGroup(groupName, selectedMembers)
+            }
+          />
+        );
+      default:
+        return <div></div>;
+    }
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.1 }}
-    >
-      <Sidebar className="bg-context-bar translate-x-64 mt-6 border-border w-14">
-        <SidebarContent className="py-4">
-          <SidebarGroup>
-            <SidebarGroupContent>
-              <SidebarMenu className="space-y-2 flex flex-col items-center">
-                {tools.map((tool) => {
-                  const IconComponent = tool.icon;
-                  return (
-                    <SidebarMenuItem key={tool.id}>
-                      <SidebarMenuButton
-                        onClick={() => handleToolClick(tool.id)}
-                        className="w-12 h-12 flex items-center justify-center rounded-lg text-text-primary hover:bg-button-hover-transparent transition-colors duration-200"
-                      >
-                        <IconComponent size={20} />
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  );
-                })}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </SidebarContent>
+    <div className="flex">
+      {activeTool && (
+        <motion.div
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -50, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="bg-context-bar border-r fixed border-border min-w-80 max-w-96 mt-6"
+        >
+          {renderToolPanel()}
+        </motion.div>
+      )}
 
-        <SidebarFooter className="p-3 border-t border-border"></SidebarFooter>
-      </Sidebar>
-    </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.1 }}
+      >
+        <Sidebar className="bg-context-bar translate-x-64 mt-6 border-border w-14">
+          <SidebarContent className="py-4">
+            <SidebarGroup>
+              <SidebarGroupContent>
+                <SidebarMenu className="space-y-2 flex flex-col items-center">
+                  {tools.map((tool) => {
+                    const IconComponent = tool.icon;
+                    const isActive = activeTool === tool.id;
+                    return (
+                      <SidebarMenuItem key={tool.id}>
+                        <SidebarMenuButton
+                          onClick={() => handleToolClick(tool.id)}
+                          className={`w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-200 ${
+                            isActive
+                              ? "bg-button-hover-transparent text-text-primary border border-border"
+                              : "text-text-primary hover:bg-button-hover-transparent"
+                          }`}
+                        >
+                          <IconComponent size={20} />
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    );
+                  })}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+          <SidebarFooter className="p-3 border-t border-border"></SidebarFooter>
+        </Sidebar>
+      </motion.div>
+    </div>
   );
 }
