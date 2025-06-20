@@ -13,17 +13,17 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-text-primary flex flex-col mt-10 md:mt-30 items-center justify-start p-8 sm:p-30">
+    <div className="min-h-screen bg-background text-text-primary  mt-10 md:mt-30  justify-start p-8 sm:p-30">
       <main className="w-full max-w-[1400px] mx-auto">
-        <div className="gap-6 items-center">
-          <div className="flex flex-col gap-4 items-center md:col-span-2">
-            <h1 className="text-text-primary font-gintoNord text-center text-4xl md:text-7xl">
+        <div className="gap-6 ">
+          <div className=" gap-4 flex flex-col items-center md:col-span-2">
+            <h1 className="text-text-primary text-center font-gintoNord  text-4xl md:text-7xl">
               <TextEffect per="char" speedReveal={3} delay={0.1}>
                 Automating the busywork of Discord community management
               </TextEffect>
             </h1>
-            <div className="text-text-secondary text-center font-ginto md:translate-x-0 translate-x-5 text-2xl md:text-4xl space-y-4">
-              <div className="text-sm text-center md:text-xl max-w-3/4 mx-7 md:mx-auto">
+            <div className="text-text-secondary text-center flex flex-col items-center font-ginto md:translate-x-0  text-2xl md:text-4xl space-y-4">
+              <div className="text-sm md:text-xl md:w-1/2">
                 <TextEffect per="line" speedReveal={1} delay={1}>
                   Arclify sets dynamic nicknames, personalizes identities, and
                   streamlines community workflows. Make Discord management
@@ -31,7 +31,7 @@ export default function Home() {
                 </TextEffect>
               </div>
             </div>
-            <div className="md:inline-flex items-center">
+            <div className="md:inline-flex ">
               <motion.button
                 onClick={handleSignUpClick}
                 initial={{ opacity: 0 }}
@@ -45,7 +45,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="flex gap-6 flex-wrap items-center justify-center"></footer>
+      <footer className="flex gap-6 flex-wrap justify-center"></footer>
     </div>
   );
 }
