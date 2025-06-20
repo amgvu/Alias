@@ -67,22 +67,18 @@ export default function Menubar({
   setShowCheckboxes,
   handleCreateGroup,
 }: MenubarProps) {
-  const [activeTool, setActiveTool] = useState<string | null>(null);
+  const [activeTool, setActiveTool] = useState<string>("Groups");
 
   const tools = [
     { icon: UsersRound, name: "Groups", id: "Groups" },
     { icon: Sparkles, name: "AI", id: "AI" },
-    { icon: ReplaceAll, name: "Apply", id: "Apply" },
-    { icon: History, name: "History", id: "History" },
   ];
 
   const handleToolClick = (toolId: string) => {
-    setActiveTool(activeTool === toolId ? null : toolId);
+    setActiveTool(toolId);
   };
 
   const renderToolPanel = () => {
-    if (!activeTool) return null;
-
     switch (activeTool) {
       case "Groups":
         return (
@@ -97,7 +93,20 @@ export default function Menubar({
           />
         );
       case "AI":
-        return <AIPanel />;
+        return (
+          <AIPanel
+            selectedServer={selectedServer}
+            members={members}
+            selectedUserIds={selectedUserIds}
+            category={category}
+            setCategory={setCategory}
+            theme={theme}
+            setTheme={setTheme}
+            loading={loading}
+            handleGenerateCharacters={handleGenerateCharacters}
+            categories={categories}
+          />
+        );
       default:
         return <div></div>;
     }
@@ -107,9 +116,9 @@ export default function Menubar({
     <div className="flex">
       {activeTool && (
         <motion.div
-          initial={{ x: -50, opacity: 0 }}
+          initial={{ x: 0, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -50, opacity: 0 }}
+          exit={{ x: 0, opacity: 0 }}
           transition={{ duration: 0.2 }}
           className="bg-context-bar border-r fixed border-border min-w-80 max-w-96 mt-6"
         >
