@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, Trash2, LoaderCircle, SaveAll } from "lucide-react";
+import { Trash2, LoaderCircle, SaveAll } from "lucide-react";
 import { Arc, Server, Member, ArcNickname } from "@/types/types";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Input } from "@/components/ui/input";
