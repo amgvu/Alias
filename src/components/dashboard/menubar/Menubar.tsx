@@ -4,6 +4,7 @@ import { useState } from "react";
 import { UsersRound, Sparkles, ReplaceAll, History } from "lucide-react";
 import { Member, Arc, Server } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
+import AIPanel from "./ai/AIPanel";
 import {
   Sidebar,
   SidebarContent,
@@ -95,6 +96,8 @@ export default function Menubar({
             }
           />
         );
+      case "AI":
+        return <AIPanel />;
       default:
         return <div></div>;
     }
