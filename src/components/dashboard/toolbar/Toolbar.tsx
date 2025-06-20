@@ -1,5 +1,5 @@
 import { Server } from "@/types/types";
-import { SquareDashed } from "lucide-react";
+import { SelectionTool } from "./SelectionTool.tsx/SelectionTool";
 
 interface ToolbarProps {
   selectedServer: Server | null;
@@ -13,15 +13,12 @@ export function Toolbar({
   setShowCheckboxes,
 }: ToolbarProps) {
   return (
-    <div className="bg-panel z-4 fixed w-screen translate-x-14 py-[12.9px] border-border border-r border-b">
-      <button
-        onClick={() => setShowCheckboxes(!showCheckboxes)}
-        className="bg-button ml-68 p-2  rounded-md cursor-pointer text-xs text-text-primary hover:bg-button-hover"
-        disabled={!selectedServer}
-      >
-        <SquareDashed className="w-4 inline-block h-4 mb-0.5 mr-1" />
-        {showCheckboxes ? "Unselect" : "Select"}
-      </button>
+    <div className="bg-panel z-4 fixed w-screen translate-x-14 p-[11.6px] border-border border-r border-b">
+      <SelectionTool
+        selectedServer={selectedServer}
+        showCheckboxes={showCheckboxes}
+        setShowCheckboxes={setShowCheckboxes}
+      />
     </div>
   );
 }

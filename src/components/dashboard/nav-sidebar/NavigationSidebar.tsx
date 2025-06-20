@@ -104,7 +104,7 @@ export function NavigationSidebar({
     <Sidebar
       className={`
          bg-sidebar border-border
-        transition-all duration-300 mt-6 shadow-xl ease-in-out
+        transition-all duration-300 mt-6  ease-in-out
         ${isMinimized ? "w-[70px]" : ""}
       `}
     >
