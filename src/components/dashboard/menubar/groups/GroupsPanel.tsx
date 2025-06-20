@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, Plus, Trash2, LoaderCircle } from "lucide-react";
+import { Users, Trash2, LoaderCircle, SaveAll } from "lucide-react";
 import { Arc, Server, Member, ArcNickname } from "@/types/types";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Input } from "@/components/ui/input";
@@ -157,16 +157,15 @@ export default function GroupsPanel({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-panel border-r translate-x-78 -translate-y-[23.2px] h-screen border-border w-64"
+      className="bg-panel border-r translate-x-78 -translate-y-[31.2px] h-screen border-border w-64"
     >
       <div>
         <div className="border-b border-border p-4.5">
-          <h1 className="font-">Groups</h1>
+          <h1 className="">Groups</h1>
         </div>
-        <div className="space-y-6 px-4 py-4">
+        <div className="space-y-6 px-2 py-4">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <Users className="w-4.5 text-text-primary h-4.5" />
               <span className="text-text-primary">Nickname Groups</span>
             </div>
 
@@ -191,7 +190,7 @@ export default function GroupsPanel({
                 {isLoading ? (
                   <LoaderCircle className="animate-spin h-4 w-4" />
                 ) : (
-                  <Plus className="h-4 w-4" />
+                  <SaveAll className="h-4 w-4" />
                 )}
               </Button>
             </div>
@@ -232,7 +231,7 @@ export default function GroupsPanel({
                                 : "auto",
                             zIndex: isHovered ? 10 : 1,
                           }}
-                          transition={{ duration: 0.2, ease: "easeInOut" }}
+                          transition={{ duration: 0.1, ease: "easeInOut" }}
                           className="relative"
                         >
                           <Card

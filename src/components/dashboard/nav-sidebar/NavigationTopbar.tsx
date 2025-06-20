@@ -16,7 +16,6 @@ export function NavigationTopBar({
         fixed top-0 left-0 right-0 z-25
         bg-sidebar border-b border-border
         h-[25px] text-center px-4
-        shadow-sm
         ${className}
       `}
     >
