@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, WandSparkles, Shuffle } from "lucide-react";
 import { Member, Server, Category } from "@/types/types";
 import React from "react";
+import { Input } from "@/components/ui/input";
 
 interface AIPanelProps {
   selectedServer: Server | null;
@@ -131,8 +132,8 @@ export default function AIPanel({
               <label className="text-xs text-text-secondary font-medium">
                 Specific Theme
               </label>
-              <input
-                className="bg-input py-1 border text-md text-text-primary rounded-md border-border-subtle cursor-pointer pl-2 focus:cursor-auto max-w-full shadow-white/10 focus:outline-hidden focus:ring-1 focus:ring-border-active transition duration-200 ease-in-out w-full"
+              <Input
+                className="bg-input border-border"
                 placeholder={`Enter ${currentCategory.name.toLowerCase()}...`}
                 value={theme}
                 onChange={(e) => setTheme(e.target.value)}

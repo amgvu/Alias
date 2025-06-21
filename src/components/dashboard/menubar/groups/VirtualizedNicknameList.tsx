@@ -45,14 +45,14 @@ export function VirtualizedNicknameList({
                 width: "100%",
                 height: `${virtualItem.size}px`,
                 transform: `translateY(${virtualItem.start}px)`,
-                padding: "0 8px 4px 8px",
+                padding: "0 2px 2px 2px",
               }}
             >
               <motion.div
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.15,
+                  duration: 0.2,
                   delay: virtualItem.index * 0.02,
                 }}
                 className="h-full"

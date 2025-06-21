@@ -239,7 +239,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             {inputValue && !showOverlay && !isExpanded && !isDragOverlay && (
               <div
                 ref={setDragRef}
-                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 text-lucide-button-card hover:text-zinc-500 cursor-grab active:cursor-grabbing group-hover:opacity-100 transition-all flex items-center justify-center rounded`}
+                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 text-zinc-700 hover:text-zinc-500 cursor-grab active:cursor-grabbing group-hover:opacity-100 transition-all flex items-center justify-center rounded`}
                 {...draggableAttributes}
                 {...draggableListeners}
               >
@@ -322,7 +322,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
         <button
           onClick={handleExpansionToggle}
-          className="p-2 transition-all text-lucide-button-card hover:text-zinc-500 cursor-pointer rounded-lg"
+          className="p-2 transition-all text-zinc-700 hover:text-zinc-500 cursor-pointer rounded-lg"
         >
           <NotebookText className="w-5 h-5 transition-all duration-200" />
         </button>
@@ -342,7 +342,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 onClick={handleExpansionToggle}
                 className="p-2 right-3.5 top-3 fixed transition-all cursor-pointer rounded-lg"
               >
-                <X className="w-5 h-5 text-lucide-button-card hover:text-neutral-100 transition-all duration-200" />
+                <X className="w-5 h-5 text-zinc-700 hover:text-zinc-500 transition-all duration-200" />
               </button>
 
               <div className="flex items-center gap-2 mb-1 text-sm font-bold text-zinc-300">
