@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 19, 20, 21 ]
+        node: [19, 20, 21]
 
     steps:
       - name: Checkout 🛎️
@@ -28,3 +28,9 @@ jobs:
 
       - name: Run build 🔨
         run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_BOT_API_URL: ${{ secrets.BOT_API_URL }}
+          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.BACKEND_URL }}
+          NEXT_PUBLIC_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
