@@ -126,7 +126,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
       >
-        <div className="bg-zinc-900/10 backdrop-blur-lg -translate-x-[510px] rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12 w-128">
+        <div className="bg-zinc-900/10 backdrop-blur-lg -translate-x-[410px] rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12 w-108">
           <div className="text-lg ml-2 text-center font-semibold text-white mb-1 flex items-center justify-center">
             <ArrowDownUp className="inline-block mt-0.5 text-blue-400 mr-2" />
             {displayValue}
@@ -232,7 +232,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               onFocus={handleFocus}
               onBlur={handleBlur}
               placeholder={`Nickname for ${member.username}`}
-              className="bg-input border border-border-subtle font-bold"
+              className="bg-input border border-border-subtle w-1/3 font-bold"
               disabled={showOverlay}
             />
 
