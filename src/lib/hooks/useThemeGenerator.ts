@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Member } from "@/types/types";
+import { Member, Category } from "@/types/types";
 import { characterGen } from "@/lib/utilities/gemini/characters";
+import { Users, Globe, Package, MapPin, Brain } from "lucide-react";
 
 export const useThemeGenerator = (
   members: Member[],
@@ -11,6 +12,49 @@ export const useThemeGenerator = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [generatedThemes, setGeneratedThemes] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const categories: Category[] = [
+    {
+      id: "fictional-characters",
+      name: "Fictional Characters",
+      icon: Users,
+      description: "Heroes, villains, and characters from stories",
+      examples: ["Tony Soprano", "Jon Snow", "Sam Porter Bridges"],
+      color: "bg-purple-500",
+    },
+    {
+      id: "real-people",
+      name: "Real People",
+      icon: Globe,
+      description: "Historical figures, celebrities, and famous individuals",
+      examples: ["Conan O'Brien", "iShowSpeed", "Martin Scorsese"],
+      color: "bg-blue-500",
+    },
+    {
+      id: "objects",
+      name: "Objects",
+      icon: Package,
+      description: "Tools, weapons, vehicles, and physical items",
+      examples: ["Car Models", "CS2 Skins", "Foods"],
+      color: "bg-green-500",
+    },
+    {
+      id: "places",
+      name: "Places",
+      icon: MapPin,
+      description: "Cities, landmarks, and geographical locations",
+      examples: ["New York", "Planets", "Sugar Land"],
+      color: "bg-orange-500",
+    },
+    {
+      id: "abstract-concepts",
+      name: "Abstract Concepts",
+      icon: Brain,
+      description: "Ideas, emotions, and philosophical concepts",
+      examples: ["Meaning of Life", "Math", "Serenity"],
+      color: "bg-pink-500",
+    },
+  ];
 
   const getSortedMembers = (membersList: Member[]): Member[] => {
     const groupedMembers = membersList.reduce(
@@ -46,19 +90,6 @@ export const useThemeGenerator = (
 
     if (!theme.trim()) {
       alert("Please enter a theme.");
-      return;
-    }
-
-    if (
-      ![
-        "Fictional Characters",
-        "Real People",
-        "Objects",
-        "Places",
-        "Abstract Concepts",
-      ].includes(category)
-    ) {
-      alert("Invalid category selected");
       return;
     }
 
@@ -99,6 +130,7 @@ export const useThemeGenerator = (
 
   return {
     category,
+    categories,
     setCategory,
     theme,
     setTheme,

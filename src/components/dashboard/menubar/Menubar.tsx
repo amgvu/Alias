@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { UsersRound, Sparkles, ReplaceAll, History } from "lucide-react";
-import { Member, Arc, Server } from "@/types/types";
+import { Member, Arc, Server, Category } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
 import AIPanel from "./ai/AIPanel";
 import {
@@ -28,12 +28,13 @@ interface MenubarProps {
   handleSaveArc: () => void;
   members: Member[];
   category: string;
+  categories: Category[];
   setCategory: (category: string | ((current: string) => string)) => void;
   theme: string;
   setTheme: (theme: string) => void;
   loading: boolean;
   handleGenerateCharacters: (selectedMembers: Member[]) => void;
-  categories: string[];
+
   onApplyToSelection: (selectedMembers: Member[]) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
   selectedUserIds?: string[];
@@ -55,12 +56,13 @@ export default function Menubar({
   handleSaveArc,
   members,
   category,
+  categories,
   setCategory,
   theme,
   setTheme,
   loading,
   handleGenerateCharacters,
-  categories,
+
   onApplyToSelection,
   selectedUserIds = [],
   showCheckboxes,

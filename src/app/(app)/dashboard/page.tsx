@@ -42,6 +42,7 @@ export default function Dashboard() {
 
   const {
     category,
+    categories,
     setCategory,
     theme,
     setTheme,
@@ -65,14 +66,6 @@ export default function Dashboard() {
   useEffect(() => {
     setShowCheckboxes(false);
   }, [selectedServer]);
-
-  const categories = [
-    "Fictional Characters",
-    "Real People",
-    "Objects",
-    "Places",
-    "Abstract Concepts",
-  ];
 
   useEffect(() => {
     if (status !== "loading") {
@@ -113,12 +106,12 @@ export default function Dashboard() {
           handleSaveArc={handleSaveArc}
           members={members}
           category={category}
+          categories={categories}
           setCategory={setCategory}
           theme={theme}
           setTheme={setTheme}
           loading={loading}
           handleGenerateCharacters={handleGenerateCharacters}
-          categories={categories}
           onApplyToSelection={applyNicknamesToSelection}
           selectedUserIds={selectedUserIds}
           showCheckboxes={showCheckboxes}

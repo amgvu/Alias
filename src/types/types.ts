@@ -45,3 +45,13 @@ export interface Nickname {
   nickname: string;
   userTag: string;
 }
+
+export interface Category {
+  id: string;
+  name: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon: any;
+  description: string;
+  examples: string[];
+  color: string;
+}
