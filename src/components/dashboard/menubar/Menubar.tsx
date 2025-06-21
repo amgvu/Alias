@@ -147,8 +147,8 @@ export default function Menubar({
                           onClick={() => handleToolClick(tool.id)}
                           className={`w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-200 ${
                             isActive
-                              ? "bg-button-hover-transparent text-text-primary border border-border"
-                              : "text-text-primary hover:bg-button-hover-transparent"
+                              ? "bg-button-hover text-text-primary"
+                              : "text-text-secondary hover:bg-transparent-button-hover-context-bar"
                           }`}
                         >
                           <IconComponent size={20} />

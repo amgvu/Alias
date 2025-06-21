@@ -25,7 +25,7 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
           <div>
             <ChevronsUpDown
               onClick={() => setIsOpen(true)}
-              className="h-4 w-4 text-zinc-700 hover:text-white transition-all duration-200"
+              className="h-4 w-4 text-text-secondary hover:text-text-primary transition-all duration-200"
             />
           </div>
         </button>
@@ -62,11 +62,11 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
                         height="32"
                         width="32"
                       />
-                      <span className="ml-2 text-sm font-medium">
+                      <span className="ml-2 text-sm text-text-primary font-medium">
                         {item.name}
                       </span>
                     </div>
-                    <span className="text-sm text-zinc-300">
+                    <span className="text-sm text-text-primary">
                       {item.memberCount}
                       <UsersRound className="ml-1 mb-0.5 h-3.5 w-3.5 text-zinc-500 inline-block" />
                     </span>
@@ -75,14 +75,17 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
               </motion.div>
             ))}
             <DropdownMenuItem
+              className=""
               onClick={() =>
                 window.open("https://app.youform.com/forms/uwk5hpox")
               }
             >
               <div className="flex w-full h-5 items-center justify-between">
                 <div className="flex items-center">
-                  <CirclePlus className="h-6 mr-2 w-6 inline-block" />
-                  <span className="text-sm font-medium">Add a server</span>
+                  <CirclePlus className="h-6 mr-2 w-6 text-text-secondary inline-block" />
+                  <span className="text-sm text-text-secondary font-medium">
+                    Add a server
+                  </span>
                 </div>
               </div>
             </DropdownMenuItem>

@@ -6,5 +6,5 @@ export const styles = {
     "w-full max-w-128 hover:bg-zinc-800 border border-border bg-card-input transition-all duration-200 font-bold rounded-md focus:outline-hidden focus:ring-1 focus:ring-border-subtle",
   username: "text-sm font-regular text-zinc-500 pl-2",
   applyButton:
-    "bg-button font-bold hover:bg-zinc-700 border border-zinc-700 text-sm text-zinc-100 transition-all",
+    "bg-button font-bold hover:bg-zinc-700 border border-border-active text-sm text-zinc-100 transition-all",
 };

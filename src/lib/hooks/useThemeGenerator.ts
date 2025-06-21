@@ -18,8 +18,8 @@ export const useThemeGenerator = (
       id: "fictional-characters",
       name: "Fictional Characters",
       icon: Users,
-      description: "Heroes, villains, and characters from stories",
-      examples: ["Tony Soprano", "Jon Snow", "Sam Porter Bridges"],
+      description: "Characters from movies, TV shows, games, books",
+      examples: ["The Sopranos", "Game of Thrones", "Grand Theft Auto V"],
       color: "bg-purple-500",
     },
     {
@@ -27,15 +27,16 @@ export const useThemeGenerator = (
       name: "Real People",
       icon: Globe,
       description: "Historical figures, celebrities, and famous individuals",
-      examples: ["Conan O'Brien", "iShowSpeed", "Martin Scorsese"],
+      examples: ["Actors", "World Leaders", "Inventors"],
       color: "bg-blue-500",
     },
     {
       id: "objects",
       name: "Objects",
       icon: Package,
-      description: "Tools, weapons, vehicles, and physical items",
-      examples: ["Car Models", "CS2 Skins", "Foods"],
+      description:
+        "Physical items and tangible things like products, food, etc",
+      examples: ["Cars", "CS2 Skins", "Foods"],
       color: "bg-green-500",
     },
     {
@@ -43,7 +44,7 @@ export const useThemeGenerator = (
       name: "Places",
       icon: MapPin,
       description: "Cities, landmarks, and geographical locations",
-      examples: ["New York", "Planets", "Sugar Land"],
+      examples: ["New York", "Los Santos", "Sugar Land"],
       color: "bg-orange-500",
     },
     {
@@ -51,7 +52,7 @@ export const useThemeGenerator = (
       name: "Abstract Concepts",
       icon: Brain,
       description: "Ideas, emotions, and philosophical concepts",
-      examples: ["Meaning of Life", "Math", "Serenity"],
+      examples: ["Life", "Quantum Mechanics", "Space"],
       color: "bg-pink-500",
     },
   ];

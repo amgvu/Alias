@@ -280,7 +280,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 <Button
                   onClick={handleApplyNickname}
                   disabled={showOverlay || !inputValue}
-                  className="bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-subtle flex items-center justify-center"
+                  className="bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-active flex items-center justify-center"
                 >
                   <Check className="w-4 h-4 mr-[-2px]" />
                   Apply
@@ -300,7 +300,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               <Button
                 onClick={handleRevert}
                 disabled={showOverlay}
-                className="bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-subtle flex items-center justify-center"
+                className="bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-active flex items-center justify-center"
               >
                 <RotateCcw className="w-4 h-4 mr-[-2px]" />
                 Reset

@@ -159,7 +159,7 @@ export function NavigationSidebar({
                         activeSection === item.value
                           ? "text-text-primary hover:bg-button-hover-sidebar"
                           : item.disabled
-                          ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
+                          ? "text-zinc-600 hover:bg-transparent active:bg-transparent active:text-zinc-600 hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}
@@ -196,7 +196,7 @@ export function NavigationSidebar({
                         activeSection === item.value
                           ? "text-text-primary hover:bg-button-hover-sidebar"
                           : item.disabled
-                          ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
+                          ? "text-zinc-600 hover:bg-transparent active:bg-transparent active:text-zinc-600 hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}
@@ -232,7 +232,7 @@ export function NavigationSidebar({
                         activeSection === item.value
                           ? "text-text-primary hover:bg-button-hover-sidebar"
                           : item.disabled
-                          ? "text-zinc-600 hover:bg-transparent hover:text-zinc-600 cursor-not-allowed"
+                          ? "text-zinc-600 hover:bg-transparent active:bg-transparent active:text-zinc-600 hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}
@@ -269,7 +269,7 @@ export function NavigationSidebar({
                         activeSection === item.value
                           ? "text-text-primary hover:bg-button-hover-sidebar"
                           : item.disabled
-                          ? "text-zinc-600 cursor-not-allowed"
+                          ? "text-zinc-600 hover:bg-transparent active:bg-transparent active:text-zinc-600 hover:text-zinc-600 cursor-not-allowed"
                           : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
                       }
                     `}
@@ -318,7 +318,7 @@ export function NavigationSidebar({
               {!isMinimized && (
                 <button
                   onClick={handleDiscordLogout}
-                  className="flex text-text-primary hover:text-text-primary cursor-pointer hover:bg-button-hover-sidebar rounded-md p-2 transition-colors"
+                  className="flex text-text-secondary hover:text-text-primary cursor-pointer hover:bg-button-hover-sidebar rounded-md p-2 transition-colors"
                   title="Logout"
                 >
                   <LogOut className="h-5 w-5" />

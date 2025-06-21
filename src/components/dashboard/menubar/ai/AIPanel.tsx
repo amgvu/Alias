@@ -55,10 +55,10 @@ export default function AIPanel({
     >
       <div>
         <div className="border-b border-border p-4.5">
-          <h1 className="font-">AI</h1>
+          <h1 className="translate-y-1 -translate-x-2">Themes</h1>
         </div>
         <div className="px-2 py-2">
-          <div className="pt-1 space-y-3">
+          <div className="pt-1 space-y-2">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-text-secondary font-medium">
@@ -73,7 +73,7 @@ export default function AIPanel({
                 </button>
               </div>
 
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap mb-2.5 gap-1">
                 {categories.map((cat) => {
                   const Icon = cat.icon;
                   const isSelected = cat.id === category;
@@ -128,7 +128,7 @@ export default function AIPanel({
               </motion.div>
             </AnimatePresence>
 
-            <div className="space-y-1">
+            <div className="">
               <label className="text-xs text-text-secondary font-medium">
                 Specific Theme
               </label>
@@ -141,7 +141,7 @@ export default function AIPanel({
               />
             </div>
 
-            <div className="flex flex-col items-center space-x-4 mt-4">
+            <div className="flex flex-col items-center">
               <AnimatePresence mode="wait">
                 {loading ? (
                   <motion.div
@@ -170,7 +170,7 @@ export default function AIPanel({
                       onClick={handleGenerate}
                       className={`transition-all cursor-pointer bg-button ${
                         !loading && "disabled:bg-disabled-button"
-                      } bg-button disabled:text-text-disabled border border-border-subtle text-text-primary font-bold hover:bg-button-hover`}
+                      } bg-button disabled:text-text-disabled border border-border-active text-text-primary font-bold hover:bg-button-hover`}
                       disabled={
                         loading ||
                         !selectedServer ||

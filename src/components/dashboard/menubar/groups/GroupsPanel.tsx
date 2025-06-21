@@ -196,15 +196,17 @@ export default function GroupsPanel({
     >
       <div>
         <div className="border-b border-border p-4.5">
-          <h1 className="">Groups</h1>
+          <h1 className="translate-y-1 -translate-x-2">Groups</h1>
         </div>
-        <div className="space-y-6 px-2 py-4">
-          <div className="space-y-4">
+        <div className="px-2 py-3">
+          <div className="space-y-2">
             <div className="flex items-center gap-4">
-              <span className="text-text-primary">Nickname Groups</span>
+              <span className="text-xs text-text-secondary font-medium">
+                Nickname Groups
+              </span>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex">
               <Input
                 placeholder="New group name"
                 maxLength={30}
@@ -221,7 +223,7 @@ export default function GroupsPanel({
               <Button
                 onClick={handleCreateClick}
                 disabled={!newArcName.trim() || isLoading}
-                className="cursor-pointer bg-transparent text-zinc-500 hover:text-zinc-400 hover:bg-transparent "
+                className="cursor-pointer bg-transparent text-text-secondary hover:text-zinc-400 hover:bg-transparent "
               >
                 {isLoading ? (
                   <LoaderCircle className="animate-spin h-4 w-4" />

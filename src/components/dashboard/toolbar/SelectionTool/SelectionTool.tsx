@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Server } from "@/types/types";
-import { SquareDashed } from "lucide-react";
+import { SquareDashedMousePointer } from "lucide-react";
 
 interface SelectionToolProps {
   selectedServer: Server | null;
@@ -16,10 +16,10 @@ export function SelectionTool({
   return (
     <Button
       onClick={() => setShowCheckboxes(!showCheckboxes)}
-      className="p-2 mx-2 bg-button border border-border ml-64 rounded-md cursor-pointer text-sm text-text-primary hover:bg-button-hover"
+      className="p-2 mx-2 bg-button border border-border-active ml-64 rounded-md cursor-pointer text-sm text-text-primary hover:bg-button-hover"
       disabled={!selectedServer}
     >
-      <SquareDashed className="w-4.5 h-4.5 inline-block mb-0.5 mr-1" />
+      <SquareDashedMousePointer className="w-4.5 h-4.5 inline-block" />
       {showCheckboxes ? "Unselect" : "Select"}
     </Button>
   );
