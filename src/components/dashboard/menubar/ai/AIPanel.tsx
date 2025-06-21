@@ -66,7 +66,7 @@ export default function AIPanel({
                 </span>
                 <button
                   onClick={randomCategory}
-                  className="text-xs text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1"
+                  className="text-xs cursor-pointer text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1"
                 >
                   <Shuffle className="w-3 h-3" />
                   Random
@@ -81,7 +81,7 @@ export default function AIPanel({
                     <button
                       key={cat.id}
                       onClick={() => setCategory(cat.id)}
-                      className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all ${
+                      className={`flex cursor-pointer items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all ${
                         isSelected
                           ? "bg-button text-text-primary border border-border-active"
                           : "bg-input border border-border-subtle text-text-secondary hover:text-text-primary hover:bg-button-hover"
@@ -167,7 +167,7 @@ export default function AIPanel({
                     </span>
                     <Button
                       onClick={handleGenerate}
-                      className={`transition-all bg-button ${
+                      className={`transition-all cursor-pointer bg-button ${
                         !loading && "disabled:bg-disabled-button"
                       } bg-button disabled:text-text-disabled border border-border-subtle text-text-primary font-bold hover:bg-button-hover`}
                       disabled={

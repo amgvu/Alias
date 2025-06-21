@@ -123,7 +123,7 @@ export function DSUserList({
               variants={checkboxContainerVariants}
               initial="hidden"
               animate={showCheckboxes ? "visible" : "hidden"}
-              className="overflow-hidden mt-4 flex-shrink-0"
+              className="overflow-hidden flex-shrink-0"
             >
               <Checkbox
                 className="border-zinc-300 border-2 cursor-pointer"
@@ -132,7 +132,7 @@ export function DSUserList({
               />
             </motion.div>
           )}
-          {showCheckboxes && <span className="mb-1 ml-1 mt-4">Select All</span>}
+          {showCheckboxes && <span className="mt-1.5">Select All</span>}
         </div>
 
         <VirtualizerList
