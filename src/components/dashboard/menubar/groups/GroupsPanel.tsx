@@ -278,7 +278,7 @@ export default function GroupsPanel({
                                   : "border-border hover:border-border-active bg-card-panel hover:bg-opacity-80"
                               }
                               before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 
-                              before:bg-gradient-to-r before:from-blue-500 before:via-cyan-500 before:to-blue-500 
+                              before:bg-gradient-to-r before:from-blue-500 before:via-blue-400 before:to-blue-500 
                               before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-200
                             `}
                             onClick={() => setSelectedArc(arc)}
