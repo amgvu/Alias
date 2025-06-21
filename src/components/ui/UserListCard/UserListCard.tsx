@@ -1,5 +1,4 @@
 import React from "react";
-import { DSInput, DSButton } from "@/components/";
 import Image from "next/image";
 import { styles } from "./UserListCard.styles";
 import { Member, Server } from "@/types/types";
@@ -16,6 +15,8 @@ import {
 import { useUserListCard } from "@/lib/hooks/useUserListCard";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import { Button } from "../button";
+import { Input } from "../input";
 
 interface UserListCardProps {
   member: Member;
@@ -225,13 +226,13 @@ export const UserListCard: React.FC<UserListCardProps> = ({
 
         <div className="w-full text-lg flex flex-col justify-center">
           <div className="relative flex items-center group">
-            <DSInput
+            <Input
               value={displayValue}
               onChange={handleInputChange}
               onFocus={handleFocus}
               onBlur={handleBlur}
               placeholder={`Nickname for ${member.username}`}
-              className={styles.nicknameInput}
+              className="bg-input border border-border-subtle font-bold"
               disabled={showOverlay}
             />
 
@@ -275,14 +276,14 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 transition={{ duration: 0.2 }}
                 className="inline-block"
               >
-                <DSButton
+                <Button
                   onClick={handleApplyNickname}
                   disabled={showOverlay || !inputValue}
-                  className={`${styles.applyButton}`}
+                  className="bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-subtle flex items-center justify-center"
                 >
                   <Check className="w-4 h-4 mr-[-2px]" />
                   Apply
-                </DSButton>
+                </Button>
               </motion.div>
             )}
           </AnimatePresence>
@@ -295,14 +296,14 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               }}
               className="inline-block"
             >
-              <DSButton
+              <Button
                 onClick={handleRevert}
                 disabled={showOverlay}
-                className={`${styles.applyButton} transition-all duration-200`}
+                className="bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-subtle flex items-center justify-center"
               >
                 <RotateCcw className="w-4 h-4 mr-[-2px]" />
                 Reset
-              </DSButton>
+              </Button>
             </motion.div>
             {showResetSuccess && (
               <motion.div

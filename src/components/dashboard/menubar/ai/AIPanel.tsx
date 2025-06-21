@@ -1,4 +1,4 @@
-import DSButton from "@/components/ui/Button/Button";
+import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, WandSparkles, Shuffle } from "lucide-react";
 import { Member, Server, Category } from "@/types/types";
@@ -164,7 +164,7 @@ export default function AIPanel({
                     <span className="text-xs mb-1 text-text-secondary text-center">
                       Select users before generating names
                     </span>
-                    <DSButton
+                    <Button
                       onClick={handleGenerate}
                       className={`transition-all bg-button ${
                         !loading && "disabled:bg-disabled-button"
@@ -180,7 +180,7 @@ export default function AIPanel({
                       {selectedUserIds.length > 0
                         ? `Generate ${selectedUserIds.length}`
                         : "Generate"}
-                    </DSButton>
+                    </Button>
                   </motion.div>
                 )}
               </AnimatePresence>
