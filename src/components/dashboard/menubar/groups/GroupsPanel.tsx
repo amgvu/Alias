@@ -207,6 +207,7 @@ export default function GroupsPanel({
             <div className="flex gap-2">
               <Input
                 placeholder="New group name"
+                maxLength={30}
                 value={newArcName}
                 onChange={(e) => setNewArcName(e.target.value)}
                 className="flex-grow bg-input border border-border text-text-primary focus:ring-1 focus:ring-border-active"

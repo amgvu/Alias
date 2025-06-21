@@ -134,6 +134,7 @@ export default function AIPanel({
               </label>
               <Input
                 className="bg-input border-border"
+                maxLength={50}
                 placeholder={`Enter ${currentCategory.name.toLowerCase()}...`}
                 value={theme}
                 onChange={(e) => setTheme(e.target.value)}

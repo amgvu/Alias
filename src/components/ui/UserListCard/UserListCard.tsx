@@ -231,6 +231,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               onChange={handleInputChange}
               onFocus={handleFocus}
               onBlur={handleBlur}
+              maxLength={30}
               placeholder={`Nickname for ${member.username}`}
               className="bg-input border border-border-subtle w-1/3 font-bold"
               disabled={showOverlay}
