@@ -8,6 +8,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { fetchArcs, fetchArcNicknames, deleteArc } from "@/lib/utilities";
 import Image from "next/image";
+import { VirtualizedNicknameList } from "./VirtualizedNicknameList";
 
 interface GroupsPanelProps {
   members: Member[];
@@ -323,40 +324,9 @@ export default function GroupsPanel({
                                   className="overflow-hidden border-t border-border"
                                 >
                                   <div className="p-3 pt-2">
-                                    <div className="max-h-40 overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
-                                      <ul className="space-y-1">
-                                        {nicknames.map((nickname, index) => (
-                                          <motion.li
-                                            key={nickname.user_id}
-                                            initial={{ opacity: 0, y: -5 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{
-                                              duration: 0.15,
-                                              delay: index * 0.02,
-                                            }}
-                                            className="text-xs bg-context-bar p-2 rounded flex items-center gap-2"
-                                          >
-                                            <div className="flex-shrink-0">
-                                              <Image
-                                                src={nickname.avatar_url}
-                                                height={20}
-                                                width={20}
-                                                alt={nickname.user_tag}
-                                                className="rounded-full ring-1 ring-zinc-700"
-                                              />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                              <div className="text-text-primary font-medium truncate text-xs">
-                                                {nickname.user_tag}
-                                              </div>
-                                              <div className="text-text-secondary truncate text-xs">
-                                                {nickname.nickname}
-                                              </div>
-                                            </div>
-                                          </motion.li>
-                                        ))}
-                                      </ul>
-                                    </div>
+                                    <VirtualizedNicknameList
+                                      nicknames={nicknames}
+                                    />
                                   </div>
                                 </motion.div>
                               )}
