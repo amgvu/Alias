@@ -12,4 +12,4 @@
 
 **Verification**
 
-<!-- Describe how others can test and verify this feature -->
+<!-- Describe how others can test and verify this feature(s) -->
