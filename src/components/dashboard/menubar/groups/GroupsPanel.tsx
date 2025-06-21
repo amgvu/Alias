@@ -152,6 +152,40 @@ export default function GroupsPanel({
     }, 150);
   };
 
+  const renderMemberThumbnails = (nicknames: ArcNickname[]) => {
+    const maxVisible = 3;
+    const visibleNicknames = nicknames.slice(0, maxVisible);
+    const remainingCount = nicknames.length - maxVisible;
+
+    return (
+      <div className="flex items-center mb-2">
+        {visibleNicknames.map((nickname, index) => (
+          <div
+            key={nickname.user_id}
+            className="relative"
+            style={{ marginLeft: index > 0 ? "-8px" : "0" }}
+          >
+            <Image
+              src={nickname.avatar_url}
+              height={24}
+              width={24}
+              alt={nickname.user_tag}
+              className="rounded-full border-2 border-card-panel bg-card-panel"
+            />
+          </div>
+        ))}
+        {remainingCount > 0 && (
+          <div
+            className="w-6 h-6 rounded-full bg-context-bar border-2 border-card-panel flex items-center justify-center text-xs text-text-secondary font-medium"
+            style={{ marginLeft: visibleNicknames.length > 0 ? "-8px" : "0" }}
+          >
+            +{remainingCount}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -210,6 +244,7 @@ export default function GroupsPanel({
                   {arcs.map((arc) => {
                     const isHovered = hoveredArc?.id === arc.id;
                     const nicknames = arcNicknamesMap[arc.id] || [];
+                    const isSelected = selectedArc?.id === arc.id;
 
                     return (
                       <motion.div
@@ -225,50 +260,58 @@ export default function GroupsPanel({
                       >
                         <motion.div
                           animate={{
-                            height:
-                              isHovered && nicknames.length > 0
-                                ? "auto"
-                                : "auto",
+                            height: "auto",
                             zIndex: isHovered ? 10 : 1,
                           }}
                           transition={{ duration: 0.1, ease: "easeInOut" }}
                           className="relative"
                         >
                           <Card
-                            className={`cursor-pointer bg-card-panel group overflow-hidden ${
-                              selectedArc?.id === arc.id
-                                ? "border-border-subtle ring-1 ring-primary"
-                                : "border-border hover:border-border-active"
-                            } transition-all relative`}
+                            className={`cursor-pointer group overflow-hidden transition-all relative
+                              ${
+                                isSelected
+                                  ? "border-border-subtle ring-1 ring-primary bg-card-panel"
+                                  : "border-border hover:border-border-active bg-card-panel hover:bg-opacity-80"
+                              }
+                              before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 
+                              before:bg-gradient-to-r before:from-blue-500 before:via-cyan-500 before:to-cyan-500 
+                              before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-200
+                            `}
                             onClick={() => setSelectedArc(arc)}
                             onMouseEnter={() => handleMouseEnter(arc)}
                             onMouseLeave={handleMouseLeave}
                           >
-                            <CardHeader className="p-2 flex flex-row items-center justify-between">
-                              <CardTitle className="text-sm font-medium text-text-primary flex-grow truncate pr-2">
-                                {arc.arc_name}
+                            <CardHeader className="p-3 flex flex-row items-start justify-between">
+                              <div className="flex-grow min-w-0">
+                                {nicknames.length > 0 &&
+                                  renderMemberThumbnails(nicknames)}
+                                <CardTitle className="text-sm font-medium text-text-primary truncate pr-2">
+                                  {arc.arc_name}
+                                </CardTitle>
                                 {arcMemberCounts[arc.id] !== undefined && (
-                                  <p className="text-xs text-text-secondary">
+                                  <p className="text-xs text-text-secondary mt-1">
                                     {arcMemberCounts[arc.id]} members
                                   </p>
                                 )}
-                              </CardTitle>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleDeleteArc(arc.id);
-                                }}
-                                className="text-red-400 hover:text-red-500 cursor-pointer hover:bg-button-hover-card transition-all duration-200 p-1 h-fit"
-                                disabled={removingArcIds.includes(arc.id)}
-                              >
-                                <Trash2 className="h-4 w-4" />
-                              </Button>
+                              </div>
+                              <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2 flex-shrink-0">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteArc(arc.id);
+                                  }}
+                                  className="text-red-400 hover:text-red-500 cursor-pointer hover:bg-button-hover-card transition-all duration-200 p-1 h-6 w-6"
+                                  disabled={removingArcIds.includes(arc.id)}
+                                >
+                                  <Trash2 className="h-3 w-3" />
+                                </Button>
+                              </div>
                             </CardHeader>
 
                             <AnimatePresence>
-                              {isHovered && (
+                              {isHovered && nicknames.length > 0 && (
                                 <motion.div
                                   initial={{ height: 0, opacity: 0 }}
                                   animate={{ height: "auto", opacity: 1 }}
@@ -279,47 +322,41 @@ export default function GroupsPanel({
                                   }}
                                   className="overflow-hidden border-t border-border"
                                 >
-                                  <div className="p-2">
-                                    {nicknames.length === 0 ? (
-                                      <p className="text-xs text-text-secondary">
-                                        No nicknames found for this group.
-                                      </p>
-                                    ) : (
-                                      <div className="max-h-40 overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
-                                        <ul className="space-y-0.5">
-                                          {nicknames.map((nickname, index) => (
-                                            <motion.li
-                                              key={nickname.user_id}
-                                              initial={{ opacity: 0, y: -5 }}
-                                              animate={{ opacity: 1, y: 0 }}
-                                              transition={{
-                                                duration: 0.15,
-                                                delay: index * 0.02,
-                                              }}
-                                              className="text-xs bg-context-bar p-1 rounded flex items-start gap-2"
-                                            >
-                                              <div className="flex-shrink-0">
-                                                <Image
-                                                  src={nickname.avatar_url}
-                                                  height={32}
-                                                  width={32}
-                                                  alt="avatar url"
-                                                  className="inline-block ring ring-zinc-800 rounded-full"
-                                                />
+                                  <div className="p-3 pt-2">
+                                    <div className="max-h-40 overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+                                      <ul className="space-y-1">
+                                        {nicknames.map((nickname, index) => (
+                                          <motion.li
+                                            key={nickname.user_id}
+                                            initial={{ opacity: 0, y: -5 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{
+                                              duration: 0.15,
+                                              delay: index * 0.02,
+                                            }}
+                                            className="text-xs bg-context-bar p-2 rounded flex items-center gap-2"
+                                          >
+                                            <div className="flex-shrink-0">
+                                              <Image
+                                                src={nickname.avatar_url}
+                                                height={20}
+                                                width={20}
+                                                alt={nickname.user_tag}
+                                                className="rounded-full ring-1 ring-zinc-700"
+                                              />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                              <div className="text-text-primary font-medium truncate text-xs">
+                                                {nickname.user_tag}
                                               </div>
-                                              <div className="flex-1 min-w-0">
-                                                <div className="text-text-primary font-medium truncate">
-                                                  {nickname.user_tag}
-                                                </div>
-                                                <div className="text-text-secondary truncate">
-                                                  {nickname.nickname}
-                                                </div>
+                                              <div className="text-text-secondary truncate text-xs">
+                                                {nickname.nickname}
                                               </div>
-                                            </motion.li>
-                                          ))}
-                                        </ul>
-                                      </div>
-                                    )}
+                                            </div>
+                                          </motion.li>
+                                        ))}
+                                      </ul>
+                                    </div>
                                   </div>
                                 </motion.div>
                               )}
