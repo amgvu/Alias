@@ -54,4 +54,9 @@ export interface Category {
   description: string;
   examples: string[];
   color: string;
+  disabledColor: string;
+  disabledHoverColor: string;
+  enabledHoverColor: string;
+  enabledBorderColor: string;
+  disabledBorderColor: string;
 }
