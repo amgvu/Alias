@@ -16,7 +16,7 @@ export function SelectionTool({
   return (
     <Button
       onClick={() => setShowCheckboxes(!showCheckboxes)}
-      className="p-2 mx-2 bg-button border border-border-active rounded-md cursor-pointer text-sm text-text-primary hover:bg-button-hover"
+      className="p-2 mr-2 bg-button border border-border-active rounded-md cursor-pointer text-sm text-text-primary hover:bg-button-hover"
       disabled={!selectedServer}
     >
       <SquareDashedMousePointer className="w-4.5 h-4.5 inline-block" />
