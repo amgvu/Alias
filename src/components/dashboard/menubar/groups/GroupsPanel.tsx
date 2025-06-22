@@ -278,7 +278,7 @@ export default function GroupsPanel({
                                   : "border-border hover:border-border-active bg-card-panel hover:bg-opacity-80"
                               }
                               before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 
-                              before:bg-gradient-to-r before:from-blue-500 before:via-blue-400 before:to-blue-500 
+                              before:bg-gradient-to-r before:from-blue-400 before:via-blue-500 before:to-blue-400 
                               before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-200
                             `}
                             onClick={() => setSelectedArc(arc)}
@@ -306,7 +306,7 @@ export default function GroupsPanel({
                                     e.stopPropagation();
                                     handleDeleteArc(arc.id);
                                   }}
-                                  className="text-red-400 hover:text-red-500 cursor-pointer hover:bg-button-hover-card transition-all duration-200 p-1 h-6 w-6"
+                                  className="text-red-400 hover:text-red-500 cursor-pointer hover:bg-zinc-900/50 transition-all duration-200 p-1 h-6 w-6"
                                   disabled={removingArcIds.includes(arc.id)}
                                 >
                                   <Trash2 className="h-3 w-3" />
