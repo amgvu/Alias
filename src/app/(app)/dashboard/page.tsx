@@ -16,6 +16,7 @@ import { LoaderCircle } from "lucide-react";
 import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
 import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
 import Menubar from "@/components/dashboard/menubar/Menubar";
+import { AuthCard } from "@/components/dashboard/nav-sidebar/AuthCard";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -94,7 +95,7 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout
-      sidebar={
+      menubar={
         <Menubar
           selectedServer={selectedServer}
           selectedArc={selectedArc}
@@ -121,6 +122,7 @@ export default function Dashboard() {
           }
         />
       }
+      authbar={<AuthCard />}
       navigationSidebar={
         <NavigationSidebar
           activeSection={activeSection}

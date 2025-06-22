@@ -160,7 +160,7 @@ export default function Menubar({
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
-          <SidebarFooter className="p-3 border-t border-border"></SidebarFooter>
+          <SidebarFooter className="p-3 border-border"></SidebarFooter>
         </Sidebar>
       </motion.div>
     </div>
