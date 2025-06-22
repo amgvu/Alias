@@ -196,7 +196,9 @@ export default function GroupsPanel({
     >
       <div>
         <div className="border-b border-border p-[14.52px]">
-          <h1 className="translate-y-1 -translate-x-2">Groups</h1>
+          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-2">
+            Groups
+          </h1>
         </div>
         <div className="px-2 py-3">
           <div className="space-y-2">

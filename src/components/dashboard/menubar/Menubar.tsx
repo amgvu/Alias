@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { UsersRound, Sparkles, ReplaceAll, History } from "lucide-react";
+import { UsersRound, Palette } from "lucide-react";
 import { Member, Arc, Server, Category } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
 import AIPanel from "./ai/AIPanel";
@@ -73,7 +73,7 @@ export default function Menubar({
 
   const tools = [
     { icon: UsersRound, name: "Groups", id: "Groups" },
-    { icon: Sparkles, name: "AI", id: "AI" },
+    { icon: Palette, name: "AI", id: "AI" },
   ];
 
   const handleToolClick = (toolId: string) => {

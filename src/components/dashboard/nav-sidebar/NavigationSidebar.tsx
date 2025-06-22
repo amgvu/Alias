@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Binoculars, Users, UserRoundPen, LayoutDashboard } from "lucide-react";
+import { Users, UserRoundPen } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -25,15 +25,6 @@ interface NavigationSidebarProps {
   handleServerSelection: (server: Server) => void;
 }
 
-const homeItems = [
-  {
-    title: "Dashboard",
-    icon: LayoutDashboard,
-    value: "dashboard",
-    disabled: true,
-  },
-];
-
 const userItems = [
   {
     title: "Nicknames",
@@ -44,15 +35,6 @@ const userItems = [
     title: "Roles",
     icon: Users,
     value: "roles",
-    disabled: true,
-  },
-];
-
-const serverItems = [
-  {
-    title: "Monitoring",
-    icon: Binoculars,
-    value: "monitoring",
     disabled: true,
   },
 ];
@@ -108,88 +90,16 @@ export function NavigationSidebar({
         )}
       </SidebarHeader>
 
-      <SidebarGroup>
-        {!isMinimized && (
-          <SidebarGroupLabel className="text-text-secondary text-xs font-medium tracking-wide">
-            App
-          </SidebarGroupLabel>
-        )}
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {homeItems.map((item) => (
-              <SidebarMenuItem key={item.value}>
-                <SidebarMenuButton
-                  onClick={() =>
-                    !item.disabled && onSectionChange?.(item.value)
-                  }
-                  isActive={activeSection === item.value}
-                  className={`
-                      text-base font-bold transition-colors duration-200
-                      ${isMinimized ? "justify-center" : ""}
-                      ${
-                        activeSection === item.value
-                          ? "text-text-primary hover:bg-button-hover-sidebar"
-                          : item.disabled
-                          ? "text-zinc-600 hover:bg-transparent active:bg-transparent active:text-zinc-600 hover:text-zinc-600 cursor-not-allowed"
-                          : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
-                      }
-                    `}
-                >
-                  <item.icon className="text-zinc-500" />
-                  {!isMinimized && <span>{item.title}</span>}
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-
       <SidebarContent className="flex flex-col">
         <SidebarGroup>
           {!isMinimized && (
             <SidebarGroupLabel className="text-text-secondary text-xs font-medium tracking-wide">
-              Users
+              App
             </SidebarGroupLabel>
           )}
           <SidebarGroupContent>
             <SidebarMenu>
               {userItems.map((item) => (
-                <SidebarMenuItem key={item.value}>
-                  <SidebarMenuButton
-                    onClick={() =>
-                      !item.disabled && onSectionChange?.(item.value)
-                    }
-                    isActive={activeSection === item.value}
-                    className={`
-                      text-base font-bold transition-colors duration-200
-                      ${isMinimized ? "justify-center" : ""}
-                      ${
-                        activeSection === item.value
-                          ? "text-text-primary hover:bg-button-hover-sidebar"
-                          : item.disabled
-                          ? "text-zinc-600 hover:bg-transparent active:bg-transparent active:text-zinc-600 hover:text-zinc-600 cursor-not-allowed"
-                          : "text-zinc-200 hover:text-zinc-100 hover:bg-zinc-900/50"
-                      }
-                    `}
-                  >
-                    <item.icon className="text-zinc-500" />
-                    {!isMinimized && <span>{item.title}</span>}
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          {!isMinimized && (
-            <SidebarGroupLabel className="text-text-secondary text-xs font-medium tracking-wide">
-              Server
-            </SidebarGroupLabel>
-          )}
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {serverItems.map((item) => (
                 <SidebarMenuItem key={item.value}>
                   <SidebarMenuButton
                     onClick={() =>
