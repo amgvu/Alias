@@ -104,13 +104,13 @@ export function NavigationSidebar({
     <Sidebar
       className={`
          bg-sidebar border-border
-        transition-all duration-300 mt-6  ease-in-out
+        transition-all z-5 duration-300 mt-[24.5px]  ease-in-out
         ${isMinimized ? "w-[70px]" : ""}
       `}
     >
       <SidebarHeader
         className={`
-    py-2 bg-sidebar border-b border- border-border
+    py-2 bg-sidebar z-50 border-b border- border-border
     flex items-center ${isMinimized ? "justify-center" : "justify-between"} px-4
   `}
       >

@@ -21,7 +21,7 @@ export function Toolbar({
   setShowCheckboxes,
 }: ToolbarProps) {
   return (
-    <div className="bg-panel z-4 fixed w-screen translate-x-14 p-[10.5px] border-border border-r border-b">
+    <div className="bg-panel z-4 fixed w-screen translate-x-12 p-[10.5px] border-border border-r border-t border-b">
       <SelectionTool
         selectedServer={selectedServer}
         showCheckboxes={showCheckboxes}
