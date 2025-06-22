@@ -77,7 +77,7 @@ export function AuthCard() {
                   ))}
                   <button
                     onClick={handleDiscordLogout}
-                    className="flex text-text-secondary hover:text-text-primary cursor-pointer hover:bg-button-hover-sidebar rounded-md p-2 transition-colors"
+                    className="flex text-text-secondary hover:text-text-primary cursor-pointer hover:bg-transparent-button-hover-sidebar rounded-md p-2 transition-colors"
                     title="Logout"
                   >
                     <LogOut className="h-5 w-5" />

@@ -192,10 +192,10 @@ export default function GroupsPanel({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-panel border-r border-t translate-x-12 -translate-y-[24.2px] h-screen border-border w-64"
+      className="bg-panel border-r border-t translate-x-12 -translate-y-[24.1px] h-screen border-border w-64"
     >
       <div>
-        <div className="border-b border-border p-[14.5px]">
+        <div className="border-b border-border p-[14.6px]">
           <h1 className="translate-y-1 -translate-x-2">Groups</h1>
         </div>
         <div className="px-2 py-3">

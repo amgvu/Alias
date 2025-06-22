@@ -81,7 +81,7 @@ export function NavigationSidebar({
     >
       <SidebarHeader
         className={`
-    py-2 bg-sidebar z-50 border-b border- border-border
+    py-2 bg-sidebar z-50  border-border
     flex items-center ${isMinimized ? "justify-center" : "justify-between"} px-4
   `}
       >

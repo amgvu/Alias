@@ -345,11 +345,9 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               >
                 <X className="w-5 h-5 text-zinc-700 hover:text-zinc-500 transition-all duration-200" />
               </button>
-
               <div className="flex items-center gap-2 mb-1 text-sm font-bold text-zinc-300">
                 Saved Nicknames
               </div>
-
               {isLoadingNicknames ? (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -368,40 +366,41 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                   No nicknames found. Add some!
                 </div>
               ) : (
-                <div className="flex flex-wrap gap-2">
-                  {previousNicknames.map((nickname) => (
-                    <AnimatePresence
-                      key={`${nickname.userId}-${nickname.nickname}`}
-                    >
-                      {!deletingNicknames.includes(nickname.nickname) && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.2 }}
-                          className="relative"
-                        >
-                          <button
-                            onClick={() =>
-                              handleNicknameSelect(nickname.nickname)
-                            }
-                            className="px-3 py-1 text-sm font-medium bg-sidebar border-border-subtle border cursor-pointer transition-all hover:bg-card rounded-md"
+                <div className="overflow-x-auto">
+                  <div className="flex gap-2 min-w-max">
+                    {previousNicknames.map((nickname) => (
+                      <AnimatePresence
+                        key={`${nickname.userId}-${nickname.nickname}`}
+                      >
+                        {!deletingNicknames.includes(nickname.nickname) && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="relative flex-shrink-0"
                           >
-                            {nickname.nickname}
-                          </button>
-
-                          <button
-                            onClick={() =>
-                              handleNicknameDeleteWithDelay(nickname)
-                            }
-                            className="absolute -top-1 -right-1 p-1 cursor-pointer text-sm text-white bg-red-400 rounded-full transition hover:bg-red-500"
-                          >
-                            <X className="w-3 h-3" />
-                          </button>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  ))}
+                            <button
+                              onClick={() =>
+                                handleNicknameSelect(nickname.nickname)
+                              }
+                              className="px-3 py-1 text-sm font-medium bg-sidebar border-border-subtle border cursor-pointer transition-all hover:bg-card rounded-md whitespace-nowrap"
+                            >
+                              {nickname.nickname}
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleNicknameDeleteWithDelay(nickname)
+                              }
+                              className="absolute -top-1 -right-1 p-1 cursor-pointer text-sm text-white bg-red-400 rounded-full transition hover:bg-red-500"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
