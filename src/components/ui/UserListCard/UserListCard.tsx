@@ -345,7 +345,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               >
                 <X className="w-5 h-5 text-zinc-700 hover:text-zinc-500 transition-all duration-200" />
               </button>
-              <div className="flex items-center gap-2 mb-1 text-sm font-bold text-zinc-300">
+              <div className="flex items-center gap-2 1 text-sm font-bold text-zinc-300">
                 Saved Nicknames
               </div>
               {isLoadingNicknames ? (
@@ -367,7 +367,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <div className="flex gap-2 min-w-max">
+                  <div className="flex gap-2 pb-2 min-w-max">
                     {previousNicknames.map((nickname) => (
                       <AnimatePresence
                         key={`${nickname.userId}-${nickname.nickname}`}
@@ -378,7 +378,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.2 }}
-                            className="relative flex-shrink-0"
+                            className="relative flex-shrink-0 mt-1"
                           >
                             <button
                               onClick={() =>
