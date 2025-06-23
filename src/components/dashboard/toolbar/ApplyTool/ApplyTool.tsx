@@ -27,10 +27,10 @@ export function ApplyTool({
   return (
     <Button
       onClick={handleApply}
-      className="p-2 bg-button border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-sm text-text-primary hover:bg-button-hover"
+      className="p-2 bg-button ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-text-primary hover:bg-button-hover"
       disabled={!selectedServer || selectedUserIds.length === 0}
     >
-      <CheckCheck className="w-4.5 h-4.5 inline-block" />
+      <CheckCheck className="w-4 h-4 sm:w-4 md:w-5 md:h-5 2xl:w-6 2xl:h-6 inline-block" />
       Apply
     </Button>
   );

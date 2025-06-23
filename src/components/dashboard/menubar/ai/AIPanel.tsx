@@ -55,7 +55,7 @@ export default function AIPanel({
     >
       <div>
         <div className="border-b border-border p-[14.52px]">
-          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-2">
+          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-2 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
             Themes
           </h1>
         </div>
@@ -63,12 +63,12 @@ export default function AIPanel({
           <div className="pt-1 space-y-2">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs text-text-secondary font-medium">
+                <span className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] text-text-secondary font-medium">
                   Theme Category
                 </span>
                 <button
                   onClick={randomCategory}
-                  className="text-xs cursor-pointer text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1"
+                  className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] cursor-pointer text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1"
                 >
                   <Shuffle className="w-3 h-3" />
                   Random
@@ -83,7 +83,7 @@ export default function AIPanel({
                     <button
                       key={cat.id}
                       onClick={() => setCategory(cat.id)}
-                      className={`flex cursor-pointer items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all ${
+                      className={`flex cursor-pointer items-center gap-1 px-2 py-1 rounded text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] font-medium transition-all ${
                         isSelected
                           ? `${cat.color} text-zinc-900 ${cat.enabledBorderColor} border`
                           : `${cat.disabledColor} border ${cat.disabledBorderColor} text-zinc-900 hover:text-zinc-700 ${cat.disabledHoverColor}`
@@ -110,18 +110,18 @@ export default function AIPanel({
                   {React.createElement(currentCategory.icon, {
                     className: "w-4 h-4 text-zinc-900",
                   })}
-                  <span className="text-sm font-medium text-zinc-900">
+                  <span className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium text-zinc-900">
                     {currentCategory.name}
                   </span>
                 </div>
-                <p className="text-xs text-zinc-800">
+                <p className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] text-zinc-800">
                   {currentCategory.description}
                 </p>
                 <div className="flex flex-wrap gap-1 mt-1">
                   {currentCategory.examples.map((example, idx) => (
                     <span
                       key={idx}
-                      className={`text-xs ${currentCategory.disabledColor} px-1.5 py-0.5 rounded text-zinc-800`}
+                      className={`text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] ${currentCategory.disabledColor} px-1.5 py-0.5 rounded text-zinc-800`}
                     >
                       {example}
                     </span>
@@ -131,11 +131,11 @@ export default function AIPanel({
             </AnimatePresence>
 
             <div className="">
-              <label className="text-xs text-text-secondary font-medium">
+              <label className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] text-text-secondary font-medium">
                 Specific Theme
               </label>
               <Input
-                className="bg-input border-border"
+                className="bg-input text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border-border"
                 maxLength={50}
                 placeholder={`Enter ${currentCategory.name.toLowerCase()}...`}
                 value={theme}
@@ -165,7 +165,7 @@ export default function AIPanel({
                     transition={{ duration: 0.2 }}
                     className="flex flex-col items-center"
                   >
-                    <span className="text-xs mb-1 text-text-secondary text-center">
+                    <span className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] mb-1 text-text-secondary text-center">
                       Select users before generating names
                     </span>
                     <Button
@@ -174,7 +174,7 @@ export default function AIPanel({
                         !loading && "disabled:bg-disabled-button"
                       } ${
                         currentCategory.color
-                      } disabled:text-text-disabled border border-border-active text-zinc-900 font-bold ${
+                      } disabled:text-text-disabled border border-border-active text-zinc-900 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold ${
                         currentCategory.enabledHoverColor
                       }`}
                       disabled={

@@ -127,7 +127,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         transition={{ duration: 0.2 }}
       >
         <div className="bg-zinc-900/10 backdrop-blur-lg -translate-x-[410px] rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12 w-108">
-          <div className="text-lg ml-2 text-center font-semibold text-white mb-1 flex items-center justify-center">
+          <div className="text-lg sm:text-base md:text-lg lg:text-[18px] xl:text-[19px] 2xl:text-[20px] ml-2 text-center font-semibold text-white mb-1 flex items-center justify-center">
             <ArrowDownUp className="inline-block mt-0.5 text-blue-400 mr-2" />
             {displayValue}
           </div>
@@ -233,7 +233,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               onBlur={handleBlur}
               maxLength={30}
               placeholder={`Nickname for ${member.username}`}
-              className="bg-input border border-border-subtle w-1/3 font-bold"
+              className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-input border border-border-subtle w-1/3 font-bold"
               disabled={showOverlay}
             />
 
@@ -249,7 +249,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             )}
           </div>
 
-          <div className={styles.username}>
+          <div className="text-sm sm:text-sm md:text-base lg:text-[14px] xl:text-[15px] 2xl:text-[16px] font-normal text-zinc-500 pl-2">
             {member.username}
             {member.userTag}
           </div>
@@ -280,7 +280,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 <Button
                   onClick={handleApplyNickname}
                   disabled={showOverlay || !inputValue}
-                  className="bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-active flex items-center justify-center"
+                  className="bg-button text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-active flex items-center justify-center"
                 >
                   <Check className="w-4 h-4 mr-[-2px]" />
                   Apply
@@ -300,7 +300,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               <Button
                 onClick={handleRevert}
                 disabled={showOverlay}
-                className="bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-active flex items-center justify-center"
+                className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-active flex items-center justify-center"
               >
                 <RotateCcw className="w-4 h-4 mr-[-2px]" />
                 Reset
@@ -345,7 +345,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               >
                 <X className="w-5 h-5 text-zinc-700 hover:text-zinc-500 transition-all duration-200" />
               </button>
-              <div className="flex items-center gap-2 1 text-sm font-bold text-zinc-300">
+              <div className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] flex items-center gap-2 font-bold text-zinc-300">
                 Saved Nicknames
               </div>
               {isLoadingNicknames ? (
@@ -354,7 +354,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="flex items-center gap-2 text-zinc-400 text-xs"
+                  className="flex text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] items-center gap-2 text-zinc-400"
                 >
                   <Loader2 className="animate-spin w-4 h-4" />
                   <span>Loading nicknames...</span>
@@ -362,7 +362,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               ) : fetchError ? (
                 <div className="text-red-500">{fetchError}</div>
               ) : previousNicknames.length === 0 ? (
-                <div className="text-zinc-500 text-xs italic">
+                <div className="text-zinc-500 text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] italic">
                   No nicknames found. Add some!
                 </div>
               ) : (
@@ -384,7 +384,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                               onClick={() =>
                                 handleNicknameSelect(nickname.nickname)
                               }
-                              className="px-3 py-1 text-sm font-medium bg-sidebar border-border-subtle border cursor-pointer transition-all hover:bg-card rounded-md whitespace-nowrap"
+                              className="px-3 py-1 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium bg-sidebar border-border-subtle border cursor-pointer transition-all hover:bg-card rounded-md whitespace-nowrap"
                             >
                               {nickname.nickname}
                             </button>
@@ -392,7 +392,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                               onClick={() =>
                                 handleNicknameDeleteWithDelay(nickname)
                               }
-                              className="absolute -top-1 -right-1 p-1 cursor-pointer text-sm text-white bg-red-400 rounded-full transition hover:bg-red-500"
+                              className="text-[10px] sm:text-xs md:text-sm absolute -top-1 -right-1 p-1 cursor-pointer text-sm text-white bg-red-400 rounded-full transition hover:bg-red-500"
                             >
                               <X className="w-3 h-3" />
                             </button>

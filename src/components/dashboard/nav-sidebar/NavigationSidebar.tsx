@@ -77,7 +77,7 @@ export function NavigationSidebar({
           />
 
           {!isMinimized && (
-            <h1 className="text-zinc-200 font-medium text-sm truncate max-w-[120px]">
+            <h1 className="text-zinc-200 font-medium text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] truncate max-w-[120px]">
               {selectedServer ? selectedServer.name : "Select a server"}
             </h1>
           )}
@@ -93,7 +93,7 @@ export function NavigationSidebar({
       <SidebarContent className="flex flex-col">
         <SidebarGroup>
           {!isMinimized && (
-            <SidebarGroupLabel className="text-text-secondary text-xs font-medium tracking-wide">
+            <SidebarGroupLabel className="text-text-secondary text-xs sm:text-xs md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] font-medium tracking-wide">
               App
             </SidebarGroupLabel>
           )}
@@ -107,7 +107,7 @@ export function NavigationSidebar({
                     }
                     isActive={activeSection === item.value}
                     className={`
-                      text-base font-bold transition-colors duration-200
+                      text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold transition-colors duration-200
                       ${isMinimized ? "justify-center" : ""}
                       ${
                         activeSection === item.value
@@ -118,7 +118,7 @@ export function NavigationSidebar({
                       }
                     `}
                   >
-                    <item.icon className="text-zinc-500" />
+                    <item.icon className="text-zinc-500 w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-5 xl:h-5 2xl:w-6 2xl:h-6" />
                     {!isMinimized && <span>{item.title}</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>

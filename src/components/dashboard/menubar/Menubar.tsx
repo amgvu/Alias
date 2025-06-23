@@ -145,13 +145,16 @@ export default function Menubar({
                       <SidebarMenuItem key={tool.id}>
                         <SidebarMenuButton
                           onClick={() => handleToolClick(tool.id)}
-                          className={`w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-200 ${
+                          className={`text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-200 ${
                             isActive
                               ? "bg-button-hover text-text-primary"
                               : "text-text-secondary hover:bg-transparent-button-hover-context-bar"
                           }`}
                         >
-                          <IconComponent size={20} />
+                          <IconComponent
+                            size={20}
+                            className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-5 xl:h-5 2xl:w-6 2xl:h-6"
+                          />
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     );
