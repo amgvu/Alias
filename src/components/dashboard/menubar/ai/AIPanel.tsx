@@ -165,7 +165,7 @@ export default function AIPanel({
                     transition={{ duration: 0.2 }}
                     className="flex flex-col items-center"
                   >
-                    <span className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] mb-1 text-text-secondary text-center">
+                    <span className="-translate-y-0.5 text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] mb-1 text-text-secondary text-center">
                       Select users before generating names
                     </span>
                     <Button

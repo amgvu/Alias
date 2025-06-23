@@ -52,7 +52,7 @@ export default function ServerContent({
               {serversError || membersError}
             </div>
           ) : selectedServer ? (
-            <div className="ml-34 mt-24 mr-2">
+            <div className="ml-34 mt-24 mr-4">
               <DSUserList
                 selectedServer={selectedServer}
                 members={members}
@@ -66,7 +66,7 @@ export default function ServerContent({
               />
             </div>
           ) : (
-            <div className="text-center font-semibold text-4xl text-text-secondary py-20">
+            <div className="text-center font-semibold text-4xl text-zinc-700 py-29">
               Select a server to view and manage members
             </div>
           )}
