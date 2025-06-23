@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { UsersRound, Palette } from "lucide-react";
+import { UsersRound, Palette, CirclePlus, Loader2 } from "lucide-react";
 import { Member, Arc, Server, Category } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
 import Image from "next/image";
-import DSMenu from "@/components/ui/Menu/Menu";
 import AIPanel from "./ai/AIPanel";
 import {
   Sidebar,
@@ -38,7 +37,6 @@ interface MenubarProps {
   setTheme: (theme: string) => void;
   loading: boolean;
   handleGenerateCharacters: (selectedMembers: Member[]) => void;
-
   onApplyToSelection: (selectedMembers: Member[]) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
   selectedUserIds?: string[];
@@ -68,7 +66,6 @@ export default function Menubar({
   setTheme,
   loading,
   handleGenerateCharacters,
-
   onApplyToSelection,
   selectedUserIds = [],
   showCheckboxes,
@@ -144,38 +141,16 @@ export default function Menubar({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.1 }}
       >
-        <Sidebar className="bg-sidebar mt-6 border-border w-20">
+        <Sidebar className="bg-sidebar mt-6 border-border w-[82px]">
           <SidebarHeader
             className={`
-          bg-sidebar z-50 border-border
-          flex items-center ${
-            isMinimized ? "justify-center" : "justify-center"
-          } px-2.5
-        `}
+              bg-sidebar z-50 border-border
+              flex items-center justify-center px-2.5
+            `}
           >
-            <div className="flex border-b pb-3 border-border items-center">
-              <Image
-                src={selectedServer ? selectedServer.iconURL : "/Arclify.svg"}
-                width="36"
-                height="36"
-                alt="logo"
-                className="inline-block w-10 h-10 rounded-lg ring-zinc-800"
-              />
-            </div>
-
-            {!isMinimized && (
-              <div className="absolute">
-                <DSMenu
-                  items={servers}
-                  setSelectedItem={handleServerSelection}
-                />
-              </div>
-            )}
-          </SidebarHeader>
-          <SidebarContent className="">
             <SidebarGroup>
               <SidebarGroupContent>
-                <SidebarMenu className="space-y-2 flex flex-col items-center">
+                <SidebarMenu className="space-y-2 border-b border-border pb-3 flex flex-col items-center">
                   {tools.map((tool) => {
                     const IconComponent = tool.icon;
                     const isActive = activeTool === tool.id;
@@ -200,7 +175,86 @@ export default function Menubar({
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
+          </SidebarHeader>
+
+          <SidebarContent className="overflow-y-auto">
+            <SidebarGroup>
+              <SidebarGroupContent>
+                <SidebarMenu className="space-y-2 flex flex-col items-center">
+                  <AnimatePresence mode="wait">
+                    {servers.length === 0 ? (
+                      <motion.div
+                        key="loading"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="flex items-center justify-center h-12 w-12"
+                      >
+                        <Loader2 className="animate-spin w-5 h-5 text-text-secondary" />
+                      </motion.div>
+                    ) : (
+                      <>
+                        {servers.map((server, index) => (
+                          <motion.div
+                            key={server.id}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{
+                              duration: 0.2,
+                            }}
+                            layout
+                          >
+                            <SidebarMenuItem>
+                              <SidebarMenuButton
+                                onClick={() => handleServerSelection(server)}
+                                className={`w-14 h-12 flex items-center justify-center rounded-lg transition-all duration-200 ${
+                                  selectedServer?.id === server.id
+                                    ? "bg-button-hover rounded-2xl"
+                                    : "hover:bg-transparent-button-hover-context-bar hover:rounded-2xl"
+                                }`}
+                              >
+                                <Image
+                                  src={server.iconURL}
+                                  alt={server.name}
+                                  width={40}
+                                  height={40}
+                                  className="w-10 h-10 rounded-lg"
+                                />
+                              </SidebarMenuButton>
+                            </SidebarMenuItem>
+                          </motion.div>
+                        ))}
+
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{
+                            duration: 0.2,
+                          }}
+                          layout
+                        >
+                          <SidebarMenuItem>
+                            <SidebarMenuButton
+                              onClick={() =>
+                                window.open(
+                                  "https://app.youform.com/forms/uwk5hpox"
+                                )
+                              }
+                              className="w-12 h-12 flex items-center justify-center rounded-lg text-text-secondary hover:bg-transparent-button-hover-context-bar hover:rounded-2xl transition-all duration-200"
+                            >
+                              <CirclePlus size={24} />
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
           </SidebarContent>
+
           <SidebarFooter className="p-3 border-border"></SidebarFooter>
         </Sidebar>
       </motion.div>
