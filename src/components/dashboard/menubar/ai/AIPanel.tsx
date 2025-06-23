@@ -55,11 +55,11 @@ export default function AIPanel({
     >
       <div>
         <div className="border-border p-3.5">
-          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-1.5 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
+          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-0.5 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
             Themes
           </h1>
         </div>
-        <div className="px-2 py-1">
+        <div className="px-3 py-1">
           <div className="space-y-2">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
