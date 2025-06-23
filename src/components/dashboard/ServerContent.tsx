@@ -37,22 +37,22 @@ export default function ServerContent({
   return (
     <div className="flex flex-col">
       <TitleUpdater />
-      <Toolbar
-        selectedServer={selectedServer}
-        showCheckboxes={showCheckboxes}
-        setShowCheckboxes={setShowCheckboxes}
-        members={members}
-        onApplyToSelection={onApplyToSelection}
-        selectedUserIds={selectedUserIds}
-      />
       <div className="flex">
         <div className="w-full">
+          <Toolbar
+            selectedServer={selectedServer}
+            showCheckboxes={showCheckboxes}
+            setShowCheckboxes={setShowCheckboxes}
+            members={members}
+            onApplyToSelection={onApplyToSelection}
+            selectedUserIds={selectedUserIds}
+          />
           {serversError || membersError ? (
             <div className="mb-3 p-3 bg-red-500/10 border border-red-500/20 rounded text-red-400">
               {serversError || membersError}
             </div>
           ) : selectedServer ? (
-            <div className="ml-14 my-15 mr-2">
+            <div className="ml-30 mt-22 my-15 mr-2">
               <DSUserList
                 selectedServer={selectedServer}
                 members={members}

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { UsersRound, Palette } from "lucide-react";
 import { Member, Arc, Server, Category } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
+import Image from "next/image";
+import DSMenu from "@/components/ui/Menu/Menu";
 import AIPanel from "./ai/AIPanel";
 import {
   Sidebar,
@@ -19,6 +21,8 @@ import {
 
 interface MenubarProps {
   selectedServer: Server | null;
+  servers: Server[];
+  handleServerSelection: (server: Server) => void;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
   handleCreateNewArc: (newArcName: string) => void;
@@ -48,6 +52,8 @@ interface MenubarProps {
 
 export default function Menubar({
   selectedServer,
+  servers,
+  handleServerSelection,
   selectedArc,
   setSelectedArc,
   handleCreateNewArc,
@@ -70,6 +76,11 @@ export default function Menubar({
   handleCreateGroup,
 }: MenubarProps) {
   const [activeTool, setActiveTool] = useState<string>("Groups");
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const toggleMinimize = () => {
+    setIsMinimized(!isMinimized);
+  };
 
   const tools = [
     { icon: UsersRound, name: "Groups", id: "Groups" },
@@ -133,11 +144,38 @@ export default function Menubar({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.1 }}
       >
-        <Sidebar className="bg-context-bar rounded-l-lg translate-x-56 mt-6 border-l border-t border-border w-14">
-          <SidebarContent className="py-4">
+        <Sidebar className="bg-sidebar mt-6 border-border w-20">
+          <SidebarHeader
+            className={`
+          bg-sidebar z-50 border-border
+          flex items-center ${
+            isMinimized ? "justify-center" : "justify-center"
+          } px-2.5
+        `}
+          >
+            <div className="flex border-b pb-3 border-border items-center">
+              <Image
+                src={selectedServer ? selectedServer.iconURL : "/Arclify.svg"}
+                width="36"
+                height="36"
+                alt="logo"
+                className="inline-block w-10 h-10 rounded-lg ring-zinc-800"
+              />
+            </div>
+
+            {!isMinimized && (
+              <div className="absolute">
+                <DSMenu
+                  items={servers}
+                  setSelectedItem={handleServerSelection}
+                />
+              </div>
+            )}
+          </SidebarHeader>
+          <SidebarContent className="">
             <SidebarGroup>
               <SidebarGroupContent>
-                <SidebarMenu className="space-y-2 mt-12 flex flex-col items-center">
+                <SidebarMenu className="space-y-2 flex flex-col items-center">
                   {tools.map((tool) => {
                     const IconComponent = tool.icon;
                     const isActive = activeTool === tool.id;

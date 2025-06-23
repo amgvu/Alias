@@ -4,7 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronsUpDown, Loader2, UsersRound, CirclePlus } from "lucide-react";
+import { Loader2, UsersRound, CirclePlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
@@ -21,17 +21,15 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <button>
-          <div>
-            <ChevronsUpDown
-              onClick={() => setIsOpen(true)}
-              className="h-4 w-4 text-text-secondary hover:text-text-primary transition-all duration-200"
-            />
-          </div>
-        </button>
+        <button className="w-6 h-6  rounded-full flex items-center justify-center  transition-all duration-200 shadow-sm"></button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-76 flex font-ggSans flex-col mr-32 max-h-60 overflow-auto">
+      <DropdownMenuContent
+        className="w-76 flex font-ggSans flex-col max-h-60 overflow-auto"
+        align="start"
+        side="right"
+        sideOffset={8}
+      >
         {items.length === 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
@@ -66,24 +64,23 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
                         {item.name}
                       </span>
                     </div>
-                    <span className="text-sm text-text-primary">
+                    <span className="text-sm text-text-primary flex items-center">
                       {item.memberCount}
-                      <UsersRound className="ml-1 mb-0.5 h-3.5 w-3.5 text-zinc-500 inline-block" />
+                      <UsersRound className="ml-1 h-3.5 w-3.5 text-zinc-500" />
                     </span>
                   </div>
                 </DropdownMenuItem>
               </motion.div>
             ))}
             <DropdownMenuItem
-              className=""
               onClick={() =>
                 window.open("https://app.youform.com/forms/uwk5hpox")
               }
             >
               <div className="flex w-full h-5 items-center justify-between">
                 <div className="flex items-center">
-                  <CirclePlus className="h-6 mr-2 w-6 text-text-secondary inline-block" />
-                  <span className="text-sm text-text-secondary font-medium">
+                  <CirclePlus className="h-6 w-6 text-text-secondary" />
+                  <span className="ml-2 text-sm text-text-secondary font-medium">
                     Add a server
                   </span>
                 </div>

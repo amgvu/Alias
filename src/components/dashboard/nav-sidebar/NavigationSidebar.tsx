@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from "next/image";
 
 import { Users, UserRoundPen } from "lucide-react";
@@ -48,7 +49,6 @@ export function NavigationSidebar({
 }: NavigationSidebarProps) {
   const [isMinimized, setIsMinimized] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const toggleMinimize = () => {
     setIsMinimized(!isMinimized);
   };
@@ -82,12 +82,6 @@ export function NavigationSidebar({
             </h1>
           )}
         </div>
-
-        {!isMinimized && (
-          <div className="flex-shrink-0">
-            <DSMenu items={servers} setSelectedItem={handleServerSelection} />
-          </div>
-        )}
       </SidebarHeader>
 
       <SidebarContent className="flex flex-col">

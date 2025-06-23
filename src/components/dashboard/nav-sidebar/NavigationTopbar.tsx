@@ -14,15 +14,15 @@ export function NavigationTopBar({
     <div
       className={`
         fixed top-0 left-0 right-0 z-4
-        bg-sidebar  border-border
-        h-[25px] text-center px-4
+        bg-sidebar border-border
+        h-[35px] text-center px-4
         ${className}
       `}
     >
       <div className=" gap-4">
         {selectedServer && (
-          <div className=" gap-3">
-            <span className="text-text-primary font-medium text-sm">
+          <div className="gap-3 mt-1">
+            <span className="text-text-primaryfont-medium text-sm">
               {selectedServer.name}
             </span>
           </div>

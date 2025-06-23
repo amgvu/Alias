@@ -32,7 +32,7 @@ export function AuthCard() {
     <div className="fixed bottom-1 left-1 z-50">
       {session?.user && (
         <SidebarFooter className="">
-          <div className="py-3 px-4 w-128 border border-border rounded-lg bg-card">
+          <div className="py-2 px-4 w-89 border border-border rounded-lg bg-card">
             <div
               className={`flex items-center gap-3 ${
                 isMinimized ? "justify-center" : ""

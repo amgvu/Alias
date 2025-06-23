@@ -13,7 +13,6 @@ import {
 } from "@/lib/hooks";
 import { DashboardLayout, ServerContent } from "@/components";
 import { LoaderCircle } from "lucide-react";
-import { NavigationSidebar } from "@/components/dashboard/nav-sidebar/NavigationSidebar";
 import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
 import Menubar from "@/components/dashboard/menubar/Menubar";
 import { AuthCard } from "@/components/dashboard/nav-sidebar/AuthCard";
@@ -62,7 +61,6 @@ export default function Dashboard() {
 
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
-  const [activeSection, setActiveSection] = useState("server");
 
   useEffect(() => {
     setShowCheckboxes(false);
@@ -98,6 +96,8 @@ export default function Dashboard() {
       menubar={
         <Menubar
           selectedServer={selectedServer}
+          servers={servers}
+          handleServerSelection={handleServerSelection}
           selectedArc={selectedArc}
           setSelectedArc={setSelectedArc}
           handleCreateNewArc={handleCreateNewArc}
@@ -123,15 +123,6 @@ export default function Dashboard() {
         />
       }
       authbar={<AuthCard />}
-      navigationSidebar={
-        <NavigationSidebar
-          activeSection={activeSection}
-          onSectionChange={setActiveSection}
-          servers={servers}
-          selectedServer={selectedServer}
-          handleServerSelection={handleServerSelection}
-        />
-      }
     >
       <NavigationTopBar className="" selectedServer={selectedServer} />
       <div className=""></div>

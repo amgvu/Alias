@@ -3,12 +3,6 @@ import { SelectionTool } from "./SelectionTool/SelectionTool";
 import { ApplyTool } from "./ApplyTool/ApplyTool";
 import { Member } from "@/types/types";
 
-const Spacer = () => {
-  return (
-    <div className="bg-context-bar h-17 border-t border-border -translate-y-[11.2px] w-64 fixed -translate-x-[259px]"></div>
-  );
-};
-
 interface ToolbarProps {
   members: Member[];
   onApplyToSelection: (selectedMembers: Member[]) => void;
@@ -28,8 +22,7 @@ export function Toolbar({
 }: ToolbarProps) {
   return (
     <div>
-      <div className="bg-context-bar z-4 fixed w-screen translate-x-[39px] p-[10.5px] border-border border-r border-t border-b">
-        <Spacer />
+      <div className="bg-panel z-5 fixed w-screen translate-x-[113px] translate-y-8 p-[10.5px] border-border border-r border-t border-b">
         <SelectionTool
           selectedServer={selectedServer}
           showCheckboxes={showCheckboxes}
