@@ -5,7 +5,7 @@ import { Member } from "@/types/types";
 
 const Spacer = () => {
   return (
-    <div className="bg-context-bar h-17 border-t border-border -translate-y-[11.3px] w-64 fixed -translate-x-[259px]"></div>
+    <div className="bg-context-bar h-17 border-t border-border -translate-y-[11.2px] w-64 fixed -translate-x-[259px]"></div>
   );
 };
 

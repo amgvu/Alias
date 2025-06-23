@@ -133,7 +133,7 @@ export default function Menubar({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.1 }}
       >
-        <Sidebar className="bg-context-bar rounded-l-lg translate-x-62 mt-6 border-l border-t border-border w-14">
+        <Sidebar className="bg-context-bar rounded-l-lg translate-x-56 mt-6 border-l border-t border-border w-14">
           <SidebarContent className="py-4">
             <SidebarGroup>
               <SidebarGroupContent>
