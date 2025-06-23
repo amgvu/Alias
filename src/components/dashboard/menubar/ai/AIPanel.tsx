@@ -54,7 +54,7 @@ export default function AIPanel({
       className="bg-panel border-r border-t translate-x-12 -translate-y-[24.0px] z-0 h-screen border-border w-64"
     >
       <div>
-        <div className="border-b border-border p-[14.52px]">
+        <div className="border-b border-border lg:p-[13.5px] p-[15.2px]">
           <h1 className="translate-y-1 font-medium text-text-primary -translate-x-2 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
             Themes
           </h1>
