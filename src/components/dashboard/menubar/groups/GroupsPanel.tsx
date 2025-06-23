@@ -200,7 +200,7 @@ export default function GroupsPanel({
             Groups
           </h1>
         </div>
-        <div className="px-2 py-3">
+        <div className="px-2 py-1">
           <div className="space-y-2">
             <div className="flex items-center gap-4">
               <span className="text-xs sm:text-xs md:text-sm lg:text-sm xl:text-[13px] 2xl:text-[14px] text-text-secondary font-medium">
