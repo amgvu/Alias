@@ -122,7 +122,7 @@ export default function Menubar({
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 0, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed mt-6"
+          className="fixed mt-6 z-4"
         >
           {renderToolPanel()}
         </motion.div>
@@ -137,7 +137,7 @@ export default function Menubar({
           <SidebarContent className="py-4">
             <SidebarGroup>
               <SidebarGroupContent>
-                <SidebarMenu className="space-y-2 flex flex-col items-center">
+                <SidebarMenu className="space-y-2 mt-12 flex flex-col items-center">
                   {tools.map((tool) => {
                     const IconComponent = tool.icon;
                     const isActive = activeTool === tool.id;
@@ -145,7 +145,7 @@ export default function Menubar({
                       <SidebarMenuItem key={tool.id}>
                         <SidebarMenuButton
                           onClick={() => handleToolClick(tool.id)}
-                          className={`text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-200 ${
+                          className={`text-sm z-8 sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-200 ${
                             isActive
                               ? "bg-button-hover text-text-primary"
                               : "text-text-secondary hover:bg-transparent-button-hover-context-bar"
