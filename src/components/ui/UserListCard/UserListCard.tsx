@@ -384,7 +384,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                               onClick={() =>
                                 handleNicknameSelect(nickname.nickname)
                               }
-                              className="px-3 py-1 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium bg-sidebar border-border-subtle border cursor-pointer transition-all hover:bg-card rounded-md whitespace-nowrap"
+                              className="px-3 py-0.5 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium bg-sidebar border-border-subtle border cursor-pointer transition-all hover:bg-card rounded-md whitespace-nowrap"
                             >
                               {nickname.nickname}
                             </button>

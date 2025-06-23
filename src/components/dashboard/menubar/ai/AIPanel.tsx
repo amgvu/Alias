@@ -55,7 +55,7 @@ export default function AIPanel({
     >
       <div>
         <div className="border-border p-3.5">
-          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-2 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
+          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-1.5 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
             Themes
           </h1>
         </div>
