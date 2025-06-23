@@ -177,7 +177,7 @@ export default function GroupsPanel({
         ))}
         {remainingCount > 0 && (
           <div
-            className="w-6 h-6 rounded-full bg-context-bar border-2 border-card-panel flex items-center justify-center text-xs text-text-secondary font-medium"
+            className="w-6 h-6 rounded-full bg-context-bar border-2 border-card-panel flex items-center justify-center text-[10px] sm:text-xs md:text-xs lg:text-sm text-text-secondary font-medium"
             style={{ marginLeft: visibleNicknames.length > 0 ? "-8px" : "0" }}
           >
             +{remainingCount}
@@ -196,14 +196,14 @@ export default function GroupsPanel({
     >
       <div>
         <div className="border-b border-border p-[14.52px]">
-          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-2">
+          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-2 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
             Groups
           </h1>
         </div>
         <div className="px-2 py-3">
           <div className="space-y-2">
             <div className="flex items-center gap-4">
-              <span className="text-xs text-text-secondary font-medium">
+              <span className="text-xs sm:text-xs md:text-sm lg:text-sm xl:text-[13px] 2xl:text-[14px] text-text-secondary font-medium">
                 Nickname Groups
               </span>
             </div>
@@ -214,7 +214,7 @@ export default function GroupsPanel({
                 maxLength={30}
                 value={newArcName}
                 onChange={(e) => setNewArcName(e.target.value)}
-                className="flex-grow bg-input border border-border text-text-primary focus:ring-1 focus:ring-border-active"
+                className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] flex-grow bg-input border border-border text-text-primary focus:ring-1 focus:ring-border-active"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && newArcName.trim()) {
                     handleCreateClick();
@@ -291,11 +291,11 @@ export default function GroupsPanel({
                               <div className="flex-grow min-w-0">
                                 {nicknames.length > 0 &&
                                   renderMemberThumbnails(nicknames)}
-                                <CardTitle className="text-sm font-medium text-text-primary truncate pr-2">
+                                <CardTitle className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium text-text-primary truncate pr-2">
                                   {arc.arc_name}
                                 </CardTitle>
                                 {arcMemberCounts[arc.id] !== undefined && (
-                                  <p className="text-xs text-text-secondary mt-1">
+                                  <p className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] text-text-secondary mt-1">
                                     {arcMemberCounts[arc.id]} members
                                   </p>
                                 )}
