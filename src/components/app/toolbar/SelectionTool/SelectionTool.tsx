@@ -8,7 +8,7 @@ interface SelectionToolProps {
   setShowCheckboxes: (show: boolean) => void;
 }
 
-export function SelectionTool({
+export default function SelectionTool({
   selectedServer,
   showCheckboxes,
   setShowCheckboxes,

@@ -13,7 +13,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import DSMenu from "@/components/ui/Menu/Menu";
 import { Server } from "@/types/types";
 
 import { useState } from "react";
@@ -40,7 +39,7 @@ const userItems = [
   },
 ];
 
-export function NavigationSidebar({
+export default function NavigationSidebar({
   activeSection = "server",
   onSectionChange,
   servers,

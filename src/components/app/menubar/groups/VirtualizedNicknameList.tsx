@@ -8,7 +8,7 @@ interface VirtualizedNicknameListProps {
   nicknames: ArcNickname[];
 }
 
-export function VirtualizedNicknameList({
+export default function VirtualizedNicknameList({
   nicknames,
 }: VirtualizedNicknameListProps) {
   const parentRef = useRef<HTMLDivElement>(null);

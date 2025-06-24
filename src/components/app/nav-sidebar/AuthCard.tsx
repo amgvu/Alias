@@ -4,7 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import { LogOut, Settings, HelpCircle } from "lucide-react";
 import { SidebarFooter } from "@/components/ui/sidebar";
 
-export function AuthCard() {
+export default function AuthCard() {
   const { data: session } = useSession();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMinimized, setIsMinimized] = useState(false);

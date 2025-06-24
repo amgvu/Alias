@@ -1,7 +1,5 @@
-import { Server } from "@/types/types";
-import { SelectionTool } from "./SelectionTool/SelectionTool";
-import { ApplyTool } from "./ApplyTool/ApplyTool";
-import { Member } from "@/types/types";
+import { Server, Member } from "@/types/types";
+import { SelectionTool, ApplyTool } from "@/components";
 
 interface ToolbarProps {
   members: Member[];
@@ -12,7 +10,7 @@ interface ToolbarProps {
   setShowCheckboxes: (show: boolean) => void;
 }
 
-export function Toolbar({
+export default function Toolbar({
   members,
   onApplyToSelection,
   selectedUserIds,

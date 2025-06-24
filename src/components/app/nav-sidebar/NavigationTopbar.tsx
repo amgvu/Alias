@@ -6,9 +6,8 @@ interface NavigationTopBarProps {
   className?: string;
 }
 
-export function NavigationTopBar({
+export default function NavigationTopBar({
   selectedServer,
-
   className = "",
 }: NavigationTopBarProps) {
   return (

@@ -1,7 +1,5 @@
-import { DSUserList } from "@/components";
-import { TitleUpdater } from "./TitleUpdater";
+import { DSUserList, TitleUpdater, Toolbar } from "@/components";
 import { Member, Server } from "@/types/types";
-import { Toolbar } from "./toolbar/Toolbar";
 
 interface ServerContentProps {
   selectedServer: Server | null;

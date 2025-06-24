@@ -11,11 +11,14 @@ import {
   useArcManagement,
   useAuth,
 } from "@/lib/hooks";
-import { DashboardLayout, ServerContent } from "@/components";
+import {
+  DashboardLayout,
+  ServerContent,
+  AuthCard,
+  NavigationTopbar,
+} from "@/components";
 import { LoaderCircle } from "lucide-react";
-import { NavigationTopBar } from "@/components/app/nav-sidebar/NavigationTopbar";
 import Menubar from "@/components/app/menubar/Menubar";
-import { AuthCard } from "@/components/app/nav-sidebar/AuthCard";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
@@ -112,7 +115,7 @@ export default function Dashboard() {
       }
       authbar={<AuthCard />}
     >
-      <NavigationTopBar className="" selectedServer={selectedServer} />
+      <NavigationTopbar className="" selectedServer={selectedServer} />
       <div className=""></div>
       <div
         className={`flex-1 transition-opacity duration-500 ${

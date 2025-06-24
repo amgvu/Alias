@@ -4,11 +4,11 @@ import { Arc, Server, Member, ArcNickname } from "@/types/types";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { VirtualizedNicknameList } from "@/components";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { fetchArcs, fetchArcNicknames, deleteArc } from "@/lib/utilities";
 import Image from "next/image";
-import { VirtualizedNicknameList } from "./VirtualizedNicknameList";
 
 interface GroupsPanelProps {
   members: Member[];

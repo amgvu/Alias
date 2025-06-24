@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
-export function TitleUpdater() {
+export default function TitleUpdater() {
   const { data: session } = useSession();
 
   useEffect(() => {

@@ -10,7 +10,7 @@ interface ApplyToolProps {
   selectedServer: Server | null;
 }
 
-export function ApplyTool({
+export default function ApplyTool({
   members,
   onApplyToSelection,
   selectedUserIds,
