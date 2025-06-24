@@ -218,7 +218,9 @@ export default function Menubar({
                           >
                             <Tooltip>
                               <TooltipContent>
-                                <p>{server.name}</p>
+                                <p className="font-ggSans font-bold">
+                                  {server.name}
+                                </p>
                               </TooltipContent>
                               <TooltipTrigger>
                                 <SidebarMenuItem>
