@@ -13,9 +13,9 @@ import {
 } from "@/lib/hooks";
 import { DashboardLayout, ServerContent } from "@/components";
 import { LoaderCircle } from "lucide-react";
-import { NavigationTopBar } from "@/components/dashboard/nav-sidebar/NavigationTopbar";
-import Menubar from "@/components/dashboard/menubar/Menubar";
-import { AuthCard } from "@/components/dashboard/nav-sidebar/AuthCard";
+import { NavigationTopBar } from "@/components/app/nav-sidebar/NavigationTopbar";
+import Menubar from "@/components/app/menubar/Menubar";
+import { AuthCard } from "@/components/app/nav-sidebar/AuthCard";
 
 export default function Dashboard() {
   const { session, status } = useAuth();
