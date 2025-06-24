@@ -195,7 +195,7 @@ export default function GroupsPanel({
       className="bg-panel border-r translate-x-[82px] translate-y-2 border-l border-t rounded-l-lg h-screen border-border w-74"
     >
       <div>
-        <div className=" border-border p-3.5">
+        <div className=" p-3.5">
           <h1 className="translate-y-1 font-medium text-text-primary -translate-x-0.5 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
             Groups
           </h1>

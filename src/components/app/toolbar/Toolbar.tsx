@@ -22,7 +22,7 @@ export function Toolbar({
 }: ToolbarProps) {
   return (
     <div>
-      <div className="bg-panel z-5 fixed w-screen translate-x-[113.0px] translate-y-8 p-[9.0px] border-border border-r border-t border-b">
+      <div className="bg-panel z-4 fixed w-screen translate-x-[111.0px] translate-y-8 p-[9.0px] border-border border-r border-t border-b">
         <SelectionTool
           selectedServer={selectedServer}
           showCheckboxes={showCheckboxes}
