@@ -45,7 +45,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <div className="h-96 md:h-[40rem]"></div>
+      <div className="h-96 md:h-[65rem]"></div>
       <footer className="w-full max-w-[1400px] mx-auto">
         <Separator className="mb-4" />
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pb-8">
