@@ -263,18 +263,27 @@ export default function Menubar({
                           }}
                           layout
                         >
-                          <SidebarMenuItem>
-                            <SidebarMenuButton
-                              onClick={() =>
-                                window.open(
-                                  "https://app.youform.com/forms/uwk5hpox"
-                                )
-                              }
-                              className="w-12 h-12 flex items-center justify-center rounded-lg text-text-secondary hover:bg-transparent-button-hover-context-bar hover:rounded-2xl transition-all duration-200"
-                            >
-                              <CirclePlus size={32} />
-                            </SidebarMenuButton>
-                          </SidebarMenuItem>
+                          <Tooltip>
+                            <TooltipContent>
+                              <p className="font-ggSans font-bold">
+                                Add a server
+                              </p>
+                            </TooltipContent>
+                            <TooltipTrigger>
+                              <SidebarMenuItem>
+                                <SidebarMenuButton
+                                  onClick={() =>
+                                    window.open(
+                                      "https://app.youform.com/forms/uwk5hpox"
+                                    )
+                                  }
+                                  className="w-12 h-12 flex items-center justify-center rounded-lg text-text-secondary hover:bg-transparent-button-hover-context-bar hover:rounded-2xl transition-all duration-200"
+                                >
+                                  <CirclePlus size={32} />
+                                </SidebarMenuButton>
+                              </SidebarMenuItem>
+                            </TooltipTrigger>
+                          </Tooltip>
                         </motion.div>
                       </>
                     )}
