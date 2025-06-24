@@ -19,7 +19,7 @@ export default function Home() {
           <div className=" gap-4 flex flex-col items-center md:col-span-2">
             <h1 className="text-text-primary text-center font-gintoNord  text-4xl md:text-7xl">
               <TextEffect per="char" speedReveal={3} delay={0.1}>
-                The nickname manager your Discord server needs
+                The nickname manager your Discord server needs.
               </TextEffect>
             </h1>
             <div className="text-text-secondary text-center flex flex-col items-center font-ginto md:translate-x-0  text-2xl md:text-4xl space-y-4">
