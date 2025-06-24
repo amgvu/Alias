@@ -35,7 +35,6 @@ export default function Dashboard() {
     isApplyingAll,
     handleNicknameChange,
     handleUpdateNickname,
-    applyAllNicknames,
     setMembers,
     applyNicknamesToSelection,
   } = useMemberManagement(selectedServer, fetchedMembers);
@@ -50,14 +49,11 @@ export default function Dashboard() {
     handleGenerateCharacters,
   } = useThemeGenerator(members, setMembers);
 
-  const {
-    selectedArc,
-    setSelectedArc,
-    isSavingArc,
-    handleSaveArc,
-    handleCreateNewArc,
-    handleCreateGroup,
-  } = useArcManagement(selectedServer, members, setMembers);
+  const { selectedArc, setSelectedArc, handleCreateGroup } = useArcManagement(
+    selectedServer,
+    members,
+    setMembers
+  );
 
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
@@ -100,11 +96,6 @@ export default function Dashboard() {
           handleServerSelection={handleServerSelection}
           selectedArc={selectedArc}
           setSelectedArc={setSelectedArc}
-          handleCreateNewArc={handleCreateNewArc}
-          applyAllNicknames={applyAllNicknames}
-          isApplyingAll={isApplyingAll}
-          isSavingArc={isSavingArc}
-          handleSaveArc={handleSaveArc}
           members={members}
           category={category}
           categories={categories}
@@ -113,10 +104,7 @@ export default function Dashboard() {
           setTheme={setTheme}
           loading={loading}
           handleGenerateCharacters={handleGenerateCharacters}
-          onApplyToSelection={applyNicknamesToSelection}
           selectedUserIds={selectedUserIds}
-          showCheckboxes={showCheckboxes}
-          setShowCheckboxes={setShowCheckboxes}
           handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
             handleCreateGroup(groupName, selectedMembers)
           }

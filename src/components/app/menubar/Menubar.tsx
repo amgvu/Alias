@@ -35,11 +35,6 @@ interface MenubarProps {
   handleServerSelection: (server: Server) => void;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
-  handleCreateNewArc: (newArcName: string) => void;
-  applyAllNicknames: () => void;
-  isApplyingAll: boolean;
-  isSavingArc: boolean;
-  handleSaveArc: () => void;
   members: Member[];
   category: string;
   categories: Category[];
@@ -48,11 +43,7 @@ interface MenubarProps {
   setTheme: (theme: string) => void;
   loading: boolean;
   handleGenerateCharacters: (selectedMembers: Member[]) => void;
-  onApplyToSelection: (selectedMembers: Member[]) => void;
-  onSelectionChange?: (selectedIds: string[]) => void;
   selectedUserIds?: string[];
-  showCheckboxes: boolean;
-  setShowCheckboxes: (show: boolean) => void;
   handleCreateGroup: (
     groupName: string,
     selectedMembers: Member[]
@@ -65,10 +56,6 @@ export default function Menubar({
   handleServerSelection,
   selectedArc,
   setSelectedArc,
-  handleCreateNewArc,
-  isApplyingAll,
-  isSavingArc,
-  handleSaveArc,
   members,
   category,
   categories,
@@ -77,18 +64,10 @@ export default function Menubar({
   setTheme,
   loading,
   handleGenerateCharacters,
-  onApplyToSelection,
   selectedUserIds = [],
-  showCheckboxes,
-  setShowCheckboxes,
   handleCreateGroup,
 }: MenubarProps) {
   const [activeTool, setActiveTool] = useState<string>("Groups");
-  const [isMinimized, setIsMinimized] = useState(false);
-
-  const toggleMinimize = () => {
-    setIsMinimized(!isMinimized);
-  };
 
   const tools = [
     { icon: UsersRound, name: "Groups", id: "Groups" },
