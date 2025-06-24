@@ -170,7 +170,7 @@ export default function Menubar({
                         <TooltipContent>
                           <p className="font-ggSans font-bold">{tool.id}</p>
                         </TooltipContent>
-                        <TooltipTrigger>
+                        <TooltipTrigger asChild>
                           <SidebarMenuItem key={tool.id}>
                             <SidebarMenuButton
                               onClick={() => handleToolClick(tool.id)}
@@ -229,7 +229,7 @@ export default function Menubar({
                                   {server.name}
                                 </p>
                               </TooltipContent>
-                              <TooltipTrigger>
+                              <TooltipTrigger asChild>
                                 <SidebarMenuItem>
                                   <SidebarMenuButton
                                     onClick={() =>
@@ -269,7 +269,7 @@ export default function Menubar({
                                 Add a server
                               </p>
                             </TooltipContent>
-                            <TooltipTrigger>
+                            <TooltipTrigger asChild>
                               <SidebarMenuItem>
                                 <SidebarMenuButton
                                   onClick={() =>

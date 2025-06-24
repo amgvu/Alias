@@ -85,7 +85,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
 
   const handleDiscordLogin = () => {
-    signIn("discord", { callbackUrl: "/dashboard" });
+    signIn("discord", { callbackUrl: "/app" });
   };
 
   const handleDiscordLogout = () => {
@@ -96,8 +96,8 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
     ...(session
       ? [
           {
-            name: "Dashboard",
-            href: "/dashboard",
+            name: "App",
+            href: "/app",
           },
         ]
       : []),
