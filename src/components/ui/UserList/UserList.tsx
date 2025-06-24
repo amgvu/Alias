@@ -26,7 +26,7 @@ interface UserListProps {
   ) => void;
 }
 
-export function DSUserList({
+export function UserList({
   members,
   isUpdating,
   selectedServer,
@@ -156,4 +156,4 @@ export function DSUserList({
   );
 }
 
-export default DSUserList;
+export default UserList;

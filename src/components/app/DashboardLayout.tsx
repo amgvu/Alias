@@ -7,7 +7,6 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({
   children,
   menubar,
-
   authbar,
 }: DashboardLayoutProps) {
   return (

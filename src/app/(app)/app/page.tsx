@@ -15,10 +15,10 @@ import {
   DashboardLayout,
   ServerContent,
   AuthCard,
+  Menubar,
   NavigationTopbar,
 } from "@/components";
 import { LoaderCircle } from "lucide-react";
-import Menubar from "@/components/app/menubar/Menubar";
 
 export default function Dashboard() {
   const { session, status } = useAuth();

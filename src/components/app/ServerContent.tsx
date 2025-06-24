@@ -1,4 +1,4 @@
-import { DSUserList, TitleUpdater, Toolbar } from "@/components";
+import { UserList, TitleUpdater, Toolbar } from "@/components";
 import { Member, Server } from "@/types/types";
 
 interface ServerContentProps {
@@ -51,7 +51,7 @@ export default function ServerContent({
             </div>
           ) : selectedServer ? (
             <div className="ml-34 mt-24 mr-4">
-              <DSUserList
+              <UserList
                 selectedServer={selectedServer}
                 members={members}
                 isUpdating={isUpdating}

@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Member } from "@/types/types";
-import UserListCard from "../UserListCard/UserListCard";
+import { UserListCard } from "@/components";
 import { Checkbox } from "../checkbox";
 import { Server } from "@/types/types";
 interface MemberItemProps {
