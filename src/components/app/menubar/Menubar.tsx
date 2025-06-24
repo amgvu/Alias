@@ -23,6 +23,11 @@ import {
   SidebarMenuItem,
   SidebarFooter,
 } from "@/components/ui/sidebar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface MenubarProps {
   selectedServer: Server | null;
@@ -211,24 +216,33 @@ export default function Menubar({
                             }}
                             layout
                           >
-                            <SidebarMenuItem>
-                              <SidebarMenuButton
-                                onClick={() => handleServerSelection(server)}
-                                className={`w-14 h-12 flex items-center justify-center rounded-lg transition-all duration-200 ${
-                                  selectedServer?.id === server.id
-                                    ? "bg-button-hover rounded-2xl"
-                                    : "hover:bg-transparent-button-hover-context-bar hover:rounded-2xl"
-                                }`}
-                              >
-                                <Image
-                                  src={server.iconURL}
-                                  alt={server.name}
-                                  width={40}
-                                  height={40}
-                                  className="w-10 h-10 rounded-lg"
-                                />
-                              </SidebarMenuButton>
-                            </SidebarMenuItem>
+                            <Tooltip>
+                              <TooltipContent>
+                                <p>{server.name}</p>
+                              </TooltipContent>
+                              <TooltipTrigger>
+                                <SidebarMenuItem>
+                                  <SidebarMenuButton
+                                    onClick={() =>
+                                      handleServerSelection(server)
+                                    }
+                                    className={`w-14 h-12 flex items-center justify-center rounded-lg transition-all duration-200 ${
+                                      selectedServer?.id === server.id
+                                        ? "bg-button-hover rounded-2xl"
+                                        : "hover:bg-transparent-button-hover-context-bar hover:rounded-2xl"
+                                    }`}
+                                  >
+                                    <Image
+                                      src={server.iconURL}
+                                      alt={server.name}
+                                      width={40}
+                                      height={40}
+                                      className="w-10 h-10 rounded-lg"
+                                    />
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                              </TooltipTrigger>
+                            </Tooltip>
                           </motion.div>
                         ))}
 
