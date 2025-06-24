@@ -31,7 +31,7 @@ export default function Home() {
                 </TextEffect>
               </div>
             </div>
-            <div className="md:inline-flex ">
+            <div className="md:inline-flex">
               <motion.button
                 onClick={handleSignUpClick}
                 initial={{ opacity: 0 }}
