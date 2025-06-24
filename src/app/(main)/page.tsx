@@ -1,7 +1,7 @@
 "use client";
-
 import { TextEffect } from "@/components/ui/Animations/text-effect";
 import { motion } from "framer-motion";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   const handleSignUpClick = () => {
@@ -13,16 +13,16 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-text-primary  mt-10 md:mt-30  justify-start p-8 sm:p-30">
+    <div className="min-h-screen bg-background text-text-primary mt-10 md:mt-30 justify-start p-8 sm:p-30">
       <main className="w-full max-w-[1400px] mx-auto">
-        <div className="gap-6 ">
-          <div className=" gap-4 flex flex-col items-center md:col-span-2">
-            <h1 className="text-text-primary text-center font-gintoNord  text-4xl md:text-7xl">
+        <div className="gap-6">
+          <div className="gap-4 flex flex-col items-center md:col-span-2">
+            <h1 className="text-text-primary text-center font-gintoNord text-4xl md:text-7xl">
               <TextEffect per="char" speedReveal={3} delay={0.1}>
                 The nickname manager you never knew you wanted
               </TextEffect>
             </h1>
-            <div className="text-text-secondary text-center flex flex-col items-center font-ginto md:translate-x-0  text-2xl md:text-4xl space-y-4">
+            <div className="text-text-secondary text-center flex flex-col items-center font-ginto md:translate-x-0 text-2xl md:text-4xl space-y-4">
               <div className="text-sm md:text-xl md:w-1/2">
                 <TextEffect per="line" speedReveal={1} delay={1}>
                   Arclify lets you set dynamic nicknames, personalize
@@ -45,7 +45,29 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="flex gap-6 flex-wrap justify-center"></footer>
+      <div className="h-96 md:h-[40rem]"></div>
+      <footer className="w-full max-w-[1400px] mx-auto">
+        <Separator className="mb-4" />
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pb-8">
+          <div className="text-text-secondary text-sm">
+            © 2025 Arclify. All rights reserved.
+          </div>
+          <div className="flex gap-6 text-sm">
+            <a
+              href="/legal/privacy-policy"
+              className="text-text-secondary hover:text-text-primary transition-colors duration-200"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/legal/terms-of-service"
+              className="text-text-secondary hover:text-text-primary transition-colors duration-200"
+            >
+              Terms of Service
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
