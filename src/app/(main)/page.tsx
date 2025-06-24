@@ -19,14 +19,14 @@ export default function Home() {
           <div className=" gap-4 flex flex-col items-center md:col-span-2">
             <h1 className="text-text-primary text-center font-gintoNord  text-4xl md:text-7xl">
               <TextEffect per="char" speedReveal={3} delay={0.1}>
-                The nickname manager your Discord server needs.
+                The nickname manager you never knew you wanted
               </TextEffect>
             </h1>
             <div className="text-text-secondary text-center flex flex-col items-center font-ginto md:translate-x-0  text-2xl md:text-4xl space-y-4">
               <div className="text-sm md:text-xl md:w-1/2">
                 <TextEffect per="line" speedReveal={1} delay={1}>
                   Arclify lets you set dynamic nicknames, personalize
-                  identities, and streamline community workflows. Make Discord
+                  identities, and speed up community workflows. Make Discord
                   management faster, smarter, and a lot more fun.
                 </TextEffect>
               </div>

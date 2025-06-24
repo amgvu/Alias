@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { UsersRound, Palette, CirclePlus, Loader2 } from "lucide-react";
+import {
+  UsersRound,
+  Palette,
+  CirclePlus,
+  Loader2,
+  Podcast,
+} from "lucide-react";
 import { Member, Arc, Server, Category } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
 import Image from "next/image";
