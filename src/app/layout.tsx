@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { gintoNord, ginto, ggSans } from "@/lib/utilities/fonts";
 import "./globals.css";
 
@@ -18,6 +19,7 @@ export default function RootLayout({
         className={`${gintoNord.variable} ${ginto.variable} ${ggSans.variable} antialiased w-full h-full`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
