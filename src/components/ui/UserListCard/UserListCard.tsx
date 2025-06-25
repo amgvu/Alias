@@ -126,7 +126,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
       >
-        <div className="bg-zinc-900/10 backdrop-blur-lg -translate-x-[410px] rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12 w-108">
+        <div className="bg-zinc-900/10 backdrop-blur-lg w-128 -translate-x-64 rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12">
           <div className="text-lg sm:text-base md:text-lg lg:text-[18px] xl:text-[19px] 2xl:text-[20px] ml-2 text-center font-semibold text-white mb-1 flex items-center justify-center">
             <ArrowDownUp className="inline-block mt-0.5 text-blue-400 mr-2" />
             {displayValue}
