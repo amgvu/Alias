@@ -5,7 +5,7 @@ import Navbar from "@/components/main/navbar/navbar";
 
 export const metadata: Metadata = {
   title: "Arclify",
-  description: "Automating the busywork of Discord community management",
+  description: "The nickname manager you never knew you wanted",
 };
 
 export default function MainLayout({
