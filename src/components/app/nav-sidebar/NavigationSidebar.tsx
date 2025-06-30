@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from "next/image";
-
-import { Users, UserRoundPen } from "lucide-react";
+import { sidebarItems } from "@/lib/data";
 import {
   Sidebar,
   SidebarContent,
@@ -24,20 +23,6 @@ interface NavigationSidebarProps {
   selectedServer: Server | null;
   handleServerSelection: (server: Server) => void;
 }
-
-const userItems = [
-  {
-    title: "Nicknames",
-    icon: UserRoundPen,
-    value: "nicknames",
-  },
-  {
-    title: "Roles",
-    icon: Users,
-    value: "roles",
-    disabled: true,
-  },
-];
 
 export default function NavigationSidebar({
   activeSection = "server",
@@ -92,7 +77,7 @@ export default function NavigationSidebar({
           )}
           <SidebarGroupContent>
             <SidebarMenu>
-              {userItems.map((item) => (
+              {sidebarItems.map((item) => (
                 <SidebarMenuItem key={item.value}>
                   <SidebarMenuButton
                     onClick={() =>
