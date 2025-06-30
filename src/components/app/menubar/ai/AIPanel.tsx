@@ -11,7 +11,7 @@ interface AIPanelProps {
   members: Member[];
   selectedUserIds: string[];
   category: string;
-  categories: Category[];
+  categoryItems: Category[];
   setCategory: (category: string | ((current: string) => string)) => void;
   theme: string;
   setTheme: (theme: string) => void;
@@ -24,7 +24,7 @@ export default function AIPanel({
   members,
   selectedUserIds = [],
   category,
-  categories,
+  categoryItems,
   setCategory,
   theme,
   setTheme,
@@ -32,7 +32,7 @@ export default function AIPanel({
   handleGenerateCharacters,
 }: AIPanelProps) {
   const currentCategory =
-    categories.find((cat) => cat.id === category) || categories[0];
+    categoryItems.find((cat) => cat.id === category) || categoryItems[0];
 
   const handleGenerate = () => {
     if (!selectedUserIds || selectedUserIds.length === 0) return;
@@ -43,8 +43,8 @@ export default function AIPanel({
   };
 
   const randomCategory = () => {
-    const randomIndex = Math.floor(Math.random() * categories.length);
-    setCategory(categories[randomIndex].id);
+    const randomIndex = Math.floor(Math.random() * categoryItems.length);
+    setCategory(categoryItems[randomIndex].id);
   };
 
   return (
@@ -73,7 +73,7 @@ export default function AIPanel({
               </div>
 
               <div className="flex flex-wrap mb-2.5 gap-1">
-                {categories.map((cat) => {
+                {categoryItems.map((cat) => {
                   const Icon = cat.icon;
                   const isSelected = cat.id === category;
                   return (

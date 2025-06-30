@@ -32,7 +32,7 @@ interface MenubarProps {
   setSelectedArc: (arc: Arc | null) => void;
   members: Member[];
   category: string;
-  categories: Category[];
+  categoryItems: Category[];
   setCategory: (category: string | ((current: string) => string)) => void;
   theme: string;
   setTheme: (theme: string) => void;
@@ -53,7 +53,7 @@ export default function Menubar({
   setSelectedArc,
   members,
   category,
-  categories,
+  categoryItems,
   setCategory,
   theme,
   setTheme,
@@ -94,7 +94,7 @@ export default function Menubar({
             setTheme={setTheme}
             loading={loading}
             handleGenerateCharacters={handleGenerateCharacters}
-            categories={categories}
+            categoryItems={categoryItems}
           />
         );
       default:

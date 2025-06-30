@@ -44,7 +44,7 @@ export default function Dashboard() {
 
   const {
     category,
-    categories,
+    categoryItems,
     setCategory,
     theme,
     setTheme,
@@ -101,7 +101,7 @@ export default function Dashboard() {
           setSelectedArc={setSelectedArc}
           members={members}
           category={category}
-          categories={categories}
+          categoryItems={categoryItems}
           setCategory={setCategory}
           theme={theme}
           setTheme={setTheme}

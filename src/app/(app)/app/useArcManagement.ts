@@ -69,7 +69,7 @@ export const useArcManagement = (
             });
           });
         } catch (error) {
-          console.error("Failed to fetch arc nicknames:", error);
+          console.error("Failed to fetch group nicknames:", error);
         }
       }
     };
@@ -84,7 +84,7 @@ export const useArcManagement = (
     }
 
     if (!selectedServer || !selectedArc || !selectedArc.arc_name) {
-      alert("Please select a server, arc, and ensure members are loaded.");
+      alert("Please select a server, group, and ensure members are loaded.");
       return;
     }
 
@@ -99,7 +99,7 @@ export const useArcManagement = (
 
       if (existingArc) {
         const confirmOverwrite = window.confirm(
-          "An arc with this name already exists. Do you want to overwrite it with the new set of nicknames?"
+          "An group with this name already exists. Do you want to overwrite it with the new set of nicknames?"
         );
 
         if (!confirmOverwrite) {
@@ -125,7 +125,7 @@ export const useArcManagement = (
       await saveArcNicknames(supabase, newNicknames);
     } catch (error) {
       console.error(error);
-      alert("Failed to save arc. Please try again.");
+      alert("Failed to save group. Please try again.");
     } finally {
       setIsSavingArc(false);
     }
@@ -145,8 +145,8 @@ export const useArcManagement = (
       );
       setSelectedArc(newArc);
     } catch (error) {
-      console.error("Failed to create new arc:", error);
-      alert("Failed to create new arc. Please try again.");
+      console.error("Failed to create new group:", error);
+      alert("Failed to create new group. Please try again.");
     }
   };
 

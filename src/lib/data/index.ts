@@ -2,3 +2,4 @@ export { settingsItems } from "./settings-items";
 export { toolsItems } from "./tools-items";
 export { resourceItems } from "./navbar-items";
 export { getProductItems } from "./navbar-items";
+export { categoryItems } from "./category-items";
