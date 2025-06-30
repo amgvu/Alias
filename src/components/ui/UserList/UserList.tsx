@@ -97,12 +97,10 @@ export function UserList({
 
   if (isLoading) {
     return (
-      <div
-        className={`${styles.scrollContainer} flex items-center justify-center`}
-      >
-        <div className="flex flex-col mt-8 items-center gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-zinc-800" />
-          <p className="text-zinc-500 font-semibold">Refreshing Members...</p>
+      <div className={`${styles.scrollContainer} ${styles.loadingContainer}`}>
+        <div className={styles.loadingContent}>
+          <Loader2 className={styles.loadingSpinner} />
+          <p className={styles.loadingText}>Refreshing Members...</p>
         </div>
       </div>
     );
@@ -117,22 +115,24 @@ export function UserList({
       className={styles.scrollContainer}
     >
       <div className={styles.container}>
-        <div className="flex items-center">
+        <div className={styles.headerContainer}>
           {showCheckboxes && (
             <motion.div
               variants={checkboxContainerVariants}
               initial="hidden"
               animate={showCheckboxes ? "visible" : "hidden"}
-              className="overflow-hidden flex-shrink-0"
+              className={styles.checkboxContainer}
             >
               <Checkbox
-                className="border-zinc-300 border-2 cursor-pointer"
+                className={styles.checkbox}
                 checked={areAllMembersSelected()}
                 onCheckedChange={handleGlobalCheckboxChange}
               />
             </motion.div>
           )}
-          {showCheckboxes && <span className="mt-1.5">Select All</span>}
+          {showCheckboxes && (
+            <span className={styles.selectAllText}>Select All</span>
+          )}
         </div>
 
         <VirtualizerList

@@ -118,9 +118,9 @@ export const UserListCard: React.FC<UserListCardProps> = ({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
       >
-        <div className="bg-zinc-900/10 backdrop-blur-lg w-128 -translate-x-64 rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12">
-          <div className="text-lg sm:text-base md:text-lg lg:text-[18px] xl:text-[19px] 2xl:text-[20px] ml-2 text-center font-semibold text-white mb-1 flex items-center justify-center">
-            <ArrowDownUp className="inline-block mt-0.5 text-blue-400 mr-2" />
+        <div className={styles.dragOverlay.container}>
+          <div className={styles.dragOverlay.text}>
+            <ArrowDownUp className={styles.dragOverlay.icon} />
             {displayValue}
           </div>
         </div>
@@ -132,11 +132,9 @@ export const UserListCard: React.FC<UserListCardProps> = ({
     <motion.div
       ref={setDropRef}
       initial={{ y: 0 }}
-      className={`${
-        styles.card
-      } relative bg-no-repeat bg-left transition-all duration-200 ${
-        isDropTarget ? "ring-2 ring-blue-400 ring-opacity-50 bg-blue-50/10" : ""
-      } ${isDragSource ? "opacity-50" : ""}`}
+      className={`${styles.card} ${
+        isDropTarget ? styles.dropTarget.ring : ""
+      } ${isDragSource ? styles.dragSource : ""}`}
       style={dragStyle}
     >
       <AnimatePresence>
@@ -164,7 +162,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 ease: "easeInOut",
               },
             }}
-            className="absolute inset-0 z-20 flex items-center justify-center rounded-lg"
+            className={styles.loadingOverlay.container}
           >
             <motion.div
               initial={{ scale: 0.7, opacity: 0, rotate: -45 }}
@@ -184,7 +182,7 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 rotate: 45,
               }}
             >
-              <Loader2 className="animate-spin w-10 h-10 text-white" />
+              <Loader2 className={styles.loadingOverlay.spinner} />
             </motion.div>
           </motion.div>
         )}
@@ -196,15 +194,15 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-blue-400/20 border-2 border-blue-400 border-dashed rounded-lg z-10 flex items-center justify-center"
+            className={styles.dropTarget.overlay}
           ></motion.div>
         )}
       </AnimatePresence>
 
-      <div className="absolute inset-0"></div>
+      <div className={styles.backgroundOverlay}></div>
 
-      <div className="flex items-center space-x-2 relative z-10">
-        <div className="h-full flex-shrink-0 relative">
+      <div className={styles.mainContent}>
+        <div className={styles.avatarContainer}>
           <Image
             src={member.avatar_url}
             alt={`${member.username}'s avatar`}
@@ -216,8 +214,8 @@ export const UserListCard: React.FC<UserListCardProps> = ({
           />
         </div>
 
-        <div className="w-full text-lg flex flex-col justify-center">
-          <div className="relative flex items-center group">
+        <div className={styles.inputSection.container}>
+          <div className={styles.inputSection.inputWrapper}>
             <Input
               value={displayValue}
               onChange={handleInputChange}
@@ -225,29 +223,29 @@ export const UserListCard: React.FC<UserListCardProps> = ({
               onBlur={handleBlur}
               maxLength={30}
               placeholder={`Nickname for ${member.username}`}
-              className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-input border border-border-subtle w-1/3 font-bold"
+              className={styles.inputSection.input}
               disabled={showOverlay}
             />
 
             {inputValue && !showOverlay && !isExpanded && !isDragOverlay && (
               <div
                 ref={setDragRef}
-                className={`right-0 duration-200 top-1/2 transform mr-2 p-1.5 text-zinc-700 hover:text-zinc-500 cursor-grab active:cursor-grabbing group-hover:opacity-100 transition-all flex items-center justify-center rounded`}
+                className={styles.inputSection.dragHandle}
                 {...draggableAttributes}
                 {...draggableListeners}
               >
-                <GripVertical className="w-4 h-4" />
+                <GripVertical className={styles.inputSection.dragIcon} />
               </div>
             )}
           </div>
 
-          <div className="text-sm sm:text-sm md:text-base lg:text-[14px] xl:text-[15px] 2xl:text-[16px] font-normal text-zinc-500 pl-2">
+          <div className={styles.username}>
             {member.username}
             {member.userTag}
           </div>
         </div>
 
-        <div className="flex flex-row space-x-2">
+        <div className={styles.buttonSection.container}>
           <AnimatePresence mode="wait">
             {showOverlay ? (
               <motion.div
@@ -256,9 +254,9 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className={`flex items-center justify-center w-[90px] h-[36px]`}
+                className={styles.buttonSection.loaderContainer}
               >
-                <Loader2 className="animate-spin w-5 h-5 text-zinc-100" />
+                <Loader2 className={styles.buttonSection.loader} />
               </motion.div>
             ) : (
               <motion.div
@@ -267,34 +265,34 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="inline-block"
+                className={styles.buttonSection.buttonWrapper}
               >
                 <Button
                   onClick={handleApplyNickname}
                   disabled={showOverlay || !inputValue}
-                  className="bg-button text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-active flex items-center justify-center"
+                  className={styles.applyButton}
                 >
-                  <Check className="w-4 h-4 mr-[-2px]" />
+                  <Check className={styles.buttonSection.buttonIcon} />
                   Apply
                 </Button>
               </motion.div>
             )}
           </AnimatePresence>
 
-          <div className="relative inline-block">
+          <div className={styles.buttonSection.resetContainer}>
             <motion.div
               animate={{
                 opacity: showResetSuccess ? 0 : 1,
                 transition: { duration: 0.1 },
               }}
-              className="inline-block"
+              className={styles.buttonSection.buttonWrapper}
             >
               <Button
                 onClick={handleRevert}
                 disabled={showOverlay}
-                className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-button cursor-pointer text-text-primary hover:bg-button-hover transition-all duration-200 disabled:bg-disabled-button disabled:text-text-disabled border border-border-active flex items-center justify-center"
+                className={styles.resetButton}
               >
-                <RotateCcw className="w-4 h-4 mr-[-2px]" />
+                <RotateCcw className={styles.buttonSection.buttonIcon} />
                 Reset
               </Button>
             </motion.div>
@@ -305,19 +303,16 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                className={styles.buttonSection.resetSuccess}
               >
-                <Check className="w-5 h-5 text-zinc-100" />
+                <Check className={styles.buttonSection.successIcon} />
               </motion.div>
             )}
           </div>
         </div>
 
-        <button
-          onClick={handleExpansionToggle}
-          className="p-2 transition-all text-zinc-700 hover:text-zinc-500 cursor-pointer rounded-lg"
-        >
-          <NotebookText className="w-5 h-5 transition-all duration-200" />
+        <button onClick={handleExpansionToggle} className={styles.expandButton}>
+          <NotebookText className={styles.expandIcon} />
         </button>
       </div>
 
@@ -328,16 +323,16 @@ export const UserListCard: React.FC<UserListCardProps> = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1 }}
             transition={{ duration: 0.1 }}
-            className="absolute inset-0 bg-sidebar/80 backdrop-blur-sm rounded-lg z-10 flex flex-col"
+            className={styles.expandedSection.container}
           >
-            <div className="px-2 flex-1">
+            <div className={styles.expandedSection.content}>
               <button
                 onClick={handleExpansionToggle}
-                className="p-2 right-3.5 top-3 fixed transition-all cursor-pointer rounded-lg"
+                className={styles.expandedSection.closeButton}
               >
-                <X className="w-5 h-5 text-zinc-700 hover:text-zinc-500 transition-all duration-200" />
+                <X className={styles.expandedSection.closeIcon} />
               </button>
-              <div className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] flex items-center gap-2 font-bold text-zinc-300">
+              <div className={styles.expandedSection.title}>
                 Saved Nicknames
               </div>
               {isLoadingNicknames ? (
@@ -346,20 +341,22 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="flex text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] items-center gap-2 text-zinc-400"
+                  className={styles.expandedSection.loadingText}
                 >
-                  <Loader2 className="animate-spin w-4 h-4" />
+                  <Loader2 className={styles.expandedSection.loadingIcon} />
                   <span>Loading nicknames...</span>
                 </motion.div>
               ) : fetchError ? (
-                <div className="text-red-500">{fetchError}</div>
+                <div className={styles.expandedSection.errorText}>
+                  {fetchError}
+                </div>
               ) : previousNicknames.length === 0 ? (
-                <div className="text-zinc-500 text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] italic">
+                <div className={styles.expandedSection.emptyText}>
                   No nicknames found. Add some!
                 </div>
               ) : (
-                <div className="overflow-x-auto">
-                  <div className="flex gap-2 pb-2 min-w-max">
+                <div className={styles.expandedSection.nicknamesContainer}>
+                  <div className={styles.expandedSection.nicknamesList}>
                     {previousNicknames.map((nickname) => (
                       <AnimatePresence
                         key={`${nickname.userId}-${nickname.nickname}`}
@@ -370,13 +367,13 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.2 }}
-                            className="relative flex-shrink-0 mt-1"
+                            className={styles.expandedSection.nicknameItem}
                           >
                             <button
                               onClick={() =>
                                 handleNicknameSelect(nickname.nickname)
                               }
-                              className="px-3 py-0.5 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium bg-sidebar border-border-subtle border cursor-pointer transition-all hover:bg-card rounded-md whitespace-nowrap"
+                              className={styles.expandedSection.nicknameButton}
                             >
                               {nickname.nickname}
                             </button>
@@ -384,9 +381,11 @@ export const UserListCard: React.FC<UserListCardProps> = ({
                               onClick={() =>
                                 handleNicknameDeleteWithDelay(nickname)
                               }
-                              className="text-[10px] sm:text-xs md:text-sm absolute -top-1 -right-1 p-1 cursor-pointer text-sm text-white bg-red-400 rounded-full transition hover:bg-red-500"
+                              className={styles.expandedSection.deleteButton}
                             >
-                              <X className="w-3 h-3" />
+                              <X
+                                className={styles.expandedSection.deleteIcon}
+                              />
                             </button>
                           </motion.div>
                         )}
