@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { LogOut, Settings, HelpCircle } from "lucide-react";
+import { LogOut } from "lucide-react";
+import { settingsItems } from "@/lib/data";
 import { SidebarFooter } from "@/components/ui/sidebar";
 
 export default function AuthCard() {
@@ -12,21 +13,6 @@ export default function AuthCard() {
   const handleDiscordLogout = () => {
     signOut({ callbackUrl: "/", redirect: true });
   };
-
-  const settingsItems = [
-    {
-      title: "Settings",
-      icon: Settings,
-      value: "settings",
-      disabled: true,
-    },
-    {
-      title: "Help",
-      icon: HelpCircle,
-      value: "help",
-      disabled: true,
-    },
-  ];
 
   return (
     <div className="fixed bottom-1 left-1 z-50">
