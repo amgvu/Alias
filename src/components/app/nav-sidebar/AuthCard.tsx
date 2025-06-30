@@ -59,7 +59,6 @@ export default function AuthCard() {
                   {settingsItems.map((item) => (
                     <button
                       key={item.value}
-                      // onClick={() => !item.disabled && onSectionChange?.(item.value)}
                       className={`
                         flex text-text-secondary hover:text-text-primary
                         hover:bg-button-hover-sidebar rounded-md p-2 transition-colors
