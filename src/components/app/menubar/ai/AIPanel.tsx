@@ -4,6 +4,7 @@ import { Loader2, WandSparkles, Shuffle } from "lucide-react";
 import { Member, Server, Category } from "@/types/types";
 import React from "react";
 import { Input } from "@/components/ui/input";
+import { styles } from "./AIPanel.styles";
 
 interface AIPanelProps {
   selectedServer: Server | null;
@@ -51,26 +52,22 @@ export default function AIPanel({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-panel border-r translate-x-[82px] translate-y-2 border-l border-t rounded-l-lg  h-screen border-border w-74"
+      className={styles.panelContainer}
     >
       <div>
-        <div className="border-border p-3.5">
-          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-0.5 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
-            Themes
-          </h1>
+        <div className={styles.header}>
+          <h1 className={styles.heading}>Themes</h1>
         </div>
-        <div className="px-3 py-1">
-          <div className="space-y-2">
-            <div className="space-y-2">
+        <div className={styles.sectionWrapper}>
+          <div className={styles.sectionSpacing}>
+            <div className={styles.sectionSpacing}>
               <div className="flex items-center justify-between">
-                <span className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] text-text-secondary font-medium">
-                  Theme Category
-                </span>
+                <span className={styles.sectionLabel}>Theme Category</span>
                 <button
                   onClick={randomCategory}
-                  className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] cursor-pointer text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1"
+                  className={styles.randomButton}
                 >
-                  <Shuffle className="w-3 h-3" />
+                  <Shuffle className={styles.iconSmall} />
                   Random
                 </button>
               </div>
@@ -83,13 +80,13 @@ export default function AIPanel({
                     <button
                       key={cat.id}
                       onClick={() => setCategory(cat.id)}
-                      className={`flex cursor-pointer items-center gap-1 px-2 py-1 rounded text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] font-medium transition-all ${
+                      className={`${styles.categoryButtonBase} ${
                         isSelected
                           ? `${cat.color} text-zinc-900 ${cat.enabledBorderColor} border`
                           : `${cat.disabledColor} border ${cat.disabledBorderColor} text-zinc-900 hover:text-zinc-700 ${cat.disabledHoverColor}`
                       }`}
                     >
-                      <Icon className="w-3 h-3" />
+                      <Icon className={styles.iconSmall} />
                       {cat.name}
                     </button>
                   );
@@ -108,20 +105,18 @@ export default function AIPanel({
               >
                 <div className="flex items-center gap-2">
                   {React.createElement(currentCategory.icon, {
-                    className: "w-4 h-4 text-zinc-900",
+                    className: styles.iconMedium + " text-zinc-900",
                   })}
-                  <span className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium text-zinc-900">
-                    {currentCategory.name}
-                  </span>
+                  <span className={styles.heading}>{currentCategory.name}</span>
                 </div>
-                <p className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] text-zinc-800">
+                <p className={styles.categoryDescription}>
                   {currentCategory.description}
                 </p>
                 <div className="flex flex-wrap gap-1 mt-1">
                   {currentCategory.examples.map((example, idx) => (
                     <span
                       key={idx}
-                      className={`text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] ${currentCategory.disabledColor} px-1.5 py-0.5 rounded text-zinc-800`}
+                      className={`${styles.exampleTag} ${currentCategory.disabledColor}`}
                     >
                       {example}
                     </span>
@@ -130,12 +125,10 @@ export default function AIPanel({
               </motion.div>
             </AnimatePresence>
 
-            <div className="">
-              <label className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] text-text-secondary font-medium">
-                Specific Theme
-              </label>
+            <div>
+              <label className={styles.inputLabel}>Specific Theme</label>
               <Input
-                className="bg-input text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border-border"
+                className={styles.input}
                 maxLength={50}
                 placeholder={`Enter ${currentCategory.name.toLowerCase()}...`}
                 value={theme}
@@ -152,7 +145,7 @@ export default function AIPanel({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="flex items-center justify-center"
+                    className={styles.loaderWrapper}
                   >
                     <Loader2 className="animate-spin w-8 h-8 text-text-primary" />
                   </motion.div>
@@ -165,18 +158,12 @@ export default function AIPanel({
                     transition={{ duration: 0.2 }}
                     className="flex flex-col items-center"
                   >
-                    <span className="-translate-y-0.5 text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] mb-1 text-text-secondary text-center">
+                    <span className={styles.generateInfo}>
                       Select users before generating names
                     </span>
                     <Button
                       onClick={handleGenerate}
-                      className={`transition-all duration-200 cursor-pointer bg-button ${
-                        !loading && "disabled:bg-disabled-button"
-                      } ${
-                        currentCategory.color
-                      } disabled:text-text-disabled border border-border-active text-zinc-900 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold ${
-                        currentCategory.enabledHoverColor
-                      }`}
+                      className={`${styles.generateButton} ${currentCategory.color} ${currentCategory.enabledHoverColor}`}
                       disabled={
                         loading ||
                         !selectedServer ||
@@ -184,7 +171,7 @@ export default function AIPanel({
                         selectedUserIds.length === 0
                       }
                     >
-                      <WandSparkles className="w-4 h-4 mr-[-2px]" />
+                      <WandSparkles className={styles.iconMedium} />
                       {selectedUserIds.length > 0
                         ? `Generate ${selectedUserIds.length}`
                         : "Generate"}
