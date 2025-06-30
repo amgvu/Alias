@@ -10,12 +10,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { Server } from "@/types/types";
 
-interface DSMenuProps {
+interface ServerMenuProps {
   items: Server[];
   setSelectedItem: (item: Server) => void;
 }
 
-function DSMenu({ items, setSelectedItem }: DSMenuProps) {
+function ServerMenu({ items, setSelectedItem }: ServerMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -93,4 +93,4 @@ function DSMenu({ items, setSelectedItem }: DSMenuProps) {
   );
 }
 
-export default DSMenu;
+export default ServerMenu;

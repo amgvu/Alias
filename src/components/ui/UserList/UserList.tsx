@@ -16,7 +16,6 @@ interface UserListProps {
   isApplyingAll: boolean;
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
-
   isInitialLoad?: boolean;
   onNicknameSwap?: (
     fromUserId: string,
