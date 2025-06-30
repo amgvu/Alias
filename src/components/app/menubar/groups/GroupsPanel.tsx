@@ -9,6 +9,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { fetchArcs, fetchArcNicknames, deleteArc } from "@/lib/utilities";
 import Image from "next/image";
+import { styles } from "./GroupsPanel.styles";
 
 interface GroupsPanelProps {
   members: Member[];
@@ -51,22 +52,20 @@ export default function GroupsPanel({
 
       const nicknamesMap: Record<number, ArcNickname[]> = {};
       const counts: Record<number, number> = {};
+
       await Promise.all(
         fetchedArcs.map(async (arc) => {
           try {
             const nicknames = await fetchArcNicknames(supabase, arc.id);
             nicknamesMap[arc.id] = nicknames;
             counts[arc.id] = nicknames.length;
-          } catch (error) {
-            console.error(
-              `Failed to fetch nicknames for arc ${arc.id}:`,
-              error
-            );
+          } catch {
             nicknamesMap[arc.id] = [];
             counts[arc.id] = 0;
           }
         })
       );
+
       setArcNicknamesMap(nicknamesMap);
       setArcMemberCounts(counts);
     } catch (error) {
@@ -92,16 +91,17 @@ export default function GroupsPanel({
         await handleCreateGroup(newArcName.trim(), members);
         await loadArcsAndNicknames();
         setNewArcName("");
-      } catch (error) {
-        console.error("Error creating group:", error);
+      } catch {
         alert("Failed to create group. Please try again.");
       } finally {
         setIsLoading(false);
       }
-    } else if (!newArcName.trim()) {
-      alert("Please enter a group name.");
-    } else if (members.length === 0) {
-      alert("Please select members first.");
+    } else {
+      alert(
+        !newArcName.trim()
+          ? "Please enter a group name."
+          : "Please select members first."
+      );
     }
   };
 
@@ -127,11 +127,8 @@ export default function GroupsPanel({
 
       try {
         await deleteArc(supabase, arcId);
-        if (selectedArc?.id === arcId) {
-          setSelectedArc(null);
-        }
-      } catch (error) {
-        console.error("Failed to delete set:", error);
+        if (selectedArc?.id === arcId) setSelectedArc(null);
+      } catch {
         alert("Failed to delete set. Please try again.");
         await loadArcsAndNicknames();
       } finally {
@@ -141,46 +138,42 @@ export default function GroupsPanel({
   };
 
   const handleMouseEnter = (arc: Arc) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setHoveredArc(arc);
   };
 
   const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setHoveredArc(null);
-    }, 150);
+    timeoutRef.current = setTimeout(() => setHoveredArc(null), 150);
   };
 
   const renderMemberThumbnails = (nicknames: ArcNickname[]) => {
     const maxVisible = 3;
-    const visibleNicknames = nicknames.slice(0, maxVisible);
-    const remainingCount = nicknames.length - maxVisible;
+    const visible = nicknames.slice(0, maxVisible);
+    const extra = nicknames.length - maxVisible;
 
     return (
-      <div className="flex items-center mb-2">
-        {visibleNicknames.map((nickname, index) => (
+      <div className={styles.memberThumbnailsWrapper}>
+        {visible.map((n, idx) => (
           <div
-            key={nickname.user_id}
+            key={n.user_id}
             className="relative"
-            style={{ marginLeft: index > 0 ? "-8px" : "0" }}
+            style={{ marginLeft: idx > 0 ? "-8px" : "0" }}
           >
             <Image
-              src={nickname.avatar_url}
+              src={n.avatar_url}
               height={24}
               width={24}
-              alt={nickname.user_tag}
+              alt={n.user_tag}
               className="rounded-full border-2 border-card-panel bg-card-panel"
             />
           </div>
         ))}
-        {remainingCount > 0 && (
+        {extra > 0 && (
           <div
-            className="w-6 h-6 rounded-full bg-context-bar border-2 border-card-panel flex items-center justify-center text-[10px] sm:text-xs md:text-xs lg:text-sm text-text-secondary font-medium"
-            style={{ marginLeft: visibleNicknames.length > 0 ? "-8px" : "0" }}
+            className={styles.extraMemberCount}
+            style={{ marginLeft: visible.length > 0 ? "-8px" : "0" }}
           >
-            +{remainingCount}
+            +{extra}
           </div>
         )}
       </div>
@@ -192,40 +185,33 @@ export default function GroupsPanel({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
-      className="bg-panel border-r translate-x-[82px] translate-y-2 border-l border-t rounded-l-lg h-screen border-border w-74"
+      className={styles.panelContainer}
     >
       <div>
-        <div className=" p-3.5">
-          <h1 className="translate-y-1 font-medium text-text-primary -translate-x-0.5 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]">
-            Groups
-          </h1>
+        <div className={styles.headingWrapper}>
+          <h1 className={styles.heading}>Groups</h1>
         </div>
-        <div className="px-3 py-1">
-          <div className="space-y-2">
+
+        <div className={styles.sectionWrapper}>
+          <div className={styles.sectionSpacing}>
             <div className="flex items-center gap-4">
-              <span className="text-xs sm:text-xs md:text-sm lg:text-sm xl:text-[13px] 2xl:text-[14px] text-text-secondary font-medium">
-                Nickname Groups
-              </span>
+              <span className={styles.sectionLabel}>Nickname Groups</span>
             </div>
 
             <div className="flex">
               <Input
+                className={styles.input}
                 placeholder="New group name"
                 maxLength={30}
                 value={newArcName}
                 onChange={(e) => setNewArcName(e.target.value)}
-                className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] flex-grow bg-input border border-border text-text-primary focus:ring-1 focus:ring-border-active"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && newArcName.trim()) {
-                    handleCreateClick();
-                  }
-                }}
+                onKeyDown={(e) => e.key === "Enter" && handleCreateClick()}
                 disabled={isLoading}
               />
               <Button
                 onClick={handleCreateClick}
                 disabled={!newArcName.trim() || isLoading}
-                className="cursor-pointer bg-transparent text-text-secondary hover:text-zinc-400 hover:bg-transparent "
+                className={styles.inputButton}
               >
                 {isLoading ? (
                   <LoaderCircle className="animate-spin h-4 w-4" />
@@ -235,22 +221,22 @@ export default function GroupsPanel({
               </Button>
             </div>
 
-            <div className="grid gap-2 max-h-screen overflow-y-auto pr-2">
+            <div className={styles.listWrapper}>
               {isLoading && arcs.length === 0 ? (
-                <div className="relative cursor-default select-none py-2 text-neutral-400 flex items-center gap-2">
+                <div className={styles.loadingState}>
                   <LoaderCircle className="animate-spin w-5 h-5" />
                   Loading groups...
                 </div>
               ) : arcs.length === 0 ? (
-                <Card className="border-dashed border-border p-4 text-center text-text-secondary bg-transparent shadow-none">
+                <Card className={styles.emptyState}>
                   No groups found. Select users and create one!
                 </Card>
               ) : (
                 <AnimatePresence mode="popLayout">
                   {arcs.map((arc) => {
                     const isHovered = hoveredArc?.id === arc.id;
-                    const nicknames = arcNicknamesMap[arc.id] || [];
                     const isSelected = selectedArc?.id === arc.id;
+                    const nicknames = arcNicknamesMap[arc.id] || [];
 
                     return (
                       <motion.div
@@ -273,34 +259,29 @@ export default function GroupsPanel({
                           className="relative"
                         >
                           <Card
-                            className={`cursor-pointer group overflow-hidden transition-all relative
-                              ${
-                                isSelected
-                                  ? "border-border-subtle ring-1 ring-primary bg-card-panel"
-                                  : "border-border hover:border-border-active bg-card-panel hover:bg-opacity-80"
-                              }
-                              before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 
-                              before:bg-gradient-to-r before:from-blue-400 before:via-blue-500 before:to-blue-400 
-                              before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-200
-                            `}
+                            className={`${styles.groupCard} ${
+                              isSelected
+                                ? styles.groupCardSelected
+                                : styles.groupCardDefault
+                            }`}
                             onClick={() => setSelectedArc(arc)}
                             onMouseEnter={() => handleMouseEnter(arc)}
                             onMouseLeave={handleMouseLeave}
                           >
-                            <CardHeader className="p-3 flex flex-row items-start justify-between">
+                            <CardHeader className={styles.cardHeader}>
                               <div className="flex-grow min-w-0">
                                 {nicknames.length > 0 &&
                                   renderMemberThumbnails(nicknames)}
-                                <CardTitle className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium text-text-primary truncate pr-2">
+                                <CardTitle className={styles.cardTitle}>
                                   {arc.arc_name}
                                 </CardTitle>
                                 {arcMemberCounts[arc.id] !== undefined && (
-                                  <p className="text-xs sm:text-sm md:text-sm lg:text-[13px] xl:text-[14px] 2xl:text-[15px] text-text-secondary mt-1">
+                                  <p className={styles.cardSubtitle}>
                                     {arcMemberCounts[arc.id]} members
                                   </p>
                                 )}
                               </div>
-                              <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2 flex-shrink-0">
+                              <div className={styles.groupActions}>
                                 <Button
                                   variant="ghost"
                                   size="sm"
@@ -308,7 +289,7 @@ export default function GroupsPanel({
                                     e.stopPropagation();
                                     handleDeleteArc(arc.id);
                                   }}
-                                  className="text-red-400 hover:text-red-500 cursor-pointer hover:bg-zinc-900/50 transition-all duration-200 p-1 h-6 w-6"
+                                  className={styles.deleteButton}
                                   disabled={removingArcIds.includes(arc.id)}
                                 >
                                   <Trash2 className="h-3 w-3" />
@@ -326,7 +307,7 @@ export default function GroupsPanel({
                                     duration: 0.2,
                                     ease: "easeInOut",
                                   }}
-                                  className="overflow-hidden border-t border-border"
+                                  className={styles.virtualizedListWrapper}
                                 >
                                   <div className="p-3 pt-2">
                                     <VirtualizedNicknameList
