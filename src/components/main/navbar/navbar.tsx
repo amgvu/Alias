@@ -1,10 +1,11 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { LogOut } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
+import { useAuth } from "@/lib/hooks";
 import { getProductItems, resourceItems } from "@/lib/data";
 import MobileDrawer from "./mobile-drawer";
 import {
@@ -18,15 +19,7 @@ import { styles } from "./Navbar.styles";
 
 export default function Navbar({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
-
-  const handleDiscordLogin = () => {
-    signIn("discord", { callbackUrl: "/app" });
-  };
-
-  const handleDiscordLogout = () => {
-    signOut({ callbackUrl: "/", redirect: true });
-  };
-
+  const { handleDiscordLogout, handleDiscordLogin } = useAuth();
   const productItems = getProductItems(session);
 
   return (
