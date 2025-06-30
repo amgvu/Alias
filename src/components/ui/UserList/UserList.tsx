@@ -4,7 +4,7 @@ import { styles } from "./UserList.styles";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Member, Server } from "@/types/types";
 import { Loader2 } from "lucide-react";
-import { useCheckboxSelection } from "@/lib/hooks/useCheckboxSelection";
+import { useCheckboxSelection } from "@/lib/hooks";
 import VirtualizerList from "./VirtualizerList";
 
 interface UserListProps {

@@ -12,7 +12,7 @@ import {
   ArrowDownUp,
   NotebookText,
 } from "lucide-react";
-import { useUserListCard } from "@/lib/hooks/useUserListCard";
+import { useUserListCard } from "@/components/ui/UserListCard/useUserListCard";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { Button } from "../button";
