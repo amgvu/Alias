@@ -1,18 +1,16 @@
 import Image from "next/image";
 import { useState } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { LogOut } from "lucide-react";
 import { settingsItems } from "@/lib/data";
 import { SidebarFooter } from "@/components/ui/sidebar";
+import { useAuth } from "@/lib/hooks";
 
 export default function AuthCard() {
   const { data: session } = useSession();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMinimized, setIsMinimized] = useState(false);
-
-  const handleDiscordLogout = () => {
-    signOut({ callbackUrl: "/", redirect: true });
-  };
+  const { handleDiscordLogout } = useAuth();
 
   return (
     <div className="fixed bottom-1 left-1 z-50">

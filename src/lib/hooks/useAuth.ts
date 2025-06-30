@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSession, signIn } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export const useAuth = () => {
   const { data: session, status } = useSession();
@@ -10,5 +10,13 @@ export const useAuth = () => {
     }
   }, [status]);
 
-  return { session, status };
+  const handleDiscordLogin = () => {
+    signIn("discord", { callbackUrl: "/app" });
+  };
+
+  const handleDiscordLogout = () => {
+    signOut({ callbackUrl: "/", redirect: true });
+  };
+
+  return { session, status, handleDiscordLogin, handleDiscordLogout };
 };
