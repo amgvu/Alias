@@ -4,7 +4,8 @@ import { SupabaseClient } from "@supabase/supabase-js";
 export const updateNickname = async (
   guildId: string,
   userId: string,
-  nickname: string
+  nickname: string,
+  globalName: string
 ) => {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const response = await fetch(`${backendUrl}/api/changeNickname`, {
@@ -16,6 +17,7 @@ export const updateNickname = async (
       guild_id: guildId,
       user_id: userId,
       nickname,
+      globalName: globalName,
     }),
   });
 
@@ -69,6 +71,7 @@ export const saveNicknames = async (
     nickname: string;
     updated_at: string;
     is_active: boolean;
+    globalName: string;
   }>;
 }> => {
   const validNicknames: {
@@ -78,6 +81,7 @@ export const saveNicknames = async (
     nickname: string;
     updated_at: string;
     is_active: boolean;
+    globalName: string;
   }[] = nicknames.map((n) => ({
     guild_id: guildId,
     user_id: n.userId,
@@ -85,6 +89,7 @@ export const saveNicknames = async (
     nickname: (n.nickname ?? "").trim(),
     updated_at: new Date().toISOString(),
     is_active: true,
+    globalName: n.globalName,
   }));
 
   const upsertResults = await Promise.all(
@@ -95,6 +100,7 @@ export const saveNicknames = async (
         .eq("guild_id", nickname.guild_id)
         .eq("user_id", nickname.user_id)
         .eq("nickname", nickname.nickname)
+        .eq("globalName", nickname.globalName)
         .maybeSingle();
 
       if (fetchError) {

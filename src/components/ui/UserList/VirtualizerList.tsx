@@ -32,7 +32,11 @@ interface VirtualizerListProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   checkboxContainerVariants: any;
   onNicknameChange: (index: number, nickname: string) => void;
-  onApplyNickname: (userId: string, nickname: string) => void;
+  onApplyNickname: (
+    userId: string,
+    nickname: string,
+    globalName: string
+  ) => void;
   onCheckboxToggle: (userId: string) => void;
   onRoleCheckboxChange: (roleName: string) => void;
   areAllRoleMembersSelected: (roleName: string) => boolean;

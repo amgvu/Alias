@@ -9,7 +9,11 @@ interface ServerContentProps {
   isUpdating: Set<string>;
   isApplyingAll: boolean;
   onNicknameChange: (index: number, nickname: string) => void;
-  onApplyNickname: (userId: string, nickname: string) => void;
+  onApplyNickname: (
+    userId: string,
+    nickname: string,
+    globalName: string
+  ) => void;
   onApplyToSelection: (selectedMembers: Member[]) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;

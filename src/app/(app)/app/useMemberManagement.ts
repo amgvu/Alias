@@ -42,13 +42,19 @@ export const useMemberManagement = (
   const handleUpdateNickname = async (
     userId: string,
     nickname: string,
+    globalName: string,
     saveToDb: boolean = true
   ) => {
     if (!supabase) return;
     try {
       setIsUpdating((prev) => new Set(prev).add(userId));
-
-      await updateNickname(selectedServer?.id ?? "", userId, nickname);
+      console.log(globalName);
+      await updateNickname(
+        selectedServer?.id ?? "",
+        userId,
+        nickname,
+        globalName
+      );
 
       if (saveToDb) {
         const member = members.find((m: Member) => m.user_id === userId);
@@ -56,8 +62,9 @@ export const useMemberManagement = (
           await saveNicknames(supabase, selectedServer?.id ?? "", [
             {
               userId: member.user_id,
-              nickname: member.nickname,
+              nickname: member.nickname || member.globalName,
               userTag: member.username,
+              globalName: member.globalName,
             },
           ]);
         }
@@ -81,12 +88,18 @@ export const useMemberManagement = (
         userId: member.user_id,
         nickname: member.nickname,
         userTag: member.username,
+        globalName: member.globalName,
       }));
 
       await saveNicknames(supabase, selectedServer?.id ?? "", nicknamesToSave);
 
       const updatePromises = members.map((member: Member) =>
-        handleUpdateNickname(member.user_id, member.nickname, false)
+        handleUpdateNickname(
+          member.user_id,
+          member.nickname,
+          member.globalName,
+          false
+        )
       );
 
       await Promise.all(updatePromises);
@@ -110,13 +123,19 @@ export const useMemberManagement = (
           userId: member.user_id,
           nickname: member.nickname,
           userTag: member.username,
+          globalName: member.globalName,
         })
       );
 
       await saveNicknames(supabase, selectedServer?.id ?? "", nicknamesToSave);
 
       const updatePromises = selectedMembers.map((member: Member) =>
-        handleUpdateNickname(member.user_id, member.nickname, false)
+        handleUpdateNickname(
+          member.user_id,
+          member.nickname,
+          member.globalName,
+          false
+        )
       );
 
       await Promise.all(updatePromises);

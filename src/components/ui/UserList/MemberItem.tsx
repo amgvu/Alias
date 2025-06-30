@@ -15,7 +15,11 @@ interface MemberItemProps {
   animationKey: number;
   onCheckboxToggle: (userId: string) => void;
   onNicknameChange: (index: number, nickname: string) => void;
-  onApplyNickname: (userId: string, nickname: string) => void;
+  onApplyNickname: (
+    userId: string,
+    nickname: string,
+    globalName: string
+  ) => void;
   onNicknameSwap?: (
     fromUserId: string,
     toUserId: string,
@@ -129,7 +133,11 @@ export default function MemberItem({
               onNicknameChange(originalIndex, nickname)
             }
             onApplyNickname={() =>
-              onApplyNickname(member.user_id, member.nickname)
+              onApplyNickname(
+                member.user_id,
+                member.nickname,
+                member.globalName
+              )
             }
           />
         </motion.div>

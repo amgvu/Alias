@@ -12,7 +12,11 @@ interface UserListProps {
   isUpdating: Set<string>;
   selectedServer: Server;
   onNicknameChange: (index: number, nickname: string) => void;
-  onApplyNickname: (userId: string, nickname: string) => void;
+  onApplyNickname: (
+    userId: string,
+    nickname: string,
+    globalName: string
+  ) => void;
   isApplyingAll: boolean;
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;

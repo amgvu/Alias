@@ -131,9 +131,11 @@ export default function Dashboard() {
           isUpdating={isUpdating}
           isApplyingAll={isApplyingAll}
           onNicknameChange={handleNicknameChange}
-          onApplyNickname={(userId: string, nickname: string) =>
-            handleUpdateNickname(userId, nickname, true)
-          }
+          onApplyNickname={(
+            userId: string,
+            nickname: string,
+            globalName: string
+          ) => handleUpdateNickname(userId, nickname, globalName, true)}
           onApplyToSelection={applyNicknamesToSelection}
           onSelectionChange={setSelectedUserIds}
           showCheckboxes={showCheckboxes}

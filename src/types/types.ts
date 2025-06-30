@@ -45,6 +45,7 @@ export interface Nickname {
   userId: string;
   nickname: string;
   userTag: string;
+  globalName: string;
 }
 
 export interface Category {
