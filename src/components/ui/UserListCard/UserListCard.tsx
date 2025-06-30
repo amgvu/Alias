@@ -27,12 +27,6 @@ interface UserListCardProps {
   onApplyNickname: () => void;
   isDragOverlay?: boolean;
   draggedNickname?: string;
-  onNicknameSwap?: (
-    fromUserId: string,
-    toUserId: string,
-    fromNickname: string,
-    toNickname: string
-  ) => void;
 }
 
 export const UserListCard: React.FC<UserListCardProps> = ({
@@ -43,8 +37,6 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   onApplyNickname,
   isDragOverlay = false,
   draggedNickname,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onNicknameSwap,
 }) => {
   const {
     inputValue,
