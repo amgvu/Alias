@@ -113,7 +113,7 @@ export default function Dashboard() {
           }
         />
       }
-      authbar={<AuthCard />}
+      authcard={<AuthCard />}
     >
       <NavigationTopbar className="" selectedServer={selectedServer} />
       <div className=""></div>
