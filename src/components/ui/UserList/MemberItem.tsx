@@ -16,6 +16,12 @@ interface MemberItemProps {
   onCheckboxToggle: (userId: string) => void;
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (userId: string, nickname: string) => void;
+  onNicknameSwap?: (
+    fromUserId: string,
+    toUserId: string,
+    fromNickname: string,
+    toNickname: string
+  ) => void;
   checkboxContainerVariants: {
     hidden: {
       width: number;
