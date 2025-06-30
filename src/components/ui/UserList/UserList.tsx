@@ -16,7 +16,7 @@ interface UserListProps {
   isApplyingAll: boolean;
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
-  setShowCheckboxes: (show: boolean) => void;
+
   isInitialLoad?: boolean;
   onNicknameSwap?: (
     fromUserId: string,
@@ -35,8 +35,6 @@ export function UserList({
   isApplyingAll,
   onSelectionChange,
   showCheckboxes,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  setShowCheckboxes,
   isInitialLoad = true,
   onNicknameSwap,
 }: UserListProps) {
