@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { LogOut, Menu, X } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
+import { getProductItems, resourceItems } from "@/lib/data";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -91,20 +92,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
     signOut({ callbackUrl: "/", redirect: true });
   };
 
-  const productItems = [
-    ...(session
-      ? [
-          {
-            name: "App",
-            href: "/app",
-          },
-        ]
-      : []),
-    { name: "Features", href: "/features" },
-    { name: "Changelog", href: "/changelog" },
-  ];
-
-  const resourceItems = [{ name: "Contact", href: "/contact" }];
+  const productItems = getProductItems(session);
 
   return (
     <>

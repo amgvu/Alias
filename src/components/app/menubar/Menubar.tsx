@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { UsersRound, Palette, CirclePlus, Loader2 } from "lucide-react";
+import { CirclePlus, Loader2 } from "lucide-react";
+import { toolsItems } from "@/lib/data/tools-items";
 import { Member, Arc, Server, Category } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
 import Image from "next/image";
@@ -62,11 +63,6 @@ export default function Menubar({
   handleCreateGroup,
 }: MenubarProps) {
   const [activeTool, setActiveTool] = useState<string>("Groups");
-
-  const tools = [
-    { icon: UsersRound, name: "Groups", id: "Groups" },
-    { icon: Palette, name: "Themes", id: "Themes" },
-  ];
 
   const handleToolClick = (toolId: string) => {
     setActiveTool(toolId);
@@ -135,7 +131,7 @@ export default function Menubar({
             <SidebarGroup>
               <SidebarGroupContent>
                 <SidebarMenu className="space-y-2 border-b border-border pb-3 flex flex-col items-center">
-                  {tools.map((tool) => {
+                  {toolsItems.map((tool) => {
                     const IconComponent = tool.icon;
                     const isActive = activeTool === tool.id;
                     return (
