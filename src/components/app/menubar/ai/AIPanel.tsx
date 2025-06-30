@@ -105,9 +105,11 @@ export default function AIPanel({
               >
                 <div className="flex items-center gap-2">
                   {React.createElement(currentCategory.icon, {
-                    className: styles.iconMedium + " text-zinc-900",
+                    className: "w-4 h-4 text-zinc-900",
                   })}
-                  <span className={styles.heading}>{currentCategory.name}</span>
+                  <span className="text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-medium text-zinc-900">
+                    {currentCategory.name}
+                  </span>
                 </div>
                 <p className={styles.categoryDescription}>
                   {currentCategory.description}

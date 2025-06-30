@@ -5,7 +5,7 @@ export const styles = {
   header: "border-border p-3.5",
 
   heading:
-    "font-medium text-zinc-900 -translate-x-0.5 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]",
+    "translate-y-1 font-medium text-text-primary -translate-x-0.5 text-base sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px]",
 
   sectionWrapper: "px-3 py-1",
 
@@ -41,5 +41,5 @@ export const styles = {
     "transition-all duration-200 cursor-pointer bg-button disabled:bg-disabled-button disabled:text-text-disabled border border-border-active text-zinc-900 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] font-bold",
 
   iconSmall: "w-3 h-3",
-  iconMedium: "w-4 h-4 mr-[-2px]",
+  iconMedium: "w-4 t h-4 mr-[-2px]",
 };
