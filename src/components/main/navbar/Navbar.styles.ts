@@ -24,6 +24,7 @@ export const styles = {
     "flex invisible md:visible text-sm items-center gap-2 px-4 py-1 cursor-pointer text-zinc-100 bg-[#5865F2] hover:bg-[#454FBF] rounded-md transition-colors",
   buttonIcon: "h-4 w-4",
 
+  //Mobile drawer
   mobileDrawerContainer: "md:hidden",
   drawerTrigger: "p-4",
   drawerMenuIcon: "text-zinc-100 h-6 w-6",
