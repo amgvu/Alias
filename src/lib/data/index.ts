@@ -1,1 +1,1 @@
-export { sidebarItems } from "./sidebar-items";
+export { settingsItems } from "./settings-items";
