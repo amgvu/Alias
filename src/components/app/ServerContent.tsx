@@ -60,7 +60,6 @@ export default function ServerContent({
                 isApplyingAll={isApplyingAll}
                 onSelectionChange={onSelectionChange}
                 showCheckboxes={showCheckboxes}
-                setShowCheckboxes={setShowCheckboxes}
               />
             </div>
           ) : (
