@@ -5,7 +5,7 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 // and their player number. A combination of a better system prompt and deduplication via key matching
 // with two different aliases after filtering solves this (Seong Gi-Hun (Player 456)), but after a previous
 // iteration of this, I realized that the system prompt already handles this well enough and the deduplication
-// adds to much latency in large servers
+// adds too much latency in large servers for any real end-user value for such uncommon cases.
 
 export const characterGen = async (
   theme: string,
