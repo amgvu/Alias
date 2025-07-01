@@ -15,7 +15,7 @@ import {
   DashboardLayout,
   ServerContent,
   AuthCard,
-  Menubar,
+  Sidebar,
   NavigationTopbar,
 } from "@/components";
 import { LoaderCircle } from "lucide-react";
@@ -93,7 +93,7 @@ export default function Dashboard() {
   return (
     <DashboardLayout
       menubar={
-        <Menubar
+        <Sidebar
           selectedServer={selectedServer}
           servers={servers}
           handleServerSelection={handleServerSelection}
