@@ -3,8 +3,8 @@ export { default as UserList } from "./ui/UserList/UserList";
 export { default as UserListCard } from "./ui/UserListCard/UserListCard";
 
 export { default as ServerContent } from "./app/ServerContent";
-export { default as DashboardLayout } from "./app/DashboardLayout";
-export { default as TitleUpdater } from "./app/TitleUpdater";
+export { default as AppLayout } from "./app/AppLayout";
+export { default as TitleUpdater } from "./app/utils/TitleUpdater";
 
 export { default as Sidebar } from "./app/SideTopBar/Sidebar";
 export { default as Toolbar } from "./app/Toolbar/Toolbar";

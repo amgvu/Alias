@@ -1,17 +1,17 @@
 import { TitleUpdater } from "@/components";
-interface DashboardLayoutProps {
-  children: React.ReactNode;
+interface AppLayoutProps {
   sidebar: React.ReactNode;
   topbar: React.ReactNode;
   authcard: React.ReactNode;
+  servercontent: React.ReactNode;
 }
 
-export default function DashboardLayout({
-  children,
+export default function AppLayout({
   sidebar,
   topbar,
   authcard,
-}: DashboardLayoutProps) {
+  servercontent,
+}: AppLayoutProps) {
   return (
     <div className="min-h-screen font-ggSans text-white bg-background">
       <div className="flex">
@@ -19,7 +19,7 @@ export default function DashboardLayout({
         <div className="flex-shrink-0 fixed z-8">{authcard}</div>
         <div className="flex-shrink-0 z-5">{sidebar}</div>
         <div>{topbar}</div>
-        <div className="flex flex-col flex-1 ml-10">{children}</div>
+        <div className="flex flex-col flex-1 ml-10">{servercontent}</div>
       </div>
     </div>
   );

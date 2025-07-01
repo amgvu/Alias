@@ -12,7 +12,7 @@ import {
   useAuth,
 } from "@/lib/hooks";
 import {
-  DashboardLayout,
+  AppLayout,
   ServerContent,
   AuthCard,
   Sidebar,
@@ -91,7 +91,7 @@ export default function Dashboard() {
   }
 
   return (
-    <DashboardLayout
+    <AppLayout
       sidebar={
         <Sidebar
           selectedServer={selectedServer}
@@ -115,27 +115,28 @@ export default function Dashboard() {
       }
       topbar={<Topbar selectedServer={selectedServer} />}
       authcard={<AuthCard />}
-    >
-      <ServerContent
-        selectedServer={selectedServer}
-        serversError={serversError}
-        membersError={membersError}
-        members={members}
-        isUpdating={isUpdating}
-        isApplyingAll={isApplyingAll}
-        onNicknameChange={handleNicknameChange}
-        onApplyNickname={(
-          userId: string,
-          nickname: string,
-          globalName: string
-        ) => handleUpdateNickname(userId, nickname, globalName, true)}
-        onApplyToSelection={applyNicknamesToSelection}
-        onSelectionChange={setSelectedUserIds}
-        showCheckboxes={showCheckboxes}
-        setShowCheckboxes={setShowCheckboxes}
-        selectedUserIds={selectedUserIds}
-        isLoaded={isLoaded}
-      />
-    </DashboardLayout>
+      servercontent={
+        <ServerContent
+          selectedServer={selectedServer}
+          serversError={serversError}
+          membersError={membersError}
+          members={members}
+          isUpdating={isUpdating}
+          isApplyingAll={isApplyingAll}
+          onNicknameChange={handleNicknameChange}
+          onApplyNickname={(
+            userId: string,
+            nickname: string,
+            globalName: string
+          ) => handleUpdateNickname(userId, nickname, globalName, true)}
+          onApplyToSelection={applyNicknamesToSelection}
+          onSelectionChange={setSelectedUserIds}
+          showCheckboxes={showCheckboxes}
+          setShowCheckboxes={setShowCheckboxes}
+          selectedUserIds={selectedUserIds}
+          isLoaded={isLoaded}
+        />
+      }
+    ></AppLayout>
   );
 }
