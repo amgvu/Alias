@@ -33,14 +33,15 @@ export const characterGen = async (
   });
 
   const prompt = `List ${numMembers} popular ${category} related to the theme "${theme}",
-   ordered from most to least popular.  For the purposes of this list, "popularity" should
+    ordered from most to least popular. For the purposes of this list, "popularity" should
     be determined by a combination of factors, including frequency of online mentions, fan
-     sentiment (positive or negative), critical acclaim, and relevance to the core themes of
-      "${theme}".  Return ONLY a JSON array of ${category} names, with no other text or explanations.
-      The JSON array should be formatted as follows: ["${category} 1", "${category} 2", "${category} 3", ...].
-        ${category} 1 should be the most popular, ${category} 2 the second most, and so on.  If fewer than
-        ${numMembers} relevant ${category} exist, return all that you can find. Please omit any explanations,
-          disclaimers, or unnecessary text.`;
+    sentiment (positive or negative), critical acclaim, and relevance to the core themes of
+    "${theme}". **If a ${category} has a well-known alternative name, player number, or alias, include it in parentheses after their primary name (e.g., 'Primary Name (Alias/Number)').**
+    Return ONLY a JSON array of ${category} names, with no other text or explanations.
+    The JSON array should be formatted as follows: ["${category} 1", "${category} 2", "${category} 3", ...].
+    ${category} 1 should be the most popular, ${category} 2 the second most, and so on. If fewer than
+    ${numMembers} relevant ${category} exist, return ALL that you can find. Please omit any explanations,
+    disclaimers, or unnecessary text.`;
 
   try {
     const result = await model.generateContent(prompt);
