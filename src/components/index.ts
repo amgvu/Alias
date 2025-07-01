@@ -12,7 +12,7 @@ export { default as SelectionTool } from "./app/Toolbar/SelectionTool/SelectionT
 export { default as ApplyTool } from "./app/Toolbar/ApplyTool/ApplyTool";
 
 export { default as AuthCard } from "./app/SideTopBar/AuthCard";
-export { default as NavigationTopbar } from "./app/SideTopBar/Topbar";
+export { default as Topbar } from "./app/SideTopBar/Topbar";
 
 export { default as AIPanel } from "./app/SideTopBar/ai/AIPanel";
 export { default as GroupsPanel } from "./app/SideTopBar/groups/GroupsPanel";

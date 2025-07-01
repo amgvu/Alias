@@ -1,15 +1,15 @@
 import { Server } from "@/types/types";
 import Image from "next/image";
 
-interface NavigationTopBarProps {
+interface TopbarProps {
   selectedServer: Server | null;
   className?: string;
 }
 
-export default function NavigationTopBar({
+export default function Topbar({
   selectedServer,
   className = "",
-}: NavigationTopBarProps) {
+}: TopbarProps) {
   return (
     <div
       className={`

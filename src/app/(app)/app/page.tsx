@@ -16,7 +16,7 @@ import {
   ServerContent,
   AuthCard,
   Sidebar,
-  NavigationTopbar,
+  Topbar,
 } from "@/components";
 import { LoaderCircle } from "lucide-react";
 
@@ -92,7 +92,7 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout
-      menubar={
+      sidebar={
         <Sidebar
           selectedServer={selectedServer}
           servers={servers}
@@ -113,10 +113,9 @@ export default function Dashboard() {
           }
         />
       }
+      topbar={<Topbar selectedServer={selectedServer} />}
       authcard={<AuthCard />}
     >
-      <NavigationTopbar className="" selectedServer={selectedServer} />
-
       <ServerContent
         selectedServer={selectedServer}
         serversError={serversError}
