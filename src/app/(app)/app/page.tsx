@@ -21,12 +21,14 @@ import {
 import { LoaderCircle } from "lucide-react";
 
 export default function Dashboard() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
+  const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+  const [showCheckboxes, setShowCheckboxes] = useState(false);
+
   const { session, status } = useAuth();
   const { servers, serversError, selectedServer, handleServerSelection } =
     useServerSelection();
-
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showLoading, setShowLoading] = useState(true);
 
   const { members: fetchedMembers, error: membersError } = useMembers(
     selectedServer?.id ?? ""
@@ -57,9 +59,6 @@ export default function Dashboard() {
     members,
     setMembers
   );
-
-  const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
-  const [showCheckboxes, setShowCheckboxes] = useState(false);
 
   useEffect(() => {
     setShowCheckboxes(false);

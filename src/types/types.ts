@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Server {
   id: string;
   name: string;
@@ -51,7 +50,7 @@ export interface Nickname {
 export interface Category {
   id: string;
   name: string;
-  icon: any;
+  icon: string | null;
   description: string;
   examples: string[];
   color: string;
