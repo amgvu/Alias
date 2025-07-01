@@ -116,33 +116,27 @@ export default function Dashboard() {
       authcard={<AuthCard />}
     >
       <NavigationTopbar className="" selectedServer={selectedServer} />
-      <div className=""></div>
-      <div
-        className={`flex-1 transition-opacity duration-500 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="flex justify-between items-center"></div>
-        <ServerContent
-          selectedServer={selectedServer}
-          serversError={serversError}
-          membersError={membersError}
-          members={members}
-          isUpdating={isUpdating}
-          isApplyingAll={isApplyingAll}
-          onNicknameChange={handleNicknameChange}
-          onApplyNickname={(
-            userId: string,
-            nickname: string,
-            globalName: string
-          ) => handleUpdateNickname(userId, nickname, globalName, true)}
-          onApplyToSelection={applyNicknamesToSelection}
-          onSelectionChange={setSelectedUserIds}
-          showCheckboxes={showCheckboxes}
-          setShowCheckboxes={setShowCheckboxes}
-          selectedUserIds={selectedUserIds}
-        />
-      </div>
+
+      <ServerContent
+        selectedServer={selectedServer}
+        serversError={serversError}
+        membersError={membersError}
+        members={members}
+        isUpdating={isUpdating}
+        isApplyingAll={isApplyingAll}
+        onNicknameChange={handleNicknameChange}
+        onApplyNickname={(
+          userId: string,
+          nickname: string,
+          globalName: string
+        ) => handleUpdateNickname(userId, nickname, globalName, true)}
+        onApplyToSelection={applyNicknamesToSelection}
+        onSelectionChange={setSelectedUserIds}
+        showCheckboxes={showCheckboxes}
+        setShowCheckboxes={setShowCheckboxes}
+        selectedUserIds={selectedUserIds}
+        isLoaded={isLoaded}
+      />
     </DashboardLayout>
   );
 }
