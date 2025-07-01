@@ -1,4 +1,4 @@
-import { UserList, TitleUpdater, Toolbar } from "@/components";
+import { UserList, Toolbar } from "@/components";
 import { Member, Server } from "@/types/types";
 
 interface ServerContentProps {
@@ -38,7 +38,6 @@ export default function ServerContent({
 }: ServerContentProps) {
   return (
     <div className="flex flex-col">
-      <TitleUpdater />
       <div className="flex">
         <div className="w-full">
           <Toolbar
