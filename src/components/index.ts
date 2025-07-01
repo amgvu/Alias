@@ -11,8 +11,8 @@ export { default as Toolbar } from "./app/toolbar/Toolbar";
 export { default as SelectionTool } from "./app/toolbar/SelectionTool/SelectionTool";
 export { default as ApplyTool } from "./app/toolbar/ApplyTool/ApplyTool";
 
-export { default as AuthCard } from "./app/nav-sidebar/AuthCard";
-export { default as NavigationTopbar } from "./app/nav-sidebar/NavigationTopbar";
+export { default as AuthCard } from "./app/menubar/AuthCard";
+export { default as NavigationTopbar } from "./app/menubar/NavigationTopbar";
 
 export { default as AIPanel } from "./app/menubar/ai/AIPanel";
 export { default as GroupsPanel } from "./app/menubar/groups/GroupsPanel";
