@@ -3,6 +3,7 @@ import { Member } from "@/types/types";
 import { UserListCard } from "@/components";
 import { Checkbox } from "../checkbox";
 import { Server } from "@/types/types";
+import { swapVariants, shiftVariants } from "@/lib/data";
 interface MemberItemProps {
   member: Member;
   memberIndex: number;
@@ -41,32 +42,6 @@ interface MemberItemProps {
   isSwapped?: boolean;
   swapAnimationKey?: number;
 }
-
-const shiftVariants = {
-  initial: { y: 0 },
-  animate: (index: number) => ({
-    y: [0, 10, 0],
-    transition: {
-      duration: 0.25,
-      ease: [0.25, 0.1, 0.25, 1],
-      delay: (index % 50) * 0.06,
-    },
-  }),
-};
-
-const swapVariants = {
-  initial: {
-    scale: 1,
-  },
-  swap: {
-    y: [0, 4, 0],
-    transition: {
-      duration: 0.25,
-      ease: [0.25, 0.1, 0.25, 1],
-      times: [0, 0.5, 1],
-    },
-  },
-};
 
 export default function MemberItem({
   member,
