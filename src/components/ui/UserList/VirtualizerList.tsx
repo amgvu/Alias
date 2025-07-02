@@ -11,6 +11,7 @@ import MemberItem from "./MemberItem";
 import RoleHeader from "./RoleHeader";
 import UserListCard from "../UserListCard/UserListCard";
 import { Member, Server } from "@/types/types";
+import { getSortedMembers } from "@/lib/utilities";
 
 interface VirtualItem {
   type: "role-header" | "member";
@@ -72,31 +73,11 @@ export default function VirtualizerList({
   const [swappedUsers, setSwappedUsers] = useState<Set<string>>(new Set());
   const [swapAnimationKey, setSwapAnimationKey] = useState(0);
 
-  const groupedMembers = useCallback(() => {
-    const grouped = members.reduce((acc: Record<string, Member[]>, member) => {
-      const highestRole = member.roles[0]?.name || "No Role";
-      if (!acc[highestRole]) {
-        acc[highestRole] = [];
-      }
-      acc[highestRole].push(member);
-      return acc;
-    }, {});
-
-    const sortedRoles = Object.keys(grouped).sort((a, b) => {
-      const roleAPosition =
-        members.find((m) => m.roles[0]?.name === a)?.roles[0]?.position ?? -1;
-      const roleBPosition =
-        members.find((m) => m.roles[0]?.name === b)?.roles[0]?.position ?? -1;
-      return roleBPosition - roleAPosition;
-    });
-
-    return { grouped, sortedRoles };
-  }, [members]);
-
   const createVirtualItems = useCallback(() => {
     const items: VirtualItem[] = [];
     let memberIndex = 0;
-    const { grouped, sortedRoles } = groupedMembers();
+
+    const { grouped, sortedRoles } = getSortedMembers(members);
 
     sortedRoles.forEach((roleName) => {
       items.push({
@@ -120,7 +101,7 @@ export default function VirtualizerList({
     });
 
     return items;
-  }, [members, groupedMembers]);
+  }, [members]);
 
   const virtualItems = createVirtualItems();
 

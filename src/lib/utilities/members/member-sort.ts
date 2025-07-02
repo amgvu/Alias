@@ -1,7 +1,7 @@
 import { Member } from "@/types/types";
 
-export const getSortedMembers = (members: Member[]): Member[][] => {
-  const groupedMembers = members.reduce(
+export const getSortedMembers = (members: Member[]) => {
+  const grouped: Record<string, Member[]> = members.reduce(
     (acc: Record<string, Member[]>, member) => {
       const highestRole = member.roles[0]?.name || "No Role";
       if (!acc[highestRole]) {
@@ -13,7 +13,7 @@ export const getSortedMembers = (members: Member[]): Member[][] => {
     {}
   );
 
-  const sortedRoles = Object.keys(groupedMembers).sort((a, b) => {
+  const sortedRoles = Object.keys(grouped).sort((a, b) => {
     const roleAPosition =
       members.find((m) => m.roles[0]?.name === a)?.roles[0]?.position ?? -1;
     const roleBPosition =
@@ -21,5 +21,5 @@ export const getSortedMembers = (members: Member[]): Member[][] => {
     return roleBPosition - roleAPosition;
   });
 
-  return sortedRoles.map((roleName) => groupedMembers[roleName]);
+  return { grouped, sortedRoles };
 };
