@@ -29,7 +29,7 @@ interface VirtualizerListProps {
   selectedUserIds: Set<string>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   checkboxContainerVariants: any;
-  onNicknameChange: (index: number, nickname: string) => void;
+  onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: (
     userId: string,
     nickname: string,
@@ -54,7 +54,7 @@ export default function VirtualizerList({
   showCheckboxes,
   selectedUserIds,
   checkboxContainerVariants,
-  onNicknameChange,
+  onUpdateNicknameLocally,
   onApplyNickname,
   onCheckboxToggle,
   onRoleCheckboxChange,
@@ -243,7 +243,7 @@ export default function VirtualizerList({
                     isUpdating={isUpdating}
                     selectedServer={selectedServer}
                     onCheckboxToggle={onCheckboxToggle}
-                    onNicknameChange={onNicknameChange}
+                    onUpdateNicknameLocally={onUpdateNicknameLocally}
                     onApplyNickname={onApplyNickname}
                     onNicknameSwap={onNicknameSwap}
                     checkboxContainerVariants={checkboxContainerVariants}
@@ -265,7 +265,7 @@ export default function VirtualizerList({
             isUpdating={new Set()}
             isDragOverlay={true}
             draggedNickname={draggedData.nickname}
-            onNicknameChange={() => {}}
+            onUpdateNicknameLocally={() => {}}
             onApplyNickname={() => {}}
           />
         ) : null}

@@ -11,7 +11,7 @@ interface UserListProps {
   members: Member[];
   isUpdating: Set<string>;
   selectedServer: Server;
-  onNicknameChange: (index: number, nickname: string) => void;
+  onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: (
     userId: string,
     nickname: string,
@@ -32,7 +32,7 @@ export function UserList({
   members,
   isUpdating,
   selectedServer,
-  onNicknameChange,
+  onUpdateNicknameLocally,
   onApplyNickname,
   onSelectionChange,
   showCheckboxes,
@@ -78,8 +78,8 @@ export function UserList({
     const toIndex = members.findIndex((m) => m.user_id === toUserId);
 
     if (fromIndex !== -1 && toIndex !== -1) {
-      onNicknameChange(fromIndex, toNickname);
-      onNicknameChange(toIndex, fromNickname);
+      onUpdateNicknameLocally(fromIndex, toNickname);
+      onUpdateNicknameLocally(toIndex, fromNickname);
 
       if (onNicknameSwap) {
         onNicknameSwap(fromUserId, toUserId, fromNickname, toNickname);
@@ -134,7 +134,7 @@ export function UserList({
           showCheckboxes={showCheckboxes}
           selectedUserIds={selectedUserIds}
           checkboxContainerVariants={checkboxContainerVariants}
-          onNicknameChange={onNicknameChange}
+          onUpdateNicknameLocally={onUpdateNicknameLocally}
           onApplyNickname={onApplyNickname}
           onCheckboxToggle={handleCheckboxToggle}
           onRoleCheckboxChange={handleRoleCheckboxChange}

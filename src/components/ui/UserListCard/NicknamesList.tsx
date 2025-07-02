@@ -7,7 +7,7 @@ import { Member, Server } from "@/types/types";
 interface NicknamesListProps {
   member: Member;
   selectedServer: Server | null;
-  onNicknameChange: (nickname: string) => void;
+  onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
   handleExpansionToggle: () => void;
 }
@@ -15,7 +15,7 @@ interface NicknamesListProps {
 export function NicknamesList({
   member,
   selectedServer,
-  onNicknameChange,
+  onUpdateNicknameLocally,
   onApplyNickname,
   handleExpansionToggle,
 }: NicknamesListProps) {
@@ -30,7 +30,7 @@ export function NicknamesList({
   } = useUserListCard({
     member,
     selectedServer: selectedServer?.id ?? "",
-    onNicknameChange,
+    onUpdateNicknameLocally,
     onApplyNickname,
   });
 

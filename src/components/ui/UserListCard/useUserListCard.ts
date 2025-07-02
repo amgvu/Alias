@@ -7,14 +7,14 @@ import { useSupabase } from "@/contexts/SupabaseProvider";
 interface UseUserListCardProps {
   member: Member;
   selectedServer: string;
-  onNicknameChange: (nickname: string) => void;
+  onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
 }
 
 export const useUserListCard = ({
   member,
   selectedServer,
-  onNicknameChange,
+  onUpdateNicknameLocally,
   onApplyNickname,
 }: UseUserListCardProps) => {
   const [inputValue, setInputValue] = useState(
@@ -76,9 +76,9 @@ export const useUserListCard = ({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setIsUserCurrentlyEditing(true);
       setInputValue(e.target.value);
-      onNicknameChange(e.target.value);
+      onUpdateNicknameLocally(e.target.value);
     },
-    [onNicknameChange]
+    [onUpdateNicknameLocally]
   );
 
   const handleBlur = useCallback(() => {
@@ -93,10 +93,10 @@ export const useUserListCard = ({
   const handleRevert = useCallback(() => {
     const globalName = member.globalName || "";
     setInputValue(globalName);
-    onNicknameChange(globalName);
+    onUpdateNicknameLocally(globalName);
     setShowResetSuccess(true);
     setTimeout(() => setShowResetSuccess(false), 400);
-  }, [member.globalName, onNicknameChange]);
+  }, [member.globalName, onUpdateNicknameLocally]);
 
   const handleExpansionToggle = useCallback(() => {
     setIsExpanded(!isExpanded);
@@ -105,10 +105,10 @@ export const useUserListCard = ({
   const handleNicknameSelect = useCallback(
     (nickname: string) => {
       setInputValue(nickname);
-      onNicknameChange(nickname);
+      onUpdateNicknameLocally(nickname);
       setIsExpanded(false);
     },
-    [onNicknameChange]
+    [onUpdateNicknameLocally]
   );
 
   const handleNicknameDelete = useCallback(

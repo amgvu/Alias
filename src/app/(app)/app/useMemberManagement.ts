@@ -24,7 +24,7 @@ export const useMemberManagement = (
     }
   }, [fetchedMembers]);
 
-  const handleNicknameChange = (index: number, nickname: string) => {
+  const handleUpdateNicknameLocally = (index: number, nickname: string) => {
     setMembers((prevMembers) => {
       const updatedMembers = [...prevMembers];
       const memberToUpdate = updatedMembers[index];
@@ -119,7 +119,7 @@ export const useMemberManagement = (
     members,
     setMembers,
     isUpdating,
-    handleNicknameChange,
+    handleUpdateNicknameLocally,
     handleUpdateNickname,
     applyNicknamesToSelection,
   };

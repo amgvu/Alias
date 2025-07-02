@@ -9,7 +9,7 @@ interface ActionButtonsProps {
   member: Member;
   selectedServer: Server | null;
   showOverlay: boolean;
-  onNicknameChange: (nickname: string) => void;
+  onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
 }
 
@@ -17,7 +17,7 @@ export function ActionButtons({
   member,
   selectedServer,
   showOverlay,
-  onNicknameChange,
+  onUpdateNicknameLocally,
   onApplyNickname,
 }: ActionButtonsProps) {
   const {
@@ -29,7 +29,7 @@ export function ActionButtons({
   } = useUserListCard({
     member,
     selectedServer: selectedServer?.id ?? "",
-    onNicknameChange,
+    onUpdateNicknameLocally,
     onApplyNickname,
   });
 

@@ -7,7 +7,7 @@ interface ServerContentProps {
   membersError: string | null;
   members: Member[];
   isUpdating: Set<string>;
-  onNicknameChange: (index: number, nickname: string) => void;
+  onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: (
     userId: string,
     nickname: string,
@@ -27,7 +27,7 @@ export default function ServerContent({
   membersError,
   members,
   isUpdating,
-  onNicknameChange,
+  onUpdateNicknameLocally,
   onApplyNickname,
   onApplyToSelection,
   onSelectionChange,
@@ -63,7 +63,7 @@ export default function ServerContent({
                   selectedServer={selectedServer}
                   members={members}
                   isUpdating={isUpdating}
-                  onNicknameChange={onNicknameChange}
+                  onUpdateNicknameLocally={onUpdateNicknameLocally}
                   onApplyNickname={onApplyNickname}
                   onSelectionChange={onSelectionChange}
                   showCheckboxes={showCheckboxes}

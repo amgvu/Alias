@@ -12,7 +12,7 @@ interface MemberItemProps {
   isUpdating: Set<string>;
   selectedServer: Server | null;
   onCheckboxToggle: (userId: string) => void;
-  onNicknameChange: (index: number, nickname: string) => void;
+  onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: (
     userId: string,
     nickname: string,
@@ -77,7 +77,7 @@ export default function MemberItem({
   isUpdating,
   selectedServer,
   onCheckboxToggle,
-  onNicknameChange,
+  onUpdateNicknameLocally,
   onApplyNickname,
   checkboxContainerVariants,
   isSwapped = false,
@@ -123,8 +123,8 @@ export default function MemberItem({
             member={member}
             selectedServer={selectedServer}
             isUpdating={isUpdating}
-            onNicknameChange={(nickname) =>
-              onNicknameChange(originalIndex, nickname)
+            onUpdateNicknameLocally={(nickname) =>
+              onUpdateNicknameLocally(originalIndex, nickname)
             }
             onApplyNickname={() =>
               onApplyNickname(

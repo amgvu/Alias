@@ -18,7 +18,7 @@ interface UserListCardProps {
   member: Member;
   isUpdating: Set<string>;
   selectedServer: Server | null;
-  onNicknameChange: (nickname: string) => void;
+  onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
   isDragOverlay?: boolean;
   draggedNickname?: string;
@@ -28,7 +28,7 @@ export default function UserListCard({
   member,
   isUpdating,
   selectedServer,
-  onNicknameChange,
+  onUpdateNicknameLocally,
   onApplyNickname,
   isDragOverlay = false,
   draggedNickname,
@@ -44,7 +44,7 @@ export default function UserListCard({
   } = useUserListCard({
     member,
     selectedServer: selectedServer?.id ?? "",
-    onNicknameChange,
+    onUpdateNicknameLocally,
     onApplyNickname,
   });
   const showOverlay = isUpdating.has(member.user_id);
@@ -160,7 +160,7 @@ export default function UserListCard({
           member={member}
           selectedServer={selectedServer}
           showOverlay={showOverlay}
-          onNicknameChange={onNicknameChange}
+          onUpdateNicknameLocally={onUpdateNicknameLocally}
           onApplyNickname={onApplyNickname}
         />
 
@@ -174,7 +174,7 @@ export default function UserListCard({
           <NicknamesList
             member={member}
             selectedServer={selectedServer}
-            onNicknameChange={onNicknameChange}
+            onUpdateNicknameLocally={onUpdateNicknameLocally}
             onApplyNickname={onApplyNickname}
             handleExpansionToggle={handleExpansionToggle}
           />

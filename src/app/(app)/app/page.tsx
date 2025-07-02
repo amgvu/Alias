@@ -37,7 +37,7 @@ export default function Dashboard() {
   const {
     members,
     isUpdating,
-    handleNicknameChange,
+    handleUpdateNicknameLocally,
     handleUpdateNickname,
     setMembers,
     applyNicknamesToSelection,
@@ -120,7 +120,7 @@ export default function Dashboard() {
           membersError={membersError}
           members={members}
           isUpdating={isUpdating}
-          onNicknameChange={handleNicknameChange}
+          onUpdateNicknameLocally={handleUpdateNicknameLocally}
           onApplyNickname={(
             userId: string,
             nickname: string,
