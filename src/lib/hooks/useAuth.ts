@@ -8,7 +8,7 @@ export const useAuth = () => {
     if (status === "unauthenticated") {
       signIn("discord");
     }
-  }, [status]); // change this in future
+  }, [status]); // change this in future to handle diff routes
 
   const handleDiscordLogin = () => {
     signIn("discord", { callbackUrl: "/app" });

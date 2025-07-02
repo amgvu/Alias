@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Member } from "@/types/types";
+import { getSortedMembers } from "@/lib/utilities";
 
 interface UseCheckboxSelectionProps {
   members: Member[];
@@ -21,14 +22,7 @@ export const useCheckboxSelection = ({
   }, [members]);
 
   const groupMembersByRole = useCallback(() => {
-    const grouped = members.reduce((acc: Record<string, Member[]>, member) => {
-      const highestRole = member.roles[0]?.name || "No Role";
-      if (!acc[highestRole]) {
-        acc[highestRole] = [];
-      }
-      acc[highestRole].push(member);
-      return acc;
-    }, {});
+    const { grouped } = getSortedMembers(members);
     return grouped;
   }, [members]);
 
