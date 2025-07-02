@@ -133,7 +133,6 @@ export function UserList({
           selectedServer={displayServer}
           showCheckboxes={showCheckboxes}
           selectedUserIds={selectedUserIds}
-          checkboxContainerVariants={checkboxContainerVariants}
           onUpdateNicknameLocally={onUpdateNicknameLocally}
           onApplyNickname={onApplyNickname}
           onCheckboxToggle={handleCheckboxToggle}

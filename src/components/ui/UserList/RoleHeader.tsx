@@ -1,25 +1,12 @@
 import { motion } from "motion/react";
 import { Checkbox } from "../checkbox";
+import { checkboxContainerVariants } from "@/lib/data";
 
 interface RoleHeaderProps {
   roleName: string;
   showCheckboxes: boolean;
   isAllSelected: boolean;
   onCheckboxChange: () => void;
-  checkboxContainerVariants: {
-    hidden: {
-      width: number;
-      opacity: number;
-      x: number;
-      transition: { duration: number };
-    };
-    visible: {
-      width: string;
-      opacity: number;
-      x: number;
-      transition: { duration: number };
-    };
-  };
 }
 
 export default function RoleHeader({
@@ -27,7 +14,6 @@ export default function RoleHeader({
   showCheckboxes,
   isAllSelected,
   onCheckboxChange,
-  checkboxContainerVariants,
 }: RoleHeaderProps) {
   return (
     <div className="flex items-center py-1 ">

@@ -28,8 +28,6 @@ interface VirtualizerListProps {
   selectedServer: Server | null;
   showCheckboxes: boolean;
   selectedUserIds: Set<string>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  checkboxContainerVariants: any;
   onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: (
     userId: string,
@@ -54,7 +52,6 @@ export default function VirtualizerList({
   selectedServer,
   showCheckboxes,
   selectedUserIds,
-  checkboxContainerVariants,
   onUpdateNicknameLocally,
   onApplyNickname,
   onCheckboxToggle,
@@ -212,7 +209,6 @@ export default function VirtualizerList({
                     onCheckboxChange={() =>
                       onRoleCheckboxChange(item.roleName!)
                     }
-                    checkboxContainerVariants={checkboxContainerVariants}
                   />
                 ) : item.type === "member" && item.member ? (
                   <MemberItem
@@ -227,7 +223,6 @@ export default function VirtualizerList({
                     onUpdateNicknameLocally={onUpdateNicknameLocally}
                     onApplyNickname={onApplyNickname}
                     onNicknameSwap={onNicknameSwap}
-                    checkboxContainerVariants={checkboxContainerVariants}
                     isSwapped={swappedUsers.has(item.member.user_id)}
                     swapAnimationKey={swapAnimationKey}
                   />

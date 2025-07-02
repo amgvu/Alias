@@ -3,7 +3,11 @@ import { Member } from "@/types/types";
 import { UserListCard } from "@/components";
 import { Checkbox } from "../checkbox";
 import { Server } from "@/types/types";
-import { swapVariants, shiftVariants } from "@/lib/data";
+import {
+  swapVariants,
+  shiftVariants,
+  checkboxContainerVariants,
+} from "@/lib/data";
 interface MemberItemProps {
   member: Member;
   memberIndex: number;
@@ -25,20 +29,6 @@ interface MemberItemProps {
     fromNickname: string,
     toNickname: string
   ) => void;
-  checkboxContainerVariants: {
-    hidden: {
-      width: number;
-      opacity: number;
-      x: number;
-      transition: { duration: number };
-    };
-    visible: {
-      width: string;
-      opacity: number;
-      x: number;
-      transition: { duration: number };
-    };
-  };
   isSwapped?: boolean;
   swapAnimationKey?: number;
 }
@@ -54,7 +44,6 @@ export default function MemberItem({
   onCheckboxToggle,
   onUpdateNicknameLocally,
   onApplyNickname,
-  checkboxContainerVariants,
   isSwapped = false,
   swapAnimationKey = 0,
 }: MemberItemProps) {
