@@ -37,7 +37,6 @@ interface VirtualizerListProps {
   onCheckboxToggle: (userId: string) => void;
   onRoleCheckboxChange: (roleName: string) => void;
   areAllRoleMembersSelected: (roleName: string) => boolean;
-
   onNicknameSwap?: (
     fromUserId: string,
     toUserId: string,

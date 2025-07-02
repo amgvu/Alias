@@ -6,6 +6,7 @@ import { Member, Server } from "@/types/types";
 
 interface NicknamesListProps {
   member: Member;
+  isUpdating: Set<string>;
   selectedServer: Server | null;
   onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
@@ -14,6 +15,7 @@ interface NicknamesListProps {
 
 export function NicknamesList({
   member,
+  isUpdating,
   selectedServer,
   onUpdateNicknameLocally,
   onApplyNickname,
@@ -28,6 +30,7 @@ export function NicknamesList({
     handleNicknameSelect: localHandleNicknameSelect,
     handleNicknameDeleteWithDelay,
   } = useUserListCard({
+    isUpdating,
     member,
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,

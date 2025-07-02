@@ -3,10 +3,15 @@ import { useAnimation } from "framer-motion";
 import { Member, Nickname } from "@/types/types";
 import { fetchNicknames, deleteNickname } from "@/lib/utilities";
 import { useSupabase } from "@/contexts/SupabaseProvider";
+import { useDraggable, useDroppable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
 interface UseUserListCardProps {
   member: Member;
   selectedServer: string;
+  isUpdating: Set<string>;
+  isDragOverlay?: boolean;
+  draggedNickname?: string;
   onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
 }
@@ -14,6 +19,9 @@ interface UseUserListCardProps {
 export const useUserListCard = ({
   member,
   selectedServer,
+  isUpdating,
+  isDragOverlay,
+  draggedNickname,
   onUpdateNicknameLocally,
   onApplyNickname,
 }: UseUserListCardProps) => {
@@ -110,6 +118,55 @@ export const useUserListCard = ({
     },
     [onUpdateNicknameLocally]
   );
+  const showOverlay = isUpdating.has(member.user_id);
+
+  const {
+    attributes: draggableAttributes,
+    listeners: draggableListeners,
+    setNodeRef: setDragRef,
+    transform: dragTransform,
+    isDragging,
+  } = useDraggable({
+    id: `nickname-${member.user_id}`,
+    data: {
+      type: "nickname",
+      userId: member.user_id,
+      nickname: inputValue || "",
+      username: member.username,
+    },
+    disabled: !inputValue || showOverlay || isExpanded,
+  });
+
+  const {
+    setNodeRef: setDropRef,
+    isOver,
+    active,
+  } = useDroppable({
+    id: `card-${member.user_id}`,
+    data: {
+      type: "usercard",
+      userId: member.user_id,
+      currentNickname: inputValue || "",
+    },
+  });
+
+  const isDropTarget =
+    isOver &&
+    active?.data.current?.type === "nickname" &&
+    active?.data.current?.userId !== member.user_id;
+  const isDragSource = isDragging && !isDragOverlay;
+
+  const dragStyle = isDragOverlay
+    ? {}
+    : {
+        transform: CSS.Translate.toString(dragTransform),
+        opacity: isDragSource ? 0.3 : 1,
+        zIndex: isDragging ? 1000 : "auto",
+      };
+
+  const displayValue = isDragOverlay
+    ? draggedNickname || inputValue
+    : inputValue;
 
   const handleNicknameDelete = useCallback(
     (nickname: Nickname) => {
@@ -175,6 +232,16 @@ export const useUserListCard = ({
     showResetSuccess,
     controls,
 
+    draggableAttributes,
+    draggableListeners,
+    isDropTarget,
+    displayValue,
+    dragStyle,
+    isDragSource,
+    showOverlay,
+
+    setDropRef,
+    setDragRef,
     handleInputChange,
     handleBlur,
     handleFocus,

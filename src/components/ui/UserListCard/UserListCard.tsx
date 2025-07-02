@@ -5,8 +5,6 @@ import { Member, Server } from "@/types/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { GripVertical, NotebookText } from "lucide-react";
 import { useUserListCard } from "@/components/ui/UserListCard/useUserListCard";
-import { useDraggable, useDroppable } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/utilities";
 import { Input } from "../input";
 import { LoadingOverlay } from "./LoadingOverlay";
 import { DropTargetOverlay } from "./dnd/DropTargetOverlay";
@@ -21,7 +19,6 @@ interface UserListCardProps {
   onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
   isDragOverlay?: boolean;
-  draggedNickname?: string;
 }
 
 export default function UserListCard({
@@ -31,70 +28,32 @@ export default function UserListCard({
   onUpdateNicknameLocally,
   onApplyNickname,
   isDragOverlay = false,
-  draggedNickname,
 }: UserListCardProps) {
   const {
     inputValue,
     isExpanded,
+    draggableAttributes,
+    draggableListeners,
+    isDropTarget,
+    displayValue,
+    dragStyle,
+    isDragSource,
+    showOverlay,
+
+    setDragRef,
+    setDropRef,
     handleInputChange,
     handleBlur,
     handleFocus,
     handleExpansionToggle,
     handleImageError,
   } = useUserListCard({
+    isUpdating,
     member,
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,
     onApplyNickname,
   });
-  const showOverlay = isUpdating.has(member.user_id);
-  const {
-    attributes: draggableAttributes,
-    listeners: draggableListeners,
-    setNodeRef: setDragRef,
-    transform: dragTransform,
-    isDragging,
-  } = useDraggable({
-    id: `nickname-${member.user_id}`,
-    data: {
-      type: "nickname",
-      userId: member.user_id,
-      nickname: inputValue || "",
-      username: member.username,
-    },
-    disabled: !inputValue || showOverlay || isExpanded,
-  });
-
-  const {
-    setNodeRef: setDropRef,
-    isOver,
-    active,
-  } = useDroppable({
-    id: `card-${member.user_id}`,
-    data: {
-      type: "usercard",
-      userId: member.user_id,
-      currentNickname: inputValue || "",
-    },
-  });
-
-  const isDropTarget =
-    isOver &&
-    active?.data.current?.type === "nickname" &&
-    active?.data.current?.userId !== member.user_id;
-  const isDragSource = isDragging && !isDragOverlay;
-
-  const dragStyle = isDragOverlay
-    ? {}
-    : {
-        transform: CSS.Translate.toString(dragTransform),
-        opacity: isDragSource ? 0.3 : 1,
-        zIndex: isDragging ? 1000 : "auto",
-      };
-
-  const displayValue = isDragOverlay
-    ? draggedNickname || inputValue
-    : inputValue;
 
   if (isDragOverlay) {
     return <DragOverlay displayValue={displayValue} />;
@@ -158,6 +117,7 @@ export default function UserListCard({
 
         <ActionButtons
           member={member}
+          isUpdating={isUpdating}
           selectedServer={selectedServer}
           showOverlay={showOverlay}
           onUpdateNicknameLocally={onUpdateNicknameLocally}
@@ -173,6 +133,7 @@ export default function UserListCard({
         {isExpanded && (
           <NicknamesList
             member={member}
+            isUpdating={isUpdating}
             selectedServer={selectedServer}
             onUpdateNicknameLocally={onUpdateNicknameLocally}
             onApplyNickname={onApplyNickname}
