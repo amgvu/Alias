@@ -32,7 +32,7 @@ export const useThemeGenerator = (
 
       const generatedNames = characters.split(",").map((name) => name.trim());
 
-      const sortedSelectedMembers = getSortedMembers(selectedMembers);
+      const sortedSelectedMembers = getSortedMembers(selectedMembers).flat();
 
       const nicknameMapping: { [key: string]: string } = {};
       sortedSelectedMembers.forEach((member, index) => {

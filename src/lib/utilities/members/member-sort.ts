@@ -1,6 +1,6 @@
 import { Member } from "@/types/types";
 
-export const getSortedMembers = (members: Member[]): Member[] => {
+export const getSortedMembers = (members: Member[]): Member[][] => {
   const groupedMembers = members.reduce(
     (acc: Record<string, Member[]>, member) => {
       const highestRole = member.roles[0]?.name || "No Role";
@@ -21,5 +21,5 @@ export const getSortedMembers = (members: Member[]): Member[] => {
     return roleBPosition - roleAPosition;
   });
 
-  return sortedRoles.flatMap((roleName) => groupedMembers[roleName]);
+  return sortedRoles.map((roleName) => groupedMembers[roleName]);
 };
