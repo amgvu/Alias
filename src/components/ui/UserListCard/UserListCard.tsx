@@ -24,7 +24,7 @@ interface UserListCardProps {
   draggedNickname?: string;
 }
 
-export const UserListCard: React.FC<UserListCardProps> = ({
+export default function UserListCard({
   member,
   isUpdating,
   selectedServer,
@@ -32,11 +32,10 @@ export const UserListCard: React.FC<UserListCardProps> = ({
   onApplyNickname,
   isDragOverlay = false,
   draggedNickname,
-}) => {
+}: UserListCardProps) {
   const {
     inputValue,
     isExpanded,
-
     handleInputChange,
     handleBlur,
     handleFocus,
@@ -183,6 +182,4 @@ export const UserListCard: React.FC<UserListCardProps> = ({
       </AnimatePresence>
     </motion.div>
   );
-};
-
-export default UserListCard;
+}
