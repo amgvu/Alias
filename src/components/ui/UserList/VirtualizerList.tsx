@@ -239,7 +239,6 @@ export default function VirtualizerList({
             selectedServer={selectedServer}
             isUpdating={new Set()}
             isDragOverlay={true}
-            draggedNickname={draggedData.nickname}
             onUpdateNicknameLocally={() => {}}
             onApplyNickname={() => {}}
           />
