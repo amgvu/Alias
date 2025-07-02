@@ -17,31 +17,24 @@ export const useCheckboxSelection = ({
     new Set()
   );
 
-  const getAllUserIds = useCallback(() => {
-    return members.map((m) => m.user_id);
-  }, [members]);
-
-  const groupMembersByRole = useCallback(() => {
-    const { grouped } = getSortedMembers(members);
-    return grouped;
-  }, [members]);
-
   const areAllMembersSelected = useCallback(() => {
-    const allUserIds = getAllUserIds();
+    const { grouped, sortedRoles } = getSortedMembers(members);
+    const allMembersFlat = sortedRoles.flatMap((roleName) => grouped[roleName]);
+    const allUserIds = allMembersFlat.map((member) => member.user_id);
     return (
       allUserIds.length > 0 && allUserIds.every((id) => selectedUserIds.has(id))
     );
-  }, [getAllUserIds, selectedUserIds]);
+  }, [members, selectedUserIds]);
 
   const areAllRoleMembersSelected = useCallback(
     (roleName: string) => {
-      const grouped = groupMembersByRole();
+      const { grouped } = getSortedMembers(members);
       const userIds = grouped[roleName]?.map((m) => m.user_id) || [];
       return (
         userIds.length > 0 && userIds.every((id) => selectedUserIds.has(id))
       );
     },
-    [groupMembersByRole, selectedUserIds]
+    [selectedUserIds, members]
   );
 
   const handleCheckboxToggle = useCallback((userId: string) => {
@@ -57,25 +50,32 @@ export const useCheckboxSelection = ({
   }, []);
 
   const handleGlobalCheckboxChange = useCallback(() => {
-    const allSelected = areAllMembersSelected();
-    const allUserIds = getAllUserIds();
+    const { grouped, sortedRoles } = getSortedMembers(members);
+    const allMembersFlat = sortedRoles.flatMap((roleName) => grouped[roleName]);
+    const allUserIds = allMembersFlat.map((member) => member.user_id);
 
-    if (allSelected) {
+    const allCurrentlySelected =
+      allUserIds.length > 0 &&
+      allUserIds.every((id) => selectedUserIds.has(id));
+
+    if (allCurrentlySelected) {
       setSelectedUserIds(new Set());
     } else {
       setSelectedUserIds(new Set(allUserIds));
     }
-  }, [areAllMembersSelected, getAllUserIds]);
+  }, [members, selectedUserIds]);
 
   const handleRoleCheckboxChange = useCallback(
     (roleName: string) => {
-      const grouped = groupMembersByRole();
+      const { grouped } = getSortedMembers(members);
       const userIds = grouped[roleName]?.map((m) => m.user_id) || [];
-      const allSelected = areAllRoleMembersSelected(roleName);
+
+      const allCurrentlySelectedForRole =
+        userIds.length > 0 && userIds.every((id) => selectedUserIds.has(id));
 
       setSelectedUserIds((prev) => {
         const newSet = new Set(prev);
-        if (allSelected) {
+        if (allCurrentlySelectedForRole) {
           userIds.forEach((id) => newSet.delete(id));
         } else {
           userIds.forEach((id) => newSet.add(id));
@@ -83,7 +83,7 @@ export const useCheckboxSelection = ({
         return newSet;
       });
     },
-    [groupMembersByRole, areAllRoleMembersSelected]
+    [members, selectedUserIds]
   );
 
   useEffect(() => {
