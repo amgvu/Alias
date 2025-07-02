@@ -4,7 +4,7 @@ import { styles } from "./UserListCard.styles";
 import { Member, Server } from "@/types/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { GripVertical, NotebookText } from "lucide-react";
-import { useUserListCard } from "@/components/ui/UserListCard/useUserListCard";
+import { useUserListCard, useDnd } from "@/lib/hooks";
 import { Input } from "../input";
 import { LoadingOverlay } from "./LoadingOverlay";
 import { DropTargetOverlay } from "./dnd/DropTargetOverlay";
@@ -32,16 +32,7 @@ export default function UserListCard({
   const {
     inputValue,
     isExpanded,
-    draggableAttributes,
-    draggableListeners,
-    isDropTarget,
-    displayValue,
-    dragStyle,
-    isDragSource,
-    showOverlay,
-
     setDragRef,
-    setDropRef,
     handleInputChange,
     handleBlur,
     handleFocus,
@@ -53,6 +44,24 @@ export default function UserListCard({
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,
     onApplyNickname,
+  });
+
+  const {
+    draggableAttributes,
+    draggableListeners,
+    isDropTarget,
+    displayValue,
+    dragStyle,
+    isDragSource,
+    showOverlay,
+
+    setDragRef,
+    setDropRef,
+  } = useDnd({
+    member,
+    inputValue,
+    isExpanded,
+    isUpdating,
   });
 
   if (isDragOverlay) {
