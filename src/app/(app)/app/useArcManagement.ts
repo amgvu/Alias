@@ -77,60 +77,6 @@ export const useArcManagement = (
     loadArcNicknames();
   }, [selectedArc, setMembers, supabase, initialFetchedNicknames]);
 
-  const handleSaveArc = async () => {
-    if (!supabase) {
-      alert("Database connection not available. Please try again.");
-      return;
-    }
-
-    if (!selectedServer || !selectedArc || !selectedArc.arc_name) {
-      alert("Please select a server, group, and ensure members are loaded.");
-      return;
-    }
-
-    setIsSavingArc(true);
-
-    try {
-      const existingArc = await checkExistingArc(
-        supabase,
-        selectedServer.id,
-        selectedArc.arc_name
-      );
-
-      if (existingArc) {
-        const confirmOverwrite = window.confirm(
-          "An group with this name already exists. Do you want to overwrite it with the new set of nicknames?"
-        );
-
-        if (!confirmOverwrite) {
-          return;
-        }
-
-        await deleteArcNicknames(supabase, existingArc.id);
-      }
-
-      const arc =
-        existingArc ||
-        (await createArc(supabase, selectedServer.id, selectedArc.arc_name));
-
-      const newNicknames: ArcNickname[] = members.map((member) => ({
-        arc_id: arc.id!,
-        guild_id: selectedServer.id,
-        user_id: member.user_id,
-        nickname: member.nickname,
-        user_tag: member.userTag || member.username,
-        avatar_url: member.avatar_url || "",
-      }));
-
-      await saveArcNicknames(supabase, newNicknames);
-    } catch (error) {
-      console.error(error);
-      alert("Failed to save group. Please try again.");
-    } finally {
-      setIsSavingArc(false);
-    }
-  };
-
   const handleCreateGroup = async (
     groupName: string,
     selectedMembers: Member[]
@@ -214,7 +160,6 @@ export const useArcManagement = (
     selectedArc,
     setSelectedArc,
     isSavingArc,
-    handleSaveArc,
     handleCreateGroup,
   };
 };
