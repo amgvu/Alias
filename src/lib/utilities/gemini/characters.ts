@@ -50,7 +50,8 @@ export const characterGen = async (
     The JSON array should be formatted as follows: ["${category} 1", "${category} 2", "${category} 3", ...].
     ${category} 1 should be the most popular, ${category} 2 the second most, and so on. If fewer than
     ${numMembers} relevant ${category} exist, return ALL that you can find. Please omit any explanations,
-    disclaimers, or unnecessary text.`;
+    disclaimers, or unnecessary text. **Ensure that each ${category} name does not exceed 32 characters,
+    including spaces.`;
 
   try {
     const result = await model.generateContent(prompt);
