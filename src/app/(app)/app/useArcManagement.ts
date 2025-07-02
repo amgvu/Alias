@@ -131,25 +131,6 @@ export const useArcManagement = (
     }
   };
 
-  const handleCreateNewArc = async (newArcName: string) => {
-    if (!supabase) {
-      alert("Database connection not available. Please try again.");
-      return;
-    }
-
-    try {
-      const newArc = await createArc(
-        supabase,
-        selectedServer?.id ?? "",
-        newArcName
-      );
-      setSelectedArc(newArc);
-    } catch (error) {
-      console.error("Failed to create new group:", error);
-      alert("Failed to create new group. Please try again.");
-    }
-  };
-
   const handleCreateGroup = async (
     groupName: string,
     selectedMembers: Member[]
@@ -234,7 +215,6 @@ export const useArcManagement = (
     setSelectedArc,
     isSavingArc,
     handleSaveArc,
-    handleCreateNewArc,
     handleCreateGroup,
   };
 };
