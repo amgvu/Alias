@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Member } from "@/types/types";
+import { Member, Server } from "@/types/types";
 import { categoryItems } from "@/lib/data";
 import { characterGen } from "@/lib/utilities/gemini/characters";
+import { useMembers } from "@/lib/hooks";
 
 export const useThemeGenerator = (
   members: Member[],
-  setMembers: (members: Member[]) => void
+  setMembers: (members: Member[]) => void,
+  selectedServer: Server | null
 ) => {
   const [theme, setTheme] = useState<string>("");
   const [category, setCategory] = useState<string>("Fictional Characters");
@@ -13,31 +15,7 @@ export const useThemeGenerator = (
   const [generatedThemes, setGeneratedThemes] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const getSortedMembers = (membersList: Member[]): Member[] => {
-    const groupedMembers = membersList.reduce(
-      (acc: Record<string, Member[]>, member) => {
-        const highestRole = member.roles[0]?.name || "No Role";
-        if (!acc[highestRole]) {
-          acc[highestRole] = [];
-        }
-        acc[highestRole].push(member);
-        return acc;
-      },
-      {}
-    );
-
-    const sortedRoles = Object.keys(groupedMembers).sort((a, b) => {
-      const roleAPosition =
-        membersList.find((m) => m.roles[0]?.name === a)?.roles[0]?.position ??
-        -1;
-      const roleBPosition =
-        membersList.find((m) => m.roles[0]?.name === b)?.roles[0]?.position ??
-        -1;
-      return roleBPosition - roleAPosition;
-    });
-
-    return sortedRoles.flatMap((roleName) => groupedMembers[roleName]);
-  };
+  const { getSortedMembers } = useMembers(selectedServer?.id ?? "");
 
   const handleGenerateCharacters = async (selectedMembers: Member[]) => {
     if (!selectedMembers || selectedMembers.length === 0) {
