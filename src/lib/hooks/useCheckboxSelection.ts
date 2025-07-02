@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Member } from "@/types/types";
-import { getSortedMembers, checkboxContainerVariants } from "@/lib/utilities";
+import { getSortedMembers } from "@/lib/utilities";
+import { checkboxContainerVariants } from "@/lib/data";
 
 interface UseCheckboxSelectionProps {
   members: Member[];
