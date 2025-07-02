@@ -1,21 +1,17 @@
 import { useState } from "react";
-import { Member, Server } from "@/types/types";
+import { Member } from "@/types/types";
 import { categoryItems } from "@/lib/data";
-import { characterGen } from "@/lib/utilities/gemini/characters";
-import { useMembers } from "@/lib/hooks";
+import { characterGen, getSortedMembers } from "@/lib/utilities";
 
 export const useThemeGenerator = (
   members: Member[],
-  setMembers: (members: Member[]) => void,
-  selectedServer: Server | null
+  setMembers: (members: Member[]) => void
 ) => {
   const [theme, setTheme] = useState<string>("");
   const [category, setCategory] = useState<string>("Fictional Characters");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [generatedThemes, setGeneratedThemes] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const { getSortedMembers } = useMembers(selectedServer?.id ?? "");
 
   const handleGenerateCharacters = async (selectedMembers: Member[]) => {
     if (!selectedMembers || selectedMembers.length === 0) {

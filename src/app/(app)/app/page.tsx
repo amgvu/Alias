@@ -51,7 +51,7 @@ export default function Dashboard() {
     setTheme,
     loading,
     handleGenerateCharacters,
-  } = useThemeGenerator(members, setMembers, selectedServer);
+  } = useThemeGenerator(members, setMembers);
 
   const { selectedArc, setSelectedArc, handleCreateGroup } = useArcManagement(
     selectedServer,
