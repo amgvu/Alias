@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Member } from "@/types/types";
-import { getSortedMembers } from "@/lib/utilities";
+import { getSortedMembers, checkboxContainerVariants } from "@/lib/utilities";
 
 interface UseCheckboxSelectionProps {
   members: Member[];
@@ -97,16 +97,6 @@ export const useCheckboxSelection = ({
       onSelectionChange(Array.from(selectedUserIds));
     }
   }, [selectedUserIds, onSelectionChange]);
-
-  const checkboxContainerVariants = {
-    hidden: { width: 0, opacity: 0, x: -10, transition: { duration: 0.15 } },
-    visible: {
-      width: "28px",
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.15 },
-    },
-  };
 
   return {
     selectedUserIds,

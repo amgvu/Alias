@@ -23,3 +23,6 @@ export { getSortedMembers } from "./members/member-sort";
 
 // Themes
 export { characterGen } from "./gemini/characters";
+
+// UI
+export { checkboxContainerVariants } from "./ui/checkbox/checkbox";
