@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Member } from "@/types/types";
 import {
-  useServerSelection,
+  useServers,
   useMembers,
   useMemberManagement,
   useThemeGenerator,
@@ -28,7 +28,7 @@ export default function Dashboard() {
 
   const { session, status } = useAuth();
   const { servers, serversError, selectedServer, handleServerSelection } =
-    useServerSelection();
+    useServers();
 
   const { members: fetchedMembers, error: membersError } = useMembers(
     selectedServer?.id ?? ""

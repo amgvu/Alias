@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { fetchServers } from "@/lib/utilities";
 import { Server } from "@/types/types";
@@ -6,7 +6,8 @@ import { Server } from "@/types/types";
 export const useServers = () => {
   const { data: session } = useSession();
   const [servers, setServers] = useState<Server[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [serversError, setServersError] = useState<string | null>(null);
+  const [selectedServer, setSelectedServer] = useState<Server | null>(null);
 
   useEffect(() => {
     const getServers = async () => {
@@ -37,11 +38,10 @@ export const useServers = () => {
             session.user.discordId
           );
           setServers(data);
-
           localStorage.setItem("cachedServers", JSON.stringify(data));
           localStorage.setItem("serversTimestamp", Date.now().toString());
         } catch (error) {
-          setError(
+          setServersError(
             error instanceof Error ? error.message : "Failed to fetch servers"
           );
         }
@@ -49,9 +49,7 @@ export const useServers = () => {
     };
 
     if (!sessionStorage.getItem("pageLoadTimestamp")) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      sessionStorage.getItem("pageLoadTimestamp") ||
-        sessionStorage.setItem("pageLoadTimestamp", Date.now().toString());
+      sessionStorage.setItem("pageLoadTimestamp", Date.now().toString());
     }
 
     if (session) {
@@ -63,5 +61,26 @@ export const useServers = () => {
     }
   }, [session]);
 
-  return { servers, error };
+  const handleServerSelection = useCallback(
+    (value: string | Server) => {
+      const selected =
+        typeof value === "string"
+          ? servers.find((server: Server) => server.name === value)
+          : value;
+
+      if (selected) {
+        setSelectedServer(selected);
+      } else {
+        setSelectedServer(null);
+      }
+    },
+    [servers]
+  );
+
+  return {
+    servers,
+    serversError,
+    selectedServer,
+    handleServerSelection,
+  };
 };
