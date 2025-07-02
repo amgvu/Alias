@@ -32,7 +32,7 @@ export default function UserListCard({
   const {
     inputValue,
     isExpanded,
-    setDragRef,
+
     handleInputChange,
     handleBlur,
     handleFocus,
