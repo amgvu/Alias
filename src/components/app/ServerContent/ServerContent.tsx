@@ -13,7 +13,7 @@ interface ServerContentProps {
     nickname: string,
     globalName: string
   ) => void;
-  onApplyToSelection: (selectedMembers: Member[]) => void;
+  onUpdateSelectedNicknames: (selectedMembers: Member[]) => void;
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
   selectedUserIds: string[];
@@ -29,7 +29,7 @@ export default function ServerContent({
   isUpdating,
   onUpdateNicknameLocally,
   onApplyNickname,
-  onApplyToSelection,
+  onUpdateSelectedNicknames,
   onSelectionChange,
   showCheckboxes,
   selectedUserIds,
@@ -50,7 +50,7 @@ export default function ServerContent({
               showCheckboxes={showCheckboxes}
               setShowCheckboxes={setShowCheckboxes}
               members={members}
-              onApplyToSelection={onApplyToSelection}
+              onUpdateSelectedNicknames={onUpdateSelectedNicknames}
               selectedUserIds={selectedUserIds}
             />
             {serversError || membersError ? (

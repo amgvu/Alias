@@ -79,7 +79,7 @@ export const useMemberManagement = (
     }
   };
 
-  const applyNicknamesToSelection = async (selectedMembers: Member[]) => {
+  const handleUpdateSelectedNicknames = async (selectedMembers: Member[]) => {
     if (!supabase) return;
 
     selectedMembers.forEach((member) =>
@@ -121,6 +121,6 @@ export const useMemberManagement = (
     isUpdating,
     handleUpdateNicknameLocally,
     handleUpdateNickname,
-    applyNicknamesToSelection,
+    handleUpdateSelectedNicknames,
   };
 };

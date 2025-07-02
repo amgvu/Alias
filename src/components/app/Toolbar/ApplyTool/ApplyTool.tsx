@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 
 interface ApplyToolProps {
   members: Member[];
-  onApplyToSelection: (selectedMembers: Member[]) => void;
+  onUpdateSelectedNicknames: (selectedMembers: Member[]) => void;
   selectedUserIds: string[];
   selectedServer: Server | null;
 }
 
 export default function ApplyTool({
   members,
-  onApplyToSelection,
+  onUpdateSelectedNicknames,
   selectedUserIds,
   selectedServer,
 }: ApplyToolProps) {
@@ -21,7 +21,7 @@ export default function ApplyTool({
     const selectedMembers = members.filter((member) =>
       selectedUserIds.includes(member.user_id)
     );
-    onApplyToSelection(selectedMembers);
+    onUpdateSelectedNicknames(selectedMembers);
   };
 
   return (

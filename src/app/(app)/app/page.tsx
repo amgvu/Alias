@@ -40,7 +40,7 @@ export default function Dashboard() {
     handleUpdateNicknameLocally,
     handleUpdateNickname,
     setMembers,
-    applyNicknamesToSelection,
+    handleUpdateSelectedNicknames,
   } = useMemberManagement(selectedServer, fetchedMembers);
 
   const {
@@ -126,7 +126,7 @@ export default function Dashboard() {
             nickname: string,
             globalName: string
           ) => handleUpdateNickname(userId, nickname, globalName, true)}
-          onApplyToSelection={applyNicknamesToSelection}
+          onUpdateSelectedNicknames={handleUpdateSelectedNicknames}
           onSelectionChange={setSelectedUserIds}
           showCheckboxes={showCheckboxes}
           setShowCheckboxes={setShowCheckboxes}

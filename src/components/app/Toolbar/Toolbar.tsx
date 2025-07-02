@@ -3,7 +3,7 @@ import { SelectionTool, ApplyTool } from "@/components";
 
 interface ToolbarProps {
   members: Member[];
-  onApplyToSelection: (selectedMembers: Member[]) => void;
+  onUpdateSelectedNicknames: (selectedMembers: Member[]) => void;
   selectedUserIds: string[];
   selectedServer: Server | null;
   showCheckboxes: boolean;
@@ -12,7 +12,7 @@ interface ToolbarProps {
 
 export default function Toolbar({
   members,
-  onApplyToSelection,
+  onUpdateSelectedNicknames,
   selectedUserIds,
   selectedServer,
   showCheckboxes,
@@ -29,7 +29,7 @@ export default function Toolbar({
 
         <ApplyTool
           members={members}
-          onApplyToSelection={onApplyToSelection}
+          onUpdateSelectedNicknames={onUpdateSelectedNicknames}
           selectedUserIds={selectedUserIds}
           selectedServer={selectedServer}
         />
