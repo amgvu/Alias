@@ -37,7 +37,6 @@ export default function Dashboard() {
   const {
     members,
     isUpdating,
-    isApplyingAll,
     handleNicknameChange,
     handleUpdateNickname,
     setMembers,
@@ -121,7 +120,6 @@ export default function Dashboard() {
           membersError={membersError}
           members={members}
           isUpdating={isUpdating}
-          isApplyingAll={isApplyingAll}
           onNicknameChange={handleNicknameChange}
           onApplyNickname={(
             userId: string,

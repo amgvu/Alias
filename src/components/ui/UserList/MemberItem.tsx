@@ -11,8 +11,6 @@ interface MemberItemProps {
   showCheckboxes: boolean;
   isUpdating: Set<string>;
   selectedServer: Server | null;
-  isApplyingAll: boolean;
-  animationKey: number;
   onCheckboxToggle: (userId: string) => void;
   onNicknameChange: (index: number, nickname: string) => void;
   onApplyNickname: (
@@ -78,8 +76,6 @@ export default function MemberItem({
   showCheckboxes,
   isUpdating,
   selectedServer,
-  isApplyingAll,
-  animationKey,
   onCheckboxToggle,
   onNicknameChange,
   onApplyNickname,
@@ -89,12 +85,11 @@ export default function MemberItem({
 }: MemberItemProps) {
   return (
     <motion.div
-      key={`${member.user_id}-${animationKey}-${swapAnimationKey}`}
+      key={`${member.user_id}-${swapAnimationKey}`}
       className="relative"
       custom={memberIndex}
       initial="initial"
       variants={shiftVariants}
-      animate={isApplyingAll ? "animate" : "initial"}
     >
       <motion.div
         className="flex items-center rounded-md"
@@ -128,7 +123,6 @@ export default function MemberItem({
             member={member}
             selectedServer={selectedServer}
             isUpdating={isUpdating}
-            isApplyingAll={isApplyingAll}
             onNicknameChange={(nickname) =>
               onNicknameChange(originalIndex, nickname)
             }

@@ -12,7 +12,6 @@ export const useMemberManagement = (
   const { data: session, status } = useSession();
   const [members, setMembers] = useState<Member[]>([]);
   const [isUpdating, setIsUpdating] = useState<Set<string>>(new Set());
-  const [isApplyingAll, setIsApplyingAll] = useState(false);
 
   useEffect(() => {
     if (supabase) {
@@ -80,36 +79,6 @@ export const useMemberManagement = (
     }
   };
 
-  const applyAllNicknames = async () => {
-    if (!supabase) return;
-    setIsApplyingAll(true);
-    try {
-      const nicknamesToSave: Nickname[] = members.map((member: Member) => ({
-        userId: member.user_id,
-        nickname: member.nickname,
-        userTag: member.username,
-        globalName: member.globalName,
-      }));
-
-      await saveNicknames(supabase, selectedServer?.id ?? "", nicknamesToSave);
-
-      const updatePromises = members.map((member: Member) =>
-        handleUpdateNickname(
-          member.user_id,
-          member.nickname,
-          member.globalName,
-          false
-        )
-      );
-
-      await Promise.all(updatePromises);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsApplyingAll(false);
-    }
-  };
-
   const applyNicknamesToSelection = async (selectedMembers: Member[]) => {
     if (!supabase) return;
 
@@ -150,10 +119,8 @@ export const useMemberManagement = (
     members,
     setMembers,
     isUpdating,
-    isApplyingAll,
     handleNicknameChange,
     handleUpdateNickname,
-    applyAllNicknames,
     applyNicknamesToSelection,
   };
 };

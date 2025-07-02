@@ -17,7 +17,6 @@ interface UserListProps {
     nickname: string,
     globalName: string
   ) => void;
-  isApplyingAll: boolean;
   onSelectionChange?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
   isInitialLoad?: boolean;
@@ -35,13 +34,11 @@ export function UserList({
   selectedServer,
   onNicknameChange,
   onApplyNickname,
-  isApplyingAll,
   onSelectionChange,
   showCheckboxes,
   isInitialLoad = true,
   onNicknameSwap,
 }: UserListProps) {
-  const [animationKey, setAnimationKey] = useState(0);
   const [displayServer, setDisplayServer] = useState(selectedServer);
   const [isLoading, setIsLoading] = useState(isInitialLoad);
 
@@ -58,12 +55,6 @@ export function UserList({
     showCheckboxes,
     onSelectionChange,
   });
-
-  useEffect(() => {
-    if (isApplyingAll) {
-      setAnimationKey((prev) => prev + 1);
-    }
-  }, [isApplyingAll]);
 
   useEffect(() => {
     if (selectedServer !== displayServer || isInitialLoad) {
@@ -140,8 +131,6 @@ export function UserList({
           members={members}
           isUpdating={isUpdating}
           selectedServer={displayServer}
-          isApplyingAll={isApplyingAll}
-          animationKey={animationKey}
           showCheckboxes={showCheckboxes}
           selectedUserIds={selectedUserIds}
           checkboxContainerVariants={checkboxContainerVariants}

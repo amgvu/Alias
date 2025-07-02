@@ -8,7 +8,7 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 // adds too much latency in large servers for any real end-user value for such uncommon cases.
 
 // Literally a better model might just fix this without post-generation processing but the new models are too slow
-// on the user side at the moment which outweighs the benefits of using them for the mentioned edge cases
+// on the user side at the moment which outweighs the benefits of using them for the mentioned edge cases.
 
 export const characterGen = async (
   theme: string,

@@ -25,8 +25,6 @@ interface VirtualizerListProps {
   members: Member[];
   isUpdating: Set<string>;
   selectedServer: Server | null;
-  isApplyingAll: boolean;
-  animationKey: number;
   showCheckboxes: boolean;
   selectedUserIds: Set<string>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,8 +51,6 @@ export default function VirtualizerList({
   members,
   isUpdating,
   selectedServer,
-  isApplyingAll,
-  animationKey,
   showCheckboxes,
   selectedUserIds,
   checkboxContainerVariants,
@@ -246,8 +242,6 @@ export default function VirtualizerList({
                     showCheckboxes={showCheckboxes}
                     isUpdating={isUpdating}
                     selectedServer={selectedServer}
-                    isApplyingAll={isApplyingAll}
-                    animationKey={animationKey}
                     onCheckboxToggle={onCheckboxToggle}
                     onNicknameChange={onNicknameChange}
                     onApplyNickname={onApplyNickname}

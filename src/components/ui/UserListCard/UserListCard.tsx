@@ -17,7 +17,6 @@ import { ActionButtons } from "./ActionButtons";
 interface UserListCardProps {
   member: Member;
   isUpdating: Set<string>;
-  isApplyingAll?: boolean;
   selectedServer: Server | null;
   onNicknameChange: (nickname: string) => void;
   onApplyNickname: () => void;
