@@ -76,9 +76,7 @@ export function NicknamesList({
           <div className={styles.expandedSection.nicknamesContainer}>
             <div className={styles.expandedSection.nicknamesList}>
               {previousNicknames.map((nickname) => (
-                <AnimatePresence
-                  key={`${nickname.userId}-${nickname.nickname}`}
-                >
+                <AnimatePresence key={`${nickname.nickname}`}>
                   {!deletingNicknames.includes(nickname.nickname) && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
