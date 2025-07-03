@@ -51,11 +51,14 @@ export default function ApplyTool({
             Apply {selectedUserIds.length}{" "}
             {selectedUserIds.length > 1 ? "nicknames" : "nickname"}
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-text-secondary">
             Are you sure you want to apply the{" "}
             {selectedUserIds.length > 1 ? "nicknames" : "nickname"} to{" "}
-            {selectedUserIds.length}{" "}
-            {selectedUserIds.length > 1 ? "members" : "member"} in the server?
+            <span className="font-bold">
+              {selectedUserIds.length}{" "}
+              {selectedUserIds.length > 1 ? "members" : "member"}{" "}
+            </span>
+            in <span className="font-bold">{selectedServer!.name}?</span>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
