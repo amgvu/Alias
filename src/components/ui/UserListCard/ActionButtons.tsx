@@ -4,6 +4,11 @@ import { styles } from "./UserListCard.styles";
 import { useUserListCard } from "./useUserListCard";
 import { Button } from "../button";
 import { Member, Server } from "@/types/types";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ActionButtonsProps {
   member: Member;
@@ -79,14 +84,21 @@ export function ActionButtons({
           }}
           className={styles.buttonSection.buttonWrapper}
         >
-          <Button
-            onClick={handleRevert}
-            disabled={showOverlay}
-            className={styles.resetButton}
-          >
-            <RotateCcw className={styles.buttonSection.buttonIcon} />
-            Reset
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={handleRevert}
+                disabled={showOverlay}
+                className={styles.resetButton}
+              >
+                <RotateCcw className={styles.buttonSection.buttonIcon} />
+                Reset
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Resets to global username</p>
+            </TooltipContent>
+          </Tooltip>
         </motion.div>
         {showResetSuccess && (
           <motion.div
