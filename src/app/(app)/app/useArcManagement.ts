@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Arc, ArcNickname, Member, Server } from "@/types/types";
 import { useSupabase } from "@/contexts/SupabaseProvider";
-import { useSession } from "next-auth/react";
+import { useSupabaseInitialized } from "@/lib/hooks";
 import {
   createArc,
   saveArcNicknames,
@@ -18,7 +18,6 @@ export const useArcManagement = (
   setMembers: React.Dispatch<React.SetStateAction<Member[]>>
 ) => {
   const { supabase } = useSupabase();
-  const { data: session, status } = useSession();
   const [selectedArc, setSelectedArc] = useState<Arc | null>(null);
   const [isSavingArc, setIsSavingArc] = useState(false);
   const [initialFetchedNicknames, setInitialFetchedNicknames] = useState<
@@ -27,10 +26,7 @@ export const useArcManagement = (
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [newArcName, setNewArcName] = useState("");
 
-  useEffect(() => {
-    if (supabase) {
-    }
-  }, [supabase, session, status]);
+  useSupabaseInitialized();
 
   useEffect(() => {
     if (

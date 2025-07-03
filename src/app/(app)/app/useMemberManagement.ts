@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Member, Nickname, Server } from "@/types/types";
 import { useSupabase } from "@/contexts/SupabaseProvider";
-import { useSession } from "next-auth/react";
+import { useSupabaseInitialized } from "@/lib/hooks";
 import { updateNickname, saveNicknames } from "@/lib/utilities";
 
 export const useMemberManagement = (
@@ -9,14 +9,10 @@ export const useMemberManagement = (
   fetchedMembers: Member[]
 ) => {
   const { supabase } = useSupabase();
-  const { data: session, status } = useSession();
   const [members, setMembers] = useState<Member[]>([]);
   const [isUpdating, setIsUpdating] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    if (supabase) {
-    }
-  }, [supabase, session, status]);
+  useSupabaseInitialized();
 
   useEffect(() => {
     if (fetchedMembers) {
