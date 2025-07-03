@@ -48,11 +48,14 @@ export default function ApplyTool({
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-text-primary">
-            Apply {selectedUserIds.length} nicknames
+            Apply {selectedUserIds.length}{" "}
+            {selectedUserIds.length > 1 ? "nicknames" : "nickname"}
           </DialogTitle>
           <DialogDescription>
-            Are you sure you want to apply the nicknames to{" "}
-            {selectedUserIds.length} members in the server?
+            Are you sure you want to apply the{" "}
+            {selectedUserIds.length > 1 ? "nicknames" : "nickname"} to{" "}
+            {selectedUserIds.length}{" "}
+            {selectedUserIds.length > 1 ? "members" : "member"} in the server?
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -63,7 +66,8 @@ export default function ApplyTool({
               disabled={!selectedServer || selectedUserIds.length === 0}
             >
               <CheckCheck className="w-4 h-4 sm:w-4 md:w-5 md:h-5 2xl:w-6 2xl:h-6 inline-block" />
-              Yes, apply {selectedUserIds.length} nicknames
+              Yes, apply {selectedUserIds.length}{" "}
+              {selectedUserIds.length > 1 ? "nicknames" : "nickname"}
             </Button>
           </DialogClose>
         </DialogFooter>
