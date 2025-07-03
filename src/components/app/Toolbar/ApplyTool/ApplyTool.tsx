@@ -58,7 +58,7 @@ export default function ApplyTool({
               {selectedUserIds.length}{" "}
               {selectedUserIds.length > 1 ? "members" : "member"}{" "}
             </span>
-            in <span className="font-bold">{selectedServer!.name}?</span>
+            in the server?
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
