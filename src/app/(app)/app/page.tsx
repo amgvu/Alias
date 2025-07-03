@@ -19,6 +19,7 @@ import {
   Topbar,
 } from "@/components";
 import { LoaderCircle } from "lucide-react";
+import { signIn } from "next-auth/react";
 
 export default function Dashboard() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -67,6 +68,12 @@ export default function Dashboard() {
     if (status !== "loading") {
       setShowLoading(false);
       setIsLoaded(true);
+    }
+  }, [status]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      signIn("discord");
     }
   }, [status]);
 
