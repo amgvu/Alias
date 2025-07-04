@@ -38,7 +38,8 @@ interface MenubarProps {
   theme: string;
   setTheme: (theme: string) => void;
   loading: boolean;
-  handleGenerateCharacters: (selectedMembers: Member[]) => void;
+  handleGenerate: () => void;
+  randomCategory: () => void;
   selectedUserIds?: string[];
   handleCreateGroup: (
     groupName: string,
@@ -68,7 +69,8 @@ export default function Menubar({
   theme,
   setTheme,
   loading,
-  handleGenerateCharacters,
+  handleGenerate,
+  randomCategory,
   selectedUserIds = [],
   handleCreateGroup,
   arcs,
@@ -119,7 +121,8 @@ export default function Menubar({
             theme={theme}
             setTheme={setTheme}
             loading={loading}
-            handleGenerateCharacters={handleGenerateCharacters}
+            handleGenerate={handleGenerate}
+            randomCategory={randomCategory}
             categoryItems={categoryItems}
           />
         );

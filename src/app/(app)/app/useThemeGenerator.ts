@@ -5,7 +5,8 @@ import { characterGen, getSortedMembers } from "@/lib/utilities";
 
 export const useThemeGenerator = (
   members: Member[],
-  setMembers: (members: Member[]) => void
+  setMembers: (members: Member[]) => void,
+  selectedUserIds: string[]
 ) => {
   const [theme, setTheme] = useState<string>("");
   const [category, setCategory] = useState<string>("Fictional Characters");
@@ -63,6 +64,19 @@ export const useThemeGenerator = (
     }
   };
 
+  const handleGenerate = () => {
+    if (!selectedUserIds || selectedUserIds.length === 0) return;
+    const selectedMembers = members.filter((member) =>
+      selectedUserIds.includes(member.user_id)
+    );
+    handleGenerateCharacters(selectedMembers);
+  };
+
+  const randomCategory = () => {
+    const randomIndex = Math.floor(Math.random() * categoryItems.length);
+    setCategory(categoryItems[randomIndex].id);
+  };
+
   return {
     category,
     categoryItems,
@@ -70,6 +84,8 @@ export const useThemeGenerator = (
     theme,
     setTheme,
     loading,
+    handleGenerate,
+    randomCategory,
     handleGenerateCharacters,
   };
 };

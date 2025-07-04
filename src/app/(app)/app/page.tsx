@@ -51,8 +51,9 @@ export default function Dashboard() {
     theme,
     setTheme,
     loading,
-    handleGenerateCharacters,
-  } = useThemeGenerator(members, setMembers);
+    handleGenerate,
+    randomCategory,
+  } = useThemeGenerator(members, setMembers, selectedUserIds);
 
   const {
     selectedArc,
@@ -119,8 +120,9 @@ export default function Dashboard() {
           setCategory={setCategory}
           theme={theme}
           setTheme={setTheme}
+          handleGenerate={handleGenerate}
+          randomCategory={randomCategory}
           loading={loading}
-          handleGenerateCharacters={handleGenerateCharacters}
           selectedUserIds={selectedUserIds}
           handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
             handleCreateGroup(groupName, selectedMembers)

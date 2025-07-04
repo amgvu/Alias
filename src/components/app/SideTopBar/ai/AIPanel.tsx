@@ -16,7 +16,8 @@ interface AIPanelProps {
   theme: string;
   setTheme: (theme: string) => void;
   loading: boolean;
-  handleGenerateCharacters: (selectedMembers: Member[]) => void;
+  handleGenerate: () => void;
+  randomCategory: () => void;
 }
 
 export default function AIPanel({
@@ -29,24 +30,11 @@ export default function AIPanel({
   theme,
   setTheme,
   loading,
-  handleGenerateCharacters,
+  handleGenerate,
+  randomCategory,
 }: AIPanelProps) {
   const currentCategory =
     categoryItems.find((cat) => cat.id === category) || categoryItems[0];
-
-  const handleGenerate = () => {
-    if (!selectedUserIds || selectedUserIds.length === 0) return;
-    const selectedMembers = members.filter((member) =>
-      selectedUserIds.includes(member.user_id)
-    );
-    handleGenerateCharacters(selectedMembers);
-  };
-
-  const randomCategory = () => {
-    const randomIndex = Math.floor(Math.random() * categoryItems.length);
-    setCategory(categoryItems[randomIndex].id);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
