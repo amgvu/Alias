@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { CirclePlus, Loader2 } from "lucide-react";
@@ -209,7 +208,7 @@ export default function Menubar({
                       </motion.div>
                     ) : (
                       <>
-                        {servers.map((server, index) => (
+                        {servers.map((server) => (
                           <motion.div
                             key={server.id}
                             initial={{ opacity: 0 }}
