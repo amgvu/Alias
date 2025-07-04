@@ -31,17 +31,19 @@ export default function Home() {
                 </TextEffect>
               </div>
             </div>
-            <div className="md:inline-flex">
-              <motion.button
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.5 }}
+              className="md:inline-flex"
+            >
+              <button
                 onClick={handleSignUpClick}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 1.5 }}
                 className="cursor-pointer border border-border-subtle font-medium text-text-primary font-ginto text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-button px-6 py-3 rounded-lg shadow-md hover:bg-button-hover transition duration-300"
               >
                 Join the early access waitlist
-              </motion.button>
-            </div>
+              </button>
+            </motion.div>
           </div>
         </div>
       </main>
