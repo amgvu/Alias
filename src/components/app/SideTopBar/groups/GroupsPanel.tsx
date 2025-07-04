@@ -1,21 +1,29 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Trash2, LoaderCircle, SaveAll } from "lucide-react";
 import { Arc, Server, Member, ArcNickname } from "@/types/types";
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { VirtualizedNicknameList } from "@/components";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { useSupabase } from "@/contexts/SupabaseProvider";
-import { fetchArcs, fetchArcNicknames, deleteArc } from "@/lib/utilities";
-import Image from "next/image";
+
 import { styles } from "./GroupsPanel.styles";
+import { MemberThumbnails } from "./MemberThumbnails";
 
 interface GroupsPanelProps {
   members: Member[];
   selectedServer: Server | null;
   selectedArc: Arc | null;
+  newArcName: string;
+  arcs: Arc[];
+  arcNicknamesMap: Record<number, ArcNickname[]>;
+  removingArcIds: number[];
+  arcMemberCounts: Record<number, number>;
+  isLoading: boolean;
+  setNewArcName: (name: string) => void;
   setSelectedArc: (arc: Arc | null) => void;
+  handleCreateClick: () => Promise<void>;
+  handleDeleteArc: (arcId: number) => Promise<void>;
   handleCreateGroup: (
     groupName: string,
     selectedMembers: Member[]
@@ -23,119 +31,20 @@ interface GroupsPanelProps {
 }
 
 export default function GroupsPanel({
-  members,
-  selectedServer,
   selectedArc,
+  isLoading,
+  newArcName,
+  arcs,
+  arcNicknamesMap,
+  removingArcIds,
+  arcMemberCounts,
+  setNewArcName,
   setSelectedArc,
-  handleCreateGroup,
+  handleDeleteArc,
+  handleCreateClick,
 }: GroupsPanelProps) {
-  const [newArcName, setNewArcName] = useState("");
-  const [arcs, setArcs] = useState<Arc[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [removingArcIds, setRemovingArcIds] = useState<number[]>([]);
-  const [arcNicknamesMap, setArcNicknamesMap] = useState<
-    Record<number, ArcNickname[]>
-  >({});
-  const [arcMemberCounts, setArcMemberCounts] = useState<
-    Record<number, number>
-  >({});
   const [hoveredArc, setHoveredArc] = useState<Arc | null>(null);
-  const { supabase } = useSupabase();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const loadArcsAndNicknames = useCallback(async () => {
-    if (!supabase || !selectedServer) return;
-    setIsLoading(true);
-    try {
-      const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
-      setArcs(fetchedArcs);
-
-      const nicknamesMap: Record<number, ArcNickname[]> = {};
-      const counts: Record<number, number> = {};
-
-      await Promise.all(
-        fetchedArcs.map(async (arc) => {
-          try {
-            const nicknames = await fetchArcNicknames(supabase, arc.id);
-            nicknamesMap[arc.id] = nicknames;
-            counts[arc.id] = nicknames.length;
-          } catch {
-            nicknamesMap[arc.id] = [];
-            counts[arc.id] = 0;
-          }
-        })
-      );
-
-      setArcNicknamesMap(nicknamesMap);
-      setArcMemberCounts(counts);
-    } catch (error) {
-      console.error("Failed to fetch sets:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [supabase, selectedServer]);
-
-  useEffect(() => {
-    setSelectedArc(null);
-    setNewArcName("");
-    setArcs([]);
-    setArcNicknamesMap({});
-    setArcMemberCounts({});
-    loadArcsAndNicknames();
-  }, [selectedServer, setSelectedArc, loadArcsAndNicknames]);
-
-  const handleCreateClick = async () => {
-    if (newArcName.trim() && members.length > 0) {
-      setIsLoading(true);
-      try {
-        await handleCreateGroup(newArcName.trim(), members);
-        await loadArcsAndNicknames();
-        setNewArcName("");
-      } catch {
-        alert("Failed to create group. Please try again.");
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      alert(
-        !newArcName.trim()
-          ? "Please enter a group name."
-          : "Please select members first."
-      );
-    }
-  };
-
-  const handleDeleteArc = async (arcId: number) => {
-    setRemovingArcIds((prev) => [...prev, arcId]);
-    setTimeout(async () => {
-      setArcs((prev) => prev.filter((arc) => arc.id !== arcId));
-      setArcNicknamesMap((prev) => {
-        const newMap = { ...prev };
-        delete newMap[arcId];
-        return newMap;
-      });
-      setArcMemberCounts((prev) => {
-        const newCounts = { ...prev };
-        delete newCounts[arcId];
-        return newCounts;
-      });
-
-      if (!supabase || !selectedServer) {
-        setRemovingArcIds((prev) => prev.filter((id) => id !== arcId));
-        return;
-      }
-
-      try {
-        await deleteArc(supabase, arcId);
-        if (selectedArc?.id === arcId) setSelectedArc(null);
-      } catch {
-        alert("Failed to delete set. Please try again.");
-        await loadArcsAndNicknames();
-      } finally {
-        setRemovingArcIds((prev) => prev.filter((id) => id !== arcId));
-      }
-    }, 200);
-  };
 
   const handleMouseEnter = (arc: Arc) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -152,31 +61,11 @@ export default function GroupsPanel({
     const extra = nicknames.length - maxVisible;
 
     return (
-      <div className={styles.memberThumbnailsWrapper}>
-        {visible.map((n, idx) => (
-          <div
-            key={n.user_id}
-            className="relative"
-            style={{ marginLeft: idx > 0 ? "-8px" : "0" }}
-          >
-            <Image
-              src={n.avatar_url}
-              height={24}
-              width={24}
-              alt={n.user_tag}
-              className="rounded-full border-2 border-card-panel bg-card-panel"
-            />
-          </div>
-        ))}
-        {extra > 0 && (
-          <div
-            className={styles.extraMemberCount}
-            style={{ marginLeft: visible.length > 0 ? "-8px" : "0" }}
-          >
-            +{extra}
-          </div>
-        )}
-      </div>
+      <MemberThumbnails
+        maxVisible={maxVisible}
+        visible={visible}
+        extra={extra}
+      />
     );
   };
 

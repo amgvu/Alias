@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Arc, ArcNickname, Member, Server } from "@/types/types";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { useSupabaseInitialized } from "@/lib/hooks";
@@ -7,6 +6,7 @@ import {
   createArc,
   saveArcNicknames,
   checkExistingArc,
+  deleteArc,
   deleteArcNicknames,
   fetchArcNicknames,
   fetchArcs,
@@ -25,6 +25,14 @@ export const useArcManagement = (
   >({});
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [newArcName, setNewArcName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [removingArcIds, setRemovingArcIds] = useState<number[]>([]);
+  const [arcNicknamesMap, setArcNicknamesMap] = useState<
+    Record<number, ArcNickname[]>
+  >({});
+  const [arcMemberCounts, setArcMemberCounts] = useState<
+    Record<number, number>
+  >({});
 
   useSupabaseInitialized();
 
@@ -152,10 +160,113 @@ export const useArcManagement = (
     }
   };
 
+  const loadArcsAndNicknames = useCallback(async () => {
+    if (!supabase || !selectedServer) return;
+    setIsLoading(true);
+    try {
+      const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
+      setArcs(fetchedArcs);
+
+      const nicknamesMap: Record<number, ArcNickname[]> = {};
+      const counts: Record<number, number> = {};
+
+      await Promise.all(
+        fetchedArcs.map(async (arc) => {
+          try {
+            const nicknames = await fetchArcNicknames(supabase, arc.id);
+            nicknamesMap[arc.id] = nicknames;
+            counts[arc.id] = nicknames.length;
+          } catch {
+            nicknamesMap[arc.id] = [];
+            counts[arc.id] = 0;
+          }
+        })
+      );
+
+      setArcNicknamesMap(nicknamesMap);
+      setArcMemberCounts(counts);
+    } catch (error) {
+      console.error("Failed to fetch sets:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [supabase, selectedServer]);
+
+  useEffect(() => {
+    setSelectedArc(null);
+    setNewArcName("");
+    setArcs([]);
+    setArcNicknamesMap({});
+    setArcMemberCounts({});
+    loadArcsAndNicknames();
+  }, [selectedServer, setSelectedArc, loadArcsAndNicknames]);
+
+  const handleCreateClick = async () => {
+    if (newArcName.trim() && members.length > 0) {
+      setIsLoading(true);
+      try {
+        await handleCreateGroup(newArcName.trim(), members);
+        await loadArcsAndNicknames();
+        setNewArcName("");
+      } catch {
+        alert("Failed to create group. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      alert(
+        !newArcName.trim()
+          ? "Please enter a group name."
+          : "Please select members first."
+      );
+    }
+  };
+
+  const handleDeleteArc = async (arcId: number) => {
+    setRemovingArcIds((prev) => [...prev, arcId]);
+    setTimeout(async () => {
+      setArcs((prev) => prev.filter((arc) => arc.id !== arcId));
+      setArcNicknamesMap((prev) => {
+        const newMap = { ...prev };
+        delete newMap[arcId];
+        return newMap;
+      });
+      setArcMemberCounts((prev) => {
+        const newCounts = { ...prev };
+        delete newCounts[arcId];
+        return newCounts;
+      });
+
+      if (!supabase || !selectedServer) {
+        setRemovingArcIds((prev) => prev.filter((id) => id !== arcId));
+        return;
+      }
+
+      try {
+        await deleteArc(supabase, arcId);
+        if (selectedArc?.id === arcId) setSelectedArc(null);
+      } catch {
+        alert("Failed to delete set. Please try again.");
+        await loadArcsAndNicknames();
+      } finally {
+        setRemovingArcIds((prev) => prev.filter((id) => id !== arcId));
+      }
+    }, 200);
+  };
+
   return {
     selectedArc,
-    setSelectedArc,
+    arcs,
+    newArcName,
+    arcNicknamesMap,
+    removingArcIds,
+    arcMemberCounts,
+    isLoading,
     isSavingArc,
+    setSelectedArc,
+    setNewArcName,
+    handleCreateClick,
+    handleDeleteArc,
     handleCreateGroup,
   };
 };

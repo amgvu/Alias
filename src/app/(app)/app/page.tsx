@@ -54,11 +54,20 @@ export default function Dashboard() {
     handleGenerateCharacters,
   } = useThemeGenerator(members, setMembers);
 
-  const { selectedArc, setSelectedArc, handleCreateGroup } = useArcManagement(
-    selectedServer,
-    members,
-    setMembers
-  );
+  const {
+    selectedArc,
+    setSelectedArc,
+    handleCreateGroup,
+    arcs,
+    newArcName,
+    setNewArcName,
+    arcNicknamesMap,
+    removingArcIds,
+    arcMemberCounts,
+    isLoading: arcLoading,
+    handleCreateClick,
+    handleDeleteArc,
+  } = useArcManagement(selectedServer, members, setMembers);
 
   useEffect(() => {
     setShowCheckboxes(false);
@@ -116,6 +125,15 @@ export default function Dashboard() {
           handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
             handleCreateGroup(groupName, selectedMembers)
           }
+          arcs={arcs}
+          newArcName={newArcName}
+          setNewArcName={setNewArcName}
+          arcNicknamesMap={arcNicknamesMap}
+          removingArcIds={removingArcIds}
+          arcMemberCounts={arcMemberCounts}
+          isLoading={arcLoading}
+          handleCreateClick={handleCreateClick}
+          handleDeleteArc={handleDeleteArc}
         />
       }
       topbar={<Topbar selectedServer={selectedServer} />}

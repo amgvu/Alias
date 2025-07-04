@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { CirclePlus, Loader2 } from "lucide-react";
 import { toolsItems } from "@/lib/data/tools-items";
-import { Member, Arc, Server, Category } from "@/types/types";
+import { Member, Arc, ArcNickname, Server, Category } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
 import Image from "next/image";
 import AIPanel from "./ai/AIPanel";
@@ -30,6 +30,8 @@ interface MenubarProps {
   handleServerSelection: (server: Server) => void;
   selectedArc: Arc | null;
   setSelectedArc: (arc: Arc | null) => void;
+  newArcName: string;
+  setNewArcName: (name: string) => void;
   members: Member[];
   category: string;
   categoryItems: Category[];
@@ -43,6 +45,13 @@ interface MenubarProps {
     groupName: string,
     selectedMembers: Member[]
   ) => Promise<void>;
+  arcs: Arc[];
+  arcNicknamesMap: Record<number, ArcNickname[]>;
+  removingArcIds: number[];
+  arcMemberCounts: Record<number, number>;
+  isLoading: boolean;
+  handleCreateClick: () => Promise<void>;
+  handleDeleteArc: (arcId: number) => Promise<void>;
 }
 
 export default function Menubar({
@@ -51,6 +60,8 @@ export default function Menubar({
   handleServerSelection,
   selectedArc,
   setSelectedArc,
+  newArcName,
+  setNewArcName,
   members,
   category,
   categoryItems,
@@ -61,6 +72,13 @@ export default function Menubar({
   handleGenerateCharacters,
   selectedUserIds = [],
   handleCreateGroup,
+  arcs,
+  arcNicknamesMap,
+  removingArcIds,
+  arcMemberCounts,
+  isLoading,
+  handleCreateClick,
+  handleDeleteArc,
 }: MenubarProps) {
   const [activeTool, setActiveTool] = useState<string>("Groups");
 
@@ -75,8 +93,17 @@ export default function Menubar({
           <GroupsPanel
             selectedServer={selectedServer}
             selectedArc={selectedArc}
+            newArcName={newArcName}
+            arcs={arcs}
+            arcNicknamesMap={arcNicknamesMap}
+            removingArcIds={removingArcIds}
+            arcMemberCounts={arcMemberCounts}
+            isLoading={isLoading}
+            setNewArcName={setNewArcName}
             setSelectedArc={setSelectedArc}
             members={members}
+            handleCreateClick={handleCreateClick}
+            handleDeleteArc={handleDeleteArc}
             handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
               handleCreateGroup(groupName, selectedMembers)
             }
