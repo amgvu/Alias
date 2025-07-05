@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Member } from "@/types/types";
 import { categoryItems } from "@/lib/data";
 import { characterGen, getSortedMembers } from "@/lib/utilities";
+import { toast } from "sonner";
 
 export const useThemeGenerator = (
   members: Member[],
@@ -16,12 +17,12 @@ export const useThemeGenerator = (
 
   const handleGenerateCharacters = async (selectedMembers: Member[]) => {
     if (!selectedMembers || selectedMembers.length === 0) {
-      alert("No members selected.");
+      toast("No members selected.");
       return;
     }
 
     if (!theme.trim()) {
-      alert("Please enter a theme.");
+      toast("Please enter a theme.");
       return;
     }
 
@@ -58,7 +59,7 @@ export const useThemeGenerator = (
       setMembers(updatedMembers);
     } catch (error) {
       console.error("Failed to generate themes:", error);
-      alert("Failed to generate themes. Please try again.");
+      toast("Failed to generate themes. Please try again.");
     } finally {
       setLoading(false);
     }
