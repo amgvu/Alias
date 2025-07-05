@@ -3,15 +3,16 @@ import { CheckCheck } from "lucide-react";
 import { Member } from "@/types/types";
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogFooter,
-  DialogClose,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface ApplyToolProps {
   members: Member[];
@@ -35,8 +36,8 @@ export default function ApplyTool({
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
         <Button
           className="p-2 bg-button ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-text-primary hover:bg-button-hover"
           disabled={!selectedServer || selectedUserIds.length === 0}
@@ -44,14 +45,14 @@ export default function ApplyTool({
           <CheckCheck className="w-4 h-4 sm:w-4 md:w-5 md:h-5 2xl:w-6 2xl:h-6 inline-block" />
           Apply
         </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="text-text-primary">
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-text-primary">
             Apply {selectedUserIds.length}{" "}
             {selectedUserIds.length > 1 ? "nicknames" : "nickname"}
-          </DialogTitle>
-          <DialogDescription className="text-text-secondary">
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-text-secondary">
             Are you sure you want to apply the{" "}
             {selectedUserIds.length > 1 ? "nicknames" : "nickname"} to{" "}
             <span className="font-bold">
@@ -59,22 +60,25 @@ export default function ApplyTool({
               {selectedUserIds.length > 1 ? "members" : "member"}{" "}
             </span>
             in the server?
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <DialogClose asChild>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel className="p-2 hover:text-text-primary bg-button ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-text-primary hover:bg-button-hover">
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction asChild>
             <Button
               onClick={handleApply}
-              className="p-2 bg-button ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-text-primary hover:bg-button-hover"
+              className="p-2 bg-zinc-200 ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-zinc-950 hover:bg-zinc-300"
               disabled={!selectedServer || selectedUserIds.length === 0}
             >
               <CheckCheck className="w-4 h-4 sm:w-4 md:w-5 md:h-5 2xl:w-6 2xl:h-6 inline-block" />
               Yes, apply {selectedUserIds.length}{" "}
               {selectedUserIds.length > 1 ? "nicknames" : "nickname"}
             </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
