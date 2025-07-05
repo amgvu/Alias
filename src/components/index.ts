@@ -1,4 +1,3 @@
-export { default as Menu } from "./ui/Menu/Menu";
 export { default as UserList } from "./ui/UserList/UserList";
 export { default as UserListCard } from "./ui/UserListCard/UserListCard";
 
