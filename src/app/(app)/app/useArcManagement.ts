@@ -152,7 +152,7 @@ export const useArcManagement = (
       setNewArcName("");
     } catch (error) {
       console.error("Failed to create/update group:", error);
-      alert("Failed to create group. Please try again.");
+      toast("Failed to create group. Please try again.");
     } finally {
       setIsSavingArc(false);
     }
@@ -207,12 +207,12 @@ export const useArcManagement = (
         await loadArcsAndNicknames();
         setNewArcName("");
       } catch {
-        alert("Failed to create group. Please try again.");
+        toast("Failed to create group. Please try again.");
       } finally {
         setIsLoading(false);
       }
     } else {
-      alert(
+      toast(
         !newArcName.trim()
           ? "Please enter a group name."
           : "Please select members first."
@@ -244,7 +244,7 @@ export const useArcManagement = (
         await deleteArc(supabase, arcId);
         if (selectedArc?.id === arcId) setSelectedArc(null);
       } catch {
-        alert("Failed to delete set. Please try again.");
+        toast("Failed to delete set. Please try again.");
         await loadArcsAndNicknames();
       } finally {
         setRemovingArcIds((prev) => prev.filter((id) => id !== arcId));
