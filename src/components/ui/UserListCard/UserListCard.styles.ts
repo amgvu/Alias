@@ -5,9 +5,9 @@ export const styles = {
 
   dragOverlay: {
     container:
-      "bg-zinc-900/10 backdrop-blur-lg w-128 -translate-x-64 rounded-lg shadow-xl border-2 border-dashed border-blue-400 text-left flex flex-col justify-center h-12",
-    text: "text-lg sm:text-base md:text-lg lg:text-[18px] xl:text-[19px] 2xl:text-[20px] ml-2 text-center font-semibold text-white mb-1 flex items-center justify-center",
-    icon: "inline-block mt-0.5 text-blue-400 mr-2",
+      "bg-zinc-900/10 backdrop-blur-lg -translate-x-128 w-full rounded-lg shadow-xl border-2 border-dashed border-blue-400 flex items-center justify-center h-12",
+    text: "text-lg sm:text-base md:text-lg lg:text-[18px] xl:text-[19px] 2xl:text-[20px] text-center font-semibold text-white flex items-center justify-center",
+    icon: "text-blue-400 mr-2",
   },
 
   dropTarget: {

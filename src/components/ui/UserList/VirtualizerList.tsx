@@ -234,14 +234,16 @@ export default function VirtualizerList({
 
       <DragOverlay>
         {activeId && activeMember && draggedData ? (
-          <UserListCard
-            member={activeMember}
-            selectedServer={selectedServer}
-            isUpdating={new Set()}
-            isDragOverlay={true}
-            onUpdateNicknameLocally={() => {}}
-            onApplyNickname={() => {}}
-          />
+          <div style={{ width: "1000px" }}>
+            <UserListCard
+              member={activeMember}
+              selectedServer={selectedServer}
+              isUpdating={new Set()}
+              isDragOverlay={true}
+              onUpdateNicknameLocally={() => {}}
+              onApplyNickname={() => {}}
+            />
+          </div>
         ) : null}
       </DragOverlay>
     </DndContext>
