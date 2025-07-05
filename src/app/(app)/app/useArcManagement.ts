@@ -11,6 +11,7 @@ import {
   fetchArcNicknames,
   fetchArcs,
 } from "@/lib/utilities";
+import { toast } from "sonner";
 
 export const useArcManagement = (
   selectedServer: Server | null,
@@ -86,22 +87,19 @@ export const useArcManagement = (
     selectedMembers: Member[]
   ) => {
     if (!supabase) {
-      alert("Database connection not available. Please try again.");
+      toast("Database connection not available. Please try again.");
       return;
     }
-
     if (!selectedServer) {
-      alert("Please select a server first.");
+      toast("Please select a server first.");
       return;
     }
-
     if (!groupName.trim()) {
-      alert("Please enter a group name.");
+      toast("Please enter a group name.");
       return;
     }
-
     if (selectedMembers.length === 0) {
-      alert("Please select at least one member for the group.");
+      toast("Please select at least one member for the group.");
       return;
     }
 

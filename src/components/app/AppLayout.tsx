@@ -1,4 +1,5 @@
 import { TitleUpdater } from "@/components";
+import { Toaster } from "../ui/sonner";
 interface AppLayoutProps {
   sidebar: React.ReactNode;
   topbar: React.ReactNode;
@@ -20,6 +21,7 @@ export default function AppLayout({
         <div className="flex-shrink-0 z-5">{sidebar}</div>
         <div>{topbar}</div>
         <div className="flex flex-col flex-1 ml-10">{servercontent}</div>
+        <Toaster />
       </div>
     </div>
   );
