@@ -92,8 +92,11 @@ const handler = NextAuth({
       return refreshDiscordAccessToken(token);
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken as string;
+      if (token.error === "RefreshAccessTokenError" || !token.accessToken) {
+        throw new Error("TokenExpired");
+      }
 
+      session.accessToken = token.accessToken as string;
       session.user.id = token.sub as string;
       session.user.discordId = token.id as string;
 
