@@ -14,7 +14,6 @@ export const useServers = () => {
       if (session?.accessToken && session.user?.discordId) {
         const cachedServers = localStorage.getItem("cachedServers");
         const cachedTimestamp = localStorage.getItem("serversTimestamp");
-        console.log("Trying server cache");
         const pageLoadTimestamp = sessionStorage.getItem("pageLoadTimestamp");
         const isCacheValid =
           cachedServers &&
