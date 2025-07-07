@@ -6,6 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { VirtualizedNicknameList } from "@/components";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 import { styles } from "./GroupsPanel.styles";
 import { MemberThumbnails } from "./MemberThumbnails";
@@ -20,8 +30,24 @@ interface GroupsPanelProps {
   removingArcIds: number[];
   arcMemberCounts: Record<number, number>;
   isLoading: boolean;
+  alertDialog: {
+    isOpen: boolean;
+    title: string;
+    description: string;
+    onConfirm: () => void;
+    onCancel?: () => void;
+  };
   setNewArcName: (name: string) => void;
   setSelectedArc: (arc: Arc | null) => void;
+  setAlertDialog: React.Dispatch<
+    React.SetStateAction<{
+      isOpen: boolean;
+      title: string;
+      description: string;
+      onConfirm: () => void;
+      onCancel?: () => void;
+    }>
+  >;
   handleCreateClick: () => Promise<void>;
   handleDeleteArc: (arcId: number) => Promise<void>;
   handleCreateGroup: (
@@ -38,8 +64,10 @@ export default function GroupsPanel({
   arcNicknamesMap,
   removingArcIds,
   arcMemberCounts,
+  alertDialog,
   setNewArcName,
   setSelectedArc,
+  setAlertDialog,
   handleDeleteArc,
   handleCreateClick,
 }: GroupsPanelProps) {
@@ -217,6 +245,46 @@ export default function GroupsPanel({
           </div>
         </div>
       </div>
+
+      <AlertDialog
+        open={alertDialog.isOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            setAlertDialog((prev) => ({ ...prev, isOpen: false }));
+            if (alertDialog.onCancel) {
+              alertDialog.onCancel();
+            }
+          }
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{alertDialog.title}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {alertDialog.description}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              className="p-2 hover:text-text-primary bg-button ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-text-primary hover:bg-button-hover"
+              onClick={() => {
+                setAlertDialog((prev) => ({ ...prev, isOpen: false }));
+                if (alertDialog.onCancel) {
+                  alertDialog.onCancel();
+                }
+              }}
+            >
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              className="p-2 bg-zinc-200 ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-zinc-950 hover:bg-zinc-300"
+              onClick={alertDialog.onConfirm}
+            >
+              Overwrite
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </motion.div>
   );
 }

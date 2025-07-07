@@ -61,6 +61,8 @@ export default function Dashboard() {
     handleCreateGroup,
     arcs,
     newArcName,
+    alertDialog,
+    setAlertDialog,
     setNewArcName,
     arcNicknamesMap,
     removingArcIds,
@@ -136,6 +138,8 @@ export default function Dashboard() {
           isLoading={arcLoading}
           handleCreateClick={handleCreateClick}
           handleDeleteArc={handleDeleteArc}
+          alertDialog={alertDialog}
+          setAlertDialog={setAlertDialog}
         />
       }
       topbar={<Topbar selectedServer={selectedServer} />}

@@ -45,6 +45,22 @@ interface MenubarProps {
     groupName: string,
     selectedMembers: Member[]
   ) => Promise<void>;
+  alertDialog: {
+    isOpen: boolean;
+    title: string;
+    description: string;
+    onConfirm: () => void;
+    onCancel?: () => void;
+  };
+  setAlertDialog: React.Dispatch<
+    React.SetStateAction<{
+      isOpen: boolean;
+      title: string;
+      description: string;
+      onConfirm: () => void;
+      onCancel?: () => void;
+    }>
+  >;
   arcs: Arc[];
   arcNicknamesMap: Record<number, ArcNickname[]>;
   removingArcIds: number[];
@@ -62,6 +78,8 @@ export default function Menubar({
   setSelectedArc,
   newArcName,
   setNewArcName,
+  alertDialog,
+  setAlertDialog,
   members,
   category,
   categoryItems,
@@ -108,6 +126,8 @@ export default function Menubar({
             handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
               handleCreateGroup(groupName, selectedMembers)
             }
+            alertDialog={alertDialog}
+            setAlertDialog={setAlertDialog}
           />
         );
       case "Themes":

@@ -35,6 +35,20 @@ export const useArcManagement = (
     Record<number, number>
   >({});
 
+  const [alertDialog, setAlertDialog] = useState<{
+    isOpen: boolean;
+    title: string;
+    description: string;
+    onConfirm: () => void;
+    onCancel?: () => void;
+  }>({
+    isOpen: false,
+    title: "",
+    description: "",
+    onConfirm: () => {},
+    onCancel: undefined,
+  });
+
   useSupabaseInitialized();
 
   useEffect(() => {
@@ -82,6 +96,34 @@ export const useArcManagement = (
     loadArcNicknames();
   }, [selectedArc, setMembers, supabase, initialFetchedNicknames]);
 
+  const continueGroupCreation = async (
+    targetArc: Arc,
+    groupName: string,
+    selectedMembers: Member[]
+  ) => {
+    try {
+      const newNicknames: ArcNickname[] = selectedMembers.map((member) => ({
+        arc_id: targetArc.id!,
+        guild_id: selectedServer!.id,
+        user_id: member.user_id,
+        nickname: member.nickname,
+        user_tag: member.userTag || member.username,
+        avatar_url: member.avatar_url || "",
+      }));
+
+      await saveArcNicknames(supabase!, newNicknames);
+      setSelectedArc(targetArc);
+      const fetchedArcs = await fetchArcs(supabase!, selectedServer!.id);
+      setArcs(fetchedArcs);
+      setNewArcName("");
+      toast("Group created successfully!");
+    } catch (error) {
+      console.error("Failed to save group:", error);
+      toast("Failed to save group. Please try again.");
+      throw error;
+    }
+  };
+
   const handleCreateGroup = async (
     groupName: string,
     selectedMembers: Member[]
@@ -115,41 +157,41 @@ export const useArcManagement = (
       let targetArc: Arc;
 
       if (existingArc) {
-        const confirmOverwrite = window.confirm(
-          "A group with this name already exists. Do you want to overwrite it with the new members?"
-        );
-
-        if (!confirmOverwrite) {
-          return;
-        }
-
-        await deleteArcNicknames(supabase, existingArc.id);
-        targetArc = existingArc;
+        setAlertDialog({
+          isOpen: true,
+          title: "Group Already Exists",
+          description:
+            "A group with this name already exists. Do you want to overwrite it with the new members?",
+          onConfirm: async () => {
+            try {
+              await deleteArcNicknames(supabase, existingArc.id);
+              await continueGroupCreation(
+                existingArc,
+                groupName,
+                selectedMembers
+              );
+            } catch (error) {
+              console.error("Failed to overwrite group:", error);
+              toast("Failed to overwrite group. Please try again.");
+            } finally {
+              setIsSavingArc(false);
+            }
+            setAlertDialog((prev) => ({ ...prev, isOpen: false }));
+          },
+          onCancel: () => {
+            setAlertDialog((prev) => ({ ...prev, isOpen: false }));
+            setIsSavingArc(false);
+          },
+        });
+        return;
       } else {
         targetArc = await createArc(
           supabase,
           selectedServer.id,
           groupName.trim()
         );
+        await continueGroupCreation(targetArc, groupName, selectedMembers);
       }
-
-      const newNicknames: ArcNickname[] = selectedMembers.map((member) => ({
-        arc_id: targetArc.id!,
-        guild_id: selectedServer.id,
-        user_id: member.user_id,
-        nickname: member.nickname,
-        user_tag: member.userTag || member.username,
-        avatar_url: member.avatar_url || "",
-      }));
-
-      await saveArcNicknames(supabase, newNicknames);
-
-      setSelectedArc(targetArc);
-
-      const fetchedArcs = await fetchArcs(supabase, selectedServer.id);
-      setArcs(fetchedArcs);
-
-      setNewArcName("");
     } catch (error) {
       console.error("Failed to create/update group:", error);
       toast("Failed to create group. Please try again.");
@@ -261,8 +303,10 @@ export const useArcManagement = (
     arcMemberCounts,
     isLoading,
     isSavingArc,
+    alertDialog,
     setSelectedArc,
     setNewArcName,
+    setAlertDialog,
     handleCreateClick,
     handleDeleteArc,
     handleCreateGroup,
