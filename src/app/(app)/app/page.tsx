@@ -53,6 +53,7 @@ export default function Dashboard() {
     loading,
     handleGenerate,
     randomCategory,
+    randomPrompt,
   } = useThemeGenerator(members, setMembers, selectedUserIds);
 
   const {
@@ -124,6 +125,7 @@ export default function Dashboard() {
           setTheme={setTheme}
           handleGenerate={handleGenerate}
           randomCategory={randomCategory}
+          randomPrompt={randomPrompt}
           loading={loading}
           selectedUserIds={selectedUserIds}
           handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>

@@ -61,3 +61,7 @@ export interface Category {
   enabledBorderColor: string;
   disabledBorderColor: string;
 }
+
+export interface CategoryRandomPrompts {
+  [categoryId: string]: string[];
+}

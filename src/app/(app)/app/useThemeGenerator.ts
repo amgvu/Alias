@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Member } from "@/types/types";
-import { categoryItems } from "@/lib/data";
+import { categoryItems, randomPrompts } from "@/lib/data";
 import { characterGen, getSortedMembers } from "@/lib/utilities";
 import { toast } from "sonner";
 
@@ -10,7 +10,7 @@ export const useThemeGenerator = (
   selectedUserIds: string[]
 ) => {
   const [theme, setTheme] = useState<string>("");
-  const [category, setCategory] = useState<string>("Fictional Characters");
+  const [category, setCategory] = useState<string>("fictional-characters");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [generatedThemes, setGeneratedThemes] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -59,7 +59,9 @@ export const useThemeGenerator = (
       setMembers(updatedMembers);
     } catch (error) {
       console.error("Failed to generate themes:", error);
-      toast("Failed to generate themes. Please try again.");
+      toast(
+        "The model is currently overloaded, please wait a few seconds before trying again."
+      );
     } finally {
       setLoading(false);
     }
@@ -73,10 +75,22 @@ export const useThemeGenerator = (
     handleGenerateCharacters(selectedMembers);
   };
 
-  const randomCategory = () => {
+  const randomCategory = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * categoryItems.length);
     setCategory(categoryItems[randomIndex].id);
-  };
+    setTheme("");
+  }, []);
+
+  const randomPrompt = useCallback((currentCategoryId: string) => {
+    const prompts = randomPrompts[currentCategoryId];
+    if (prompts && prompts.length > 0) {
+      const randomIndex = Math.floor(Math.random() * prompts.length);
+      setTheme(prompts[randomIndex]);
+    } else {
+      setTheme("");
+      toast("No random themes available for this category.");
+    }
+  }, []);
 
   return {
     category,
@@ -87,6 +101,7 @@ export const useThemeGenerator = (
     loading,
     handleGenerate,
     randomCategory,
+    randomPrompt,
     handleGenerateCharacters,
   };
 };

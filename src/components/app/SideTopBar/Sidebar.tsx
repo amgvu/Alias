@@ -40,6 +40,7 @@ interface MenubarProps {
   loading: boolean;
   handleGenerate: () => void;
   randomCategory: () => void;
+  randomPrompt: (categoryId: string) => void;
   selectedUserIds?: string[];
   handleCreateGroup: (
     groupName: string,
@@ -89,6 +90,7 @@ export default function Menubar({
   loading,
   handleGenerate,
   randomCategory,
+  randomPrompt,
   selectedUserIds = [],
   handleCreateGroup,
   arcs,
@@ -144,6 +146,7 @@ export default function Menubar({
             handleGenerate={handleGenerate}
             randomCategory={randomCategory}
             categoryItems={categoryItems}
+            randomPrompt={randomPrompt}
           />
         );
       default:

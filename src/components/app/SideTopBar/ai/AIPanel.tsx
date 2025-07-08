@@ -18,6 +18,7 @@ interface AIPanelProps {
   loading: boolean;
   handleGenerate: () => void;
   randomCategory: () => void;
+  randomPrompt: (categoryId: string) => void;
 }
 
 export default function AIPanel({
@@ -32,9 +33,11 @@ export default function AIPanel({
   loading,
   handleGenerate,
   randomCategory,
+  randomPrompt,
 }: AIPanelProps) {
   const currentCategory =
     categoryItems.find((cat) => cat.id === category) || categoryItems[0];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -74,7 +77,9 @@ export default function AIPanel({
                           : `${cat.disabledColor} border ${cat.disabledBorderColor} text-zinc-900 hover:text-zinc-700 ${cat.disabledHoverColor}`
                       }`}
                     >
-                      <Icon className={styles.iconSmall} />
+                      {React.createElement(Icon, {
+                        className: styles.iconSmall,
+                      })}
                       {cat.name}
                     </button>
                   );
@@ -116,7 +121,16 @@ export default function AIPanel({
             </AnimatePresence>
 
             <div>
-              <label className={styles.inputLabel}>Specific Theme</label>
+              <div className="flex items-center justify-between">
+                <label className={styles.inputLabel}>Specific Theme</label>
+                <button
+                  onClick={() => randomPrompt(currentCategory.id)}
+                  className={styles.randomButton}
+                >
+                  <Shuffle className={styles.iconSmall} />
+                  Random
+                </button>
+              </div>
               <Input
                 className={styles.input}
                 maxLength={50}
