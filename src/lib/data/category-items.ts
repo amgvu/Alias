@@ -1,4 +1,4 @@
-import { Globe, Package, Users, MapPin, Brain } from "lucide-react";
+import { Globe, Package, Users, MapPin, Brain, Zap, Radio } from "lucide-react";
 import { Category } from "@/types/types";
 
 export const categoryItems: Category[] = [
@@ -40,6 +40,32 @@ export const categoryItems: Category[] = [
     enabledHoverColor: "hover:bg-yellow-200",
     enabledBorderColor: "border-yellow-200",
     disabledBorderColor: "border-yellow-400",
+  },
+  {
+    id: "products-and-brands",
+    name: "Products and Brands",
+    icon: Zap,
+    description: "Commercial products, brands, and consumer goods",
+    examples: ["Gaming Mice", "Cleaning Products", "Designer Fashion"],
+    color: "bg-orange-300",
+    disabledColor: "bg-orange-400",
+    disabledHoverColor: "hover:bg-orange-300",
+    enabledHoverColor: "hover:bg-orange-200",
+    enabledBorderColor: "border-orange-200",
+    disabledBorderColor: "border-orange-400",
+  },
+  {
+    id: "media-and-content",
+    name: "Media and Content",
+    icon: Radio,
+    description: "Movies, TV shows, podcasts, music, and general content",
+    examples: ["Podcasts", "Martin Scorsese Movies", "Techno Records"],
+    color: "bg-red-300",
+    disabledColor: "bg-red-400",
+    disabledHoverColor: "hover:bg-red-300",
+    enabledHoverColor: "hover:bg-red-200",
+    enabledBorderColor: "border-red-200",
+    disabledBorderColor: "border-red-400",
   },
   {
     id: "places",
