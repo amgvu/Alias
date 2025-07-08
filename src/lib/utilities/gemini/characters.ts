@@ -46,12 +46,13 @@ export const characterGen = async (
     ordered from most to least popular. For the purposes of this list, "popularity" should
     be determined by a combination of factors, including frequency of online mentions, fan
     sentiment (positive or negative), critical acclaim, and relevance to the core themes of
-    "${theme}". Return ONLY a JSON array of ${category} names, with no other text or explanations.
+    "${theme}". **However, the maximum number of ${category} names returned must not exceed 100.**
+    Return ONLY a JSON array of ${category} names, with no other text or explanations.
     The JSON array should be formatted as follows: ["${category} 1", "${category} 2", "${category} 3", ...].
     ${category} 1 should be the most popular, ${category} 2 the second most, and so on. If fewer than
     ${numMembers} relevant ${category} exist, return ALL that you can find. Please omit any explanations,
     disclaimers, or unnecessary text. **Ensure that each ${category} name does not exceed 32 characters,
-    including spaces.`;
+    including spaces.**`;
 
   try {
     const result = await model.generateContent(prompt);
