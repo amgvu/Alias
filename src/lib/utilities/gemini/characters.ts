@@ -19,14 +19,14 @@ export const characterGen = async (
   const genAI = new GoogleGenerativeAI(apiKey);
 
   const schema = {
-    description: `List of popular characters related to a given theme from most to least popular.`,
+    description: `List of popular entities related to a given theme from most to least popular.`,
     type: SchemaType.ARRAY,
     items: {
       type: SchemaType.OBJECT,
       properties: {
         name: {
           type: SchemaType.STRING,
-          description: "Name of the character",
+          description: "Name of the entity/item",
           nullable: false,
         },
       },
