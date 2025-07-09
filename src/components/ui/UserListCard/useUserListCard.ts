@@ -7,9 +7,6 @@ import { useSupabase } from "@/contexts/SupabaseProvider";
 interface UseUserListCardProps {
   member: Member;
   selectedServer: string;
-  isUpdating: Set<string>;
-  isDragOverlay?: boolean;
-  draggedNickname?: string;
   onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
 }

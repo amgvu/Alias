@@ -39,7 +39,6 @@ export default function UserListCard({
     handleExpansionToggle,
     handleImageError,
   } = useUserListCard({
-    isUpdating,
     member,
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,
@@ -126,7 +125,6 @@ export default function UserListCard({
 
         <ActionButtons
           member={member}
-          isUpdating={isUpdating}
           selectedServer={selectedServer}
           showOverlay={showOverlay}
           onUpdateNicknameLocally={onUpdateNicknameLocally}
@@ -142,7 +140,6 @@ export default function UserListCard({
         {isExpanded && (
           <NicknamesList
             member={member}
-            isUpdating={isUpdating}
             selectedServer={selectedServer}
             onUpdateNicknameLocally={onUpdateNicknameLocally}
             onApplyNickname={onApplyNickname}

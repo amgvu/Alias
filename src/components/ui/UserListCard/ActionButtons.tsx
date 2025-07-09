@@ -12,7 +12,6 @@ import {
 
 interface ActionButtonsProps {
   member: Member;
-  isUpdating: Set<string>;
   selectedServer: Server | null;
   showOverlay: boolean;
   onUpdateNicknameLocally: (nickname: string) => void;
@@ -21,7 +20,6 @@ interface ActionButtonsProps {
 
 export function ActionButtons({
   member,
-  isUpdating,
   selectedServer,
   showOverlay,
   onUpdateNicknameLocally,
@@ -34,7 +32,6 @@ export function ActionButtons({
     handleRevert,
     handleApplyNickname,
   } = useUserListCard({
-    isUpdating,
     member,
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,

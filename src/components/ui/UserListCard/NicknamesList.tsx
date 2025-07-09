@@ -15,7 +15,6 @@ interface NicknamesListProps {
 
 export function NicknamesList({
   member,
-  isUpdating,
   selectedServer,
   onUpdateNicknameLocally,
   onApplyNickname,
@@ -30,7 +29,6 @@ export function NicknamesList({
     handleNicknameSelect: localHandleNicknameSelect,
     handleNicknameDeleteWithDelay,
   } = useUserListCard({
-    isUpdating,
     member,
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,
