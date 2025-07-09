@@ -5,7 +5,7 @@ interface ServerContentProps {
   selectedServer: Server | null;
   serversError: string | null;
   membersError: string | null;
-  members: Member[];
+  fetchedMembers: Member[];
   isUpdating: Set<string>;
   onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: (
@@ -14,7 +14,7 @@ interface ServerContentProps {
     globalName: string
   ) => void;
   onUpdateSelectedNicknames: (selectedMembers: Member[]) => void;
-  onSelectionChange?: (selectedIds: string[]) => void;
+  onSelectedUserIds?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
   selectedUserIds: string[];
   setShowCheckboxes: (show: boolean) => void;
@@ -25,12 +25,12 @@ export default function ServerContent({
   selectedServer,
   serversError,
   membersError,
-  members,
+  fetchedMembers,
   isUpdating,
   onUpdateNicknameLocally,
   onApplyNickname,
   onUpdateSelectedNicknames,
-  onSelectionChange,
+  onSelectedUserIds,
   showCheckboxes,
   selectedUserIds,
   setShowCheckboxes,
@@ -49,7 +49,7 @@ export default function ServerContent({
               selectedServer={selectedServer}
               showCheckboxes={showCheckboxes}
               setShowCheckboxes={setShowCheckboxes}
-              members={members}
+              members={fetchedMembers}
               onUpdateSelectedNicknames={onUpdateSelectedNicknames}
               selectedUserIds={selectedUserIds}
             />
@@ -61,11 +61,11 @@ export default function ServerContent({
               <div className="ml-34 mt-24 mr-4">
                 <UserList
                   selectedServer={selectedServer}
-                  members={members}
+                  fetchedMembers={fetchedMembers}
                   isUpdating={isUpdating}
                   onUpdateNicknameLocally={onUpdateNicknameLocally}
                   onApplyNickname={onApplyNickname}
-                  onSelectionChange={onSelectionChange}
+                  onSelectedUserIds={onSelectedUserIds}
                   showCheckboxes={showCheckboxes}
                 />
               </div>

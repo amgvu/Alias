@@ -27,7 +27,7 @@ interface VirtualizerListProps {
   isUpdating: Set<string>;
   selectedServer: Server | null;
   showCheckboxes: boolean;
-  selectedUserIds: Set<string>;
+  selectedUserIdSets: Set<string>;
   onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: (
     userId: string,
@@ -50,7 +50,7 @@ export default function VirtualizerList({
   isUpdating,
   selectedServer,
   showCheckboxes,
-  selectedUserIds,
+  selectedUserIdSets,
   onUpdateNicknameLocally,
   onApplyNickname,
   onCheckboxToggle,
@@ -214,7 +214,7 @@ export default function VirtualizerList({
                     member={item.member}
                     memberIndex={item.memberIndex!}
                     originalIndex={item.originalIndex!}
-                    isSelected={selectedUserIds.has(item.member.user_id)}
+                    isSelected={selectedUserIdSets.has(item.member.user_id)}
                     showCheckboxes={showCheckboxes}
                     isUpdating={isUpdating}
                     selectedServer={selectedServer}

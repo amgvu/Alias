@@ -9,6 +9,7 @@ import {
   useMemberManagement,
   useThemeGenerator,
   useArcManagement,
+  useCheckboxSelection,
   useAuth,
 } from "@/lib/hooks";
 import {
@@ -24,11 +25,12 @@ import { signIn } from "next-auth/react";
 export default function Dashboard() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
-  const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
-  const [showCheckboxes, setShowCheckboxes] = useState(false);
+
   const { session, status } = useAuth();
+
   const { servers, serversError, selectedServer, handleServerSelection } =
     useServers();
+
   const { members: fetchedMembers, error: membersError } = useMembers(
     selectedServer?.id ?? ""
   );
@@ -41,6 +43,13 @@ export default function Dashboard() {
     setMembers,
     handleUpdateSelectedNicknames,
   } = useMemberManagement(selectedServer, fetchedMembers);
+
+  const {
+    selectedUserIds,
+    setSelectedUserIds,
+    setShowCheckboxes,
+    showCheckboxes,
+  } = useCheckboxSelection({ fetchedMembers: fetchedMembers });
 
   const {
     category,
@@ -73,7 +82,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     setShowCheckboxes(false);
-  }, [selectedServer]);
+  }, [selectedServer, setShowCheckboxes]);
 
   useEffect(() => {
     if (status !== "loading") {
@@ -149,7 +158,7 @@ export default function Dashboard() {
           selectedServer={selectedServer}
           serversError={serversError}
           membersError={membersError}
-          members={members}
+          fetchedMembers={members}
           isUpdating={isUpdating}
           selectedUserIds={selectedUserIds}
           isLoaded={isLoaded}
@@ -161,7 +170,7 @@ export default function Dashboard() {
             globalName: string
           ) => handleUpdateNickname(userId, nickname, globalName, true)}
           onUpdateSelectedNicknames={handleUpdateSelectedNicknames}
-          onSelectionChange={setSelectedUserIds}
+          onSelectedUserIds={setSelectedUserIds}
           setShowCheckboxes={setShowCheckboxes}
         />
       }

@@ -8,7 +8,7 @@ import { useCheckboxSelection } from "@/lib/hooks";
 import VirtualizerList from "./VirtualizerList";
 
 interface UserListProps {
-  members: Member[];
+  fetchedMembers: Member[];
   isUpdating: Set<string>;
   selectedServer: Server;
   onUpdateNicknameLocally: (index: number, nickname: string) => void;
@@ -17,7 +17,7 @@ interface UserListProps {
     nickname: string,
     globalName: string
   ) => void;
-  onSelectionChange?: (selectedIds: string[]) => void;
+  onSelectedUserIds?: (selectedIds: string[]) => void;
   showCheckboxes: boolean;
   isInitialLoad?: boolean;
   onNicknameSwap?: (
@@ -29,12 +29,12 @@ interface UserListProps {
 }
 
 export function UserList({
-  members,
+  fetchedMembers,
   isUpdating,
   selectedServer,
   onUpdateNicknameLocally,
   onApplyNickname,
-  onSelectionChange,
+  onSelectedUserIds,
   showCheckboxes,
   isInitialLoad = true,
   onNicknameSwap,
@@ -43,7 +43,7 @@ export function UserList({
   const [isLoading, setIsLoading] = useState(isInitialLoad);
 
   const {
-    selectedUserIds,
+    selectedUserIdSets,
     areAllMembersSelected,
     areAllRoleMembersSelected,
     handleCheckboxToggle,
@@ -51,9 +51,8 @@ export function UserList({
     handleRoleCheckboxChange,
     checkboxContainerVariants,
   } = useCheckboxSelection({
-    members,
-    showCheckboxes,
-    onSelectionChange,
+    fetchedMembers,
+    onSelectedUserIds,
   });
 
   useEffect(() => {
@@ -74,8 +73,8 @@ export function UserList({
     fromNickname: string,
     toNickname: string
   ) => {
-    const fromIndex = members.findIndex((m) => m.user_id === fromUserId);
-    const toIndex = members.findIndex((m) => m.user_id === toUserId);
+    const fromIndex = fetchedMembers.findIndex((m) => m.user_id === fromUserId);
+    const toIndex = fetchedMembers.findIndex((m) => m.user_id === toUserId);
 
     if (fromIndex !== -1 && toIndex !== -1) {
       onUpdateNicknameLocally(fromIndex, toNickname);
@@ -128,11 +127,11 @@ export function UserList({
         </div>
 
         <VirtualizerList
-          members={members}
+          members={fetchedMembers}
           isUpdating={isUpdating}
           selectedServer={displayServer}
           showCheckboxes={showCheckboxes}
-          selectedUserIds={selectedUserIds}
+          selectedUserIdSets={selectedUserIdSets}
           onUpdateNicknameLocally={onUpdateNicknameLocally}
           onApplyNickname={onApplyNickname}
           onCheckboxToggle={handleCheckboxToggle}
