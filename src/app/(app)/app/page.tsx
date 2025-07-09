@@ -26,11 +26,9 @@ export default function Dashboard() {
   const [showLoading, setShowLoading] = useState(true);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const [showCheckboxes, setShowCheckboxes] = useState(false);
-
   const { session, status } = useAuth();
   const { servers, serversError, selectedServer, handleServerSelection } =
     useServers();
-
   const { members: fetchedMembers, error: membersError } = useMembers(
     selectedServer?.id ?? ""
   );
@@ -47,10 +45,10 @@ export default function Dashboard() {
   const {
     category,
     categoryItems,
-    setCategory,
     theme,
-    setTheme,
     loading,
+    setCategory,
+    setTheme,
     handleGenerate,
     randomCategory,
     randomPrompt,
@@ -58,17 +56,17 @@ export default function Dashboard() {
 
   const {
     selectedArc,
-    setSelectedArc,
-    handleCreateGroup,
     arcs,
     newArcName,
     alertDialog,
-    setAlertDialog,
-    setNewArcName,
     arcNicknamesMap,
     removingArcIds,
     arcMemberCounts,
     isLoading: arcLoading,
+    setAlertDialog,
+    setNewArcName,
+    setSelectedArc,
+    handleCreateGroup,
     handleCreateClick,
     handleDeleteArc,
   } = useArcManagement(selectedServer, members, setMembers);
@@ -114,33 +112,33 @@ export default function Dashboard() {
         <Sidebar
           selectedServer={selectedServer}
           servers={servers}
-          handleServerSelection={handleServerSelection}
           selectedArc={selectedArc}
-          setSelectedArc={setSelectedArc}
           members={members}
           category={category}
           categoryItems={categoryItems}
-          setCategory={setCategory}
           theme={theme}
-          setTheme={setTheme}
-          handleGenerate={handleGenerate}
-          randomCategory={randomCategory}
-          randomPrompt={randomPrompt}
           loading={loading}
           selectedUserIds={selectedUserIds}
-          handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
-            handleCreateGroup(groupName, selectedMembers)
-          }
           arcs={arcs}
+          alertDialog={alertDialog}
           newArcName={newArcName}
-          setNewArcName={setNewArcName}
           arcNicknamesMap={arcNicknamesMap}
           removingArcIds={removingArcIds}
           arcMemberCounts={arcMemberCounts}
           isLoading={arcLoading}
+          setSelectedArc={setSelectedArc}
+          setCategory={setCategory}
+          setTheme={setTheme}
+          handleGenerate={handleGenerate}
+          randomCategory={randomCategory}
+          randomPrompt={randomPrompt}
+          setNewArcName={setNewArcName}
           handleCreateClick={handleCreateClick}
           handleDeleteArc={handleDeleteArc}
-          alertDialog={alertDialog}
+          handleServerSelection={handleServerSelection}
+          handleCreateGroup={(groupName: string, selectedMembers: Member[]) =>
+            handleCreateGroup(groupName, selectedMembers)
+          }
           setAlertDialog={setAlertDialog}
         />
       }
@@ -153,6 +151,9 @@ export default function Dashboard() {
           membersError={membersError}
           members={members}
           isUpdating={isUpdating}
+          selectedUserIds={selectedUserIds}
+          isLoaded={isLoaded}
+          showCheckboxes={showCheckboxes}
           onUpdateNicknameLocally={handleUpdateNicknameLocally}
           onApplyNickname={(
             userId: string,
@@ -161,10 +162,7 @@ export default function Dashboard() {
           ) => handleUpdateNickname(userId, nickname, globalName, true)}
           onUpdateSelectedNicknames={handleUpdateSelectedNicknames}
           onSelectionChange={setSelectedUserIds}
-          showCheckboxes={showCheckboxes}
           setShowCheckboxes={setShowCheckboxes}
-          selectedUserIds={selectedUserIds}
-          isLoaded={isLoaded}
         />
       }
     ></AppLayout>
