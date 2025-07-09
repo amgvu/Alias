@@ -46,9 +46,9 @@ export default function Dashboard() {
 
   const {
     selectedUserIds,
+    showCheckboxes,
     setSelectedUserIds,
     setShowCheckboxes,
-    showCheckboxes,
   } = useCheckboxSelection({ fetchedMembers: fetchedMembers });
 
   const {
@@ -71,7 +71,7 @@ export default function Dashboard() {
     arcNicknamesMap,
     removingArcIds,
     arcMemberCounts,
-    isLoading: arcLoading,
+    isLoading,
     setAlertDialog,
     setNewArcName,
     setSelectedArc,
@@ -134,7 +134,7 @@ export default function Dashboard() {
           arcNicknamesMap={arcNicknamesMap}
           removingArcIds={removingArcIds}
           arcMemberCounts={arcMemberCounts}
-          isLoading={arcLoading}
+          isLoading={isLoading}
           setSelectedArc={setSelectedArc}
           setCategory={setCategory}
           setTheme={setTheme}
