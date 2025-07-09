@@ -8,9 +8,10 @@ interface NicknamesListProps {
   member: Member;
   isUpdating: Set<string>;
   selectedServer: Server | null;
-  onUpdateNicknameLocally: (nickname: string) => void;
+  onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: () => void;
   handleExpansionToggle: () => void;
+  index: number;
 }
 
 export function NicknamesList({
@@ -19,6 +20,7 @@ export function NicknamesList({
   onUpdateNicknameLocally,
   onApplyNickname,
   handleExpansionToggle,
+  index,
 }: NicknamesListProps) {
   const {
     previousNicknames,
@@ -29,6 +31,7 @@ export function NicknamesList({
     handleNicknameSelect: localHandleNicknameSelect,
     handleNicknameDeleteWithDelay,
   } = useUserListCard({
+    index,
     member,
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,

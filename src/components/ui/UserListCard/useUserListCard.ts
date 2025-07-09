@@ -7,8 +7,9 @@ import { useSupabase } from "@/contexts/SupabaseProvider";
 interface UseUserListCardProps {
   member: Member;
   selectedServer: string;
-  onUpdateNicknameLocally: (nickname: string) => void;
+  onUpdateNicknameLocally: (index: number, nickname: string) => void;
   onApplyNickname: () => void;
+  index: number;
 }
 
 export const useUserListCard = ({
@@ -16,6 +17,7 @@ export const useUserListCard = ({
   selectedServer,
   onUpdateNicknameLocally,
   onApplyNickname,
+  index,
 }: UseUserListCardProps) => {
   const [inputValue, setInputValue] = useState(
     member.nickname || member.globalName || ""
@@ -76,9 +78,9 @@ export const useUserListCard = ({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setIsUserCurrentlyEditing(true);
       setInputValue(e.target.value);
-      onUpdateNicknameLocally(e.target.value);
+      onUpdateNicknameLocally(index, e.target.value);
     },
-    [onUpdateNicknameLocally]
+    [onUpdateNicknameLocally, index]
   );
 
   const handleBlur = useCallback(() => {
@@ -93,10 +95,10 @@ export const useUserListCard = ({
   const handleRevert = useCallback(() => {
     const globalName = member.globalName || "";
     setInputValue(globalName);
-    onUpdateNicknameLocally(globalName);
+    onUpdateNicknameLocally(index, globalName);
     setShowResetSuccess(true);
     setTimeout(() => setShowResetSuccess(false), 400);
-  }, [member.globalName, onUpdateNicknameLocally]);
+  }, [member.globalName, onUpdateNicknameLocally, index]);
 
   const handleExpansionToggle = useCallback(() => {
     setIsExpanded(!isExpanded);
@@ -105,10 +107,10 @@ export const useUserListCard = ({
   const handleNicknameSelect = useCallback(
     (nickname: string) => {
       setInputValue(nickname);
-      onUpdateNicknameLocally(nickname);
+      onUpdateNicknameLocally(index, nickname);
       setIsExpanded(false);
     },
-    [onUpdateNicknameLocally]
+    [onUpdateNicknameLocally, index]
   );
 
   const handleNicknameDelete = useCallback(
@@ -174,6 +176,7 @@ export const useUserListCard = ({
     deletingNicknames,
     showResetSuccess,
     controls,
+    index,
 
     handleInputChange,
     handleBlur,
