@@ -11,7 +11,6 @@ export const useThemeGenerator = (
 ) => {
   const [theme, setTheme] = useState<string>("");
   const [category, setCategory] = useState<string>("fictional-characters");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [generatedThemes, setGeneratedThemes] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -98,6 +97,7 @@ export const useThemeGenerator = (
     setCategory,
     theme,
     setTheme,
+    generatedThemes,
     loading,
     handleGenerate,
     randomCategory,

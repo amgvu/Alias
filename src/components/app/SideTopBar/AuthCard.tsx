@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+
 import { useSession } from "next-auth/react";
 import { LogOut } from "lucide-react";
 import { settingsItems } from "@/lib/data";
@@ -8,8 +8,6 @@ import { useAuth } from "@/lib/hooks";
 
 export default function AuthCard() {
   const { data: session } = useSession();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isMinimized, setIsMinimized] = useState(false);
   const { handleDiscordLogout } = useAuth();
 
   return (
@@ -17,11 +15,7 @@ export default function AuthCard() {
       {session?.user && (
         <SidebarFooter className="">
           <div className="py-2.5 px-4 w-89 border border-border rounded-lg bg-card">
-            <div
-              className={`flex items-center gap-3 ${
-                isMinimized ? "justify-center" : ""
-              }`}
-            >
+            <div className="flex items-center gap-3">
               <Image
                 src={session.user.image || "/default-avatar.png"}
                 alt="Profile"
@@ -29,21 +23,17 @@ export default function AuthCard() {
                 height={36}
                 className="rounded-full ring-2 h-9 w-9 ring-border-subtle"
               />
-              {!isMinimized ? (
-                <div className="flex-1 min-w-0">
-                  <p className="text-text-primary font-medium text-sm truncate">
-                    {session.user.name}
-                  </p>
-                </div>
-              ) : (
-                <></>
-              )}
-              {!isMinimized && (
-                <div className="flex items-center gap-1">
-                  {settingsItems.map((item) => (
-                    <button
-                      key={item.value}
-                      className={`
+              <div className="flex-1 min-w-0">
+                <p className="text-text-primary font-medium text-sm truncate">
+                  {session.user.name}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-1">
+                {settingsItems.map((item) => (
+                  <button
+                    key={item.value}
+                    className={`
                         flex text-text-secondary hover:text-text-primary
                         hover:bg-button-hover-sidebar rounded-md p-2 transition-colors
                         ${
@@ -52,21 +42,20 @@ export default function AuthCard() {
                             : ""
                         }
                       `}
-                      title={item.title}
-                      disabled={item.disabled}
-                    >
-                      <item.icon className="h-5 w-5" />
-                    </button>
-                  ))}
-                  <button
-                    onClick={handleDiscordLogout}
-                    className="flex text-text-secondary hover:text-text-primary cursor-pointer hover:bg-transparent-button-hover-sidebar rounded-md p-2 transition-colors"
-                    title="Logout"
+                    title={item.title}
+                    disabled={item.disabled}
                   >
-                    <LogOut className="h-5 w-5" />
+                    <item.icon className="h-5 w-5" />
                   </button>
-                </div>
-              )}
+                ))}
+                <button
+                  onClick={handleDiscordLogout}
+                  className="flex text-text-secondary hover:text-text-primary cursor-pointer hover:bg-transparent-button-hover-sidebar rounded-md p-2 transition-colors"
+                  title="Logout"
+                >
+                  <LogOut className="h-5 w-5" />
+                </button>
+              </div>
             </div>
           </div>
         </SidebarFooter>
