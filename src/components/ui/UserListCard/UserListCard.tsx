@@ -16,10 +16,9 @@ interface UserListCardProps {
   member: Member;
   isUpdating: Set<string>;
   selectedServer: Server | null;
-  onUpdateNicknameLocally: (index: number, nickname: string) => void;
+  onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
   isDragOverlay?: boolean;
-  index: number;
 }
 
 export default function UserListCard({
@@ -29,7 +28,6 @@ export default function UserListCard({
   onUpdateNicknameLocally,
   onApplyNickname,
   isDragOverlay = false,
-  index,
 }: UserListCardProps) {
   const {
     inputValue,
@@ -41,7 +39,6 @@ export default function UserListCard({
     handleExpansionToggle,
     handleImageError,
   } = useUserListCard({
-    index,
     member,
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,
@@ -128,7 +125,6 @@ export default function UserListCard({
 
         <ActionButtons
           member={member}
-          index={index}
           selectedServer={selectedServer}
           showOverlay={showOverlay}
           onUpdateNicknameLocally={onUpdateNicknameLocally}
@@ -148,8 +144,6 @@ export default function UserListCard({
             onUpdateNicknameLocally={onUpdateNicknameLocally}
             onApplyNickname={onApplyNickname}
             handleExpansionToggle={handleExpansionToggle}
-            isUpdating={isUpdating}
-            index={index}
           />
         )}
       </AnimatePresence>
