@@ -144,6 +144,7 @@ export default function UserListCard({
             onUpdateNicknameLocally={onUpdateNicknameLocally}
             onApplyNickname={onApplyNickname}
             handleExpansionToggle={handleExpansionToggle}
+            isUpdating={isUpdating}
           />
         )}
       </AnimatePresence>
