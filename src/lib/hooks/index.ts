@@ -5,7 +5,7 @@ export { useArcManagement } from "../../app/(app)/app/useArcManagement";
 export { useThemeGenerator } from "../../app/(app)/app/useThemeGenerator";
 export { useCheckboxSelection } from "./useCheckboxSelection";
 export { useUserListCard } from "../../components/ui/UserListCard/useUserListCard";
-export { useDnd } from "../../components/ui/UserListCard/dnd/useDnd";
+export { useDnd } from "../../components/ui/dnd/useDnd";
 export { useAuth } from "./useAuth";
 
 export { useSupabaseInitialized } from "./useSupabaseInitialized";

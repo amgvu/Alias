@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { styles } from "../UserListCard.styles";
+import { styles } from "../UserListCard/UserListCard.styles";
 
 interface DropTargetOverlayProps {
   isDropTarget: boolean;
