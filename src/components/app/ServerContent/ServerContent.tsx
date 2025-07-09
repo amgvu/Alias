@@ -18,7 +18,7 @@ interface ServerContentProps {
   showCheckboxes: boolean;
   selectedUserIds: string[];
   setShowCheckboxes: (show: boolean) => void;
-  isLoaded: boolean;
+  isPageLoaded: boolean;
 }
 
 export default function ServerContent({
@@ -34,12 +34,12 @@ export default function ServerContent({
   showCheckboxes,
   selectedUserIds,
   setShowCheckboxes,
-  isLoaded,
+  isPageLoaded,
 }: ServerContentProps) {
   return (
     <div
       className={`flex-1 transition-opacity duration-500 ${
-        isLoaded ? "opacity-100" : "opacity-0"
+        isPageLoaded ? "opacity-100" : "opacity-0"
       }`}
     >
       <div className="flex flex-col">

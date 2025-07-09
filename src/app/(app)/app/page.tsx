@@ -23,8 +23,8 @@ import { LoaderCircle } from "lucide-react";
 import { signIn } from "next-auth/react";
 
 export default function Dashboard() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showLoading, setShowLoading] = useState(true);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [showLoadingSpinner, setShowLoadingSpinner] = useState(true);
 
   const { session, status } = useAuth();
 
@@ -86,8 +86,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (status !== "loading") {
-      setShowLoading(false);
-      setIsLoaded(true);
+      setShowLoadingSpinner(false);
+      setIsPageLoaded(true);
     }
   }, [status]);
 
@@ -97,7 +97,7 @@ export default function Dashboard() {
     }
   }, [status]);
 
-  if (showLoading || status === "loading") {
+  if (showLoadingSpinner || status === "loading") {
     return (
       <div className="flex items-center justify-center h-screen">
         <motion.div
@@ -161,7 +161,7 @@ export default function Dashboard() {
           fetchedMembers={members}
           isUpdating={isUpdating}
           selectedUserIds={selectedUserIds}
-          isLoaded={isLoaded}
+          isPageLoaded={isPageLoaded}
           showCheckboxes={showCheckboxes}
           onUpdateNicknameLocally={handleUpdateNicknameLocally}
           onApplyNickname={(
