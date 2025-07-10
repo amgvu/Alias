@@ -14,9 +14,9 @@ export { default as TitleUpdater } from "./app/utils/TitleUpdater";
 export { default as Sidebar } from "./app/SideTopBar/Sidebar";
 export { default as Topbar } from "./app/SideTopBar/Topbar";
 export { default as AuthCard } from "./app/SideTopBar/AuthCard";
-export { default as Toolbar } from "./app/Toolbar/Toolbar";
-export { default as SelectionTool } from "./app/Toolbar/SelectionTool/SelectionTool";
-export { default as ApplyTool } from "./app/Toolbar/ApplyTool/ApplyTool";
+export { default as Toolbar } from "./app/ServerContent/Toolbar/Toolbar";
+export { default as SelectionTool } from "./app/ServerContent/Toolbar/SelectionTool/SelectionTool";
+export { default as ApplyTool } from "./app/ServerContent/Toolbar/ApplyTool/ApplyTool";
 
 export { default as AIPanel } from "./app/SideTopBar/ai/AIPanel";
 export { default as GroupsPanel } from "./app/SideTopBar/groups/GroupsPanel";
