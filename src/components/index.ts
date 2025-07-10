@@ -1,4 +1,4 @@
-export { default as UserList } from "./app/UserList/UserList";
+export { default as UserList } from "./app/ServerContent/UserList/UserList";
 export { default as UserCard } from "./ui/UserCard/UserCard";
 export { default as NicknamesList } from "./ui/UserCard/NicknamesList";
 export { default as ActionButtons } from "./ui/UserCard/ActionButtons";

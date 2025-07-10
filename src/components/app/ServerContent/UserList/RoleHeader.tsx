@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Checkbox } from "../../ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 import { checkboxContainerVariants } from "@/lib/data";
 
 interface RoleHeaderProps {

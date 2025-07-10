@@ -7,6 +7,6 @@ export { useCheckboxSelection } from "./useCheckboxSelection";
 export { useUserCard } from "../../components/ui/UserCard/useUserCard";
 export { useDnd } from "../../components/ui/dnd/useDnd";
 export { useAuth } from "./useAuth";
-export { useVirtualizerList } from "../../components/app/UserList/useVirtualizerList";
+export { useVirtualizerList } from "../../components/app/ServerContent/UserList/useVirtualizerList";
 
 export { useSupabaseInitialized } from "./useSupabaseInitialized";
