@@ -5,7 +5,7 @@ import { Arc, Server, Member, ArcNickname } from "@/types/types";
 import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { VirtualizedNicknameList } from "@/components";
+import VirtualizedNicknameList from "./VirtualizedNicknameList";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   AlertDialog,

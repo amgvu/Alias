@@ -1,5 +1,6 @@
 "use client";
-import { UserList, Toolbar } from "@/components";
+import UserList from "./UserList/UserList";
+import Toolbar from "./Toolbar/Toolbar";
 import { Member, Server } from "@/types/types";
 
 interface ServerContentProps {

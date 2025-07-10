@@ -4,7 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Member, Server } from "@/types/types";
 import { styles } from "./UserCard.styles";
 import { useUserCard, useDnd } from "@/lib/hooks";
-import { LoadingOverlay, DropTargetOverlay, DragOverlay } from "@/components";
+import LoadingOverlay from "@/components/ui/UserCard/UserCardChildren/LoadingOverlay";
+import DragOverlay from "../dnd/DragOverlay";
+import DropTargetOverlay from "../dnd/DropTargetOverlay";
 import UserCardContent from "./UserCardChildren/UserCardContent";
 import NicknamesList from "./UserCardChildren/NicknamesList";
 

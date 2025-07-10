@@ -1,6 +1,7 @@
 "use client";
 import { Server, Member } from "@/types/types";
-import { SelectionTool, ApplyTool } from "@/components";
+import SelectionTool from "./SelectionTool/SelectionTool";
+import ApplyTool from "./ApplyTool/ApplyTool";
 
 interface ToolbarProps {
   members: Member[];

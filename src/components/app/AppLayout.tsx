@@ -1,4 +1,4 @@
-import { TitleUpdater } from "@/components";
+import TitleUpdater from "./utils/TitleUpdater";
 import { Toaster } from "../ui/sonner";
 interface AppLayoutProps {
   sidebar: React.ReactNode;

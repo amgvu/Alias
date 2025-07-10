@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import { Member } from "@/types/types";
-import { UserCard } from "@/components";
+import UserCard from "@/components/ui/UserCard/UserCard";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Server } from "@/types/types";
 import {

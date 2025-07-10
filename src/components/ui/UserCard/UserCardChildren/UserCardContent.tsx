@@ -5,7 +5,7 @@ import { Member } from "@/types/types";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 import { Input } from "@/components/ui/input";
 import { GripVertical, NotebookText } from "lucide-react";
-import { ActionButtons } from "@/components";
+import ActionButtons from "./ActionButtons";
 
 interface UserCardContentProps {
   member: Member;

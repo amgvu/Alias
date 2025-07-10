@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ClientProvider from "@/contexts/ClientProvider";
 import "../globals.css";
-import { Navbar } from "@/components";
+import Navbar from "@/components/landing/navbar/navbar";
 
 export const metadata: Metadata = {
   title: "Arclify",

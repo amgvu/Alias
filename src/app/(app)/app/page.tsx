@@ -12,13 +12,11 @@ import {
   useCheckboxSelection,
   useAuth,
 } from "@/lib/hooks";
-import {
-  AppLayout,
-  ServerContent,
-  AuthCard,
-  Sidebar,
-  Topbar,
-} from "@/components";
+import AppLayout from "@/components/app/AppLayout";
+import Sidebar from "@/components/app/SideTopBar/Sidebar";
+import Topbar from "@/components/app/SideTopBar/Topbar";
+import AuthCard from "@/components/app/SideTopBar/AuthCard";
+import ServerContent from "@/components/app/ServerContent/ServerContent";
 import { LoaderCircle } from "lucide-react";
 import { signIn } from "next-auth/react";
 
