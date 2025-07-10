@@ -1,11 +1,10 @@
-import React from "react";
 import Image from "next/image";
-import { styles } from "./UserListCard.styles";
-import { Member, Server } from "@/types/types";
 import { AnimatePresence, motion } from "framer-motion";
+import { Member, Server } from "@/types/types";
+import { styles } from "./UserListCard.styles";
 import { GripVertical, NotebookText } from "lucide-react";
 import { useUserListCard, useDnd } from "@/lib/hooks";
-import { Input } from "../input";
+import { Input } from "@/components/ui/input";
 import {
   LoadingOverlay,
   ActionButtons,

@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { Member, Server } from "@/types/types";
 import { Loader2, X } from "lucide-react";
 import { useUserListCard } from "@/lib/hooks";
-import { styles } from "./UserListCard.styles";
-import { Member, Server } from "@/types/types";
+import { styles } from "@/components/ui/UserListCard/UserListCard.styles";
 
 interface NicknamesListProps {
   member: Member;

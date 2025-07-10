@@ -1,9 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, Check, RotateCcw } from "lucide-react";
-import { styles } from "./UserListCard.styles";
-import { useUserListCard } from "@/lib/hooks";
-import { Button } from "../button";
 import { Member, Server } from "@/types/types";
+import { Loader2, Check, RotateCcw } from "lucide-react";
+import { styles } from "@/components/ui/UserListCard/UserListCard.styles";
+import { useUserListCard } from "@/lib/hooks";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,

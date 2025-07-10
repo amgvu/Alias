@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
-import { styles } from "./UserListCard.styles";
+import { styles } from "@/components/ui/UserListCard/UserListCard.styles";
 
 interface LoadingOverlayProps {
   showOverlay: boolean;
