@@ -1,6 +1,7 @@
 export { default as UserList } from "./app/ServerContent/UserList/UserList";
 export { default as UserCard } from "./ui/UserCard/UserCard";
 export { default as NicknamesList } from "./ui/UserCard/UserCardChildren/NicknamesList";
+export { default as ActionButtons } from "./ui/UserCard/UserCardChildren/ActionButtons";
 export { default as LoadingOverlay } from "./ui/UserCard/UserCardChildren/LoadingOverlay";
 
 export { default as DragOverlay } from "./ui/dnd/DragOverlay";
@@ -20,3 +21,5 @@ export { default as ApplyTool } from "./app/ServerContent/Toolbar/ApplyTool/Appl
 export { default as AIPanel } from "./app/SideTopBar/ai/AIPanel";
 export { default as GroupsPanel } from "./app/SideTopBar/groups/GroupsPanel";
 export { default as VirtualizedNicknameList } from "./app/SideTopBar/groups/VirtualizedNicknameList";
+
+export { default as Navbar } from "./landing/navbar/navbar";

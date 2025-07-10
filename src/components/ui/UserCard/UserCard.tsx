@@ -1,4 +1,5 @@
 "use client";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { Member, Server } from "@/types/types";
 import { styles } from "./UserCard.styles";
