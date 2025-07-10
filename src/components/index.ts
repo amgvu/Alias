@@ -22,4 +22,4 @@ export { default as AIPanel } from "./app/SideTopBar/ai/AIPanel";
 export { default as GroupsPanel } from "./app/SideTopBar/groups/GroupsPanel";
 export { default as VirtualizedNicknameList } from "./app/SideTopBar/groups/VirtualizedNicknameList";
 
-export { default as Navbar } from "./main/navbar/navbar";
+export { default as Navbar } from "./landing/navbar/navbar";
