@@ -1,8 +1,8 @@
 export { default as UserList } from "./app/ServerContent/UserList/UserList";
 export { default as UserCard } from "./ui/UserCard/UserCard";
-export { default as NicknamesList } from "./ui/UserCard/NicknamesList";
-export { default as ActionButtons } from "./ui/UserCard/ActionButtons";
-export { default as LoadingOverlay } from "./ui/UserCard/LoadingOverlay";
+export { default as NicknamesList } from "./ui/UserCard/UserCardChildren/NicknamesList";
+export { default as ActionButtons } from "./ui/UserCard/UserCardChildren/ActionButtons";
+export { default as LoadingOverlay } from "./ui/UserCard/UserCardChildren/LoadingOverlay";
 
 export { default as DragOverlay } from "./ui/dnd/DragOverlay";
 export { default as DropTargetOverlay } from "./ui/dnd/DropTargetOverlay";

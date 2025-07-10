@@ -3,8 +3,8 @@ import { Member, Server } from "@/types/types";
 import { styles } from "./UserCard.styles";
 import { useUserCard, useDnd } from "@/lib/hooks";
 import { LoadingOverlay, DropTargetOverlay, DragOverlay } from "@/components";
-import UserCardContent from "./UserCardContent";
-import NicknamesList from "./NicknamesList";
+import UserCardContent from "./UserCardChildren/UserCardContent";
+import NicknamesList from "./UserCardChildren/NicknamesList";
 
 interface UserCardProps {
   member: Member;
