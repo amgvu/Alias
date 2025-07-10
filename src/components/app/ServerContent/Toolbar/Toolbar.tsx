@@ -1,3 +1,4 @@
+"use client";
 import { Server, Member } from "@/types/types";
 import { SelectionTool, ApplyTool } from "@/components";
 

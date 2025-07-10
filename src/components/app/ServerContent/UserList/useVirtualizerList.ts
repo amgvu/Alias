@@ -1,3 +1,4 @@
+"use client";
 import { Member } from "@/types/types";
 import { useCallback, useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";

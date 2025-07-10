@@ -1,3 +1,4 @@
+"use client";
 import { UserList, Toolbar } from "@/components";
 import { Member, Server } from "@/types/types";
 

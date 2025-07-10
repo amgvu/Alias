@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { styles } from "../UserCard/UserCard.styles";
 import { ArrowDownUp } from "lucide-react";

@@ -1,3 +1,4 @@
+"use client";
 import { Server } from "@/types/types";
 import { CheckCheck } from "lucide-react";
 import { Member } from "@/types/types";

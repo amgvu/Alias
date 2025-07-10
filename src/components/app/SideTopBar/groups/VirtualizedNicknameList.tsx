@@ -1,3 +1,4 @@
+"use client";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { motion } from "framer-motion";
 import Image from "next/image";

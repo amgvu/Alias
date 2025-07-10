@@ -1,3 +1,4 @@
+"use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Member, Server, Nickname } from "@/types/types";
 import { Loader2, X } from "lucide-react";

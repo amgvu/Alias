@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "motion/react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { checkboxContainerVariants } from "@/lib/data";

@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, WandSparkles, Shuffle } from "lucide-react";

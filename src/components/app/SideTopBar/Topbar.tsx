@@ -1,3 +1,5 @@
+"use client";
+
 import { Server } from "@/types/types";
 import Image from "next/image";
 

@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Server } from "@/types/types";
 import { SquareDashedMousePointer } from "lucide-react";

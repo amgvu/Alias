@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "motion/react";
 import { Member } from "@/types/types";
 import { UserCard } from "@/components";

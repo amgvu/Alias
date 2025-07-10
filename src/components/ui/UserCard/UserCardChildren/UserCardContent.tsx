@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import Image from "next/image";
 import { Member } from "@/types/types";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";

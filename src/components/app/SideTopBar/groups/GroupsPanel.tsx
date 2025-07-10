@@ -1,3 +1,4 @@
+"use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trash2, LoaderCircle, SaveAll } from "lucide-react";
 import { Arc, Server, Member, ArcNickname } from "@/types/types";
