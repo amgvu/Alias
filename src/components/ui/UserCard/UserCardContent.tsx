@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
-import { Member, Server } from "@/types/types";
+import { Member } from "@/types/types";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 import { Input } from "@/components/ui/input";
 import { GripVertical, NotebookText } from "lucide-react";
-import { ActionButtons } from "@/components";
+import ActionButtons from "./ActionButtons";
 
 interface UserCardContentProps {
   member: Member;
-  selectedServer: Server | null;
   inputValue: string;
   displayValue: string;
   showOverlay: boolean;
@@ -22,13 +21,13 @@ interface UserCardContentProps {
   handleFocus: () => void;
   handleImageError: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
   handleExpansionToggle: () => void;
-  onUpdateNicknameLocally: (nickname: string) => void;
-  onApplyNickname: () => void;
+  showResetSuccess: boolean;
+  handleRevert: () => void;
+  handleApplyNickname: () => void;
 }
 
 export default function UserCardContent({
   member,
-  selectedServer,
   inputValue,
   displayValue,
   showOverlay,
@@ -42,8 +41,9 @@ export default function UserCardContent({
   handleFocus,
   handleImageError,
   handleExpansionToggle,
-  onUpdateNicknameLocally,
-  onApplyNickname,
+  showResetSuccess,
+  handleRevert,
+  handleApplyNickname,
 }: UserCardContentProps) {
   return (
     <div className={styles.mainContent}>
@@ -91,11 +91,11 @@ export default function UserCardContent({
       </div>
 
       <ActionButtons
-        member={member}
-        selectedServer={selectedServer}
         showOverlay={showOverlay}
-        onUpdateNicknameLocally={onUpdateNicknameLocally}
-        onApplyNickname={onApplyNickname}
+        inputValue={inputValue}
+        showResetSuccess={showResetSuccess}
+        handleRevert={handleRevert}
+        handleApplyNickname={handleApplyNickname}
       />
 
       <button onClick={handleExpansionToggle} className={styles.expandButton}>

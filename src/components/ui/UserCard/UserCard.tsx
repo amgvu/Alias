@@ -37,6 +37,9 @@ export default function UserCard({
     deletingNicknames,
     handleNicknameSelectAndClose,
     handleNicknameDeleteWithDelay,
+    showResetSuccess,
+    handleRevert,
+    handleApplyNickname,
   } = useUserCard({
     member,
     selectedServer: selectedServer?.id ?? "",
@@ -78,7 +81,6 @@ export default function UserCard({
       <DropTargetOverlay isDropTarget={isDropTarget} />
       <UserCardContent
         member={member}
-        selectedServer={selectedServer}
         inputValue={inputValue}
         displayValue={displayValue}
         showOverlay={showOverlay}
@@ -92,8 +94,9 @@ export default function UserCard({
         handleFocus={handleFocus}
         handleImageError={handleImageError}
         handleExpansionToggle={handleExpansionToggle}
-        onUpdateNicknameLocally={onUpdateNicknameLocally}
-        onApplyNickname={onApplyNickname}
+        showResetSuccess={showResetSuccess}
+        handleRevert={handleRevert}
+        handleApplyNickname={handleApplyNickname}
       />
 
       <AnimatePresence>
