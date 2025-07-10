@@ -5,7 +5,9 @@ interface DropTargetOverlayProps {
   isDropTarget: boolean;
 }
 
-export function DropTargetOverlay({ isDropTarget }: DropTargetOverlayProps) {
+export default function DropTargetOverlay({
+  isDropTarget,
+}: DropTargetOverlayProps) {
   return (
     <AnimatePresence>
       {isDropTarget && (

@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, Check, RotateCcw } from "lucide-react";
 import { styles } from "./UserListCard.styles";
-import { useUserListCard } from "./useUserListCard";
+import { useUserListCard } from "@/lib/hooks";
 import { Button } from "../button";
 import { Member, Server } from "@/types/types";
 import {
@@ -18,7 +18,7 @@ interface ActionButtonsProps {
   onApplyNickname: () => void;
 }
 
-export function ActionButtons({
+export default function ActionButtons({
   member,
   selectedServer,
   showOverlay,

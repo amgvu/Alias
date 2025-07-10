@@ -6,7 +6,7 @@ interface LoadingOverlayProps {
   showOverlay: boolean;
 }
 
-export function LoadingOverlay({ showOverlay }: LoadingOverlayProps) {
+export default function LoadingOverlay({ showOverlay }: LoadingOverlayProps) {
   return (
     <AnimatePresence>
       {showOverlay && (

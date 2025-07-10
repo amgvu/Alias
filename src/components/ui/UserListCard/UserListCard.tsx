@@ -6,11 +6,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { GripVertical, NotebookText } from "lucide-react";
 import { useUserListCard, useDnd } from "@/lib/hooks";
 import { Input } from "../input";
-import { LoadingOverlay } from "./LoadingOverlay";
-import { DropTargetOverlay } from "../dnd/DropTargetOverlay";
-import { DragOverlay } from "../dnd/DragOverlay";
-import { NicknamesList } from "./NicknamesList";
-import { ActionButtons } from "./ActionButtons";
+import {
+  LoadingOverlay,
+  ActionButtons,
+  NicknamesList,
+  DropTargetOverlay,
+  DragOverlay,
+} from "@/components";
 
 interface UserListCardProps {
   member: Member;

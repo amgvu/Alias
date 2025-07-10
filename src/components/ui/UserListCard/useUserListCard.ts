@@ -22,14 +22,11 @@ export const useUserListCard = ({
   );
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isUserCurrentlyEditing, setIsUserCurrentlyEditing] = useState(false);
-
   const [isExpanded, setIsExpanded] = useState(false);
-
   const [previousNicknames, setPreviousNicknames] = useState<Nickname[]>([]);
   const [isLoadingNicknames, setIsLoadingNicknames] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [deletingNicknames, setDeletingNicknames] = useState<string[]>([]);
-
   const [showResetSuccess, setShowResetSuccess] = useState(false);
 
   const controls = useAnimation();

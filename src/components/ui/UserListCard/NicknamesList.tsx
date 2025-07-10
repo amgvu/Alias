@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, X } from "lucide-react";
-import { useUserListCard } from "@/components/ui/UserListCard/useUserListCard";
+import { useUserListCard } from "@/lib/hooks";
 import { styles } from "./UserListCard.styles";
 import { Member, Server } from "@/types/types";
 
@@ -13,7 +13,7 @@ interface NicknamesListProps {
   handleExpansionToggle: () => void;
 }
 
-export function NicknamesList({
+export default function NicknamesList({
   member,
   selectedServer,
   onUpdateNicknameLocally,

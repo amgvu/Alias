@@ -6,7 +6,7 @@ interface DragOverlayProps {
   displayValue: string;
 }
 
-export function DragOverlay({ displayValue }: DragOverlayProps) {
+export default function DragOverlay({ displayValue }: DragOverlayProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
