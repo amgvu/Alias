@@ -9,7 +9,7 @@ import {
 } from "@dnd-kit/core";
 import MemberItem from "./MemberItem";
 import RoleHeader from "./RoleHeader";
-import UserCard from "../UserCard/UserCard";
+import UserCard from "../../ui/UserCard/UserCard";
 import { Member, Server } from "@/types/types";
 import { useVirtualizerList } from "./useVirtualizerList";
 

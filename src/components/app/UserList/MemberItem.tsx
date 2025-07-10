@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { Member } from "@/types/types";
 import { UserCard } from "@/components";
-import { Checkbox } from "../checkbox";
+import { Checkbox } from "../../ui/checkbox";
 import { Server } from "@/types/types";
 import {
   swapVariants,
