@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Member, Server } from "@/types/types";
+import { Member, Server, Nickname } from "@/types/types";
 import { Loader2, X } from "lucide-react";
-import { useUserCard } from "@/lib/hooks";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 
 interface NicknamesListProps {
@@ -11,35 +10,23 @@ interface NicknamesListProps {
   onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
   handleExpansionToggle: () => void;
+  previousNicknames: Nickname[];
+  isLoadingNicknames: boolean;
+  fetchError: string | null;
+  deletingNicknames: string[];
+  handleNicknameSelectAndClose: (nickname: string) => void;
+  handleNicknameDeleteWithDelay: (nickname: Nickname) => void;
 }
 
 export default function NicknamesList({
-  member,
-  selectedServer,
-  onUpdateNicknameLocally,
-  onApplyNickname,
   handleExpansionToggle,
+  previousNicknames,
+  isLoadingNicknames,
+  fetchError,
+  deletingNicknames,
+  handleNicknameSelectAndClose,
+  handleNicknameDeleteWithDelay,
 }: NicknamesListProps) {
-  const {
-    previousNicknames,
-    isLoadingNicknames,
-    fetchError,
-    deletingNicknames,
-
-    handleNicknameSelect: localHandleNicknameSelect,
-    handleNicknameDeleteWithDelay,
-  } = useUserCard({
-    member,
-    selectedServer: selectedServer?.id ?? "",
-    onUpdateNicknameLocally,
-    onApplyNickname,
-  });
-
-  const handleNicknameSelectAndClose = (nickname: string) => {
-    localHandleNicknameSelect(nickname);
-    handleExpansionToggle();
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 1 }}

@@ -2,13 +2,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Member, Server } from "@/types/types";
 import { styles } from "./UserCard.styles";
 import { useUserCard, useDnd } from "@/lib/hooks";
-import {
-  LoadingOverlay,
-  NicknamesList,
-  DropTargetOverlay,
-  DragOverlay,
-} from "@/components";
+import { LoadingOverlay, DropTargetOverlay, DragOverlay } from "@/components";
 import UserCardContent from "./UserCardContent";
+import NicknamesList from "./NicknamesList";
 
 interface UserCardProps {
   member: Member;
@@ -35,6 +31,12 @@ export default function UserCard({
     handleFocus,
     handleExpansionToggle,
     handleImageError,
+    previousNicknames,
+    isLoadingNicknames,
+    fetchError,
+    deletingNicknames,
+    handleNicknameSelectAndClose,
+    handleNicknameDeleteWithDelay,
   } = useUserCard({
     member,
     selectedServer: selectedServer?.id ?? "",
@@ -102,6 +104,12 @@ export default function UserCard({
             onUpdateNicknameLocally={onUpdateNicknameLocally}
             onApplyNickname={onApplyNickname}
             handleExpansionToggle={handleExpansionToggle}
+            previousNicknames={previousNicknames}
+            isLoadingNicknames={isLoadingNicknames}
+            fetchError={fetchError}
+            deletingNicknames={deletingNicknames}
+            handleNicknameSelectAndClose={handleNicknameSelectAndClose}
+            handleNicknameDeleteWithDelay={handleNicknameDeleteWithDelay}
             isUpdating={isUpdating}
           />
         )}

@@ -108,6 +108,11 @@ export const useUserCard = ({
     [onUpdateNicknameLocally]
   );
 
+  const handleNicknameSelectAndClose = (nickname: string) => {
+    handleNicknameSelect(nickname);
+    handleExpansionToggle();
+  };
+
   const handleNicknameDelete = useCallback(
     (nickname: Nickname) => {
       if (!supabase) return;
@@ -178,6 +183,7 @@ export const useUserCard = ({
     handleRevert,
     handleExpansionToggle,
     handleNicknameSelect,
+    handleNicknameSelectAndClose,
     handleNicknameDelete,
     handleNicknameDeleteWithDelay,
     handleApplyNickname,
