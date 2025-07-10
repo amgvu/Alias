@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Member, Server } from "@/types/types";
 import { Loader2, Check, RotateCcw } from "lucide-react";
-import { styles } from "@/components/ui/UserListCard/UserListCard.styles";
-import { useUserListCard } from "@/lib/hooks";
+import { styles } from "@/components/ui/UserCard/UserCard.styles";
+import { useUserCard } from "@/lib/hooks";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -25,18 +25,13 @@ export default function ActionButtons({
   onUpdateNicknameLocally,
   onApplyNickname,
 }: ActionButtonsProps) {
-  const {
-    inputValue,
-    showResetSuccess,
-
-    handleRevert,
-    handleApplyNickname,
-  } = useUserListCard({
-    member,
-    selectedServer: selectedServer?.id ?? "",
-    onUpdateNicknameLocally,
-    onApplyNickname,
-  });
+  const { inputValue, showResetSuccess, handleRevert, handleApplyNickname } =
+    useUserCard({
+      member,
+      selectedServer: selectedServer?.id ?? "",
+      onUpdateNicknameLocally,
+      onApplyNickname,
+    });
 
   return (
     <div className={styles.buttonSection.container}>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { styles } from "../UserListCard/UserListCard.styles";
+import { styles } from "../UserCard/UserCard.styles";
 import { ArrowDownUp } from "lucide-react";
 
 interface DragOverlayProps {

@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Member } from "@/types/types";
-import { UserListCard } from "@/components";
+import { UserCard } from "@/components";
 import { Checkbox } from "../checkbox";
 import { Server } from "@/types/types";
 import {
@@ -83,7 +83,7 @@ export default function MemberItem({
             backfaceVisibility: "hidden",
           }}
         >
-          <UserListCard
+          <UserCard
             member={member}
             selectedServer={selectedServer}
             isUpdating={isUpdating}

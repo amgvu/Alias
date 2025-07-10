@@ -1,8 +1,8 @@
 export { default as UserList } from "./ui/UserList/UserList";
-export { default as UserListCard } from "./ui/UserListCard/UserListCard";
-export { default as NicknamesList } from "./ui/UserListCard/NicknamesList";
-export { default as ActionButtons } from "./ui/UserListCard/ActionButtons";
-export { default as LoadingOverlay } from "./ui/UserListCard/LoadingOverlay";
+export { default as UserCard } from "./ui/UserCard/UserCard";
+export { default as NicknamesList } from "./ui/UserCard/NicknamesList";
+export { default as ActionButtons } from "./ui/UserCard/ActionButtons";
+export { default as LoadingOverlay } from "./ui/UserCard/LoadingOverlay";
 
 export { default as DragOverlay } from "./ui/dnd/DragOverlay";
 export { default as DropTargetOverlay } from "./ui/dnd/DropTargetOverlay";

@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Member, Server } from "@/types/types";
 import { Loader2, X } from "lucide-react";
-import { useUserListCard } from "@/lib/hooks";
-import { styles } from "@/components/ui/UserListCard/UserListCard.styles";
+import { useUserCard } from "@/lib/hooks";
+import { styles } from "@/components/ui/UserCard/UserCard.styles";
 
 interface NicknamesListProps {
   member: Member;
@@ -28,7 +28,7 @@ export default function NicknamesList({
 
     handleNicknameSelect: localHandleNicknameSelect,
     handleNicknameDeleteWithDelay,
-  } = useUserListCard({
+  } = useUserCard({
     member,
     selectedServer: selectedServer?.id ?? "",
     onUpdateNicknameLocally,

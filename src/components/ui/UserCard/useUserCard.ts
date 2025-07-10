@@ -4,19 +4,19 @@ import { Member, Nickname } from "@/types/types";
 import { fetchNicknames, deleteNickname } from "@/lib/utilities";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 
-interface UseUserListCardProps {
+interface UseUserCardProps {
   member: Member;
   selectedServer: string;
   onUpdateNicknameLocally: (nickname: string) => void;
   onApplyNickname: () => void;
 }
 
-export const useUserListCard = ({
+export const useUserCard = ({
   member,
   selectedServer,
   onUpdateNicknameLocally,
   onApplyNickname,
-}: UseUserListCardProps) => {
+}: UseUserCardProps) => {
   const [inputValue, setInputValue] = useState(
     member.nickname || member.globalName || ""
   );

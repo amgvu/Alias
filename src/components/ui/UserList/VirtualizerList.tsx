@@ -9,7 +9,7 @@ import {
 } from "@dnd-kit/core";
 import MemberItem from "./MemberItem";
 import RoleHeader from "./RoleHeader";
-import UserListCard from "../UserListCard/UserListCard";
+import UserCard from "../UserCard/UserCard";
 import { Member, Server } from "@/types/types";
 import { useVirtualizerList } from "./useVirtualizerList";
 
@@ -177,7 +177,7 @@ export default function VirtualizerList({
       <DragOverlay>
         {activeId && activeMember && draggedData ? (
           <div style={{ width: "1000px" }}>
-            <UserListCard
+            <UserCard
               member={activeMember}
               selectedServer={selectedServer}
               isUpdating={new Set()}

@@ -4,7 +4,7 @@ export { useMemberManagement } from "../../app/(app)/app/useMemberManagement";
 export { useArcManagement } from "../../app/(app)/app/useArcManagement";
 export { useThemeGenerator } from "../../app/(app)/app/useThemeGenerator";
 export { useCheckboxSelection } from "./useCheckboxSelection";
-export { useUserListCard } from "../../components/ui/UserListCard/useUserListCard";
+export { useUserCard } from "../../components/ui/UserCard/useUserCard";
 export { useDnd } from "../../components/ui/dnd/useDnd";
 export { useAuth } from "./useAuth";
 export { useVirtualizerList } from "../../components/ui/UserList/useVirtualizerList";
