@@ -15,7 +15,7 @@ import {
 import AppLayout from "@/components/app/AppLayout";
 import Sidebar from "@/components/app/SideTopBar/Sidebar";
 import Topbar from "@/components/app/SideTopBar/Topbar";
-import AuthCard from "@/components/app/SideTopBar/AuthCard";
+import AuthCard from "@/components/app/SideTopBar/SidebarChildren/AuthCard";
 import ServerContent from "@/components/app/ServerContent/ServerContent";
 import { LoaderCircle } from "lucide-react";
 import { signIn } from "next-auth/react";

@@ -47,3 +47,14 @@ export interface MenubarProps {
   handleCreateClick: () => Promise<void>;
   handleDeleteArc: (arcId: number) => Promise<void>;
 }
+
+export interface ServerBrowserProps {
+  selectedServer: Server | null;
+  servers: Server[];
+  handleServerSelection: (server: Server) => void;
+}
+
+export interface ToolBrowserProps {
+  activeTool: string;
+  setActiveTool: (toolId: string) => void;
+}
