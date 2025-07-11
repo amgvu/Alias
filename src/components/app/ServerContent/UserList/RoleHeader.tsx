@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { checkboxContainerVariants } from "@/lib/data";
 
-import { RoleHeaderProps } from "@/components/app/ServerContent/UserList/RoleHeader.types";
+import { RoleHeaderProps } from "@/components/app/ServerContent/ServerContent.types";
 
 export default function RoleHeader({
   roleName,

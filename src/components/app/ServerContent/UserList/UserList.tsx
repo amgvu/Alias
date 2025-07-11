@@ -7,7 +7,7 @@ import { Loader2 } from "lucide-react";
 import { useCheckboxSelection } from "@/lib/hooks";
 import VirtualizerList from "./VirtualizerList";
 
-import { UserListProps } from "@/components/app/ServerContent/UserList/UserList.types";
+import { UserListProps } from "@/components/app/ServerContent/ServerContent.types";
 
 export function UserList({
   fetchedMembers,
