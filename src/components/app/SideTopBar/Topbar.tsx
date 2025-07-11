@@ -1,12 +1,7 @@
 "use client";
-
-import { Server } from "@/types/types";
 import Image from "next/image";
 
-interface TopbarProps {
-  selectedServer: Server | null;
-  className?: string;
-}
+import { TopbarProps } from "@/types/topbar";
 
 export default function Topbar({
   selectedServer,

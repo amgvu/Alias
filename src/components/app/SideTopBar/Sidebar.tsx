@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { CirclePlus, Loader2 } from "lucide-react";
 import { toolsItems } from "@/lib/data/tools-items";
-import { Member, Arc, ArcNickname, Server, Category } from "@/types/types";
+import { Member } from "@/types/types";
 import GroupsPanel from "./groups/GroupsPanel";
 import Image from "next/image";
 import AIPanel from "./ai/AIPanel";
@@ -24,53 +24,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-interface MenubarProps {
-  selectedServer: Server | null;
-  servers: Server[];
-  handleServerSelection: (server: Server) => void;
-  selectedArc: Arc | null;
-  setSelectedArc: (arc: Arc | null) => void;
-  newArcName: string;
-  setNewArcName: (name: string) => void;
-  members: Member[];
-  category: string;
-  categoryItems: Category[];
-  setCategory: (category: string | ((current: string) => string)) => void;
-  theme: string;
-  setTheme: (theme: string) => void;
-  loading: boolean;
-  handleGenerate: () => void;
-  randomCategory: () => void;
-  randomPrompt: (categoryId: string) => void;
-  selectedUserIds?: string[];
-  handleCreateGroup: (
-    groupName: string,
-    selectedMembers: Member[]
-  ) => Promise<void>;
-  alertDialog: {
-    isOpen: boolean;
-    title: string;
-    description: string;
-    onConfirm: () => void;
-    onCancel?: () => void;
-  };
-  setAlertDialog: React.Dispatch<
-    React.SetStateAction<{
-      isOpen: boolean;
-      title: string;
-      description: string;
-      onConfirm: () => void;
-      onCancel?: () => void;
-    }>
-  >;
-  arcs: Arc[];
-  arcNicknamesMap: Record<number, ArcNickname[]>;
-  removingArcIds: number[];
-  arcMemberCounts: Record<number, number>;
-  isLoading: boolean;
-  handleCreateClick: () => Promise<void>;
-  handleDeleteArc: (arcId: number) => Promise<void>;
-}
+import { MenubarProps } from "@/types/sidebar";
 
 export default function Menubar({
   selectedServer,
