@@ -1,16 +1,9 @@
 "use client";
-import { Server, Member } from "@/types/types";
+
 import SelectionTool from "./SelectionTool/SelectionTool";
 import ApplyTool from "./ApplyTool/ApplyTool";
 
-interface ToolbarProps {
-  members: Member[];
-  onUpdateSelectedNicknames: (selectedMembers: Member[]) => void;
-  selectedUserIds: string[];
-  selectedServer: Server | null;
-  showCheckboxes: boolean;
-  setShowCheckboxes: (show: boolean) => void;
-}
+import { ToolbarProps } from "@/types/toolbar";
 
 export default function Toolbar({
   members,

@@ -1,13 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Server } from "@/types/types";
 import { SquareDashedMousePointer } from "lucide-react";
 
-interface SelectionToolProps {
-  selectedServer: Server | null;
-  showCheckboxes: boolean;
-  setShowCheckboxes: (show: boolean) => void;
-}
+import { SelectionToolProps } from "@/types/selectionTool";
 
 export default function SelectionTool({
   selectedServer,

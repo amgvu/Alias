@@ -1,7 +1,5 @@
 "use client";
-import { Server } from "@/types/types";
 import { CheckCheck } from "lucide-react";
-import { Member } from "@/types/types";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -15,12 +13,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-interface ApplyToolProps {
-  members: Member[];
-  onUpdateSelectedNicknames: (selectedMembers: Member[]) => void;
-  selectedUserIds: string[];
-  selectedServer: Server | null;
-}
+import { ApplyToolProps } from "@/types/applyTool";
 
 export default function ApplyTool({
   members,
