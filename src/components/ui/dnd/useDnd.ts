@@ -2,7 +2,7 @@ import { useAnimation } from "framer-motion";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
-import { UseDndProps } from "@/types/useDndProps";
+import { UseDndProps } from "@/components/ui/dnd/useDnd.types";
 
 export const useDnd = ({
   member,

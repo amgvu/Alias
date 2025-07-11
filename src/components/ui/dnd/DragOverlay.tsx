@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { styles } from "../UserCard/UserCard.styles";
 import { ArrowDownUp } from "lucide-react";
 
-import { DragOverlayProps } from "@/types/useDndProps";
+import { DragOverlayProps } from "@/components/ui/dnd/useDnd.types";
 
 export default function DragOverlay({ displayValue }: DragOverlayProps) {
   return (

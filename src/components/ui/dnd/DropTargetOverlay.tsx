@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { styles } from "../UserCard/UserCard.styles";
 
-import { DropTargetOverlayProps } from "@/types/useDndProps";
+import { DropTargetOverlayProps } from "@/components/ui/dnd/useDnd.types";
 
 export default function DropTargetOverlay({
   isDropTarget,
