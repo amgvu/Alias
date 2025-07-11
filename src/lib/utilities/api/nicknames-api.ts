@@ -8,7 +8,7 @@ export const updateNickname = async (
   globalName: string
 ) => {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-  const response = await fetch(`${backendUrl}/api/changeNickname`, {
+  const response = await fetch(`${backendUrl}/changeNickname`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

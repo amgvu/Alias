@@ -5,7 +5,7 @@ export const fetchServers = async (
   userId: string
 ): Promise<Server[]> => {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-  const response = await fetch(`${backendUrl}/api/servers`, {
+  const response = await fetch(`${backendUrl}/servers`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const fetchServers = async (
 
 export const fetchMembers = async (guildId: string) => {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-  const response = await fetch(`${backendUrl}/api/members/${guildId}`);
+  const response = await fetch(`${backendUrl}/members/${guildId}`);
   if (!response.ok) {
     throw new Error("Failed to fetch members");
   }
