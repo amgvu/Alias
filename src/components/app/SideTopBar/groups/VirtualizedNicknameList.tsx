@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 
-import { VirtualizedNicknameListProps } from "@/types/virtualizedNicknameList";
+import { VirtualizedNicknameListProps } from "@/components/app/SideTopBar/groups/VirtualizedNicknameList.types";
 
 export default function VirtualizedNicknameList({
   nicknames,

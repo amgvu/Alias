@@ -6,7 +6,7 @@ import { Loader2, WandSparkles, Shuffle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { styles } from "./AIPanel.styles";
 
-import { AIPanelProps } from "@/types/aiPanel";
+import { AIPanelProps } from "@/components/app/SideTopBar/ai/AIPanel.types";
 
 export default function AIPanel({
   selectedServer,

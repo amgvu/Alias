@@ -21,7 +21,7 @@ import {
 import { styles } from "./GroupsPanel.styles";
 import { MemberThumbnails } from "./MemberThumbnails";
 
-import { GroupsPanelProps } from "@/types/groupsPanel";
+import { GroupsPanelProps } from "@/components/app/SideTopBar/groups/GroupsPanel.types";
 
 export default function GroupsPanel({
   selectedArc,
