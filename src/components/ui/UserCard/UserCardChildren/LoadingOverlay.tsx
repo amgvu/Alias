@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 
-import { LoadingOverlayProps } from "@/types/loadingOverlay";
+import { LoadingOverlayProps } from "@/components/ui/UserCard/UserCardChildren/LoadingOverlay.types";
 
 export default function LoadingOverlay({ showOverlay }: LoadingOverlayProps) {
   return (

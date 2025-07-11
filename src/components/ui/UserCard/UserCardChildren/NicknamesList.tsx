@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, X } from "lucide-react";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 
-import { NicknamesListProps } from "@/types/nicknamesList";
+import { NicknamesListProps } from "@/components/ui/UserCard/UserCardChildren/NicknamesList.types";
 
 export default function NicknamesList({
   handleExpansionToggle,
