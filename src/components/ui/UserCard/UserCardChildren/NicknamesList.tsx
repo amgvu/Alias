@@ -1,23 +1,9 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { Member, Server, Nickname } from "@/types/types";
 import { Loader2, X } from "lucide-react";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 
-interface NicknamesListProps {
-  member: Member;
-  isUpdating: Set<string>;
-  selectedServer: Server | null;
-  onUpdateNicknameLocally: (nickname: string) => void;
-  onApplyNickname: () => void;
-  handleExpansionToggle: () => void;
-  previousNicknames: Nickname[];
-  isLoadingNicknames: boolean;
-  fetchError: string | null;
-  deletingNicknames: string[];
-  handleNicknameSelectAndClose: (nickname: string) => void;
-  handleNicknameDeleteWithDelay: (nickname: Nickname) => void;
-}
+import { NicknamesListProps } from "@/types/nicknamesList";
 
 export default function NicknamesList({
   handleExpansionToggle,

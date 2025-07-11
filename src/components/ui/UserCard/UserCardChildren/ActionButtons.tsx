@@ -8,13 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-interface ActionButtonsProps {
-  showOverlay: boolean;
-  inputValue: string;
-  showResetSuccess: boolean;
-  handleRevert: () => void;
-  handleApplyNickname: () => void;
-}
+import { ActionButtonsProps } from "@/types/actionButtons";
 
 export default function ActionButtons({
   showOverlay,

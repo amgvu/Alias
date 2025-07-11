@@ -1,31 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Image from "next/image";
-import { Member } from "@/types/types";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 import { Input } from "@/components/ui/input";
 import { GripVertical, NotebookText } from "lucide-react";
 import ActionButtons from "./ActionButtons";
 
-interface UserCardContentProps {
-  member: Member;
-  inputValue: string;
-  displayValue: string;
-  showOverlay: boolean;
-  isExpanded: boolean;
-  isDragOverlay: boolean;
-  draggableAttributes: any;
-  draggableListeners: any;
-  setDragRef: (element: HTMLElement | null) => void;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: () => void;
-  handleFocus: () => void;
-  handleImageError: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
-  handleExpansionToggle: () => void;
-  showResetSuccess: boolean;
-  handleRevert: () => void;
-  handleApplyNickname: () => void;
-}
+import { UserCardContentProps } from "@/types/userCardContent";
 
 export default function UserCardContent({
   member,
@@ -36,13 +16,13 @@ export default function UserCardContent({
   isDragOverlay,
   draggableAttributes,
   draggableListeners,
+  showResetSuccess,
   setDragRef,
   handleInputChange,
   handleBlur,
   handleFocus,
   handleImageError,
   handleExpansionToggle,
-  showResetSuccess,
   handleRevert,
   handleApplyNickname,
 }: UserCardContentProps) {
