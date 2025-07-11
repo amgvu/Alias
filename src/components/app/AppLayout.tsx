@@ -1,11 +1,7 @@
 import TitleUpdater from "./utils/TitleUpdater";
 import { Toaster } from "../ui/sonner";
-interface AppLayoutProps {
-  sidebar: React.ReactNode;
-  topbar: React.ReactNode;
-  authcard: React.ReactNode;
-  servercontent: React.ReactNode;
-}
+
+import { AppLayoutProps } from "@/types/appLayout";
 
 export default function AppLayout({
   sidebar,
