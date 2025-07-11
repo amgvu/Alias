@@ -2,7 +2,7 @@
 import UserList from "./UserList/UserList";
 import Toolbar from "./Toolbar/Toolbar";
 
-import { ServerContentProps } from "@/types/serverContent";
+import { ServerContentProps } from "@/components/app/ServerContent/ServerContent.types";
 
 export default function ServerContent({
   selectedServer,

@@ -8,7 +8,7 @@ import {
   checkboxContainerVariants,
 } from "@/lib/data";
 
-import { MemberItemProps } from "@/types/memberItem";
+import { MemberItemProps } from "@/components/app/ServerContent/UserList/MemberItem.types";
 
 export default function MemberItem({
   member,

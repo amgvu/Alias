@@ -1,4 +1,5 @@
 import { Server, Member, Category } from "@/types/types";
+
 export interface AIPanelProps {
   selectedServer: Server | null;
   members: Member[];

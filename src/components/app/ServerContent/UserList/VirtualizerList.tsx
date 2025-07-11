@@ -12,7 +12,7 @@ import RoleHeader from "@/components/app/ServerContent/UserList/RoleHeader";
 import UserCard from "@/components/ui/UserCard/UserCard";
 import { useVirtualizerList } from "./useVirtualizerList";
 
-import { VirtualizerListProps } from "@/types/virtualizerList";
+import { VirtualizerListProps } from "@/components/app/ServerContent/UserList/VirtualizerList.types";
 
 export default function VirtualizerList({
   members,
