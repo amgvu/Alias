@@ -3,12 +3,7 @@ import { motion } from "motion/react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { checkboxContainerVariants } from "@/lib/data";
 
-interface RoleHeaderProps {
-  roleName: string;
-  showCheckboxes: boolean;
-  isAllSelected: boolean;
-  onCheckboxChange: () => void;
-}
+import { RoleHeaderProps } from "@/types/roleHeader";
 
 export default function RoleHeader({
   roleName,

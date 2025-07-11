@@ -3,31 +3,11 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { styles } from "./UserList.styles";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Member, Server } from "@/types/types";
 import { Loader2 } from "lucide-react";
 import { useCheckboxSelection } from "@/lib/hooks";
 import VirtualizerList from "./VirtualizerList";
 
-interface UserListProps {
-  fetchedMembers: Member[];
-  isUpdating: Set<string>;
-  selectedServer: Server;
-  onUpdateNicknameLocally: (index: number, nickname: string) => void;
-  onApplyNickname: (
-    userId: string,
-    nickname: string,
-    globalName: string
-  ) => void;
-  onSelectedUserIds?: (selectedIds: string[]) => void;
-  showCheckboxes: boolean;
-  isInitialLoad?: boolean;
-  onNicknameSwap?: (
-    fromUserId: string,
-    toUserId: string,
-    fromNickname: string,
-    toNickname: string
-  ) => void;
-}
+import { UserListProps } from "@/types/userList";
 
 export function UserList({
   fetchedMembers,

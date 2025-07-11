@@ -1,38 +1,14 @@
 "use client";
 import { motion } from "motion/react";
-import { Member } from "@/types/types";
 import UserCard from "@/components/ui/UserCard/UserCard";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Server } from "@/types/types";
 import {
   swapVariants,
   shiftVariants,
   checkboxContainerVariants,
 } from "@/lib/data";
-interface MemberItemProps {
-  member: Member;
-  memberIndex: number;
-  originalIndex: number;
-  isSelected: boolean;
-  showCheckboxes: boolean;
-  isUpdating: Set<string>;
-  selectedServer: Server | null;
-  onCheckboxToggle: (userId: string) => void;
-  onUpdateNicknameLocally: (index: number, nickname: string) => void;
-  onApplyNickname: (
-    userId: string,
-    nickname: string,
-    globalName: string
-  ) => void;
-  onNicknameSwap?: (
-    fromUserId: string,
-    toUserId: string,
-    fromNickname: string,
-    toNickname: string
-  ) => void;
-  isSwapped?: boolean;
-  swapAnimationKey?: number;
-}
+
+import { MemberItemProps } from "@/types/memberItem";
 
 export default function MemberItem({
   member,

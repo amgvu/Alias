@@ -10,31 +10,9 @@ import {
 import MemberItem from "@/components/app/ServerContent/UserList/MemberItem";
 import RoleHeader from "@/components/app/ServerContent/UserList/RoleHeader";
 import UserCard from "@/components/ui/UserCard/UserCard";
-import { Member, Server } from "@/types/types";
 import { useVirtualizerList } from "./useVirtualizerList";
 
-interface VirtualizerListProps {
-  members: Member[];
-  isUpdating: Set<string>;
-  selectedServer: Server | null;
-  showCheckboxes: boolean;
-  selectedUserIdSets: Set<string>;
-  onUpdateNicknameLocally: (index: number, nickname: string) => void;
-  onApplyNickname: (
-    userId: string,
-    nickname: string,
-    globalName: string
-  ) => void;
-  onCheckboxToggle: (userId: string) => void;
-  onRoleCheckboxChange: (roleName: string) => void;
-  areAllRoleMembersSelected: (roleName: string) => boolean;
-  onNicknameSwap?: (
-    fromUserId: string,
-    toUserId: string,
-    fromNickname: string,
-    toNickname: string
-  ) => void;
-}
+import { VirtualizerListProps } from "@/types/virtualizerList";
 
 export default function VirtualizerList({
   members,
