@@ -9,7 +9,7 @@ import DropTargetOverlay from "../dnd/DropTargetOverlay";
 import UserCardContent from "./UserCardChildren/UserCardContent";
 import NicknamesList from "./UserCardChildren/NicknamesList";
 
-import { UserCardProps } from "@/types/userCard";
+import { UserCardProps } from "@/components/ui/UserCard/UserCard.types";
 
 export default function UserCard({
   member,
