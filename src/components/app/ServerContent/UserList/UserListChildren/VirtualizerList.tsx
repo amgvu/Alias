@@ -7,8 +7,8 @@ import {
   DragEndEvent,
   DragStartEvent,
 } from "@dnd-kit/core";
-import MemberItem from "@/components/app/ServerContent/UserList/MemberItem";
-import RoleHeader from "@/components/app/ServerContent/UserList/RoleHeader";
+import MemberItem from "@/components/app/ServerContent/UserList/UserListChildren/MemberItem";
+import RoleHeader from "@/components/app/ServerContent/UserList/UserListChildren/RoleHeader";
 import UserCard from "@/components/ui/UserCard/UserCard";
 import { useVirtualizerList } from "./useVirtualizerList";
 
