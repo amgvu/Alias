@@ -2,11 +2,7 @@
 import Image from "next/image";
 import { styles } from "./GroupsPanel.styles";
 
-interface MemberThumbnailsProps {
-  maxVisible: number;
-  visible: Array<{ user_id: string; avatar_url: string; user_tag: string }>;
-  extra: number;
-}
+import { MemberThumbnailsProps } from "@/types/memberThumbnails";
 
 export const MemberThumbnails = ({ visible, extra }: MemberThumbnailsProps) => {
   return (

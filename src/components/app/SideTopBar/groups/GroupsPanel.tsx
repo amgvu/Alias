@@ -1,7 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trash2, LoaderCircle, SaveAll } from "lucide-react";
-import { Arc, Server, Member, ArcNickname } from "@/types/types";
+import { Arc, ArcNickname } from "@/types/types";
 import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,41 +21,7 @@ import {
 import { styles } from "./GroupsPanel.styles";
 import { MemberThumbnails } from "./MemberThumbnails";
 
-interface GroupsPanelProps {
-  members: Member[];
-  selectedServer: Server | null;
-  selectedArc: Arc | null;
-  newArcName: string;
-  arcs: Arc[];
-  arcNicknamesMap: Record<number, ArcNickname[]>;
-  removingArcIds: number[];
-  arcMemberCounts: Record<number, number>;
-  isLoading: boolean;
-  alertDialog: {
-    isOpen: boolean;
-    title: string;
-    description: string;
-    onConfirm: () => void;
-    onCancel?: () => void;
-  };
-  setNewArcName: (name: string) => void;
-  setSelectedArc: (arc: Arc | null) => void;
-  setAlertDialog: React.Dispatch<
-    React.SetStateAction<{
-      isOpen: boolean;
-      title: string;
-      description: string;
-      onConfirm: () => void;
-      onCancel?: () => void;
-    }>
-  >;
-  handleCreateClick: () => Promise<void>;
-  handleDeleteArc: (arcId: number) => Promise<void>;
-  handleCreateGroup: (
-    groupName: string,
-    selectedMembers: Member[]
-  ) => Promise<void>;
-}
+import { GroupsPanelProps } from "@/types/groupsPanel";
 
 export default function GroupsPanel({
   selectedArc,

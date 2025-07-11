@@ -3,11 +3,8 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
-import { ArcNickname } from "@/types/types";
 
-interface VirtualizedNicknameListProps {
-  nicknames: ArcNickname[];
-}
+import { VirtualizedNicknameListProps } from "@/types/virtualizedNicknameList";
 
 export default function VirtualizedNicknameList({
   nicknames,
