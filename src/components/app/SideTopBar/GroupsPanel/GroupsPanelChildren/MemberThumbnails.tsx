@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
-import { styles } from "./GroupsPanel.styles";
+import { styles } from "../GroupsPanel.styles";
 
-import { MemberThumbnailsProps } from "@/components/app/SideTopBar/groups/MemberThumbnails.types";
+import { MemberThumbnailsProps } from "@/components/app/SideTopBar/groups/GroupsPanelChildren/MemberThumbnails.types";
 
 export const MemberThumbnails = ({ visible, extra }: MemberThumbnailsProps) => {
   return (

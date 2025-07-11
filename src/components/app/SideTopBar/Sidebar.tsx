@@ -4,9 +4,9 @@ import { useState } from "react";
 import { CirclePlus, Loader2 } from "lucide-react";
 import { toolsItems } from "@/lib/data/tools-items";
 import { Member } from "@/types/types";
-import GroupsPanel from "./groups/GroupsPanel";
+import GroupsPanel from "./GroupsPanel/GroupsPanel";
 import Image from "next/image";
-import AIPanel from "./ai/AIPanel";
+import AIPanel from "./AIPanel/AIPanel";
 import {
   Sidebar,
   SidebarContent,

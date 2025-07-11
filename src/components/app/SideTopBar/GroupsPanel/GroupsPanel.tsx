@@ -5,7 +5,7 @@ import { Arc, ArcNickname } from "@/types/types";
 import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import VirtualizedNicknameList from "./VirtualizedNicknameList";
+import VirtualizedNicknameList from "./GroupsPanelChildren/VirtualizedNicknameList";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   AlertDialog,
@@ -19,9 +19,9 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { styles } from "./GroupsPanel.styles";
-import { MemberThumbnails } from "./MemberThumbnails";
+import { MemberThumbnails } from "./GroupsPanelChildren/MemberThumbnails";
 
-import { GroupsPanelProps } from "@/components/app/SideTopBar/groups/GroupsPanel.types";
+import { GroupsPanelProps } from "@/components/app/SideTopBar/GroupsPanel/GroupsPanel.types";
 
 export default function GroupsPanel({
   selectedArc,
