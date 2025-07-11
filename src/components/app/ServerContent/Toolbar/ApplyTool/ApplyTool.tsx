@@ -13,7 +13,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import { ApplyToolProps } from "@/components/app/ServerContent/Toolbar/ApplyTool/ApplyTool.types";
+import { ApplyToolProps } from "@/components/app/ServerContent/Toolbar/Toolbar.types";
 
 export default function ApplyTool({
   members,
