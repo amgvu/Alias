@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { SquareDashedMousePointer } from "lucide-react";
 
-import { SelectionToolProps } from "@/types/selectionTool";
+import { SelectionToolProps } from "@/components/app/ServerContent/Toolbar/SelectionTool/SelectionTool.types";
 
 export default function SelectionTool({
   selectedServer,

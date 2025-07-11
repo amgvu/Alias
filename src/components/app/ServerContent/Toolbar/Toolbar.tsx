@@ -3,7 +3,7 @@
 import SelectionTool from "./SelectionTool/SelectionTool";
 import ApplyTool from "./ApplyTool/ApplyTool";
 
-import { ToolbarProps } from "@/types/toolbar";
+import { ToolbarProps } from "@/components/app/ServerContent/Toolbar/Toolbar.types";
 
 export default function Toolbar({
   members,
