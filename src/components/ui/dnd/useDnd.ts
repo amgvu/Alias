@@ -1,17 +1,8 @@
 import { useAnimation } from "framer-motion";
-import { Member } from "@/types/types";
-
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
-interface UseDndProps {
-  member: Member;
-  inputValue: string;
-  isExpanded: boolean;
-  isUpdating: Set<string>;
-  isDragOverlay?: boolean;
-  draggedNickname?: string;
-}
+import { UseDndProps } from "@/types/useDndProps";
 
 export const useDnd = ({
   member,
