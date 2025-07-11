@@ -1,27 +1,8 @@
 "use client";
 import UserList from "./UserList/UserList";
 import Toolbar from "./Toolbar/Toolbar";
-import { Member, Server } from "@/types/types";
 
-interface ServerContentProps {
-  selectedServer: Server | null;
-  serversError: string | null;
-  membersError: string | null;
-  fetchedMembers: Member[];
-  isUpdating: Set<string>;
-  onUpdateNicknameLocally: (index: number, nickname: string) => void;
-  onApplyNickname: (
-    userId: string,
-    nickname: string,
-    globalName: string
-  ) => void;
-  onUpdateSelectedNicknames: (selectedMembers: Member[]) => void;
-  onSelectedUserIds?: (selectedIds: string[]) => void;
-  showCheckboxes: boolean;
-  selectedUserIds: string[];
-  setShowCheckboxes: (show: boolean) => void;
-  isPageLoaded: boolean;
-}
+import { ServerContentProps } from "@/types/serverContent";
 
 export default function ServerContent({
   selectedServer,
