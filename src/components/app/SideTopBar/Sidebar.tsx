@@ -24,7 +24,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { MenubarProps } from "@/types/sidebar";
+import { MenubarProps } from "@/components/app/SideTopBar/Sidebar.types";
 
 export default function Menubar({
   selectedServer,

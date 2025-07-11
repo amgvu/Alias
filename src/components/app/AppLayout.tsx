@@ -1,7 +1,7 @@
 import TitleUpdater from "./utils/TitleUpdater";
 import { Toaster } from "../ui/sonner";
 
-import { AppLayoutProps } from "@/types/appLayout";
+import { AppLayoutProps } from "@/components/app/AppLayout.types";
 
 export default function AppLayout({
   sidebar,

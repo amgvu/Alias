@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-import { TopbarProps } from "@/types/topbar";
+import { TopbarProps } from "@/components/app/SideTopBar/Topbar.types";
 
 export default function Topbar({
   selectedServer,
