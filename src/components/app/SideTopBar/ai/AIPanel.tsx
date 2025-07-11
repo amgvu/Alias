@@ -1,26 +1,12 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, WandSparkles, Shuffle } from "lucide-react";
-import { Member, Server, Category } from "@/types/types";
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Loader2, WandSparkles, Shuffle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { styles } from "./AIPanel.styles";
 
-interface AIPanelProps {
-  selectedServer: Server | null;
-  members: Member[];
-  selectedUserIds: string[];
-  category: string;
-  categoryItems: Category[];
-  setCategory: (category: string | ((current: string) => string)) => void;
-  theme: string;
-  setTheme: (theme: string) => void;
-  loading: boolean;
-  handleGenerate: () => void;
-  randomCategory: () => void;
-  randomPrompt: (categoryId: string) => void;
-}
+import { AIPanelProps } from "@/types/aiPanel";
 
 export default function AIPanel({
   selectedServer,
