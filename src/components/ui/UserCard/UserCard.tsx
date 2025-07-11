@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Member, Server } from "@/types/types";
 import { styles } from "./UserCard.styles";
 import { useUserCard, useDnd } from "@/lib/hooks";
 import LoadingOverlay from "@/components/ui/UserCard/UserCardChildren/LoadingOverlay";
@@ -10,14 +9,7 @@ import DropTargetOverlay from "../dnd/DropTargetOverlay";
 import UserCardContent from "./UserCardChildren/UserCardContent";
 import NicknamesList from "./UserCardChildren/NicknamesList";
 
-interface UserCardProps {
-  member: Member;
-  isUpdating: Set<string>;
-  selectedServer: Server | null;
-  onUpdateNicknameLocally: (nickname: string) => void;
-  onApplyNickname: () => void;
-  isDragOverlay?: boolean;
-}
+import { UserCardProps } from "@/types/userCard";
 
 export default function UserCard({
   member,
