@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { styles } from "../GroupsPanel.styles";
 
-import { MemberThumbnailsProps } from "@/components/app/SideTopBar/GroupsPanel/GroupsPanelChildren/MemberThumbnails.types";
+import { MemberThumbnailsProps } from "@/components/app/SideTopBar/GroupsPanel/GroupsPanel.types";
 
 export const MemberThumbnails = ({ visible, extra }: MemberThumbnailsProps) => {
   return (
