@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Member, Nickname, Server } from "@/types/types";
+import { Member, Server } from "@/types/types";
 import { useSupabase } from "@/contexts/SupabaseProvider";
 import { useSupabaseInitialized } from "@/lib/hooks";
-import { updateNickname, saveNicknames } from "@/lib/utilities";
+import { updateNickname } from "@/lib/utilities";
 
 export const useMemberManagement = (
   selectedServer: Server | null,
