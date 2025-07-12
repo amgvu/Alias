@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { GripVertical, NotebookText } from "lucide-react";
 import ActionButtons from "./ActionButtons";
 
-import { UserCardContentProps } from "@/components/ui/UserCard/UserCardChildren/UserCardContent.types";
+import { UserCardContentProps } from "@/components/ui/UserCard/UserCard.types";
 
 export default function UserCardContent({
   member,

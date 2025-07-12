@@ -8,7 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { ActionButtonsProps } from "@/components/ui/UserCard/UserCardChildren/ActionButtons.types";
+import { ActionButtonsProps } from "@/components/ui/UserCard/UserCard.types";
 
 export default function ActionButtons({
   showOverlay,
