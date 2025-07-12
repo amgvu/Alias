@@ -37,8 +37,7 @@ export const useMemberManagement = (
   const handleUpdateNickname = async (
     userId: string,
     nickname: string,
-    globalName: string,
-    saveToDb: boolean = true
+    globalName: string
   ) => {
     if (!supabase) return;
     try {
@@ -50,20 +49,6 @@ export const useMemberManagement = (
         nickname,
         globalName
       );
-
-      if (saveToDb) {
-        const member = members.find((m: Member) => m.user_id === userId);
-        if (member) {
-          await saveNicknames(supabase, selectedServer?.id ?? "", [
-            {
-              userId: member.user_id,
-              nickname: member.nickname || member.globalName,
-              userTag: member.username,
-              globalName: member.globalName,
-            },
-          ]);
-        }
-      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -83,24 +68,10 @@ export const useMemberManagement = (
     );
 
     try {
-      const nicknamesToSave: Nickname[] = selectedMembers.map(
-        (member: Member) => ({
-          userId: member.user_id,
-          nickname: member.nickname,
-          userTag: member.username,
-          globalName: member.globalName,
-        })
-      );
-
-      await saveNicknames(supabase, selectedServer?.id ?? "", nicknamesToSave);
+      //await saveNicknames(supabase, selectedServer?.id ?? "", nicknamesToSave);
 
       const updatePromises = selectedMembers.map((member: Member) =>
-        handleUpdateNickname(
-          member.user_id,
-          member.nickname,
-          member.globalName,
-          false
-        )
+        handleUpdateNickname(member.user_id, member.nickname, member.globalName)
       );
 
       await Promise.all(updatePromises);

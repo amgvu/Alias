@@ -166,7 +166,7 @@ export default function Dashboard() {
             userId: string,
             nickname: string,
             globalName: string
-          ) => handleUpdateNickname(userId, nickname, globalName, true)}
+          ) => handleUpdateNickname(userId, nickname, globalName)}
           onUpdateSelectedNicknames={handleUpdateSelectedNicknames}
           onSelectedUserIds={setSelectedUserIds}
           setShowCheckboxes={setShowCheckboxes}
