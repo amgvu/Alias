@@ -45,7 +45,7 @@ export default function NicknamesList({
           <div className={styles.expandedSection.errorText}>{fetchError}</div>
         ) : previousNicknames.length === 0 ? (
           <div className={styles.expandedSection.emptyText}>
-            No nicknames found. Add some!
+            *construction noises*
           </div>
         ) : (
           <div className={styles.expandedSection.nicknamesContainer}>
