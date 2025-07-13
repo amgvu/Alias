@@ -10,7 +10,7 @@ export default function Contact() {
         transition={{ duration: 0.2, delay: 0.1 }}
       >
         <h1 className="text-3xl font-bold mb-2">Contact</h1>
-        <p className="text-neutral-300">Email: arclify.dev@gmail.com</p>
+        <p className="text-neutral-300">Email: thealiasapp@gmail.com</p>
         <p className="text-neutral-300">Discord: amg00</p>
       </motion.div>
     </main>

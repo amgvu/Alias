@@ -25,9 +25,9 @@ export default function Home() {
             <div className="text-text-secondary text-center flex flex-col items-center font-ginto text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl space-y-4">
               <div className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[20px] md:w-1/2">
                 <TextEffect per="line" speedReveal={1} delay={1}>
-                  Arclify lets you set dynamic nicknames, personalize
-                  identities, and speed up community workflows. Make Discord
-                  management faster, smarter, and a lot more fun.
+                  Alias lets you set dynamic nicknames, personalize identities,
+                  and speed up community workflows. Make Discord management
+                  faster, smarter, and a lot more fun.
                 </TextEffect>
               </div>
             </div>
@@ -52,7 +52,7 @@ export default function Home() {
         <Separator className="mb-4" />
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pb-8">
           <div className="text-text-secondary text-xs sm:text-sm md:text-base">
-            © 2025 Arclify. All rights reserved.
+            © 2025 Alias. All rights reserved.
           </div>
           <div className="flex gap-6 text-xs sm:text-sm md:text-base">
             <a

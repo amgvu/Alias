@@ -4,7 +4,7 @@ import "../globals.css";
 import Navbar from "@/components/landing/navbar/navbar";
 
 export const metadata: Metadata = {
-  title: "Arclify",
+  title: "Alias",
   description: "The nickname manager you never knew you wanted",
 };
 

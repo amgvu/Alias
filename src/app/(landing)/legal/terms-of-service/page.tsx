@@ -34,7 +34,7 @@ export default function TermsOfService() {
           <ul>
             <li>
               <p>
-                <strong>Application</strong> refers to Arclify, the software
+                <strong>Application</strong> refers to Alias, the software
                 program provided by the Company.
               </p>
             </li>
@@ -59,7 +59,7 @@ export default function TermsOfService() {
               <p>
                 <strong>Company</strong> (referred to as either &apos;the
                 Company&apos;, &apos;We&apos;, &apos;Us&apos; or &apos;Our&apos;
-                in this Agreement) refers to Arclify.
+                in this Agreement) refers to Alias.
               </p>
             </li>
             <li>
@@ -319,7 +319,7 @@ export default function TermsOfService() {
           <ul>
             <li>
               By email:
-              <a href="mailto:arclify.dev@gmail.com">arclify.dev@gmail.com</a>
+              <a href="mailto:Alias.dev@gmail.com">Alias.dev@gmail.com</a>
             </li>
           </ul>
         </section>

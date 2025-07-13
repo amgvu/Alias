@@ -39,7 +39,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                         alt="logo"
                         className={styles.logoImage}
                       />
-                      <span className={styles.logoText}>Arclify</span>
+                      <span className={styles.logoText}>Alias</span>
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>

@@ -5,7 +5,7 @@ import { gintoNord, ginto, ggSans } from "@/lib/utilities/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Arclify",
+  title: "Alias",
   description: "The nickname manager you never knew you wanted",
 };
 
