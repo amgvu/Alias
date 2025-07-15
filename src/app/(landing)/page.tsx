@@ -39,6 +39,7 @@ export default function Home() {
                 className="cursor-pointer border border-border-subtle font-medium text-zinc-200 font-ginto text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-[#5865F2] hover:bg-[#454FBF] px-6 py-6 rounded-lg shadow-md hover:shadow-[0_8px_16px_0_rgba(0,0,0,0.3)] hover:translate-y-[-2px] transition-all duration-300"
               >
                 <span>
+                  <FaDiscord className="h-4\5 w-4" />
                 </span>
                 Try it now!
               </Button>
