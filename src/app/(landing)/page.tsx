@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/hooks";
+import { FaDiscord } from "react-icons/fa";
 
 export default function Home() {
   const { handleDiscordLogin } = useAuth();
@@ -35,8 +36,10 @@ export default function Home() {
             >
               <Button
                 onClick={handleDiscordLogin}
-                className="cursor-pointer border border-border-subtle font-medium text-text-primary font-ginto text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-button px-6 py-6 rounded-lg shadow-md hover:bg-button-hover transition duration-300"
+                className="cursor-pointer border border-border-subtle font-medium text-zinc-200 font-ginto text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-[#5865F2] hover:bg-[#454FBF] px-6 py-6 rounded-lg shadow-md hover:shadow-[0_8px_16px_0_rgba(0,0,0,0.3)] hover:translate-y-[-2px] transition-all duration-300"
               >
+                <span>
+                </span>
                 Try it now!
               </Button>
             </motion.div>
