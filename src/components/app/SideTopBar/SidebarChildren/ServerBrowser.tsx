@@ -97,7 +97,7 @@ export default function ServerBrowser({
                           <SidebarMenuButton
                             onClick={() =>
                               window.open(
-                                "https://app.youform.com/forms/uwk5hpox"
+                                "https://discord.com/oauth2/authorize?client_id=1327517966342033441&permissions=1135249446800464&integration_type=0&scope=bot"
                               )
                             }
                             className="w-12 h-12 flex items-center justify-center rounded-lg text-text-secondary hover:bg-transparent-button-hover-context-bar hover:rounded-2xl transition-all duration-200"

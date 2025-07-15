@@ -2,15 +2,11 @@
 import { TextEffect } from "@/components/ui/Animations/text-effect";
 import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/lib/hooks";
 
 export default function Home() {
-  const handleSignUpClick = () => {
-    window.open(
-      "https://app.youform.com/forms/uwk5hpox",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
+  const { handleDiscordLogin } = useAuth();
 
   return (
     <div className="min-h-screen bg-background text-text-primary mt-10 md:mt-30 justify-start p-8 sm:p-30">
@@ -37,12 +33,12 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 1.5 }}
               className="md:inline-flex"
             >
-              <button
-                onClick={handleSignUpClick}
-                className="cursor-pointer border border-border-subtle font-medium text-text-primary font-ginto text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-button px-6 py-3 rounded-lg shadow-md hover:bg-button-hover transition duration-300"
+              <Button
+                onClick={handleDiscordLogin}
+                className="cursor-pointer border border-border-subtle font-medium text-text-primary font-ginto text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] bg-button px-6 py-6 rounded-lg shadow-md hover:bg-button-hover transition duration-300"
               >
-                Join the early access waitlist
-              </button>
+                Try it now!
+              </Button>
             </motion.div>
           </div>
         </div>
