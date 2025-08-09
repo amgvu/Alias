@@ -32,7 +32,7 @@ export default function Cta() {
             </p>
             <Button
               onClick={handleDiscordLogin}
-              className="group bg-gradient-to-r from-[#5865F2] to-[#4752C4] hover:from-[#4752C4] hover:to-[#3C45A8] text-white font-ginto font-semibold px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              className="cursor-pointer group bg-gradient-to-r from-[#5865F2] to-[#4752C4] hover:from-[#4752C4] hover:to-[#3C45A8] text-white font-ginto font-semibold px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             >
               <span className="flex items-center gap-3">
                 <FaDiscord className="w-5 h-5" />
