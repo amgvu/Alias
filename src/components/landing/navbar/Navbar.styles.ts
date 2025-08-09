@@ -5,7 +5,7 @@ export const styles = {
     "max-w-7xl mx-auto flex justify-between items-center md:px-32",
 
   logoContainer: "flex items-center gap-4",
-  logoLink: "hover:bg-sidebar focus:bg-sidebar",
+  logoLink: "hover:bg-transparent focus:bg-transparent",
   logoLinkInner: "flex flex-row items-center gap-2 px-4 py-4",
   logoImage: "inline-block",
   logoText: "text-xl text-text-primary font-gintoNord whitespace-nowrap",
