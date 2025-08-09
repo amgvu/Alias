@@ -17,7 +17,7 @@ export default function Features() {
             Choose Alias
           </h2>
           <p className="font-ginto text-lg text-text-primary max-w-2xl mx-auto">
-            Built by a developer who understand the pain of manual Discord
+            Built by a developer who understands the pain of manual Discord
             management
           </p>
         </motion.div>
