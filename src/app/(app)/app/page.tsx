@@ -101,7 +101,7 @@ export default function Dashboard() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.1, delay: 0.1 }}
+          transition={{ duration: 0.1, delay: 0.2 }}
         >
           <LoaderCircle className="text-zinc-300 animate-spin h-24 w-24" />
         </motion.div>
