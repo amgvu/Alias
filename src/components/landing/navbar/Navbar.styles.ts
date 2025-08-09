@@ -1,6 +1,6 @@
 export const styles = {
   header:
-    "w-full bg-sidebar border-b border-border-subtle font-ginto font-medium fixed top-0 z-50",
+    "w-full bg-sidebar/70 backdrop-blur-2xl border-b border-border-subtle font-ginto font-medium fixed top-0 z-50",
   headerContainer:
     "max-w-7xl mx-auto flex justify-between items-center md:px-32",
 
