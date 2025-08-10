@@ -38,5 +38,5 @@ export const styles = {
     "px-4 py-2 place-items-center text-zinc-400 hover:text-white cursor-pointer rounded-md",
   drawerCloseIcon: "h-12 w-12",
 
-  main: "pt-15",
+  main: "pt-0",
 };
