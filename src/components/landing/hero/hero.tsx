@@ -144,7 +144,7 @@ export default function Hero() {
         <motion.div variants={landingItemVariants} className="mb-16">
           <Button
             onClick={handleDiscordLogin}
-            className="group relative overflow-hidden px-12 py-6 text-xl font-ginto font-bold rounded-2xl border-0 shadow-2xl transform transition-all duration-300 hover:scale-105"
+            className="group cursor-pointer relative overflow-hidden px-12 py-6 text-xl font-ginto font-bold rounded-2xl border-0 shadow-2xl transform transition-all duration-300 hover:scale-105"
             style={{
               background: "linear-gradient(135deg, #5865F2 0%, #4752C4 100%)",
               color: "white",

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
   return (
-    <main className="p-8 font-sans text-center text-neutral-200">
+    <main className="p-8 font-sans text-center text-text-primary mt-16">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
