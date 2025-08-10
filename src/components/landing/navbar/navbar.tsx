@@ -39,7 +39,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
                         alt="logo"
                         className={styles.logoImage}
                       />
-                      <span className={styles.logoText}>Alias</span>
+                      <span className={styles.logoText}>ALIAS</span>
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -97,7 +97,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </header>
-      <main className={styles.main}>{children}</main>
+      <main>{children}</main>
     </>
   );
 }

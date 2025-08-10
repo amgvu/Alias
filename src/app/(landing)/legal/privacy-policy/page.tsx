@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function PrivacyPolicy() {
   return (
-    <main className="max-w-screen-lg mx-auto text-neutral-200 px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-screen-lg mx-auto text-neutral-200 px-4 sm:px-6 lg:px-8 py-8 pt-24">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -8,7 +8,8 @@ export const styles = {
   logoLink: "hover:bg-transparent focus:bg-transparent",
   logoLinkInner: "flex flex-row items-center gap-2 px-4 py-4",
   logoImage: "inline-block",
-  logoText: "text-xl text-text-primary font-gintoNord whitespace-nowrap",
+  logoText:
+    "text-xl text-text-primary font-gintoNord uppercase tracking-tight whitespace-nowrap",
 
   desktopNavContainer:
     "hidden md:flex absolute left-1/2 transform -translate-x-1/2",
@@ -37,6 +38,4 @@ export const styles = {
   drawerClose:
     "px-4 py-2 place-items-center text-zinc-400 hover:text-white cursor-pointer rounded-md",
   drawerCloseIcon: "h-12 w-12",
-
-  main: "pt-0",
 };
