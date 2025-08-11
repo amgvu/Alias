@@ -1,6 +1,6 @@
 export const styles = {
   header:
-    "w-full bg-sidebar/70 backdrop-blur-2xl border-b border-border-subtle font-ginto font-medium fixed top-0 z-50",
+    "w-full bg-sidebar/50 backdrop-blur-2xl font-ginto font-medium fixed top-0 z-50 mb-16",
   headerContainer:
     "max-w-7xl mx-auto flex justify-between items-center md:px-32",
 
@@ -38,4 +38,5 @@ export const styles = {
   drawerClose:
     "px-4 py-2 place-items-center text-zinc-400 hover:text-white cursor-pointer rounded-md",
   drawerCloseIcon: "h-12 w-12",
+  main: "bg-red-500",
 };
