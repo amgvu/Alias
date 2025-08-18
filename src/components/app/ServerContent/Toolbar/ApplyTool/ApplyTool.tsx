@@ -1,5 +1,5 @@
 "use client";
-import { CheckCheck } from "lucide-react";
+import { LuCheckCheck } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -36,7 +36,7 @@ export default function ApplyTool({
           className="p-2 bg-button ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-text-primary hover:bg-button-hover"
           disabled={!selectedServer || selectedUserIds.length === 0}
         >
-          <CheckCheck className="w-4 h-4 sm:w-4 md:w-5 md:h-5 2xl:w-6 2xl:h-6 inline-block" />
+          <LuCheckCheck className="w-4 h-4 sm:w-4 md:w-5 md:h-5 2xl:w-6 2xl:h-6 inline-block" />
           Apply
         </Button>
       </AlertDialogTrigger>
@@ -65,7 +65,7 @@ export default function ApplyTool({
             className="p-2 bg-zinc-200 ml-2 text-sm sm:text-sm md:text-base lg:text-[15px] xl:text-[16px] 2xl:text-[17px] border border-border enabled:border-border-active rounded-md disabled:bg-transparent disabled:text-text-disabled disabled:cursor-not-allowed cursor-pointer text-zinc-950 hover:bg-zinc-300"
             disabled={!selectedServer || selectedUserIds.length === 0}
           >
-            <CheckCheck className="w-4 h-4 sm:w-4 md:w-5 md:h-5 2xl:w-6 2xl:h-6 inline-block" />
+            <LuCheckCheck className="w-4 h-4 sm:w-4 md:w-5 md:h-5 2xl:w-6 2xl:h-6 inline-block" />
             Yes, apply {selectedUserIds.length}{" "}
             {selectedUserIds.length > 1 ? "nicknames" : "nickname"}
           </AlertDialogAction>

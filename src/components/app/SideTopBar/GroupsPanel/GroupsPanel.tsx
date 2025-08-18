@@ -1,6 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { Trash2, LoaderCircle, SaveAll } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
+import { FaSave, FaTrash } from "react-icons/fa";
 import { Arc, ArcNickname } from "@/types/types";
 import React, { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
@@ -100,7 +101,7 @@ export default function GroupsPanel({
                 {isLoading ? (
                   <LoaderCircle className="animate-spin h-4 w-4" />
                 ) : (
-                  <SaveAll className="h-4 w-4" />
+                  <FaSave className="h-4 w-4" />
                 )}
               </Button>
             </div>
@@ -176,7 +177,7 @@ export default function GroupsPanel({
                                   className={styles.deleteButton}
                                   disabled={removingArcIds.includes(arc.id)}
                                 >
-                                  <Trash2 className="h-3 w-3" />
+                                  <FaTrash className="h-3 w-3" />
                                 </Button>
                               </div>
                             </CardHeader>

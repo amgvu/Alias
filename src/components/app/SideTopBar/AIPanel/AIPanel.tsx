@@ -2,7 +2,8 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Loader2, WandSparkles, Shuffle } from "lucide-react";
+import { Loader2, WandSparkles } from "lucide-react";
+import { FaRandom } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { styles } from "./AIPanel.styles";
 
@@ -45,7 +46,7 @@ export default function AIPanel({
                   onClick={randomCategory}
                   className={styles.randomButton}
                 >
-                  <Shuffle className={styles.iconSmall} />
+                  <FaRandom className={styles.iconSmall} />
                   Random
                 </button>
               </div>
@@ -114,7 +115,7 @@ export default function AIPanel({
                   onClick={() => randomPrompt(currentCategory.id)}
                   className={styles.randomButton}
                 >
-                  <Shuffle className={styles.iconSmall} />
+                  <FaRandom className={styles.iconSmall} />
                   Random
                 </button>
               </div>

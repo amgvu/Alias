@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 import { useSession } from "next-auth/react";
-import { LogOut } from "lucide-react";
+import { IoLogOut } from "react-icons/io5";
 import { settingsItems } from "@/lib/data";
 import { SidebarFooter } from "@/components/ui/sidebar";
 import { useAuth } from "@/lib/hooks";
@@ -54,7 +54,7 @@ export default function AuthCard() {
                   className="flex text-text-secondary hover:text-text-primary cursor-pointer hover:bg-transparent-button-hover-sidebar rounded-md p-2 transition-colors"
                   title="Logout"
                 >
-                  <LogOut className="h-5 w-5" />
+                  <IoLogOut className="h-5 w-5" />
                 </button>
               </div>
             </div>

@@ -1,15 +1,16 @@
-import { Settings, HelpCircle } from "lucide-react";
+import { RiSettings5Fill } from "react-icons/ri";
+import { IoMdHelp } from "react-icons/io";
 
 export const settingsItems = [
   {
     title: "Settings",
-    icon: Settings,
+    icon: RiSettings5Fill,
     value: "settings",
     disabled: true,
   },
   {
     title: "Help",
-    icon: HelpCircle,
+    icon: IoMdHelp,
     value: "help",
     disabled: true,
   },

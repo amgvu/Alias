@@ -1,11 +1,17 @@
-import { Globe, Package, Users, MapPin, Brain, Zap, Radio } from "lucide-react";
+import { HiUsers } from "react-icons/hi2";
+import { FaGlobe } from "react-icons/fa";
+import { FaRadio } from "react-icons/fa6";
+import { RiMapPin2Fill } from "react-icons/ri";
+import { BiSolidPackage, BiSolidZap } from "react-icons/bi";
+import { FaBrain } from "react-icons/fa";
+
 import { Category } from "@/types/types";
 
 export const categoryItems: Category[] = [
   {
     id: "fictional-characters",
     name: "Fictional Characters",
-    icon: Users,
+    icon: HiUsers,
     description: "Characters from movies, TV shows, games, books",
     examples: ["The Sopranos", "Game of Thrones", "Grand Theft Auto V"],
     color: "bg-blue-300",
@@ -18,7 +24,7 @@ export const categoryItems: Category[] = [
   {
     id: "real-people",
     name: "Real People",
-    icon: Globe,
+    icon: FaGlobe,
     description: "Historical figures, celebrities, and famous individuals",
     examples: ["Actors", "World Leaders", "Inventors"],
     color: "bg-purple-300",
@@ -31,7 +37,7 @@ export const categoryItems: Category[] = [
   {
     id: "objects",
     name: "Objects",
-    icon: Package,
+    icon: BiSolidPackage,
     description: "Physical items and tangible things like products, food, etc",
     examples: ["Cars", "CS2 Skins", "Foods"],
     color: "bg-yellow-300",
@@ -44,7 +50,7 @@ export const categoryItems: Category[] = [
   {
     id: "products-and-brands",
     name: "Products and Brands",
-    icon: Zap,
+    icon: BiSolidZap,
     description: "Commercial products, brands, and consumer goods",
     examples: ["Gaming Mice", "Cleaning Products", "Designer Fashion"],
     color: "bg-orange-300",
@@ -57,7 +63,7 @@ export const categoryItems: Category[] = [
   {
     id: "media-and-content",
     name: "Media and Content",
-    icon: Radio,
+    icon: FaRadio,
     description: "Movies, TV shows, podcasts, music, and general content",
     examples: ["Podcasts", "Martin Scorsese Movies", "Techno Records"],
     color: "bg-red-300",
@@ -70,7 +76,7 @@ export const categoryItems: Category[] = [
   {
     id: "places",
     name: "Places",
-    icon: MapPin,
+    icon: RiMapPin2Fill,
     description: "Cities, landmarks, and geographical locations",
     examples: ["New York", "Los Santos", "Sugar Land"],
     color: "bg-green-300",
@@ -83,7 +89,7 @@ export const categoryItems: Category[] = [
   {
     id: "abstract-concepts",
     name: "Abstract Concepts",
-    icon: Brain,
+    icon: FaBrain,
     description: "Ideas, emotions, and philosophical concepts",
     examples: ["Life", "Quantum Mechanics", "Space"],
     color: "bg-pink-300",

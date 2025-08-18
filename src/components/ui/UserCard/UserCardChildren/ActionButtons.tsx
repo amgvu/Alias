@@ -1,5 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, Check, RotateCcw } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import { FaCheck } from "react-icons/fa";
+import { FaArrowRotateLeft } from "react-icons/fa6";
+
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,7 +48,7 @@ export default function ActionButtons({
               disabled={showOverlay || !inputValue}
               className={styles.applyButton}
             >
-              <Check className={styles.buttonSection.buttonIcon} />
+              <FaCheck className={styles.buttonSection.buttonIcon} />
               Apply
             </Button>
           </motion.div>
@@ -67,7 +70,9 @@ export default function ActionButtons({
                 disabled={showOverlay}
                 className={styles.resetButton}
               >
-                <RotateCcw className={styles.buttonSection.buttonIcon} />
+                <FaArrowRotateLeft
+                  className={styles.buttonSection.buttonIcon}
+                />
                 Reset
               </Button>
             </TooltipTrigger>
@@ -85,7 +90,7 @@ export default function ActionButtons({
             transition={{ duration: 0.2 }}
             className={styles.buttonSection.resetSuccess}
           >
-            <Check className={styles.buttonSection.successIcon} />
+            <FaCheck className={styles.buttonSection.successIcon} />
           </motion.div>
         )}
       </div>

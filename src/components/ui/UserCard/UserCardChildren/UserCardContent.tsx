@@ -2,7 +2,8 @@
 import Image from "next/image";
 import { styles } from "@/components/ui/UserCard/UserCard.styles";
 import { Input } from "@/components/ui/input";
-import { GripVertical, NotebookText } from "lucide-react";
+import { NotebookText } from "lucide-react";
+import { FaGripVertical } from "react-icons/fa";
 import ActionButtons from "./ActionButtons";
 
 import { UserCardContentProps } from "@/components/ui/UserCard/UserCard.types";
@@ -60,7 +61,7 @@ export default function UserCardContent({
               {...draggableAttributes}
               {...draggableListeners}
             >
-              <GripVertical className={styles.inputSection.dragIcon} />
+              <FaGripVertical className={styles.inputSection.dragIcon} />
             </div>
           )}
         </div>

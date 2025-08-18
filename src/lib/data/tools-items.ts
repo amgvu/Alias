@@ -1,6 +1,7 @@
-import { UsersRound, Palette } from "lucide-react";
+import { FaUsers } from "react-icons/fa";
+import { FaPalette } from "react-icons/fa";
 
 export const toolsItems = [
-  { icon: UsersRound, name: "Groups", id: "Groups" },
-  { icon: Palette, name: "Themes", id: "Themes" },
+  { icon: FaUsers, name: "Groups", id: "Groups" },
+  { icon: FaPalette, name: "Themes", id: "Themes" },
 ];

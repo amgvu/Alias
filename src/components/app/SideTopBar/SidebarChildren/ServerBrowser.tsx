@@ -1,6 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { CirclePlus, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import { FaCirclePlus } from "react-icons/fa6";
 import Image from "next/image";
 import {
   SidebarContent,
@@ -102,7 +103,7 @@ export default function ServerBrowser({
                             }
                             className="w-12 h-12 flex items-center justify-center rounded-lg text-text-secondary hover:bg-transparent-button-hover-context-bar hover:rounded-2xl transition-all duration-200"
                           >
-                            <CirclePlus size={32} />
+                            <FaCirclePlus size={32} />
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                       </TooltipTrigger>
