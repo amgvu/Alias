@@ -112,10 +112,6 @@ export default function Footer() {
                   "linear-gradient(135deg, rgba(88, 101, 242, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%)",
                 border: "1px solid rgba(88, 101, 242, 0.2)",
               }}
-              whileHover={{
-                scale: 1.1,
-                y: -4,
-              }}
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
