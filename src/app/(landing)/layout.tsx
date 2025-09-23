@@ -5,7 +5,7 @@ import Navbar from "@/components/landing/navbar/navbar";
 
 export const metadata: Metadata = {
   title: "Alias",
-  description: "The nickname manager you never knew you wanted",
+  description: "AI Discord Nicknames Manager",
 };
 
 export default function MainLayout({
